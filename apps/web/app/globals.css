@@ -8,19 +8,45 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-defectica: "Defectica", Arial, Helvetica, sans-serif;
+  --font-sans: var(--font-defectica);
+  --font-mono: var(--font-defectica);
+  --font-serif: var(--font-defectica);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Defectica", Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: "Defectica";
+  src:
+    url("/fonts/defectica.otf") format("opentype"),
+    url("/fonts/defectica.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-defectica {
+  font-family: "Defectica", Arial, Helvetica, sans-serif;
+}
+
+.font-defectica-bold {
+  font-family: "Defectica", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.font-defectica-light {
+  font-family: "Defectica", Arial, Helvetica, sans-serif;
+  font-weight: 300;
 }
