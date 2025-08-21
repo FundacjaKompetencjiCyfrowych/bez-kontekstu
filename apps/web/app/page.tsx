@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { Button } from "@/app/components/ui/Button";
 
 export default function Home() {
   return (
-    <div className="flex-1 bg-black flex flex-col">
+    <div className="bg-blue-500">
       {/* Hero Section */}
       <section className="flex-1 relative overflow-hidden">
         <div className="flex flex-col items-end justify-start h-full z-10">
@@ -19,13 +20,42 @@ export default function Home() {
         </div>
 
         {/* Logo w tle - koło z rozmyciem */}
+        {/* <Image
+          src="/logo.png"
+          priority
+          width={400}
+          height={400}
+          alt="Bez Kontekstu"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192"
+        /> */}
+      </section>
+
+      {/* MANIFEST Section */}
+      <section className="relative overflow-hidden h-screen flex flex-col justify-between">
+        <div className="relative flex flex-col items-start justify-start z-10">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3 font-defectica">MANIF</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3 font-defectica">EST</h1>
+        </div>
+
+        <div className="w-[90vw] mx-auto flex items-center z-10 text-white text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl font-sans">
+          Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty. Działamy z myślą o
+          tworzeniu innowacyjnych doświadczeń artystycznych, które przełamują granice tradycyjnych form wyrazu. Poprzez łączenie
+          immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnych wprowadzamy odbiorców w świat,
+          gdzie teatr spotyka się z cyfrową rzeczywistością.
+        </div>
+
+        <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <Button>test</Button>
+        </div>
+
+        {/* Logo w tle - koło z rozmyciem */}
         <Image
           src="/logo.png"
           priority
           width={400}
           height={400}
           alt="Bez Kontekstu"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 brightness-0 invert sepia hue-rotate-270 opacity-50"
         />
       </section>
     </div>
