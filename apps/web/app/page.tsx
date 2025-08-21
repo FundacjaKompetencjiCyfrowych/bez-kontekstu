@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
+import Logo from "@/app/assets/images/logo.png";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
 
         {/* Logo w tle - koło z rozmyciem */}
         {/* <Image
-          src="/logo.png"
+          src={Logo}
           priority
           width={400}
           height={400}
@@ -50,7 +51,7 @@ export default function Home() {
 
         {/* Logo w tle - koło z rozmyciem */}
         <Image
-          src="/logo.png"
+          src={Logo}
           priority
           width={400}
           height={400}

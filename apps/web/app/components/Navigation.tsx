@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { NavItem } from "@/app/lib/types";
+import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
+import Image from "next/image";
 
 const navigationItems: NavItem[] = [
   { title: "Strona główna", href: "/" },
@@ -50,8 +52,8 @@ export function Navigation() {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="z-[9999] text-white hover:text-white focus:outline-none focus:text-white bg-black px-2 py-1 rounded"
               >
-                <img
-                  src="/menu_mobile-icon.png"
+                <Image
+                  src={MobileMenuIcon}
                   alt="Bez Kontekstu"
                   className={`w-15 h-15 transition-transform duration-1000 ease-in-out ${isMenuOpen ? "rotate-180" : "rotate-0"}`}
                 />
