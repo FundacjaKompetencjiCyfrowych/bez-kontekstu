@@ -38,3 +38,6 @@ yarn-error.log*
 *.pem
 git_workflow.md
 .cursor/
+
+# Personal notes
+git-notatki.md
