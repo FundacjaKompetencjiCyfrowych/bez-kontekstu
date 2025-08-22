@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="bg-blue-500">
       {/* Hero Section */}
-      <section className="relative w-full h-screen">
+      {/* <section className="relative w-full h-screen">
         <div className="flex flex-col items-end justify-center z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mr-2 sm:mr-3 mt-2 sm:mt-3 font-defectica">BEZ</h1>
         </div>
@@ -20,7 +20,6 @@ export default function Home() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-defectica">TEKSTU</h1>
         </div>
 
-        {/* Logo w tle - koło z rozmyciem */}
         <Image
           src={Logo}
           priority
@@ -28,6 +27,30 @@ export default function Home() {
           height={400}
           alt="Bez Kontekstu"
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192"
+        />
+      </section> */}
+      <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-4 ">
+        <div className="relative flex flex-col justify-end items-end z-10">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-defectica">BEZ</h1>
+        </div>
+
+        <div className="relative flex flex-col justify-start items-start bottom-0 transform z-10">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white flex flex-col font-defectica">
+            <span>K</span>
+            <span>O</span>
+            <span>N</span>
+          </h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white font-defectica flex flex-col">TEKSTU</h1>
+        </div>
+
+        {/* Logo w tle - koło z rozmyciem */}
+        <Image
+          src={Logo}
+          priority
+          width={400}
+          height={400}
+          alt="Bez Kontekstu"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 brightness-0 invert sepia hue-rotate-270 opacity-50"
         />
       </section>
 
@@ -102,7 +125,7 @@ export default function Home() {
       </section>
 
       {/* DONATORS Section */}
-      <section className="relative overflow-hidden h-screen flex flex-col justify-evenly">
+      <section className="relative overflow-hidden h-screen flex flex-col justify-around">
         <div className="relative flex flex-col items-start justify-start z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3 font-defectica">DLA DAR</h1>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3 font-defectica">CZYŃCÓW</h1>
