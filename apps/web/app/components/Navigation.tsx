@@ -28,7 +28,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md text-center text-sm font-medium transition-colors"
+                className="text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md text-center text-sm font-medium transition-colors font-mono"
               >
                 {item.title.toLocaleUpperCase()}
               </Link>
@@ -77,7 +77,7 @@ export function Navigation() {
                 <div key={item.href} className="border-b border-gray-400 mx-3">
                   <Link
                     href={item.href}
-                    className="text-gray-400 hover:text-blue-600 block py-3 rounded-md text-base font-medium transition-colors"
+                    className="text-gray-400 hover:text-blue-600 block py-3 rounded-md text-base font-medium transition-colors font-mono"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.title}

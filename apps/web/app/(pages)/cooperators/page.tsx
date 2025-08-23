@@ -4,7 +4,7 @@ export default function CooperatorsPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-defectica">OSOBY WSPÓŁPRACUJĄCE</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">OSOBY WSPÓŁPRACUJĄCE</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">Poznaj nasz zespół i osoby, które tworzą z nami wyjątkowe projekty.</p>
         </div>
 
