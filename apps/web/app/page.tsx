@@ -3,6 +3,7 @@ import { Button } from "@/app/components/ui/Button";
 
 import Logo from "@/app/assets/images/logo.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
+import { Footer } from "@/app/components/Footer";
 
 export default function Home() {
   return (
@@ -130,6 +131,7 @@ export default function Home() {
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
         />
       </section>
+      <Footer />
     </div>
   );
 }
