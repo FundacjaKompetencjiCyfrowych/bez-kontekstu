@@ -17,6 +17,7 @@
 @layer base {
   h1 {
     font-family: var(--font-defectica);
+    font-size: 36px;
   }
   button {
     font-family: var(--font-space-mono);
