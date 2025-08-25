@@ -48,7 +48,7 @@ export function Navigation() {
           >
             <div className="flex items-center justify-center w-[100vw]  bg-yellow-500 relative top-8 ">
               {/* <hr className=" w-screen size-1 text-red-500" /> */}
-              <div className="absolute top-[-33px] flex justify-center bg-black h-[35px] border-b-1 border-red-500 w-full"></div>
+              <div className="absolute top-[-33px] flex justify-center bg-black h-[35px] border-b-1 border-gray-700 w-full"></div>
               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-28px] flex justify-center">
                 <Image
                   src={MobileMenuIcon}
