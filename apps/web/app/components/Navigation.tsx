@@ -11,7 +11,7 @@ const navigationItems: NavItem[] = [
   { title: "Manifest", href: "/manifest" },
   { title: "Projekty", href: "/projekty" },
   { title: "Osoby Współpracujące", href: "/cooperators" },
-  { title: "Dla Darczyńców", href: "/donors" },
+  { title: "Dla Darczyńców", href: "/donators" },
   { title: "Kontakt", href: "/contact" },
 ];
 

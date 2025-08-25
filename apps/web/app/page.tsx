@@ -4,6 +4,7 @@ import { Button } from "@/app/components/ui/Button";
 import Logo from "@/app/assets/images/logo.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -49,9 +50,11 @@ export default function Home() {
         </div>
 
         <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
-          <Button variant="dark" size="sm">
-            Poznaj nas lepiej
-          </Button>
+          <Link href={"/manifest"}>
+            <Button variant="dark" size="sm">
+              Poznaj nas lepiej
+            </Button>
+          </Link>
         </div>
 
         {/* Logo w tle - koło z rozmyciem */}
@@ -75,9 +78,11 @@ export default function Home() {
         <div className="w-[90vw] h-[50vh] mx-auto flex items-center z-10 bg-red-500">...........</div>
 
         <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
-          <Button variant="dark" size="sm">
-            Sprawdź projekty
-          </Button>
+          <Link href={"/projects"}>
+            <Button variant="dark" size="sm">
+              Sprawdź projekty
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -96,9 +101,11 @@ export default function Home() {
         </div>
 
         <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
-          <Button variant="dark" size="sm">
-            Poznaj nasz zespół
-          </Button>
+          <Link href={"/cooperators"}>
+            <Button variant="dark" size="sm">
+              Poznaj nasz zespół
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -116,9 +123,11 @@ export default function Home() {
         </div>
 
         <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
-          <Button variant="dark" size="sm">
-            Wesprzyj nas
-          </Button>
+          <Link href={"/donators"}>
+            <Button variant="dark" size="sm">
+              Wesprzyj nas
+            </Button>
+          </Link>
         </div>
 
         {/* Logo w tle - koło z rozmyciem */}
