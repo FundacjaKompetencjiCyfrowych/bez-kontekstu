@@ -1,104 +1,63 @@
 import Link from "next/link";
+import { Footer } from "@/app/components/Footer";
+import Image from "next/image";
+import SoundIcon from "@/app/assets/icons/sound_button.png";
+import LocationIcon from "@/app/assets/icons/location.png";
+import InstagramIcon from "@/app/assets/icons/instagram.png";
+import FacebookIcon from "@/app/assets/icons/facebook.png";
+import EmailIcon from "@/app/assets/icons/email.png";
+import PhoneIcon from "@/app/assets/icons/phone.png";
 
 export default function ContactPage() {
   return (
-    <div className="flex justify-between flex-col w-full h-full px-7 py-10 bg-black text-gray-400">
+    <div className="flex justify-between flex-col w-full h-full px-7 bg-black text-gray-400">
       {/*Title*/}
-      <div className="flex items-center justify-between p-4 ">
-        <h1 className="text-white text-4xl my-10 font-bold">Kontakt</h1>
-        <div className="flex flex-col w-[200px] h-[200px] bg-white text-black p-4 rounded-lg"></div>
+      <div className="flex justify-between items-center mt-10">
+        <div className="flex flex-col">
+          <h1 className="text-white text-4xl font-defectica">KON</h1>
+          <h1 className="text-white text-4xl font-defectica">TA</h1>
+          <h1 className="text-white text-4xl font-defectica">KT</h1>
+        </div>
+        <Image src={SoundIcon} alt="Logo" width={45} height={45} />
       </div>
 
-      <div className="grid md:grid-cols-4 gap-0">
+      <div className="grid md:grid-cols-4 gap-0 font-mono text-gray-200">
         {/* Adres */}
         <div>
-          <ul className="text-gray-400 my-2">
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
+          <ul className=" my-2">
+            <li className="flex items-center pb-3">
+              <Image src={EmailIcon} alt="Email" width={25} height={25} className="mr-4" />
               fundacjabezkontekstu@gmail.com
             </li>
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              +48 608 486 769
+            <li className="flex items-center pb-3">
+              <Image src={PhoneIcon} alt="Phone" width={25} height={25} className="mr-4" />
+              608 486 769
             </li>
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              ul. Smulikowskiego 2/5
+            <li className="flex items-center pb-3">
+              <Image src={LocationIcon} alt="Location" width={25} height={25} className="mr-4" />
+              ul.Smulikowskiego 2/5
             </li>
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                />
-              </svg>
-              00-389 Warszawa
-            </li>
+            <li className="flex items-center ml-10">00-389 Warszawa</li>
           </ul>
         </div>
 
         {/* Socials */}
         <div>
-          <ul className="text-gray-400 my-2">
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
+          <ul className=" my-6">
+            <li className="flex items-center pb-3">
+              <Image src={InstagramIcon} alt="Instagram" width={25} height={25} className="mr-4" />
               <Link href="https://www.instagram.com/fundacjabezkontekstu/">Instagram</Link>
             </li>
 
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
+            <li className="flex items-center pb-3">
+              <Image src={FacebookIcon} alt="Facebook" width={25} height={25} className="mr-4" />
               <Link href="https://www.facebook.com/fundacjabezkontekstu/">Facebook</Link>
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Copyright */}
-      <div className="border-t border-gray-500 mt-4 pt-4 text-right text-gray-500">
-        <p>Page made with ❤️ by </p>
-        <p>
-          <Link href="https://cyfrowe.org/?utm_source=itgirls&utm_medium=referral&utm_campaign=partners">
-            Fundacja Kompetencji Cyfrowych
-          </Link>
-        </p>
-      </div>
+      <Footer />
     </div>
   );
 }

@@ -4,7 +4,7 @@ export default function DonorsPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-defectica">DLA DARCZYŃCÓW</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">DLA DARCZYŃCÓW</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">Wspieraj nasze projekty i bądź częścią naszej kreatywnej społeczności.</p>
         </div>
 

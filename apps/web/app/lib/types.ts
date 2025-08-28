@@ -8,7 +8,7 @@ export interface NavItem {
 
 export interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "outline" | "dark";
   size?: "sm" | "md" | "lg";
   onClick?: () => void;
   disabled?: boolean;
