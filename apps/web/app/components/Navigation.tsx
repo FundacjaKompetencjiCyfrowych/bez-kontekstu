@@ -7,16 +7,22 @@ import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 
 const navigationItems: NavItem[] = [
-  { title: "Strona główna", href: "/" },
-  { title: "Manifest", href: "/manifest" },
-  { title: "Projekty", href: "/projekty" },
-  { title: "Osoby Współpracujące", href: "/cooperators" },
-  { title: "Dla Darczyńców", href: "/donators" },
-  { title: "Kontakt", href: "/contact" },
+  { title: "STRONA GLOWNA", href: "/" },
+  { title: "MANIFEST", href: "/manifest" },
+  { title: "PROJEKTY", href: "/projekty" },
+  { title: "WSPOLPRACE", href: "/cooperators" },
+  { title: "DLA DARZYNCOW", href: "/donators" },
+  { title: "KONTAKT", href: "/contact" },
 ];
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState<"PL" | "ENG">("PL");
+
+  // Function to toggle language
+  const toggleLanguage = () => {
+    setCurrentLanguage((prev) => (prev === "PL" ? "ENG" : "PL"));
+  };
 
   return (
     <nav className="w-full absolute flex justify-center">
@@ -40,20 +46,19 @@ export function Navigation() {
         <div className="md:hidden w-full absolute top-0">
           {/* Animated menu button that slides down */}
           <div
-            className={`fixed z-[9999] transition-all duration-1000 ease-in-out ${isMenuOpen ? "top-[350px]" : "top-0"}`}
+            className={`fixed z-[9999] transition-all duration-1000 ease-in-out ${isMenuOpen ? "top-[410px]" : "top-0"}`}
             style={{
               left: "50%",
               transform: "translateX(-50%)",
             }}
           >
             <div className="flex items-center justify-center w-[100vw]  bg-yellow-500 relative top-8 ">
-              {/* <hr className=" w-screen size-1 text-red-500" /> */}
               <div className="absolute top-[-33px] flex justify-center bg-black h-[35px] border-b-1 border-gray-700 w-full"></div>
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-28px] flex justify-center">
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
                 <Image
                   src={MobileMenuIcon}
                   alt="Bez Kontekstu"
-                  className={`w-15 h-15 top-[-28px] transition-transform duration-1000 ease-in-out ${isMenuOpen ? "rotate-180" : "rotate-0"}`}
+                  className={`w-12 h-12 top-[-28px] transition-transform opacity-90 duration-1000 ease-in-out `}
                 />
               </button>
             </div>
@@ -65,23 +70,59 @@ export function Navigation() {
             style={{
               left: 0,
               right: 0,
-              height: "350px",
+              height: "410px",
               clipPath: isMenuOpen ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
             }}
           >
             {/* Menu items */}
-            <div className="pb-8 pt-4">
+            <div className="pb-8 pt-4 overflow-visible">
               {navigationItems.map((item) => (
-                <div key={item.href} className="border-b border-gray-400 mx-3">
+                <div key={item.href} className="mx-6">
                   <Link
                     href={item.href}
-                    className="text-gray-400 hover:text-blue-600 block py-3 rounded-md text-base font-medium transition-colors font-mono"
+                    className="text-gray-200 hover:text-blue-600 block px-3 py-3 text-2xl rounded-md font-defectica"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.title}
                   </Link>
                 </div>
               ))}
+
+              {/* Language Toggle Switch */}
+              <div className="mx-9 pt-4">
+                <div className="flex items-center justify-between">
+                  {/* Language Labels */}
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`text-xl font-defectica transition-colors ${currentLanguage === "PL" ? "text-gray-100 font-bold" : "text-gray-100"}`}
+                    >
+                      PL
+                    </span>
+
+                    {/* Toggle Switch */}
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={currentLanguage === "ENG"}
+                        onChange={toggleLanguage}
+                        className="sr-only peer"
+                        aria-label={`Switch to ${currentLanguage === "PL" ? "English" : "Polish"}`}
+                      />
+                      <div className="relative w-15 h-8 bg-gray-800 border border-white peer-focus:outline-none rounded-full peer flex items-center">
+                        <div
+                          className={`w-5 h-5 bg-white border border-gray-300 rounded-full transition-all duration-300 transform ${currentLanguage === "ENG" ? "translate-x-8" : "translate-x-1"}`}
+                        ></div>
+                      </div>
+                    </label>
+
+                    <span
+                      className={`text-xl font-defectica transition-colors ${currentLanguage === "ENG" ? "text-gray-100 font-bold" : "text-gray-100"}`}
+                    >
+                      ENG
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
