@@ -21,7 +21,7 @@ export default function Home() {
         </div>
 
         {/* Logo w tle - koło z rozmyciem */}
-        {/* <Image
+        <Image
           src={Logo}
           priority
           width={400}
