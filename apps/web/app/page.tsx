@@ -84,6 +84,16 @@ export default function Home() {
             </Button>
           </Link>
         </div>
+
+        {/* Logo w tle - koło z rozmyciem */}
+        <Image
+          src="/logo.png"
+          priority
+          width={400}
+          height={400}
+          alt="Bez Kontekstu"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 brightness-0 invert sepia hue-rotate-270 opacity-50"
+        />
       </section>
 
       {/* PEOPLE Section */}
@@ -107,6 +117,16 @@ export default function Home() {
             </Button>
           </Link>
         </div>
+
+        {/* Logo w tle - koło z rozmyciem */}
+        <Image
+          src="/logo.png"
+          priority
+          width={400}
+          height={400}
+          alt="Bez Kontekstu"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 brightness-0 invert sepia hue-rotate-270 opacity-50"
+        />
       </section>
 
       {/* DONATORS Section */}
