@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
-
+import SoundIcon from "@/app/assets/icons/sound_button.png";
 import Logo from "@/app/assets/images/logo.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
@@ -9,18 +9,28 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="bg-black">
+      {/*Title*/}
+      <div className="flex justify-between items-center mt-20 mx-8">
+        <div className="flex flex-col">
+          <h1 className="text-white text-4xl font-defectica">STRO</h1>
+          <h1 className="text-white text-4xl font-defectica">NAGL</h1>
+          <h1 className="text-white text-4xl font-defectica">OWN</h1>
+          <h1 className="text-white text-4xl font-defectica">A</h1>
+        </div>
+        <Image src={SoundIcon} alt="Logo" width={45} height={45} />
+      </div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-4 ">
+      <section className="relative overflow-hidden h-[80vh] flex flex-col justify-around mx-8 ">
         <div className="relative flex flex-col justify-end items-end z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">BEZ</h1>
         </div>
 
         <div className="relative flex flex-col justify-start items-start bottom-0 transform z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white flex flex-col">
-            <span>K</span>
-            <span>O</span>
-            <span>N</span>
-          </h1>
+          <div className=" flex flex-col">
+            <h1 className="text-white text-4xl font-defectica">K</h1>
+            <h1 className="text-white text-4xl font-defectica">O</h1>
+            <h1 className="text-white text-4xl font-defectica">N</h1>
+          </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white flex flex-col">TEKSTU</h1>
         </div>
 
@@ -28,15 +38,15 @@ export default function Home() {
         <Image
           src={Logo}
           priority
-          width={400}
-          height={400}
+          // width={350}
+          // height={350}
           alt="Bez Kontekstu"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-76 h-76 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-62 h-62 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192"
         />
       </section>
 
       {/* MANIFEST Section */}
-      <section className="relative overflow-hidden h-screen flex flex-col justify-around">
+      <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8">
         <div className="relative flex flex-col items-start justify-start z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">EST</h1>
@@ -61,15 +71,15 @@ export default function Home() {
         <Image
           src={LogoViolet}
           priority
-          width={400}
-          height={400}
+          width={350}
+          height={350}
           alt="Bez Kontekstu"
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
         />
       </section>
 
       {/* PROJECTS Section */}
-      <section className="relative overflow-hidden h-screen flex flex-col justify-around">
+      <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8">
         <div className="relative flex flex-col items-start justify-start z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">PROJ</h1>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">EKTY</h1>
@@ -87,7 +97,7 @@ export default function Home() {
       </section>
 
       {/* PEOPLE Section */}
-      <section className="relative overflow-hidden h-screen flex flex-col justify-evenly">
+      <section className="relative overflow-hidden h-screen flex flex-col justify-evenly mx-8">
         <div className="relative flex flex-col items-start justify-start z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">OSOBY</h1>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">WSPÓŁPRACUJĄCE</h1>
@@ -110,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* DONATORS Section */}
-      <section className="relative overflow-hidden h-screen flex flex-col justify-around">
+      <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8">
         <div className="relative flex flex-col items-start justify-start z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">DLA DAR</h1>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">CZYŃCÓW</h1>
@@ -134,7 +144,7 @@ export default function Home() {
         <Image
           src={LogoViolet}
           priority
-          width={400}
+          width={350}
           height={400}
           alt="Bez Kontekstu"
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
