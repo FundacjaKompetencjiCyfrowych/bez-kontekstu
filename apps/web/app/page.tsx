@@ -4,6 +4,7 @@ import SoundIcon from "@/app/assets/icons/sound_button.png";
 import Logo from "@/app/assets/images/logo.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
+import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
 
 export default function Home() {
@@ -104,7 +105,9 @@ export default function Home() {
             <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">EKTY</h1>
           </div>
 
-          <div className="w-[90vw] h-[50vh] mx-auto flex items-center z-10 bg-red-500">...........</div>
+          <div className="w-[100%] h-[70vh] mx-auto z-10">
+            <RandomRectangles />
+          </div>
 
           <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/projects"}>
