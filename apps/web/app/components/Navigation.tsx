@@ -46,7 +46,7 @@ export function Navigation() {
         <div className="md:hidden w-full absolute top-0">
           {/* Animated menu button that slides down */}
           <div
-            className={`fixed z-[9999] transition-all duration-1000 ease-in-out ${isMenuOpen ? "top-[410px]" : "top-0"}`}
+            className={`fixed z-[9999] transition-all duration-1000 ease-in-out ${isMenuOpen ? "top-[290px]" : "top-0"}`}
             style={{
               left: "50%",
               transform: "translateX(-50%)",
@@ -70,7 +70,7 @@ export function Navigation() {
             style={{
               left: 0,
               right: 0,
-              height: "410px",
+              height: "290px",
               clipPath: isMenuOpen ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
             }}
           >
@@ -80,7 +80,7 @@ export function Navigation() {
                 <div key={item.href} className="mx-6">
                   <Link
                     href={item.href}
-                    className="text-gray-200 hover:text-blue-600 block px-3 py-3 text-2xl rounded-md font-defectica"
+                    className="text-gray-200 hover:text-blue-600 block px-3 py-1 text-xl rounded-md font-defectica"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.title}

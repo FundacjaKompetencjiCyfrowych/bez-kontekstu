@@ -11,7 +11,7 @@ export function Button({ children, variant = "primary", size = "md", onClick, di
     primary: "bg-blue-600 text-white hover:bg-blue-700",
     secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200",
     outline: "border border-gray-300 bg-transparent hover:bg-gray-50",
-    dark: "bg-gradient-to-tl from-gray-800 via-gray-900 to-gray-800 rounded-2xl text-white border-2 border-purple-400 hover:from-gray-800 hover:via-gray-800 hover:to-gray-700 hover:border-purple-300 shadow-lg",
+    dark: "bg-gradient-to-tl from-gray-800 via-gray-900/30 to-gray-800 rounded-2xl text-white border-1 border-purple-400 hover:from-gray-800 hover:via-gray-800 hover:to-gray-700 hover:border-purple-300 shadow-lg",
   };
 
   const sizes = {
