@@ -10,28 +10,28 @@ export default function Home() {
   return (
     <div className="bg-[#0d0b0e]">
       {/*Title*/}
-      <div className=" flex justify-between items-center mt-20 mx-8 z-10">
+      <div className=" flex justify-between items-center mt-5 mx-8 z-10">
         <div className="flex flex-col text-white">
-          <h1 className="text-4xl font-defectica">STRO</h1>
-          <h1 className="text-4xl font-defectica">NAGL</h1>
-          <h1 className="text-4xl font-defectica">OWN</h1>
-          <h1 className="text-4xl font-defectica">A</h1>
+          <h1 className="text-6xl font-defectica">STRO</h1>
+          <h1 className="text-6xl font-defectica">NAGL</h1>
+          <h1 className="text-6xl font-defectica">OWN</h1>
+          <h1 className="text-6xl font-defectica">A</h1>
         </div>
-        <Image src={SoundIcon} alt="Logo" width={45} height={45} />
+        <Image src={SoundIcon} alt="Logo" width={35} height={35} />
       </div>
       {/* Hero Section */}
       <section className="relative overflow-hidden h-[80vh] flex flex-col justify-around mx-8  z-10">
         <div className="relative flex flex-col justify-end items-end z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">BEZ</h1>
+          <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white">BEZ</h1>
         </div>
 
         <div className="relative flex flex-col justify-start items-start bottom-0 transform z-10">
           <div className=" flex flex-col">
-            <h1 className="text-white text-4xl font-defectica">K</h1>
-            <h1 className="text-white text-4xl font-defectica">O</h1>
-            <h1 className="text-white text-4xl font-defectica">N</h1>
+            <h1 className="text-white text-5xl font-defectica">K</h1>
+            <h1 className="text-white text-5xl font-defectica">O</h1>
+            <h1 className="text-white text-5xl font-defectica">N</h1>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white flex flex-col">TEKSTU</h1>
+          <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white flex flex-col">TEKSTU</h1>
         </div>
 
         {/* Logo w tle - koło z rozmyciem */}
@@ -41,7 +41,7 @@ export default function Home() {
           // width={350}
           // height={350}
           alt="Bez Kontekstu"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-62 h-62 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-72 h-72 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192"
         />
       </section>
 
@@ -63,15 +63,21 @@ export default function Home() {
         {/* MANIFEST Section*/}
         <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 -mt-[35vh]">
           <div className="relative flex flex-col items-start justify-start z-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">EST</h1>
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">EST</h1>
           </div>
 
-          <div className="w-[85vw] flex items-center z-10 text-white text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
-            Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty. Działamy z myślą
-            o tworzeniu innowacyjnych doświadczeń artystycznych, które przełamują granice tradycyjnych form wyrazu. Poprzez łączenie
-            immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnych wprowadzamy odbiorców w świat,
-            gdzie teatr spotyka się z cyfrową rzeczywistością.
+          <div className="w-[75vw] leading-8 mx-auto z-10 text-white text-center text-md sm:text-3xl md:text-4xl lg:text-5xl font-mono">
+            <p className="mb-4">
+              Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty.
+            </p>
+            <p className="mb-4">
+              Działamy z myślą o tworzeniu innowacyjnych doświadczeń artystycznych, które przełamują granice tradycyjnych form wyrazu.
+            </p>
+            <p className="mb-4">
+              Poprzez łączenie immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnychwprowadzamy
+              odbiorców w świat, gdzie teatr spotyka się z cyfrową rzeczywistością.
+            </p>
           </div>
 
           <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
@@ -85,9 +91,9 @@ export default function Home() {
 
         {/* PROJECTS Section */}
         <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8 bg-transparent">
-          <div className="relative flex flex-col items-start justify-start z-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">PROJ</h1>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">EKTY</h1>
+          <div className="relative flex flex-col items-end justify-start z-10">
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">PROJ</h1>
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">EKTY</h1>
           </div>
 
           <div className="w-[90vw] h-[50vh] mx-auto flex items-center z-10 bg-red-500">...........</div>
@@ -104,8 +110,8 @@ export default function Home() {
         {/* PEOPLE Section */}
         <section className="relative overflow-hidden h-screen flex flex-col justify-evenly mx-8 bg-transparent">
           <div className="relative flex flex-col items-start justify-start z-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">OSOBY</h1>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">WSPÓŁPRACUJĄCE</h1>
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">WSPOL</h1>
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">PRACE</h1>
           </div>
 
           <div className="w-[95vw] h-[50vh] mx-auto flex items-center z-10 bg-green-500">
@@ -126,16 +132,16 @@ export default function Home() {
 
         {/* DONATORS Section */}
         <section className="relative overflow-hidden h-[60vh] flex flex-col justify-around mx-8 bg-transparent">
-          <div className="relative flex flex-col items-end text-4xl text-white z-10">
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DLA</h1>
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DARCZY</h1>
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">NCOW</h1>
+          <div className="relative flex flex-col items-end  text-white z-10">
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl ">DLA</h1>
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl ">DARCZY</h1>
+            <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl ">NCOW</h1>
           </div>
 
           <div className="w-[90vw] mx-auto flex flex-col items-center z-10 text-white text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
-            <p>Twoje wsparcie</p>
-            <p>=</p>
-            <p>nowe przestrzenie sztuki</p>
+            <p className="leading-10">Twoje wsparcie</p>
+            <p className="leading-10">=</p>
+            <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
 
           <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
