@@ -43,17 +43,13 @@ export function Navigation() {
         </div>
 
         {/* Mobile Navigation Container */}
-        <div className="md:hidden w-full absolute top-0">
-          {/* Animated menu button that slides down */}
+        <div className="md:hidden w-full top-0 flex justify-center">
+          {/* Animated menu button with gray line */}
           <div
-            className={`fixed z-[9999] transition-all duration-1000 ease-in-out ${isMenuOpen ? "top-[290px]" : "top-0"}`}
-            style={{
-              left: "50%",
-              transform: "translateX(-50%)",
-            }}
+            className={`absolute top-[290px] z-[9999] transition-all duration-1000 ease-in-out w-full max-w-full ${isMenuOpen ? "top-[290px]" : "top-0"}`}
           >
-            <div className="flex items-center justify-center w-[100vw]  bg-yellow-500 relative top-8 ">
-              <div className="absolute top-[-33px] flex justify-center bg-black h-[35px] border-b-1 border-gray-700 w-full"></div>
+            <div className="flex items-center justify-center w-full relative top-8 ">
+              <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
                 <Image
                   src={MobileMenuIcon}
@@ -64,18 +60,19 @@ export function Navigation() {
             </div>
           </div>
 
-          {/* Animated menu that gets revealed as button slides down */}
+          {/* Animated menu  */}
           <div
-            className={`fixed z-[9998] bg-black w-full transition-all duration-1000 ease-in-out`}
+            className={`fixed z-[9998] bg-[#0d0b0e] w-[100vw] transition-all duration-1000 ease-in-out`}
             style={{
+              top: 20,
               left: 0,
               right: 0,
               height: "290px",
-              clipPath: isMenuOpen ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
+              clipPath: isMenuOpen ? "inset(0 0 0 0)" : "inset(100% 0 0 0)",
             }}
           >
             {/* Menu items */}
-            <div className="pb-8 pt-4 overflow-visible">
+            <div className="pb-8 overflow-visible">
               {navigationItems.map((item) => (
                 <div key={item.href} className="mx-6">
                   <Link

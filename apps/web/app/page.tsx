@@ -8,19 +8,19 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-black">
+    <div className="bg-[#0d0b0e]">
       {/*Title*/}
-      <div className=" flex justify-between items-center mt-20 mx-8 bg-black z-10">
-        <div className="flex flex-col">
-          <h1 className="text-white text-4xl font-defectica">STRO</h1>
-          <h1 className="text-white text-4xl font-defectica">NAGL</h1>
-          <h1 className="text-white text-4xl font-defectica">OWN</h1>
-          <h1 className="text-white text-4xl font-defectica">A</h1>
+      <div className=" flex justify-between items-center mt-20 mx-8 z-10">
+        <div className="flex flex-col text-white">
+          <h1 className="text-4xl font-defectica">STRO</h1>
+          <h1 className="text-4xl font-defectica">NAGL</h1>
+          <h1 className="text-4xl font-defectica">OWN</h1>
+          <h1 className="text-4xl font-defectica">A</h1>
         </div>
         <Image src={SoundIcon} alt="Logo" width={45} height={45} />
       </div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden h-[80vh] flex flex-col justify-around mx-8 bg-black z-10">
+      <section className="relative overflow-hidden h-[80vh] flex flex-col justify-around mx-8  z-10">
         <div className="relative flex flex-col justify-end items-end z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">BEZ</h1>
         </div>
@@ -60,7 +60,7 @@ export default function Home() {
           />
         </div>
 
-        {/* MANIFEST Section - zaczyna się wcześniej */}
+        {/* MANIFEST Section*/}
         <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 -mt-[35vh]">
           <div className="relative flex flex-col items-start justify-start z-10">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
@@ -73,17 +73,6 @@ export default function Home() {
             immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnych wprowadzamy odbiorców w świat,
             gdzie teatr spotyka się z cyfrową rzeczywistością.
           </div>
-
-          {/* Logo w tle - koło z rozmyciem - fixed żeby zostało podczas przewijania */}
-
-          {/* <Image
-          src={LogoViolet}
-          priority
-          width={350}
-          height={350}
-          alt="Bez Kontekstu"
-          className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-96 h-96 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50 z-0"
-        /> */}
 
           <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/manifest"}>
@@ -136,10 +125,11 @@ export default function Home() {
         </section>
 
         {/* DONATORS Section */}
-        <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8 bg-transparent">
-          <div className="relative flex flex-col items-start justify-start z-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">DLA DAR</h1>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">CZYŃCÓW</h1>
+        <section className="relative overflow-hidden h-[60vh] flex flex-col justify-around mx-8 bg-transparent">
+          <div className="relative flex flex-col items-end text-4xl text-white z-10">
+            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DLA</h1>
+            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DARCZY</h1>
+            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">NCOW</h1>
           </div>
 
           <div className="w-[90vw] mx-auto flex flex-col items-center z-10 text-white text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
