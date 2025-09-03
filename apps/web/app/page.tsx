@@ -7,6 +7,14 @@ import { Footer } from "@/app/components/Footer";
 import Link from "next/link";
 
 export default function Home() {
+  // Array with people data for the cooperation section
+  const teamMembers = [
+    { id: 1, name: "Anna Kowalska" },
+    { id: 2, name: "Piotr Nowak" },
+    { id: 3, name: "Maria Wiśniewska" },
+    { id: 4, name: "Tomasz Zieliński" },
+  ];
+
   return (
     <div className="bg-[#0d0b0e]">
       {/*Title*/}
@@ -114,11 +122,13 @@ export default function Home() {
             <h1 className="text-5xl sm:text-4xl md:text-5xl lg:text-6xl text-white ml-2 sm:ml-3 mt-2 sm:mt-3">PRACE</h1>
           </div>
 
-          <div className="w-[95vw] h-[50vh] mx-auto flex items-center z-10 bg-green-500">
-            <div className="flex flex-col items-center justify-center bg-amber-200 w-1/4 h-1/2">1</div>
-            <div className="flex flex-col items-center justify-center bg-amber-200 w-1/4 h-1/2">2</div>
-            <div className="flex flex-col items-center justify-center bg-amber-200 w-1/4 h-1/2">3</div>
-            <div className="flex flex-col items-center justify-center bg-amber-200 w-1/4 h-1/2">4</div>
+          <div className="w-[90%] max-w-[600px] mx-auto grid grid-cols-2 gap-x-5 gap-y-8 aspect-square z-10">
+            {teamMembers.map((member) => (
+              <div key={member.id} className="relative flex flex-col items-start justify-end p-3 bg-amber-200  overflow-hidden">
+                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <h3 className="relative z-10 text-sm text-white">{member.name.toUpperCase()}</h3>
+              </div>
+            ))}
           </div>
 
           <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
