@@ -9,7 +9,7 @@ import Image from "next/image";
 const navigationItems: NavItem[] = [
   { title: "STRONA GLOWNA", href: "/" },
   { title: "MANIFEST", href: "/manifest" },
-  { title: "PROJEKTY", href: "/projekty" },
+  { title: "PROJEKTY", href: "/projects" },
   { title: "WSPOLPRACE", href: "/cooperators" },
   { title: "DLA DARZYNCOW", href: "/donators" },
   { title: "KONTAKT", href: "/contact" },
@@ -49,7 +49,7 @@ export function Navigation() {
             className={`absolute top-[290px] z-[9999] transition-all duration-1000 ease-in-out w-full max-w-full ${isMenuOpen ? "top-[290px]" : "top-0"}`}
           >
             <div className="flex items-center justify-center w-full relative top-8 ">
-              <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
+              <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 bg-[#0d0b0e] border-gray-700"></div>
               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
                 <Image
                   src={MobileMenuIcon}
