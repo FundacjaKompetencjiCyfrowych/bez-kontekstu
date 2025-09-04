@@ -9,7 +9,7 @@ import Image from "next/image";
 const navigationItems: NavItem[] = [
   { title: "STRONA GLOWNA", href: "/" },
   { title: "MANIFEST", href: "/manifest" },
-  { title: "PROJEKTY", href: "/projekty" },
+  { title: "PROJEKTY", href: "/projects" },
   { title: "WSPOLPRACE", href: "/cooperators" },
   { title: "DLA DARZYNCOW", href: "/donators" },
   { title: "KONTAKT", href: "/contact" },
