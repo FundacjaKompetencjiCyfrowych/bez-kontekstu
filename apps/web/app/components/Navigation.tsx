@@ -46,15 +46,15 @@ export function Navigation() {
         <div className="md:hidden w-full top-0 flex justify-center">
           {/* Animated menu button with gray line */}
           <div
-            className={`absolute top-[290px] z-[9999] transition-all duration-1000 ease-in-out w-full max-w-full ${isMenuOpen ? "top-[290px]" : "top-0"}`}
+            className={`absolute top-[120px] z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isMenuOpen ? "top-[418px]" : "top-0"}`}
           >
-            <div className="flex items-center justify-center w-full relative top-8 ">
-              <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 bg-[#0d0b0e] border-gray-700"></div>
+            <div className="flex items-center justify-center w-full relative">
+              <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
                 <Image
                   src={MobileMenuIcon}
                   alt="Bez Kontekstu"
-                  className={`w-12 h-12 top-[-28px] transition-transform opacity-90 duration-1000 ease-in-out `}
+                  className={`w-12 h-12 top-[-28px] transition-transform opacity-90 duration-500 ease-in-out `}
                 />
               </button>
             </div>
@@ -62,22 +62,21 @@ export function Navigation() {
 
           {/* Animated menu  */}
           <div
-            className={`fixed z-[9998] bg-[#0d0b0e] w-[100vw] transition-all duration-1000 ease-in-out`}
+            className={`fixed z-[9998] bg-[#0d0b0e] w-[100vw] transition-all duration-500 ease-in-out ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
             style={{
               top: 20,
               left: 0,
               right: 0,
-              height: "290px",
-              clipPath: isMenuOpen ? "inset(0 0 0 0)" : "inset(100% 0 0 0)",
+              height: "400px",
             }}
           >
             {/* Menu items */}
-            <div className="pb-8 overflow-visible">
+            <div className="overflow-visible bg-[#0d0b0e]">
               {navigationItems.map((item) => (
                 <div key={item.href} className="mx-6">
                   <Link
                     href={item.href}
-                    className="text-gray-200 hover:text-blue-600 block px-3 py-1 text-xl rounded-md font-defectica"
+                    className="text-gray-200 hover:text-blue-600 block px-3 py-3 text-xl rounded-md font-defectica"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.title}
