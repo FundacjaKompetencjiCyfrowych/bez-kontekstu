@@ -6,10 +6,10 @@ import FacebookIcon from "../assets/icons/facebook.png";
 
 export function Footer() {
   return (
-    <footer className="py-6 px-4 w-[90vw] mx-auto font-mono text-sm">
+    <footer className="py-6 px-4 w-[90vw] mx-auto font-mono text-xs">
       <div className="max-w-6xl mx-auto">
         {/* Copyright */}
-        <div className="border-t border-gray-400 mt-4 pt-2 text-center text-gray-600">
+        <div className="border-t border-white mt-4 pt-2 text-center text-gray-600">
           <Link href={"/contact"} className="text-gray-400">
             Kontakt |
           </Link>
