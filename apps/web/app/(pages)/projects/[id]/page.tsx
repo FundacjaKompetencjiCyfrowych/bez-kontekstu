@@ -42,7 +42,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   return (
     <div className="bg-[#0d0b0e] min-h-screen font-mono">
       {/* Navigation Header */}
-      <div className="flex justify-between items-center px-8 py-6">
+      <div className="relative px-8 py-6">
         <Link href="/projects" className="flex items-center gap-2  hover:text-gray-300 transition-colors">
           <span>←</span>
           <span>Wstecz</span>
@@ -94,37 +94,44 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <h2 className="mb-6">WYKONAWCY</h2>
         </div>
 
-        <div className="mb-12 text-right text-md mr-3">
-          <div className="space-y-2">
-            {project.performers.map((performer, index) => (
-              <div key={index}>{performer}</div>
-            ))}
+        <div className="mb-12 grid grid-cols-2 gap-0">
+          {/* Left Column - Empty/Decorative */}
+          <div className="bg-gray-800  p-6 flex items-center justify-center">
+            <div></div>
           </div>
 
-          {/* Voice Over Section */}
-
-          {project.voiceOver && project.voiceOver.length > 0 && (
-            <div className="mb-12 mt-12">
-              <h3 className="mb-4">Głos gas:</h3>
-              <div className="space-y-2">
-                {project.voiceOver.map((voice, index) => (
-                  <div key={index}>{voice}</div>
-                ))}
-              </div>
+          {/* Right Column - Data */}
+          <div>
+            <div className="space-y-2">
+              {project.performers.map((performer, index) => (
+                <div key={index}>{performer}</div>
+              ))}
             </div>
-          )}
 
-          {/* Narrators Section */}
-          {project.narrators && project.narrators.length > 0 && (
-            <div className="mb-12">
-              <h3 className="mb-4">Lektorzy:</h3>
-              <div className="space-y-2">
-                {project.narrators.map((narrator, index) => (
-                  <div key={index}>{narrator}</div>
-                ))}
+            {/* Voice Over Section */}
+            {project.voiceOver && project.voiceOver.length > 0 && (
+              <div className="mt-8">
+                <h3 className="mb-4 font-bold">Głos gas:</h3>
+                <div className="space-y-2">
+                  {project.voiceOver.map((voice, index) => (
+                    <div key={index}>{voice}</div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Narrators Section */}
+            {project.narrators && project.narrators.length > 0 && (
+              <div className="mt-8">
+                <h3 className="mb-4 font-bold">Lektorzy:</h3>
+                <div className="space-y-2">
+                  {project.narrators.map((narrator, index) => (
+                    <div key={index}>{narrator}</div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Creators Section */}
@@ -133,8 +140,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <h2 className="mb-6">TWÓRCY</h2>
 
             {project.creators.direction && (
-              <div className="mb-6">
-                <h3 className="mb-3">Reżyseria</h3>
+              <div className="mb-12">
+                <h3 className="mb-4 font-bold">Reżyseria</h3>
                 <div className="space-y-2">
                   {project.creators.direction.map((director, index) => (
                     <div key={index} className="text-lg">
@@ -146,8 +153,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             )}
 
             {project.creators.choreography && (
-              <div className="mb-6">
-                <h3 className="mb-3">Choreografia</h3>
+              <div className="mb-12">
+                <h3 className="mb-4 font-bold">Choreografia</h3>
                 <div className="space-y-2">
                   {project.creators.choreography.map((choreographer, index) => (
                     <div key={index} className="text-lg">
@@ -159,8 +166,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             )}
 
             {project.creators.soundDirection && (
-              <div className="mb-6">
-                <h3 className="mb-3">Reżyseria dźwięku</h3>
+              <div className="mb-12">
+                <h3 className="mb-4 font-bold">Reżyseria dźwięku</h3>
                 <div className="space-y-2">
                   {project.creators.soundDirection.map((soundDirector, index) => (
                     <div key={index} className="text-lg">
@@ -172,8 +179,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             )}
 
             {project.creators.scenography && (
-              <div className="mb-6">
-                <h3 className="mb-3">Scenografia</h3>
+              <div className="mb-12">
+                <h3 className="mb-4 font-bold">Scenografia</h3>
                 <div className="space-y-2">
                   {project.creators.scenography.map((scenographer, index) => (
                     <div key={index} className="text-lg">
@@ -185,8 +192,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             )}
 
             {project.creators.production && (
-              <div className="mb-6">
-                <h3 className="mb-3">Produkcja</h3>
+              <div className="mb-12">
+                <h3 className="mb-4 font-bold">Produkcja</h3>
                 <div className="space-y-2">
                   {project.creators.production.map((producer, index) => (
                     <div key={index} className="text-lg">
