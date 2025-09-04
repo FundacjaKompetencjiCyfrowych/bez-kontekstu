@@ -1,59 +1,76 @@
+"use client";
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import CopyIcon from "@/app/assets/icons/copy.png";
 import { Footer } from "@/app/components/Footer";
+import LogoViolet from "@/app/assets/images/logo_violet.png";
 
 export default function DonorsPage() {
-  const iconSize = { width: 20, height: 20 };
+  const iconSize = { width: 30, height: 30 };
+  const bgBorder = "violet-400";
+  const bgGrayOpacity = "neutral-600/70";
+
+  const handleCopy = (elementId: string) => {
+    // navigator.clipboard.writeText("Fundacja Bez Kontekstu");
+    console.log(elementId);
+  };
 
   return (
-    <div className="min-h-screen bg-black text-[#F5F5F5] pt-5 px-4 font-mono">
+    <div className="min-h-screen bg-[#0d0b0e] text-[#F5F5F5] pt-5 px-4 font-mono">
       <div className="max-w-md mx-auto">
         {/*Title*/}
-        <div className="flex justify-between items-center my-10">
-          <div className="flex flex-col">
-            <h1 className=" leading-tight font-defectica">
-              DLA
-              <br />
-              DARCZYŃ
-              <br />
-              CÓW
-            </h1>
-          </div>
-          <Image src={SoundIcon} alt="Logo" width={45} height={45} />
+        <div className="flex justify-end h-20 items-center mt-5 mb-24 mx-8">
+          <Image src={SoundIcon} alt="Logo" width={30} height={30} />
+        </div>
+
+        {/* Violet logo - sticky for all sections from Manifest */}
+        <div className="sticky top-1/2 h-0 z-0">
+          <Image
+            src={LogoViolet}
+            priority
+            alt="Bez Kontekstu"
+            className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
+          />
         </div>
 
         {/* Support section */}
-        <section className="text-sm my-16 py-10 text-left">
-          <h2>Twoje wsparcie</h2>
-          <p>=</p>
-          <h2>nowe przestrzenie sztuki</h2>
+        <section className="text-sm my-12 mx-5 py-10 text-left">
+          <div className="w-[90vw] mx-auto flex flex-col sm:text-3xl md:text-4xl lg:text-5xl font-mono">
+            <p className="leading-10">Twoje wsparcie</p>
+            <p className="leading-10">=</p>
+            <p className="leading-10">nowe przestrzenie sztuki</p>
+          </div>
         </section>
 
         {/* One-time transfer */}
         <div className="mb-8 text-sm">
-          <div className="mx-2 mb-4">
+          <div className="mx-5 mb-4">
             <h3 className="mb-6 font-bold">Przelew jednorazowy</h3>
             <p className="leading-6">Przekaż dowolną bezpośrednio na konto fundacji</p>
           </div>
 
           {/* Transfer details */}
-          <div className="space-y-4 mt-10">
+          <div className="space-y-4 mt-10 mx-5">
             {/* Recipient */}
-            <div className="border border-white rounded-3xl p-3 mb-10">
-              <div className="flex justify-between items-end mx-2 my-2">
+            {/* <button onClick={() => handleCopy()}> */}
+            <div
+              className={`border border-${bgBorder} rounded-3xl p-3 mb-10 bg-${bgGrayOpacity}`}
+              onClick={() => handleCopy("foundation-name")}
+            >
+              <div className="flex justify-between items-end mx-2 my-2 ">
                 <div>
                   <p className="mb-4">Odbiorca:</p>
-                  <p>Fundacja Bez Kontekstu</p>
+                  <p id="foundation-name">Fundacja Bez Kontekstu</p>
                 </div>
                 <button className="w-6 h-6  flex items-center justify-center">
                   <Image src={CopyIcon} alt="Copy" {...iconSize} />
                 </button>
               </div>
             </div>
+            {/* </button> */}
 
             {/* Account number */}
-            <div className="border border-white rounded-3xl p-3 mb-10">
+            <div className={`border border-${bgBorder} rounded-3xl p-3 mb-10 bg-${bgGrayOpacity}`}>
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Numer konta:</p>
@@ -67,7 +84,7 @@ export default function DonorsPage() {
             </div>
 
             {/* Title */}
-            <div className="border border-white rounded-3xl p-3 mb-10">
+            <div className={`border border-${bgBorder} rounded-3xl p-3 mb-10 bg-${bgGrayOpacity}`}>
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Tytuł:</p>
@@ -80,7 +97,7 @@ export default function DonorsPage() {
             </div>
 
             {/* Address */}
-            <div className="border border-white rounded-3xl p-3 mb-10">
+            <div className={`border border-${bgBorder} rounded-3xl p-3 mb-10 bg-${bgGrayOpacity}`}>
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Adres:</p>
@@ -94,7 +111,7 @@ export default function DonorsPage() {
             </div>
 
             {/* Foundation data */}
-            <div className="border border-white rounded-3xl p-3 mb-10">
+            <div className={`border border-${bgBorder} rounded-3xl p-3 mb-10 bg-${bgGrayOpacity}`}>
               <p className="mb-4 mx-2">Dane fundacji:</p>
               <div className="space-y-3 mx-2">
                 <p>KRS 0001102013</p>
@@ -106,13 +123,13 @@ export default function DonorsPage() {
         </div>
 
         {/* 1% PIT */}
-        <div className="mb-8">
+        <div className="mb-8 mx-5">
           <h3 className="mb-4 mx-2">1% PIT</h3>
           <p className="mb-10 mx-2 leading-6">
             Przekaż darowiznę bezpośrednio na konto fundacji. W zeznaniu podatkowym wpisz nasz numer KRS.
           </p>
 
-          <div className="border border-white rounded-3xl p-3 mb-10">
+          <div className={`border border-${bgBorder} rounded-3xl p-3 mb-10 bg-${bgGrayOpacity}`}>
             <div className="flex justify-between items-end mx-2 my-2">
               <div>
                 <p className="mb-4">KRS:</p>
@@ -126,11 +143,11 @@ export default function DonorsPage() {
         </div>
 
         {/* Patronite */}
-        <div className="mb-20">
+        <div className="mb-20 mx-5">
           <h3 className="mb-4 mx-2">Patronite</h3>
           <p className="mb-10 mx-2">Wspieraj nas regularnie przez platformę Patronite</p>
 
-          <div className="border border-white rounded-3xl p-3 mb-10">
+          <div className={`border border-${bgBorder} rounded-3xl p-3 mb-10 bg-${bgGrayOpacity}`}>
             <button className="w-full text-left space-y-3 mx-2">
               <p>Profil na Patronite</p>
               <p>będzie dostępny wkrótce</p>
