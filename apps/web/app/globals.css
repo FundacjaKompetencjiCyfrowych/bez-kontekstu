@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color: white;
 }
 
 @layer utilities {
@@ -17,7 +18,9 @@
 @layer base {
   h1 {
     font-family: var(--font-defectica);
-    font-size: 36px;
+    font-size: 42px;
+    color: white;
+    line-height: 1;
   }
   button {
     font-family: var(--font-space-mono);
