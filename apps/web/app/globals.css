@@ -22,6 +22,10 @@
     color: white;
     line-height: 1;
   }
+  h2 {
+    font-family: var(--font-defectica);
+    font-size: 32px;
+  }
   button {
     font-family: var(--font-space-mono);
   }

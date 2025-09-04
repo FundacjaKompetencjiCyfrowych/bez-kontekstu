@@ -1,19 +1,12 @@
 import Image from "next/image";
-import { Button } from "@/app/components/ui/Button";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
-import Logo from "@/app/assets/images/logo.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
-import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
+import { getAllProjects } from "@/app/lib/projects";
 
 export default function ProjectsPage() {
-  const projects = [
-    { id: 1, name: "Project 1", year: "2024" },
-    { id: 2, name: "Project 2", year: "2024" },
-    { id: 3, name: "Project 3", year: "2024" },
-    { id: 4, name: "Project 4", year: "2024" },
-  ];
+  const projects = getAllProjects();
 
   return (
     <div className="bg-[#0d0b0e]">
@@ -45,10 +38,12 @@ export default function ProjectsPage() {
           <div className="w-[85vw] text-white text-center text-md sm:text-3xl md:text-4xl lg:text-5xl font-mono">
             <div className="w-100%] mx-auto flex flex-col gap-y-14 font-defectica">
               {projects.map((project) => (
-                <div key={project.id} className="relative flex flex-col items-start justify-end p-3 bg-green-500 w-[100%] h-[250px] mb-5">
-                  <p className="relative text-md mb-4 ml-4">{project.year}</p>
-                  <h2 className="relative mb-4 ml-4 text-xl">{project.name.toUpperCase()}</h2>
-                </div>
+                <Link key={project.id} href={`/projects/${project.id}`} className="block transition-transform duration-200 hover:scale-105">
+                  <div className="relative flex flex-col items-start justify-end p-3 bg-green-500 w-[100%] h-[250px] mb-5 cursor-pointer">
+                    <p className="relative text-md mb-4 ml-4">{project.year}</p>
+                    <h2 className="relative mb-4 ml-4 text-xl">{project.name.toUpperCase()}</h2>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
