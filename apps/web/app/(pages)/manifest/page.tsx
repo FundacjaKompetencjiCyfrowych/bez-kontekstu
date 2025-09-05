@@ -2,29 +2,16 @@ import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
+import { Header } from "@/app/components/Header";
 
 export default function ManifestPage() {
   return (
     <div className="min-h-screen bg-[#0d0b0e] px-5">
-      {/* Violet logo - sticky for all sections from Manifest */}
-      <div className="sticky top-1/2 h-0 z-0">
-        <Image
-          src={LogoViolet}
-          priority
-          alt="Bez Kontekstu"
-          className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
-        />
-      </div>
+      <Header title="MAN IF EST" />
 
       <div className="max-w-4xl mx-auto relative">
-        {/* Header */}
-        <div className="flex justify-end items-center mt-15 mb-24 mx-4">
-          <Image src={SoundIcon} alt="Logo" width={30} height={30} />
-        </div>
-
-        {/* Content */}
         {/* Quote Section */}
-        <section className="my-20 pt-20  mx-5">
+        <section className="my-20 pt-20 mx-5">
           <div className=" pl-1 flex flex-row items-start z-100 relative">
             <div className="text-7xl font-mono rotate-180">„</div>
             <div className="text-lg font-mono mr-4 mt-1">
@@ -119,7 +106,7 @@ export default function ManifestPage() {
         </section>
 
         {/* Fuzsion */}
-        <section className="my-10 py-10 mx-5">
+        <section className="mt-10 mb-5 pt-10 mx-5">
           <h1 className="mb-12">FUZJA</h1>
           <div className="mt-10 font-mono">
             <p>

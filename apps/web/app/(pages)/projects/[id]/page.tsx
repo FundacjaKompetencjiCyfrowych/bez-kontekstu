@@ -24,19 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-// This function tells Next.js which paths to pre-generate at build time
-export async function generateStaticParams() {
-  // In a real app, you might fetch this from an API
-  const projects = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
-
-  return projects;
-}
-
 export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const project = getProjectById(parseInt(id));
 
-  // If project doesn't exist, show 404 page
   if (!project) {
     notFound();
   }
@@ -45,14 +36,14 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     <div className="bg-[#0d0b0e] min-h-screen font-mono">
       {/* Navigation Header */}
       <div className="relative px-8 py-6">
-        <Link href="/projects" className="flex items-center gap-2  hover:text-gray-300 transition-colors">
+        <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
           <Image src={ArrowLeft} alt="Poprzedni" />
-          <p>Wstecz</p>
+          <p className="ml-4">Wstecz</p>
         </Link>
+        <h1 className="my-10">{project.name.toUpperCase()}</h1>
       </div>
 
-      {/* Fioletowe logo - sticky  */}
-      <div className="h-[5vh]"></div>
+      {/* Violet logo - sticky  */}
       <div className="sticky top-1/2 h-0 z-0">
         <Image
           src={LogoViolet}
@@ -63,7 +54,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Main Content */}
-      <div className="px-8 pb-16">
+      <div className="relative px-8 pb-4">
         {/* Title and Year */}
         <div className="mb-8">
           <p className="text-xl text-gray-300">{project.year}</p>
@@ -132,9 +123,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Creators Section */}
-
-        <div className="mb-4">
-          <h2 className="text-right">TWÓRCY</h2>
+        <div className="mb-4 flex">
+          <div className="w-[50%]"></div>
+          <h2 className="text-left w-[50%]">TWÓRCY</h2>
         </div>
 
         {project.creators && (
@@ -142,7 +133,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             {/* Left Column - Data */}
             <div className="text-right text-sm">
               {project.creators.direction && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Reżyseria:</h3>
                   <div className="space-y-2">
                     {project.creators.direction.map((director, index) => (
@@ -153,7 +144,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.choreography && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Choreografia:</h3>
                   <div className="space-y-2">
                     {project.creators.choreography.map((choreographer, index) => (
@@ -164,7 +155,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.soundDirection && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Reżyseria dźwięku:</h3>
                   <div className="space-y-2">
                     {project.creators.soundDirection.map((soundDirector, index) => (
@@ -175,7 +166,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.scenography && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Scenografia:</h3>
                   <div className="space-y-2">
                     {project.creators.scenography.map((scenographer, index) => (
@@ -186,7 +177,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.production && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Produkcja:</h3>
                   <div className="space-y-2">
                     {project.creators.production.map((producer, index) => (

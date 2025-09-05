@@ -1,16 +1,15 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import SoundIcon from "@/app/assets/icons/sound_button.png";
 import CopyIcon from "@/app/assets/icons/copy.png";
 import { Footer } from "@/app/components/Footer";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import { Header } from "@/app/components/Header";
 
 export default function DonorsPage() {
   const iconSize = { width: 30, height: 30 };
   // Define complete Tailwind classes so they are included in the build
   const buttonClasses = "border border-violet-300 rounded-3xl p-3 mb-10 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
-  const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-10 bg-neutral-600/70";
+  const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-4 bg-neutral-600/70";
 
   // Create references to all copyable elements
   const foundationNameRef = useRef<HTMLParagraphElement>(null);
@@ -49,27 +48,14 @@ export default function DonorsPage() {
   return (
     <div className="min-h-screen bg-[#0d0b0e] pt-5 px-4 font-mono">
       <div className="max-w-md mx-auto">
-        {/*Title*/}
-        <div className="flex justify-end h-20 items-center mt-5 mb-24 mx-8">
-          <Image src={SoundIcon} alt="Logo" width={30} height={30} />
-        </div>
-
-        {/* Violet logo - sticky for all sections from Manifest */}
-        <div className="sticky top-1/2 h-0 z-0">
-          <Image
-            src={LogoViolet}
-            priority
-            alt="Bez Kontekstu"
-            className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
-          />
-        </div>
+        <Header title="DLA DARCZYŃ CÓW" />
 
         {/* Support section */}
-        <section className="text-sm my-12 mx-5 py-10 text-left">
+        <section className="relative text-sm my-12 mx-5 mt-[100px] py-10 text-left">
           <div className="w-[90vw] mx-auto flex flex-col sm:text-3xl md:text-4xl lg:text-5xl font-mono">
-            <p className="leading-10">Twoje wsparcie</p>
-            <p className="leading-10">=</p>
-            <p className="leading-10">nowe przestrzenie sztuki</p>
+            <p className="leading-8">Twoje wsparcie</p>
+            <p className="leading-8">=</p>
+            <p className="leading-8">nowe przestrzenie sztuki</p>
           </div>
         </section>
 
@@ -169,12 +155,12 @@ export default function DonorsPage() {
         </div>
 
         {/* Patronite */}
-        <div className="mb-20 mx-5">
+        <div className="mx-5">
           <h3 className="mb-4 mx-2">Patronite</h3>
           <p className="mb-10 mx-2">Wspieraj nas regularnie przez platformę Patronite</p>
 
           <div className={containerClasses}>
-            <button className="w-full text-left space-y-3 mx-2">
+            <button className="w-full text-left space-y-3 py-2 mx-2">
               <p>Profil na Patronite</p>
               <p>będzie dostępny wkrótce</p>
             </button>

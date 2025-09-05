@@ -8,11 +8,11 @@ import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 
 const navigationItems: NavItem[] = [
-  { title: "STRONA GLOWNA", href: "/" },
+  { title: "STRONA GŁÓWNA", href: "/" },
   { title: "MANIFEST", href: "/manifest" },
   { title: "PROJEKTY", href: "/projects" },
-  { title: "WSPOLPRACE", href: "/cooperators" },
-  { title: "DLA DARZYNCOW", href: "/donators" },
+  { title: "WSPÓŁPRACE", href: "/cooperators" },
+  { title: "DLA DARCZYŃCÓW", href: "/donators" },
   { title: "KONTAKT", href: "/contact" },
 ];
 
@@ -23,6 +23,9 @@ export function Navigation() {
 
   // Check if we're on a project detail page (e.g., /projects/1, /projects/2, etc.)
   const isProjectDetailPage = pathname.startsWith("/projects/") && pathname !== "/projects";
+
+  // Check if we're on the home page
+  const isHomePage = pathname === "/";
 
   // Function to toggle language
   const toggleLanguage = () => {
@@ -52,7 +55,7 @@ export function Navigation() {
           <div className="md:hidden w-full top-0 flex justify-center">
             {/* Animated menu button with gray line */}
             <div
-              className={`${isMenuOpen ? "fixed top-[408px]" : "absolute top-[120px]"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full`}
+              className={`${isMenuOpen ? "fixed top-[408px]" : `absolute ${isHomePage ? "top-[120px]" : "top-[250px]"}`} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full`}
             >
               <div className="flex items-center justify-center w-full relative">
                 <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
