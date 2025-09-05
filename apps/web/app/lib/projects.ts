@@ -11,6 +11,7 @@ export interface Project {
     direction?: string[];
     choreography?: string[];
     soundDirection?: string[];
+    lightDirection?: string[];
     scenography?: string[];
     production?: string[];
   };
@@ -29,7 +30,7 @@ export const projects: Project[] = [
       '"Copy of Copy of NPC" w Teatrze Rozbark stanowi refleksję nad cyfrowymi tożsamościami i pojęciem Main Character w przestrzeni społecznej.',
     performers: ["Olga Bury", "Zuzanna Predygier", "Jan Sarata", "Piotr Stanek", "Mateusz Wierzbicki"],
     voiceOver: ["Marcin Sanakiewicz", "Robert Czeobotar"],
-    narrators: ["Jan Butruk", "Piotr Choroba", "Maciej Marcinkowskic"],
+    narrators: ["Jan Butruk", "Piotr Choroba", "Maciej Marcinkowski"],
     creators: {
       direction: ["Jan Łuć"],
       choreography: ["Olga Bury", "Zuzanna Predygier", "Jan Sarata", "Piotr Stanek", "Mateusz Wierzbicki"],
@@ -38,8 +39,61 @@ export const projects: Project[] = [
       production: ["Fundacja Bez Kontekstu"],
     },
     images: ["/placeholder1.jpg", "/placeholder2.jpg", "/placeholder3.jpg", "/placeholder4.jpg"],
-    videoUrl: "https://example.com/video.mp4",
-    liveUrl: "https://project1.example.com",
+    videoUrl: "https://youtu.be/dkAwO54wQ9E",
+  },
+  {
+    id: 2,
+    name: "PRAWDY ZA GROSZ",
+    year: "2024",
+    description: "Eksperymentalny spektakl łączący teatr z technologią, eksplorujący granice między rzeczywistością a wirtualnością.",
+    performers: ["Anna Kowalska", "Michał Nowak", "Katarzyna Wiśniewska"],
+    creators: {
+      direction: ["Maria Zielińska"],
+      choreography: ["Tomasz Krawczyk"],
+      soundDirection: ["Piotr Dąbrowski"],
+      scenography: ["Agnieszka Lewandowska"],
+      production: ["Fundacja Bez Kontekstu"],
+    },
+    images: ["/placeholder5.jpg", "/placeholder6.jpg"],
+    videoUrl: "https://example.com/video2.mp4",
+  },
+  {
+    id: 3,
+    name: "GANGLIONY, GANGLIONY...",
+    year: "2024",
+    description:
+      "To spektakl eksperymentalny, który bada granice między ciałem a technologią za pomocą immersji dźwiękowej i przestrzennej. Dźwięk w tym spektaklu pełni rolę zarówno narracyjną, jak i sensoryczną, wpływając na percepcję przestrzeni i ruchu. Widzowie stają się częścią przestrzeni performatywnej, w której dźwięk stymuluje ich zmysły i zmienia ich postrzeganie ciała. Spektakl jest częścią projektu „Przestrzenie Sztuki”, który koncentruje się na nowoczesnych formach sztuki performatywnej.",
+    performers: ["Mateusz Wierzbicki"],
+    voiceOver: ["Piotr Klauza"],
+    creators: {
+      direction: ["Jan Łuć"],
+      choreography: ["Mateusz Wierzbicki / Olga Bury"],
+      production: ["Centrum Kultury w Lublinie, Fundacja Bez Kontekstu"],
+      scenography: ["Adrianna Urbańska"],
+      lightDirection: ["Szymon Stęchły"],
+    },
+    images: ["/placeholder7.jpg", "/placeholder8.jpg", "/placeholder9.jpg"],
+    videoUrl: "https://www.youtube.com/watch?v=-MJFk5q0DeE",
+  },
+  {
+    id: 4,
+    name: "LIMBO",
+    year: "2022",
+    description: `„Limbo” to eksperymentalny spektakl immersyjny, który koncentruje się na doświadczeniu
+dźwiękowym widza. Spektakl łączy nowoczesne technologie dźwiękowe z interakcją aktorów,
+pozwalając na pełne zanurzenie publiczności w przestrzeń performatywną. Dźwięk odgrywa
+tutaj kluczową rolę – jest nie tylko tłem, ale także jednym z głównych nośników narracji, tworząc
+poczucie niepewności i surrealistycznej przestrzeni. Spektakl został finalistą konkursu „The Best
+OFF” i zdobył 2. Nagrodę na MonoFest 2024.`,
+    performers: ["Sebastian Dela"],
+    creators: {
+      direction: ["Jan Łuć"],
+      soundDirection: ["Piotr Klauza / Łukasz Niemancewicz"],
+      scenography: ["Jan Łuć"],
+      production: ["Fundacja Bez Kontekstu"],
+    },
+    images: ["/placeholder10.jpg"],
+    liveUrl: "https://www.youtube.com/watch?v=0m4tgoVBQKg",
   },
 ];
 
@@ -51,4 +105,18 @@ export function getProjectById(id: number): Project | undefined {
 // Function to get all projects
 export function getAllProjects(): Project[] {
   return projects;
+}
+
+// Function to get previous project ID
+export function getPreviousProjectId(currentId: number): number | null {
+  const currentIndex = projects.findIndex((project) => project.id === currentId);
+  if (currentIndex <= 0) return null;
+  return projects[currentIndex - 1].id;
+}
+
+// Function to get next project ID
+export function getNextProjectId(currentId: number): number | null {
+  const currentIndex = projects.findIndex((project) => project.id === currentId);
+  if (currentIndex === -1 || currentIndex >= projects.length - 1) return null;
+  return projects[currentIndex + 1].id;
 }
