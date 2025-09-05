@@ -52,7 +52,7 @@ export function Navigation() {
           <div className="md:hidden w-full top-0 flex justify-center">
             {/* Animated menu button with gray line */}
             <div
-              className={`absolute top-[120px] z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isMenuOpen ? "top-[418px]" : "top-0"}`}
+              className={`${isMenuOpen ? "fixed top-[408px]" : "absolute top-[120px]"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full`}
             >
               <div className="flex items-center justify-center w-full relative">
                 <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
@@ -70,14 +70,14 @@ export function Navigation() {
             <div
               className={`fixed z-[9998] bg-[#0d0b0e] w-[100vw] transition-all duration-500 ease-in-out ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
               style={{
-                top: 20,
+                top: 0,
                 left: 0,
                 right: 0,
-                height: "400px",
+                height: "410px",
               }}
             >
               {/* Menu items */}
-              <div className="overflow-visible bg-[#0d0b0e]">
+              <div className="overflow-visible pt-5 bg-[#0d0b0e]">
                 {navigationItems.map((item) => (
                   <div key={item.href} className="mx-6">
                     <Link
@@ -110,7 +110,7 @@ export function Navigation() {
                           className="sr-only peer"
                           aria-label={`Switch to ${currentLanguage === "PL" ? "English" : "Polish"}`}
                         />
-                        <div className="relative w-15 h-8 bg-gray-800 border border-white peer-focus:outline-none rounded-full peer flex items-center">
+                        <div className="relative w-15 h-8 bg-neutral-600 border border-white peer-focus:outline-none rounded-full peer flex items-center">
                           <div
                             className={`w-5 h-5 bg-white border border-gray-300 rounded-full transition-all duration-300 transform ${currentLanguage === "ENG" ? "translate-x-8" : "translate-x-1"}`}
                           ></div>

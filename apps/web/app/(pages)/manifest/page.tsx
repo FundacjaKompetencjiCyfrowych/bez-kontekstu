@@ -1,77 +1,94 @@
 import Image from "next/image";
-import logoViolet from "../../assets/images/logo_violet.png";
+import SoundIcon from "@/app/assets/icons/sound_button.png";
+import LogoViolet from "@/app/assets/images/logo_violet.png";
+import { Footer } from "@/app/components/Footer";
 
 export default function ManifestPage() {
   return (
-    <div className="min-h-screen bg-black text-white py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-[#0d0b0e] px-5">
+      {/* Violet logo - sticky for all sections from Manifest */}
+      <div className="sticky top-1/2 h-0 z-0">
+        <Image
+          src={LogoViolet}
+          priority
+          alt="Bez Kontekstu"
+          className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
+        />
+      </div>
+
+      <div className="max-w-4xl mx-auto relative">
         {/* Header */}
-        <div className="mb-12">
-          <h1>MANI</h1>
-          <h1 className=" mb-4">FEST</h1>
+        <div className="flex justify-end items-center mt-15 mb-24 mx-4">
+          <Image src={SoundIcon} alt="Logo" width={30} height={30} />
         </div>
 
         {/* Content */}
         {/* Quote Section */}
-        <section className="my-12 pb-10">
+        <section className="my-20 pt-20  mx-5">
           <div className=" pl-1 flex flex-row items-start z-100 relative">
             <div className="text-7xl font-mono rotate-180">„</div>
-            <div className="text-xl font-mono font-bold ml-4 mt-1">
+            <div className="text-lg font-mono mr-4 mt-1">
               Dobry wpływ wcale nie istnieje, panie Gray. Ze stanowiska naukowego każdy wpływ jest niemoralny.
             </div>
           </div>
-          <Image src={logoViolet} alt="logo violet" width={370} height={370} className="absolute top-[130px] z-0" />
-        </section>
-
-        {/* Mission Statement */}
-        <section className="my-10 py-5">
-          <p className="font-mono text-xl leading-relaxed">
-            <span className="font-bold">Fundacja Bez Kontekstu</span> to przestrzeń, w której
-            <span className="font-bold"> fuzja sztuki i nowoczesnych technologii </span>
-            wyznacza nowe horyzonty.
-          </p>
         </section>
 
         {/* Beyond Schema */}
-        <section className="my-10 py-10 font-mono">
-          <h2 className="text-3xl font-bold text-center">Poza schematem</h2>
-          <p className="text-center  font-bold">=</p>
-          <h2 className="text-3xl font-bold text-center">Poza kontekstem</h2>
-          <p className=" mt-20 mb-4 font-bold">
-            Działamy z myślą o tworzeniu innowacyjnych doświadczeń artystycznych, które przełamują granice tradycyjnych form wyrazu.
-          </p>
-          <p>
-            Poprzez łączenie immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnych wprowadzamy
-            odbiorców w świat, gdzie teatr spotyka się z cyfrową rzeczywistością.
+        <section className="my-10 py-10">
+          <div className="flex flex-col items-center font-defectica">
+            <h2 className=" mb-4">POZA SCHEMATEM</h2>
+            <p className="text-3xl mb-4">=</p>
+            <h2 className="text-3xl ">POZA KONTEKSTEM</h2>
+          </div>
+          <div className="flex flex-col text-left font-mono mx-5">
+            <p className="mt-20 mb-5 font-bold">
+              Działamy z myślą o tworzeniu innowacyjnych doświadczeń artystycznych, które przełamują granice tradycyjnych form wyrazu.
+            </p>
+            <p>
+              Poprzez łączenie immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnych wprowadzamy
+              odbiorców w świat, gdzie teatr spotyka się z cyfrową rzeczywistością.
+            </p>
+          </div>
+        </section>
+
+        {/* Our Logo */}
+        <section className="my-10 py-10 ml-20 text-right mx-5">
+          <h1 className=" mb-12">NASZE LOGO</h1>
+          <div className="flex flex-col text-right font-mono leading-relaxed">
+            <p className=" mb-5 font-bold">Ma charakter pieczęci- hipnotyzującej, niepowtarzalnej i pełnej ukrytych znaczeń.</p>
+            <p>
+              Inspirowane cymatyką oraz obrazami mózgu z badania MRI, to ręcznie narysowany symbol łączący teatr z cyfrową rzeczywistością.
+              W negatywie ukrywa 12 otworów - jak tajemnicza pieczęć zapraszająca do zgłębienia wzoru.
+            </p>
+          </div>
+        </section>
+
+        {/* Our Goal */}
+        <section className="my-10 py-10 ml-3 mx-5">
+          <h1 className="mb-12">NASZ CEL</h1>
+          <p className="font-mono leading-relaxed">
+            <strong>Naszym głównym celem jest interdyscyplinarność. </strong>Fundacja działa lokalnie i europejsko, korzystając z programów
+            Interreg oraz Programów Ministerialnych, aby{" "}
+            <strong>wspierać młodych twórców, rozwijać edukację kulturalną i promować międzynarodową wymianę doświadczeń.</strong>
           </p>
         </section>
 
         {/* Our Vision */}
-        <section className="my-12 py-12">
-          <h1 className=" font-bold mb-4">NASZA WIZJA</h1>
-          <p className="font-mono w-[80%] leading-relaxed">
+        <section className="my-10 py-10 text-right mx-5">
+          <h1 className="mb-12">NASZA WIZJA</h1>
+          <p className="leading-relaxed font-mono ">
             Opiera się na przekonaniu, że prawdziwy rozwój sektora kreatywnego zależy od
-            <span className="font-bold">ciągłego poszukiwania nowatorskich rozwiązań</span> - zarówno pod względem form artystycznych, jak i
-            organizacji współpracy.
-          </p>
-        </section>
-
-        {/* Our Goal */}
-        <section className="my-12 py-12 ml-20">
-          <h1 className=" font-bold mb-4">NASZ CEL</h1>
-          <p className="font-mono leading-relaxed">
-            Naszym głównym celem jest interdyscyplinarność. Fundacja działa lokalnie i europejsko, korzystając z programów Interreg oraz
-            Programów Ministerialnych, aby wspierać młodych twórców, rozwijać edukację kulturalną i promować międzynarodową wymianę
-            doświadczeń.
+            <strong>ciągłego poszukiwania nowatorskich rozwiązań</strong> - zarówno pod względem form artystycznych, jak i organizacji
+            współpracy.
           </p>
         </section>
 
         {/* Our Cooperation */}
-        <section className="mb-20 pb-10">
+        <section className="my-10 py-10 mx-5">
           <h1>NASZE</h1>
-          <h1 className=" mb-4">WSPÓŁPRACE</h1>
+          <h1 className=" mb-12">WSPÓŁPRACE</h1>
           <div className="font-mono">
-            <p className="mt-7 mb-18">
+            <p className="mt-7 mb-6">
               W czasie naszej działalności współpracowaliśmy z uznanymi instytucjami kultury, takimi jak: <br />
             </p>
             <p className="font-bold">
@@ -84,8 +101,8 @@ export default function ManifestPage() {
         </section>
 
         {/* Artists */}
-        <section className="text-center my-20 pb-6">
-          <h1 className=" font-bold mb-4">ARTYŚCI</h1>
+        <section className="text-center my-10 py-10 mx-5">
+          <h1 className="mb-12">ARTYŚCI</h1>
           <div className=" font-mono">
             <p className="mb-10">Realizację naszych projektów wspierała także współpraca z wyjątkowymi artystami, m.in.</p>
             <div className="font-bold leading-10">
@@ -102,8 +119,8 @@ export default function ManifestPage() {
         </section>
 
         {/* Fuzsion */}
-        <section className="mb-10">
-          <h1 className=" font-bold mb-4">FUZJA</h1>
+        <section className="my-10 py-10 mx-5">
+          <h1 className="mb-12">FUZJA</h1>
           <div className="mt-10 font-mono">
             <p>
               Wszystkich elementów —{" "}
@@ -111,13 +128,14 @@ export default function ManifestPage() {
               , z którymi współpracujemy — pozwala nam wciąż odkrywać nowe obszary ekspresji.
             </p>
 
-            <p className="ml-25 my-10 py-10">I choć stawiamy na eksperyment, jedno pozostaje niezmienne: </p>
+            <p className="ml-16 my-6 py-6">I choć stawiamy na eksperyment, jedno pozostaje niezmienne: </p>
 
             <p className="text-center text-lg font-bold">
               Teatr jest miejscem, które przyjmie wszystko — każdą ideę, każdą emocję, każdy impuls do zmiany.
             </p>
           </div>
         </section>
+        <Footer />
       </div>
     </div>
   );
