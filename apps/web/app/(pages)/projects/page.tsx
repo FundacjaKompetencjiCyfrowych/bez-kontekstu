@@ -11,18 +11,17 @@ export default function ProjectsPage() {
   return (
     <div className="bg-[#0d0b0e]">
       {/*Title*/}
-      <div className=" flex justify-between items-center mt-5 mx-8 z-10">
-        <div className="flex flex-col text-white">
+      <div className=" flex justify-between items-center mt-12 mx-8 z-10">
+        <div className="flex flex-col">
           <h1 className="text-5xl font-defectica">PRO</h1>
           <h1 className="text-5xl font-defectica">JEK</h1>
           <h1 className="text-5xl font-defectica">TY</h1>
         </div>
         <Image src={SoundIcon} alt="Logo" width={35} height={35} />
       </div>
-      {/* PROJECTS Section */}
-      {/* ------------------------- */}
+
       <div>
-        {/* Fioletowe logo - sticky  */}
+        {/* Violet logo - sticky  */}
         <div className="h-[35vh]"></div>
         <div className="sticky top-1/2 h-0 z-0">
           <Image
@@ -33,7 +32,7 @@ export default function ProjectsPage() {
           />
         </div>
 
-        {/* Content */}
+        {/* PROJECTS Section */}
         <section className="overflow-hidden h-auto flex flex-col justify-around mx-8 mt-[-50px]">
           <div className="w-[85vw] text-white text-center text-md sm:text-3xl md:text-4xl lg:text-5xl font-mono">
             <div className="w-100%] mx-auto flex flex-col gap-y-14 font-defectica">
@@ -49,8 +48,6 @@ export default function ProjectsPage() {
           </div>
         </section>
       </div>
-      {/* ------------------------- */}
-
       <Footer />
     </div>
   );

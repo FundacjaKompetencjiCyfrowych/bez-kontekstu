@@ -7,6 +7,27 @@ import LogoViolet from "@/app/assets/images/logo_violet.png";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
 
+// Function to convert YouTube URL to embed format
+function getYouTubeEmbedUrl(url: string): string {
+  // Handle youtu.be format
+  if (url.includes("youtu.be/")) {
+    const videoId = url.split("youtu.be/")[1].split("?")[0];
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+
+  // Handle youtube.com/watch format
+  if (url.includes("youtube.com/watch")) {
+    const urlParams = new URLSearchParams(url.split("?")[1]);
+    const videoId = urlParams.get("v");
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+  }
+
+  // Return original URL if it's not a recognized YouTube format
+  return url;
+}
+
 // This function generates the metadata for each project page
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -22,14 +43,6 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     title: `${project.name} - Bez Kontekstu`,
     description: project.description,
   };
-}
-
-// This function tells Next.js which paths to pre-generate at build time
-export async function generateStaticParams() {
-  // In a real app, you might fetch this from an API
-  const projects = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }];
-
-  return projects;
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -62,7 +75,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Main Content */}
-      <div className="px-8 pb-16">
+      <div className="relative px-8 pb-16">
         {/* Title and Year */}
         <div className="mb-8">
           <h1 className="mt-4 mb-16">{project.name.toUpperCase()}</h1>
@@ -77,13 +90,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         {/* Video Section */}
         {project.videoUrl && (
           <div className="mb-12">
-            <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors">
-                  <div className="w-0 h-0 border-l-[12px] border-l-black border-y-[8px] border-y-transparent ml-1"></div>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video w-full">
+              <iframe
+                src={getYouTubeEmbedUrl(project.videoUrl)}
+                title={`${project.name} - Video`}
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                // Mobile accessibility: ensure proper touch targets and viewport
+                style={{ minHeight: "200px" }}
+              />
             </div>
           </div>
         )}
@@ -204,9 +221,14 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <h2 className="mb-6">MULTIMEDIA</h2>
             <div className="grid grid-cols-2 gap-4">
               {project.images.map((image, index) => (
-                <div key={index} className="aspect-square bg-gray-800 flex items-center justify-center">
-                  {/* <Image src={image} alt={project.name} fill className="object-cover" /> */}
-                  ...
+                <div key={index} className="aspect-square bg-gray-800 relative overflow-hidden">
+                  <Image
+                    src={image}
+                    alt={`${project.name} - Image ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
                 </div>
               ))}
             </div>

@@ -38,7 +38,7 @@ export const projects: Project[] = [
       scenography: ["Olga Bury", "Zuzanna Predygier", "Jan Sarata", "Piotr Stanek", "Mateusz Wierzbicki"],
       production: ["Fundacja Bez Kontekstu"],
     },
-    images: ["/placeholder1.jpg", "/placeholder2.jpg", "/placeholder3.jpg", "/placeholder4.jpg"],
+    images: getProjectImages("Copy of Copy of NPC"),
     videoUrl: "https://youtu.be/dkAwO54wQ9E",
   },
   {
@@ -54,7 +54,7 @@ export const projects: Project[] = [
       scenography: ["Agnieszka Lewandowska"],
       production: ["Fundacja Bez Kontekstu"],
     },
-    images: ["/placeholder5.jpg", "/placeholder6.jpg"],
+    images: getProjectImages("PRAWDY ZA GROSZ"),
     videoUrl: "https://example.com/video2.mp4",
   },
   {
@@ -72,7 +72,7 @@ export const projects: Project[] = [
       scenography: ["Adrianna Urbańska"],
       lightDirection: ["Szymon Stęchły"],
     },
-    images: ["/placeholder7.jpg", "/placeholder8.jpg", "/placeholder9.jpg"],
+    images: getProjectImages("GANGLIONY, GANGLIONY..."),
     videoUrl: "https://www.youtube.com/watch?v=-MJFk5q0DeE",
   },
   {
@@ -92,7 +92,7 @@ OFF” i zdobył 2. Nagrodę na MonoFest 2024.`,
       scenography: ["Jan Łuć"],
       production: ["Fundacja Bez Kontekstu"],
     },
-    images: ["/placeholder10.jpg"],
+    images: getProjectImages("LIMBO"),
     liveUrl: "https://www.youtube.com/watch?v=0m4tgoVBQKg",
   },
 ];
@@ -119,4 +119,26 @@ export function getNextProjectId(currentId: number): number | null {
   const currentIndex = projects.findIndex((project) => project.id === currentId);
   if (currentIndex === -1 || currentIndex >= projects.length - 1) return null;
   return projects[currentIndex + 1].id;
+}
+
+// Function to generate image paths for a project based on its name
+export function getProjectImages(projectName: string): string[] {
+  // Convert project name to lowercase and replace spaces with underscores
+  const folderName = projectName.toLowerCase().replace(/\s+/g, "_");
+
+  // Define known project images based on existing folders
+  const projectImageMap: { [key: string]: string[] } = {
+    copy_of_copy_of_npc: [
+      "/api/images/copy_of_copy_of_npc/1.png",
+      "/api/images/copy_of_copy_of_npc/2.png",
+      "/api/images/copy_of_copy_of_npc/3.png",
+      "/api/images/copy_of_copy_of_npc/4.png",
+    ],
+    prawdy_za_grosz: [],
+    gangliony_gangliony: [],
+    limbo: [],
+  };
+
+  // Return images for the project if they exist, otherwise return empty array
+  return projectImageMap[folderName] || [];
 }
