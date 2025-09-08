@@ -1,11 +1,7 @@
 import Image from "next/image";
-import { Button } from "@/app/components/ui/Button";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
-import Logo from "@/app/assets/images/logo.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
-import { RandomRectangles } from "@/app/components/RandomRectangles";
-import Link from "next/link";
 
 export default function ProjectsPage() {
   const projects = [
