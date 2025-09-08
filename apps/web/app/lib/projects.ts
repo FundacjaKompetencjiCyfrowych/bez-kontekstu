@@ -3,6 +3,7 @@ export interface Project {
   id: number;
   name: string;
   year: string;
+  poster?: string;
   description: string;
   performers: string[];
   voiceOver?: string[];
@@ -17,7 +18,6 @@ export interface Project {
   };
   images?: string[];
   videoUrl?: string;
-  liveUrl?: string;
 }
 
 // Mock projects data - you can replace this with real data from API or CMS
@@ -26,6 +26,7 @@ export const projects: Project[] = [
     id: 1,
     name: "Copy of Copy of NPC",
     year: "2025",
+    poster: "/assets/images/copy_of_copy_of_npc.png",
     description:
       '"Copy of Copy of NPC" w Teatrze Rozbark stanowi refleksję nad cyfrowymi tożsamościami i pojęciem Main Character w przestrzeni społecznej.',
     performers: ["Olga Bury", "Zuzanna Predygier", "Jan Sarata", "Piotr Stanek", "Mateusz Wierzbicki"],
@@ -45,6 +46,7 @@ export const projects: Project[] = [
     id: 2,
     name: "PRAWDY ZA GROSZ",
     year: "2024",
+    poster: "/assets/images/prawdy_za_grosz.png",
     description: "Eksperymentalny spektakl łączący teatr z technologią, eksplorujący granice między rzeczywistością a wirtualnością.",
     performers: ["Anna Kowalska", "Michał Nowak", "Katarzyna Wiśniewska"],
     creators: {
@@ -61,6 +63,7 @@ export const projects: Project[] = [
     id: 3,
     name: "GANGLIONY, GANGLIONY...",
     year: "2024",
+    poster: "/assets/images/gangliony_gangliony.png",
     description:
       "To spektakl eksperymentalny, który bada granice między ciałem a technologią za pomocą immersji dźwiękowej i przestrzennej. Dźwięk w tym spektaklu pełni rolę zarówno narracyjną, jak i sensoryczną, wpływając na percepcję przestrzeni i ruchu. Widzowie stają się częścią przestrzeni performatywnej, w której dźwięk stymuluje ich zmysły i zmienia ich postrzeganie ciała. Spektakl jest częścią projektu „Przestrzenie Sztuki”, który koncentruje się na nowoczesnych formach sztuki performatywnej.",
     performers: ["Mateusz Wierzbicki"],
@@ -79,6 +82,7 @@ export const projects: Project[] = [
     id: 4,
     name: "LIMBO",
     year: "2022",
+    poster: "/assets/images/limbo.png",
     description: `„Limbo” to eksperymentalny spektakl immersyjny, który koncentruje się na doświadczeniu
 dźwiękowym widza. Spektakl łączy nowoczesne technologie dźwiękowe z interakcją aktorów,
 pozwalając na pełne zanurzenie publiczności w przestrzeń performatywną. Dźwięk odgrywa
@@ -93,7 +97,7 @@ OFF” i zdobył 2. Nagrodę na MonoFest 2024.`,
       production: ["Fundacja Bez Kontekstu"],
     },
     images: getProjectImages("LIMBO"),
-    liveUrl: "https://www.youtube.com/watch?v=0m4tgoVBQKg",
+    videoUrl: "https://www.youtube.com/watch?v=0m4tgoVBQKg",
   },
 ];
 
