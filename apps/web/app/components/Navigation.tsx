@@ -8,11 +8,11 @@ import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 
 const navigationItems: NavItem[] = [
-  { title: "STRONA GLOWNA", href: "/" },
+  { title: "STRONA GŁÓWNA", href: "/" },
   { title: "MANIFEST", href: "/manifest" },
   { title: "PROJEKTY", href: "/projects" },
-  { title: "WSPOLPRACE", href: "/cooperators" },
-  { title: "DLA DARZYNCOW", href: "/donators" },
+  { title: "WSPÓŁPRACE", href: "/cooperators" },
+  { title: "DLA DARCZYŃCÓW", href: "/donators" },
   { title: "KONTAKT", href: "/contact" },
 ];
 

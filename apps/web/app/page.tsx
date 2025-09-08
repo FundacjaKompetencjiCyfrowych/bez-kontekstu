@@ -115,7 +115,7 @@ export default function Home() {
         {/* PEOPLE Section */}
         <section className="relative overflow-hidden h-screen flex flex-col justify-evenly mx-8 bg-transparent">
           <div className="relative flex flex-col items-start justify-start z-10">
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">WSPOL</h1>
+            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">WSPÓŁ</h1>
             <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">PRACE</h1>
           </div>
 
@@ -142,10 +142,10 @@ export default function Home() {
           <div className="relative flex flex-col items-end ">
             <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DLA</h1>
             <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DARCZY</h1>
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">NCOW</h1>
+            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">ŃCOW</h1>
           </div>
 
-          <div className="w-[90vw] mx-auto flex flex-col items-center text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl font-mono">
+          <div className="w-[90vw] mx-auto flex flex-col items-center text-center text-base sm:text-3xl md:text-4xl lg:text-5xl font-mono">
             <p className="leading-10">Twoje wsparcie</p>
             <p className="leading-10">=</p>
             <p className="leading-10">nowe przestrzenie sztuki</p>

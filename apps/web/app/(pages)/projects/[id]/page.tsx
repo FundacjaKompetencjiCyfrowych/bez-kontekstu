@@ -49,7 +49,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const { id } = await params;
   const project = getProjectById(parseInt(id));
 
-  // If project doesn't exist, show 404 page
   if (!project) {
     notFound();
   }
@@ -58,10 +57,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     <div className="bg-[#0d0b0e] min-h-screen font-mono">
       {/* Navigation Header */}
       <div className="relative px-8 py-6">
-        <Link href="/projects" className="flex items-center gap-2  hover:text-gray-300 transition-colors">
+        <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
           <Image src={ArrowLeft} alt="Poprzedni" />
-          <p>Wstecz</p>
+          <p className="ml-4">Wstecz</p>
         </Link>
+        <h1 className="my-10">{project.name.toUpperCase()}</h1>
       </div>
 
       {/* Violet logo - sticky  */}
@@ -149,8 +149,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Creators Section */}
-        <div className="mb-4">
-          <h2 className="text-right">TWÓRCY</h2>
+        <div className="mb-4 flex">
+          <div className="w-[50%]"></div>
+          <h2 className="text-left w-[50%]">TWÓRCY</h2>
         </div>
 
         {project.creators && (
@@ -158,7 +159,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             {/* Left Column - Data */}
             <div className="text-right text-sm">
               {project.creators.direction && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Reżyseria:</h3>
                   <div className="space-y-2">
                     {project.creators.direction.map((director, index) => (
@@ -169,7 +170,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.choreography && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Choreografia:</h3>
                   <div className="space-y-2">
                     {project.creators.choreography.map((choreographer, index) => (
@@ -180,7 +181,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.soundDirection && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Reżyseria dźwięku:</h3>
                   <div className="space-y-2">
                     {project.creators.soundDirection.map((soundDirector, index) => (
@@ -191,7 +192,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.scenography && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Scenografia:</h3>
                   <div className="space-y-2">
                     {project.creators.scenography.map((scenographer, index) => (
@@ -202,7 +203,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               )}
 
               {project.creators.production && (
-                <div className="mb-8">
+                <div className="mb-10">
                   <h3 className="mb-4 font-bold">Produkcja:</h3>
                   <div className="space-y-2">
                     {project.creators.production.map((producer, index) => (
