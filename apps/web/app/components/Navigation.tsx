@@ -24,6 +24,12 @@ export function Navigation() {
   // Check if we're on a project detail page (e.g., /projects/1, /projects/2, etc.)
   const isProjectDetailPage = pathname.startsWith("/projects/") && pathname !== "/projects";
 
+  // Check if we're on the home page
+  const isHomePage = pathname === "/";
+
+  // Check if we're on any other page (not home, not project detail)
+  const isOtherPage = !isHomePage && !isProjectDetailPage;
+
   // Function to toggle language
   const toggleLanguage = () => {
     setCurrentLanguage((prev) => (prev === "PL" ? "ENG" : "PL"));
@@ -52,7 +58,9 @@ export function Navigation() {
           <div className="md:hidden w-full top-0 flex justify-center">
             {/* Animated menu button with gray line */}
             <div
-              className={`absolute top-[120px] z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isMenuOpen ? "top-[418px]" : "top-0"}`}
+              className={`absolute z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
+                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[418px]" : "top-[220px]"
+              }`}
             >
               <div className="flex items-center justify-center w-full relative">
                 <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>

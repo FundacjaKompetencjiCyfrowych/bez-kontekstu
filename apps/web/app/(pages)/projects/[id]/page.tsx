@@ -51,8 +51,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </Link>
       </div>
 
-      {/* Fioletowe logo - sticky  */}
-      <div className="h-[5vh]"></div>
+      {/* Violet logo - sticky  */}
       <div className="sticky top-1/2 h-0 z-0">
         <Image
           src={LogoViolet}
@@ -66,7 +65,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       <div className="px-8 pb-16">
         {/* Title and Year */}
         <div className="mb-8">
-          <p className="text-xl text-gray-300">{project.year}</p>
+          <h1 className="mt-4 mb-16">{project.name.toUpperCase()}</h1>
+          <p className="text-xl">{project.year}</p>
         </div>
 
         {/* Description  */}
@@ -132,7 +132,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </div>
 
         {/* Creators Section */}
-
         <div className="mb-4">
           <h2 className="text-right">TWÓRCY</h2>
         </div>
