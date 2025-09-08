@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
@@ -15,7 +15,7 @@ export default function ProjectsPage() {
   const projects = getAllProjects();
 
   // Map project IDs to imported poster images
-  const posterImages: { [key: number]: any } = {
+  const posterImages: { [key: number]: StaticImageData } = {
     1: CopyOfCopyOfNpcPoster,
     2: PrawdyZaGroszPoster,
     3: GanglionyPoster,
