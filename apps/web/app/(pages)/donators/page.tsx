@@ -39,6 +39,10 @@ export default function DonorsPage() {
 
   return (
     <div className="min-h-screen bg-[#0d0b0e] pt-5 px-4 font-mono">
+      {/* Screen reader announcements */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {copiedElements.size > 0 && "Tekst został skopiowany do schowka"}
+      </div>
       <div className="max-w-md mx-auto">
         {/*Title*/}
         <div className="flex justify-end h-20 items-center mt-5 mb-24 mx-8">
@@ -74,7 +78,11 @@ export default function DonorsPage() {
           {/* Transfer details */}
           <div className="space-y-4 mt-10 mx-5">
             {/* Recipient */}
-            <button className={buttonClasses} onClick={handleCopy("Fundacja Bez Kontekstu", "foundation")}>
+            <button
+              className={buttonClasses}
+              onClick={handleCopy("Fundacja Bez Kontekstu", "foundation")}
+              aria-label="Skopiuj nazwę fundacji: Fundacja Bez Kontekstu"
+            >
               <div className="flex justify-between items-end mx-2 my-2 ">
                 <div>
                   <p className="mb-4">Odbiorca:</p>
@@ -87,7 +95,11 @@ export default function DonorsPage() {
             </button>
 
             {/* Account number */}
-            <button className={buttonClasses} onClick={handleCopy("00114020040000350294818053", "account")}>
+            <button
+              className={buttonClasses}
+              onClick={handleCopy("00114020040000350294818053", "account")}
+              aria-label="Skopiuj numer konta: 00 1140 2004 0000 3502 9481 8053"
+            >
               <div className="flex justify-between items-end mx-2 my-2">
                 <div ref={accountNumberRef}>
                   <p className="mb-4">Numer konta:</p>
@@ -100,7 +112,11 @@ export default function DonorsPage() {
             </button>
 
             {/* Title */}
-            <button className={buttonClasses} onClick={handleCopy("Wsparcie dla fundacji", "title")}>
+            <button
+              className={buttonClasses}
+              onClick={handleCopy("Wsparcie dla fundacji", "title")}
+              aria-label="Skopiuj tytuł przelewu: Wsparcie dla fundacji"
+            >
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Tytuł:</p>
@@ -113,7 +129,11 @@ export default function DonorsPage() {
             </button>
 
             {/* Address */}
-            <button className={buttonClasses} onClick={handleCopy("ul. Smulikowskiego 2, 500-389 Warszawa", "address")}>
+            <button
+              className={buttonClasses}
+              onClick={handleCopy("ul. Smulikowskiego 2, 500-389 Warszawa", "address")}
+              aria-label="Skopiuj adres fundacji: ul. Smulikowskiego 2, 500-389 Warszawa"
+            >
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Adres:</p>
@@ -146,7 +166,7 @@ export default function DonorsPage() {
             Przekaż darowiznę bezpośrednio na konto fundacji. W zeznaniu podatkowym wpisz nasz numer KRS.
           </p>
 
-          <button className={buttonClasses} onClick={handleCopy("0001102013", "krs")}>
+          <button className={buttonClasses} onClick={handleCopy("0001102013", "krs")} aria-label="Skopiuj numer KRS: 0001102013">
             <div className="flex justify-between items-end mx-2 my-2">
               <div>
                 <p className="mb-4">KRS:</p>
