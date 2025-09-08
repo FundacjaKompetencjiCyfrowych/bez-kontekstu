@@ -79,7 +79,6 @@ export function Navigation() {
               className={`fixed z-[9998] bg-[#0d0b0e] w-[100vw] transition-all duration-500 ease-in-out ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
               style={{
                 top: 0,
-                top: 0,
                 left: 0,
                 right: 0,
                 height: "410px",
