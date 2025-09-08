@@ -58,8 +58,8 @@ export function Navigation() {
           <div className="md:hidden w-full top-0 flex justify-center">
             {/* Animated menu button with gray line */}
             <div
-              className={`absolute z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
-                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[418px]" : "top-[220px]"
+              className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
+                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[400px]" : "top-[220px]"
               }`}
             >
               <div className="flex items-center justify-center w-full relative">
@@ -78,7 +78,7 @@ export function Navigation() {
             <div
               className={`fixed z-[9998] bg-[#0d0b0e] w-[100vw] transition-all duration-500 ease-in-out ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
               style={{
-                top: 20,
+                top: 0,
                 left: 0,
                 right: 0,
                 height: "400px",
