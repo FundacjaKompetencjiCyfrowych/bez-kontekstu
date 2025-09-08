@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
+import { useCopyToClipboard, useTimeout } from "usehooks-ts";
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import CopyIcon from "@/app/assets/icons/copy.png";
@@ -8,7 +9,6 @@ import LogoViolet from "@/app/assets/images/logo_violet.png";
 
 export default function DonorsPage() {
   const iconSize = { width: 30, height: 30 };
-  // Define complete Tailwind classes so they are included in the build
   const buttonClasses = "border border-violet-300 rounded-3xl p-3 mb-10 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
   const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-10 bg-neutral-600/70";
 
@@ -21,29 +21,20 @@ export default function DonorsPage() {
 
   // State to track which elements are showing "copied" message
   const [copiedElements, setCopiedElements] = useState<Set<string>>(new Set());
+  const [copiedText, copy] = useCopyToClipboard();
 
-  const handleCopy = (ref: React.RefObject<HTMLElement | null>, elementId: string) => {
-    // Read the value from the passed ref
-    if (ref.current) {
-      const textContent = ref.current.textContent;
+  // Use useTimeout to hide "copied" messages after 2 seconds
+  useTimeout(() => setCopiedElements(new Set()), copiedElements.size > 0 ? 2000 : null);
 
-      // Copy to clipboard
-      if (textContent) {
-        navigator.clipboard.writeText(textContent);
-
+  const handleCopy = (text: string, elementId: string) => () => {
+    copy(text)
+      .then(() => {
         // Show "copied" message
         setCopiedElements((prev) => new Set([...prev, elementId]));
-
-        // Hide "copied" message after 2 seconds
-        setTimeout(() => {
-          setCopiedElements((prev) => {
-            const newSet = new Set(prev);
-            newSet.delete(elementId);
-            return newSet;
-          });
-        }, 2000);
-      }
-    }
+      })
+      .catch((error) => {
+        console.error("Failed to copy!", error);
+      });
   };
 
   return (
@@ -73,7 +64,7 @@ export default function DonorsPage() {
           </div>
         </section>
 
-        {/* One-time transfer */}
+        {/* Info */}
         <div className="mb-8 text-sm z-50">
           <div className="mx-5 mb-4">
             <h3 className="mb-6 font-bold">Przelew jednorazowy</h3>
@@ -83,7 +74,7 @@ export default function DonorsPage() {
           {/* Transfer details */}
           <div className="space-y-4 mt-10 mx-5">
             {/* Recipient */}
-            <button className={buttonClasses} onClick={() => handleCopy(foundationNameRef, "foundation")}>
+            <button className={buttonClasses} onClick={handleCopy("Fundacja Bez Kontekstu", "foundation")}>
               <div className="flex justify-between items-end mx-2 my-2 ">
                 <div>
                   <p className="mb-4">Odbiorca:</p>
@@ -96,7 +87,7 @@ export default function DonorsPage() {
             </button>
 
             {/* Account number */}
-            <button className={buttonClasses} onClick={() => handleCopy(accountNumberRef, "account")}>
+            <button className={buttonClasses} onClick={handleCopy("00114020040000350294818053", "account")}>
               <div className="flex justify-between items-end mx-2 my-2">
                 <div ref={accountNumberRef}>
                   <p className="mb-4">Numer konta:</p>
@@ -109,7 +100,7 @@ export default function DonorsPage() {
             </button>
 
             {/* Title */}
-            <button className={buttonClasses} onClick={() => handleCopy(titleRef, "title")}>
+            <button className={buttonClasses} onClick={handleCopy("Wsparcie dla fundacji", "title")}>
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Tytuł:</p>
@@ -122,7 +113,7 @@ export default function DonorsPage() {
             </button>
 
             {/* Address */}
-            <button className={buttonClasses} onClick={() => handleCopy(addressRef, "address")}>
+            <button className={buttonClasses} onClick={handleCopy("ul. Smulikowskiego 2, 500-389 Warszawa", "address")}>
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Adres:</p>
@@ -155,7 +146,7 @@ export default function DonorsPage() {
             Przekaż darowiznę bezpośrednio na konto fundacji. W zeznaniu podatkowym wpisz nasz numer KRS.
           </p>
 
-          <button className={buttonClasses} onClick={() => handleCopy(krsRef, "krs")}>
+          <button className={buttonClasses} onClick={handleCopy("0001102013", "krs")}>
             <div className="flex justify-between items-end mx-2 my-2">
               <div>
                 <p className="mb-4">KRS:</p>
