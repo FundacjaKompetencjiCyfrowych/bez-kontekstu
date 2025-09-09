@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,6 +22,7 @@ export function Navigation() {
 
   // Check if we're on a project detail page (e.g., /projects/1, /projects/2, etc.)
   const isProjectDetailPage = pathname.startsWith("/projects/") && pathname !== "/projects";
+  const isCooperatorDetailPage = pathname.startsWith("/cooperators/") && pathname !== "/cooperators";
 
   // Check if we're on the home page
   const isHomePage = pathname === "/";
@@ -54,7 +54,7 @@ export function Navigation() {
         </div>
 
         {/* Mobile Navigation Container */}
-        {!isProjectDetailPage && (
+        {!isProjectDetailPage && !isCooperatorDetailPage && (
           <div className="md:hidden w-full top-0 flex justify-center">
             {/* Animated menu button with gray line */}
             <div

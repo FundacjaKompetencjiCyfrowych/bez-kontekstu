@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+import * as React from "react";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCooperatorById, getPreviousCooperatorId, getNextCooperatorId } from "@/app/lib/cooperators";
@@ -6,16 +8,38 @@ import { Footer } from "@/app/components/Footer";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
+import CatImage from "@/app/assets/images/cooperators/cat.png";
 
 interface CooperatorPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function CooperatorPage({ params }: CooperatorPageProps) {
-  const { id } = params;
-  const cooperator = getCooperatorById(parseInt(id));
+// This is the main component for the cooperator's bio page
+export default function CooperatorBioPage({ params }: CooperatorPageProps) {
+  // Unwrap the params Promise using React.use()
+  const resolvedParams = React.use(params);
+  const id = parseInt(resolvedParams.id);
+
+  if (isNaN(id)) {
+    notFound();
+    return null;
+  }
+
+  const cooperator = getCooperatorById(id);
+
+  // Map cooperator IDs to imported images
+  const cooperatorImages: { [key: number]: StaticImageData } = {
+    1: CatImage,
+    // Add more images here as you import them
+    // 2: AnnaImage,
+    // 3: PiotrImage,
+    // 4: MariaImage,
+  };
+
+  // Get the image for current cooperator
+  const cooperatorImage = cooperator ? cooperatorImages[cooperator.id] : null;
 
   if (!cooperator) {
     notFound();
@@ -41,30 +65,48 @@ export default function CooperatorPage({ params }: CooperatorPageProps) {
         />
       </div>
 
+      {/* ------------------------------------ */}
       {/* Main Content */}
-      <div className="relative px-8 pb-16">
+      <div className="relative top-[30px] px-8 ">
         {/* Portrait Section */}
         <div className="mb-8">
-          {cooperator.image && (
-            <div className="relative w-full h-[400px] mb-4">
-              <Image src={cooperator.image} alt={cooperator.name} fill className="object-cover rounded-lg" priority />
-              {/* Name overlay */}
-              <div className="absolute bottom-4 left-4">
-                <h1 className="text-2xl font-bold text-white">{cooperator.name}</h1>
-                <h1 className="text-2xl font-bold text-white">{cooperator.surname}</h1>
-              </div>
+          <div className="relative w-full h-[250px] mb-5 cursor-pointer overflow-hidden">
+            {cooperatorImage ? (
+              <Image
+                src={cooperatorImage}
+                alt={`Image of ${cooperator.name}`}
+                width={800}
+                height={250}
+                className="w-full h-full object-cover object-top"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
+                priority={cooperator.id <= 2}
+              />
+            ) : (
+              <p className="text-gray-400 text-sm font-mono">(brak zdjęcia)</p>
+            )}
+
+            {/* Gradient overlay for better text readability */}
+            <div className="absolute bottom-0 left-0 right-0 h-30 bg-gradient-to-t from-black/95 to-transparent pointer-events-none"></div>
+
+            {/* Content overlay */}
+            <div className="absolute bottom-0 left-0 p-3 z-10 mb-4 ml-3 text-2xl text-left">
+              <h3>{cooperator.name.toUpperCase()}</h3>
+              <h3>{cooperator.surname.toUpperCase()}</h3>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Description Section */}
         <div className="relative mb-12">
-          <p className="text-sm leading-relaxed text-white">{cooperator.description}</p>
+          <p className="text-md leading-relaxed">{cooperator.description}</p>
         </div>
 
         {/* Social Media Section */}
-        <div className="mb-8">
-          <h2 className="text-sm font-semibold mb-4">social media:</h2>
+        <div className="mb-8 flex flex-row gap-2 justify-between">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-base mb-4">social media:</h3>
+          </div>
+
           <div className="flex flex-col gap-2">
             {cooperator.socialMedia.instagram && (
               <a
@@ -74,7 +116,7 @@ export default function CooperatorPage({ params }: CooperatorPageProps) {
                 className="flex items-center gap-2 hover:text-gray-300 transition-colors"
               >
                 <span>Instagram</span>
-                <span className="text-xs">↗</span>
+                <span className="text-xl">↗</span>
               </a>
             )}
             {cooperator.socialMedia.facebook && (
@@ -85,7 +127,7 @@ export default function CooperatorPage({ params }: CooperatorPageProps) {
                 className="flex items-center gap-2 hover:text-gray-300 transition-colors"
               >
                 <span>Facebook</span>
-                <span className="text-xs">↗</span>
+                <span className="text-xl">↗</span>
               </a>
             )}
           </div>
@@ -93,7 +135,7 @@ export default function CooperatorPage({ params }: CooperatorPageProps) {
 
         {/* Projects Section */}
         <div className="mb-12">
-          <h2 className="text-sm font-semibold mb-4">projekty:</h2>
+          <h3 className="text-base mb-4 font-bold">projekty:</h3>
           <div className="flex flex-col gap-2">
             {cooperator.projects.map((project, index) => (
               <div key={index} className="text-sm">
@@ -106,14 +148,16 @@ export default function CooperatorPage({ params }: CooperatorPageProps) {
         </div>
       </div>
 
+      {/* ------------------------------------ */}
+
       {/* Cooperator Navigation */}
-      <div className="px-8 text-sm">
+      <div className="px-8 text-sm pt-10">
         <div className="flex justify-around items-center">
           {/* Previous Cooperator */}
           <div>
-            {getPreviousCooperatorId(parseInt(id)) ? (
+            {getPreviousCooperatorId(id) ? (
               <Link
-                href={`/cooperators/${getPreviousCooperatorId(parseInt(id))}`}
+                href={`/cooperators/${getPreviousCooperatorId(id)}`}
                 className="flex items-center hover:text-gray-300 transition-colors"
               >
                 <div>
@@ -128,9 +172,9 @@ export default function CooperatorPage({ params }: CooperatorPageProps) {
 
           {/* Next Cooperator */}
           <div className="text-right">
-            {getNextCooperatorId(parseInt(id)) ? (
+            {getNextCooperatorId(id) ? (
               <Link
-                href={`/cooperators/${getNextCooperatorId(parseInt(id))}`}
+                href={`/cooperators/${getNextCooperatorId(id)}`}
                 className="flex items-center justify-end gap-2 hover:text-gray-300 transition-colors"
               >
                 <div>
