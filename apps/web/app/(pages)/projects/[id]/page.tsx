@@ -61,7 +61,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <Image src={ArrowLeft} alt="Poprzedni" />
           <p className="ml-4">Wstecz</p>
         </Link>
-        <h1 className="my-10">{project.name.toUpperCase()}</h1>
       </div>
 
       {/* Violet logo - sticky  */}

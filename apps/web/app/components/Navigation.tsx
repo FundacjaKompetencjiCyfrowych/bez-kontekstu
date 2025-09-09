@@ -59,17 +59,13 @@ export function Navigation() {
             {/* Animated menu button with gray line */}
             <div
               className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
-                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[400px]" : "top-[220px]"
+                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[420px]" : "top-[220px]"
               }`}
             >
               <div className="flex items-center justify-center w-full relative">
                 <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
-                  <Image
-                    src={MobileMenuIcon}
-                    alt="Bez Kontekstu"
-                    className={`w-12 h-12 top-[-28px] transition-transform opacity-90 duration-500 ease-in-out `}
-                  />
+                  <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
                 </button>
               </div>
             </div>
@@ -81,7 +77,7 @@ export function Navigation() {
                 top: 0,
                 left: 0,
                 right: 0,
-                height: "410px",
+                height: "420px",
               }}
             >
               {/* Menu items */}
