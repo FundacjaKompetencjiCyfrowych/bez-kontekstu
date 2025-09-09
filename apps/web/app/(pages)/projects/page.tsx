@@ -8,7 +8,6 @@ import CopyOfCopyOfNpcPoster from "@/app/assets/images/copy_of_copy_of_npc.png";
 import PrawdyZaGroszPoster from "@/app/assets/images/prawdy_za_grosz.png";
 import GanglionyPoster from "@/app/assets/images/gangliony_gangliony.png";
 import LimboPoster from "@/app/assets/images/limbo.png";
-import LogoFallback from "@/app/assets/images/logo.png";
 
 export default function ProjectsPage() {
   const projects = getAllProjects();
