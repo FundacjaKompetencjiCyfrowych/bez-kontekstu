@@ -1,8 +1,13 @@
+"use client";
+
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProjectById, getPreviousProjectId, getNextProjectId } from "@/app/lib/projects";
+import { useState } from "react";
+import { getProjectById, getPreviousProjectId, getNextProjectId, Project } from "@/app/lib/projects";
 import { Footer } from "@/app/components/Footer";
+import { ImageSlider } from "@/app/components/ImageSlider";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
@@ -28,29 +33,41 @@ function getYouTubeEmbedUrl(url: string): string {
   return url;
 }
 
-// This function generates the metadata for each project page
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const project = getProjectById(parseInt(id));
+export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const [sliderOpen, setSliderOpen] = useState(false);
+  const [sliderIndex, setSliderIndex] = useState(0);
 
-  if (!project) {
-    return {
-      title: "Project Not Found",
+  // We need to handle async params in client component
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [projectId, setProjectId] = useState<number | null>(null);
+
+  React.useEffect(() => {
+    const loadProject = async () => {
+      const resolvedParams = await params;
+      const id = parseInt(resolvedParams.id);
+      const projectData = getProjectById(id);
+      if (!projectData) {
+        notFound();
+      }
+      setProject(projectData);
+      setProjectId(id);
+      setLoading(false);
     };
-  }
+    loadProject();
+  }, [params]);
 
-  return {
-    title: `${project.name} - Bez Kontekstu`,
-    description: project.description,
+  const handleImageClick = (index: number) => {
+    setSliderIndex(index);
+    setSliderOpen(true);
   };
-}
 
-export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const project = getProjectById(parseInt(id));
+  const handleCloseSlider = () => {
+    setSliderOpen(false);
+  };
 
-  if (!project) {
-    notFound();
+  if (loading || !project) {
+    return <div className="bg-[#0d0b0e] min-h-screen font-mono flex items-center justify-center">Loading...</div>;
   }
 
   return (
@@ -117,7 +134,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           {/* Right Column - Data */}
           <div className="relative text-sm">
             <div className="space-y-3">
-              {project.performers.map((performer, index) => (
+              {project.performers.map((performer: string, index: number) => (
                 <div key={index}>{performer}</div>
               ))}
             </div>
@@ -129,7 +146,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                   <strong>Głos GAS:</strong>
                 </h3>
                 <div className="space-y-2">
-                  {project.voiceOver.map((voice, index) => (
+                  {project.voiceOver.map((voice: string, index: number) => (
                     <div key={index}>{voice}</div>
                   ))}
                 </div>
@@ -143,7 +160,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                   <strong>Lektorzy:</strong>
                 </h3>
                 <div className="space-y-2">
-                  {project.narrators.map((narrator, index) => (
+                  {project.narrators.map((narrator: string, index: number) => (
                     <div key={index}>{narrator}</div>
                   ))}
                 </div>
@@ -168,7 +185,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     <strong>Reżyseria:</strong>
                   </h3>
                   <div className="space-y-2">
-                    {project.creators.direction.map((director, index) => (
+                    {project.creators.direction.map((director: string, index: number) => (
                       <div key={index}>{director}</div>
                     ))}
                   </div>
@@ -181,7 +198,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     <strong>Choreografia:</strong>
                   </h3>
                   <div className="space-y-2">
-                    {project.creators.choreography.map((choreographer, index) => (
+                    {project.creators.choreography.map((choreographer: string, index: number) => (
                       <div key={index}>{choreographer}</div>
                     ))}
                   </div>
@@ -194,7 +211,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     <strong>Reżyseria dźwięku:</strong>
                   </h3>
                   <div className="space-y-2">
-                    {project.creators.soundDirection.map((soundDirector, index) => (
+                    {project.creators.soundDirection.map((soundDirector: string, index: number) => (
                       <div key={index}>{soundDirector}</div>
                     ))}
                   </div>
@@ -207,7 +224,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     <strong>Scenografia:</strong>
                   </h3>
                   <div className="space-y-2">
-                    {project.creators.scenography.map((scenographer, index) => (
+                    {project.creators.scenography.map((scenographer: string, index: number) => (
                       <div key={index}>{scenographer}</div>
                     ))}
                   </div>
@@ -220,7 +237,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     <strong>Produkcja:</strong>
                   </h3>
                   <div className="space-y-2">
-                    {project.creators.production.map((producer, index) => (
+                    {project.creators.production.map((producer: string, index: number) => (
                       <div key={index}>{producer}</div>
                     ))}
                   </div>
@@ -235,8 +252,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <div className="mb-12">
             <h2 className="mb-6">MULTIMEDIA</h2>
             <div className="grid grid-cols-2 gap-4">
-              {project.images.map((image, index) => (
-                <div key={index} className="aspect-square bg-gray-800 relative overflow-hidden">
+              {project.images.map((image: string, index: number) => (
+                <button
+                  key={index}
+                  onClick={() => handleImageClick(index)}
+                  className="aspect-square bg-gray-800 relative overflow-hidden hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                  aria-label={`View image ${index + 1} in full screen`}
+                >
                   <Image
                     src={image}
                     alt={`${project.name} - Image ${index + 1}`}
@@ -244,7 +266,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     className="object-cover"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -256,9 +278,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         <div className="flex justify-around items-center">
           {/* Previous Project */}
           <div>
-            {getPreviousProjectId(parseInt(id)) ? (
+            {projectId && getPreviousProjectId(projectId) ? (
               <Link
-                href={`/projects/${getPreviousProjectId(parseInt(id))}`}
+                href={`/projects/${getPreviousProjectId(projectId)}`}
                 className="flex items-center hover:text-gray-300 transition-colors"
               >
                 <div>
@@ -273,9 +295,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
           {/* Next Project */}
           <div className="text-right">
-            {getNextProjectId(parseInt(id)) ? (
+            {projectId && getNextProjectId(projectId) ? (
               <Link
-                href={`/projects/${getNextProjectId(parseInt(id))}`}
+                href={`/projects/${getNextProjectId(projectId)}`}
                 className="flex items-center justify-end gap-2 hover:text-gray-300 transition-colors"
               >
                 <div>
@@ -289,6 +311,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </div>
+
+      {/* Image Slider Modal */}
+      {project.images && project.images.length > 0 && (
+        <ImageSlider images={project.images} isOpen={sliderOpen} onClose={handleCloseSlider} initialIndex={sliderIndex} />
+      )}
 
       <Footer />
     </div>
