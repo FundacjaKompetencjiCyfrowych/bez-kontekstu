@@ -57,7 +57,9 @@ export default function DonorsPage() {
         {/* Info */}
         <div className="mb-8 text-sm z-50">
           <div className="mx-5 mb-4">
-            <h3 className="mb-6 font-bold">Przelew jednorazowy</h3>
+            <h3 className="mb-6">
+              <strong>Przelew jednorazowy</strong>
+            </h3>
             <p className="leading-6">Przekaż dowolną bezpośrednio na konto fundacji</p>
           </div>
 
@@ -146,7 +148,7 @@ export default function DonorsPage() {
         </div>
 
         {/* 1% PIT */}
-        <div className="mb-8 mx-5">
+        <div className="mb-8 mx-5 relative">
           <h3 className="mb-4 mx-2">1% PIT</h3>
           <p className="mb-10 mx-2 leading-6">
             Przekaż darowiznę bezpośrednio na konto fundacji. W zeznaniu podatkowym wpisz nasz numer KRS.
@@ -166,7 +168,7 @@ export default function DonorsPage() {
         </div>
 
         {/* Patronite */}
-        <div className="mx-5">
+        <div className="mx-5 relative">
           <h3 className="mb-4 mx-2">Patronite</h3>
           <p className="mb-10 mx-2">Wspieraj nas regularnie przez platformę Patronite</p>
 

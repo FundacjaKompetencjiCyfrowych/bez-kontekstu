@@ -115,7 +115,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <div></div>
 
           {/* Right Column - Data */}
-          <div className="text-sm">
+          <div className="relative text-sm">
             <div className="space-y-3">
               {project.performers.map((performer, index) => (
                 <div key={index}>{performer}</div>
@@ -125,7 +125,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             {/* Voice Over Section */}
             {project.voiceOver && project.voiceOver.length > 0 && (
               <div className="mt-8">
-                <h3 className="mb-4 font-bold">Głos GAS:</h3>
+                <h3 className="mb-4">
+                  <strong>Głos GAS:</strong>
+                </h3>
                 <div className="space-y-2">
                   {project.voiceOver.map((voice, index) => (
                     <div key={index}>{voice}</div>
@@ -137,7 +139,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             {/* Narrators Section */}
             {project.narrators && project.narrators.length > 0 && (
               <div className="mt-8">
-                <h3 className="mb-4 font-bold">Lektorzy:</h3>
+                <h3 className="mb-4">
+                  <strong>Lektorzy:</strong>
+                </h3>
                 <div className="space-y-2">
                   {project.narrators.map((narrator, index) => (
                     <div key={index}>{narrator}</div>
@@ -160,7 +164,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <div className="text-right text-sm">
               {project.creators.direction && (
                 <div className="mb-10">
-                  <h3 className="mb-4 font-bold">Reżyseria:</h3>
+                  <h3 className="mb-4">
+                    <strong>Reżyseria:</strong>
+                  </h3>
                   <div className="space-y-2">
                     {project.creators.direction.map((director, index) => (
                       <div key={index}>{director}</div>
@@ -171,7 +177,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
               {project.creators.choreography && (
                 <div className="mb-10">
-                  <h3 className="mb-4 font-bold">Choreografia:</h3>
+                  <h3 className="mb-4">
+                    <strong>Choreografia:</strong>
+                  </h3>
                   <div className="space-y-2">
                     {project.creators.choreography.map((choreographer, index) => (
                       <div key={index}>{choreographer}</div>
@@ -182,7 +190,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
               {project.creators.soundDirection && (
                 <div className="mb-10">
-                  <h3 className="mb-4 font-bold">Reżyseria dźwięku:</h3>
+                  <h3 className="mb-4">
+                    <strong>Reżyseria dźwięku:</strong>
+                  </h3>
                   <div className="space-y-2">
                     {project.creators.soundDirection.map((soundDirector, index) => (
                       <div key={index}>{soundDirector}</div>
@@ -193,7 +203,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
               {project.creators.scenography && (
                 <div className="mb-10">
-                  <h3 className="mb-4 font-bold">Scenografia:</h3>
+                  <h3 className="mb-4">
+                    <strong>Scenografia:</strong>
+                  </h3>
                   <div className="space-y-2">
                     {project.creators.scenography.map((scenographer, index) => (
                       <div key={index}>{scenographer}</div>
@@ -204,7 +216,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
               {project.creators.production && (
                 <div className="mb-10">
-                  <h3 className="mb-4 font-bold">Produkcja:</h3>
+                  <h3 className="mb-4">
+                    <strong>Produkcja:</strong>
+                  </h3>
                   <div className="space-y-2">
                     {project.creators.production.map((producer, index) => (
                       <div key={index}>{producer}</div>
