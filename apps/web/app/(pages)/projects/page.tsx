@@ -3,7 +3,7 @@ import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 import Link from "next/link";
 import { getAllProjects } from "@/app/lib/projects";
-// Import poster images
+
 import CopyOfCopyOfNpcPoster from "@/app/assets/images/copy_of_copy_of_npc.png";
 import PrawdyZaGroszPoster from "@/app/assets/images/prawdy_za_grosz.png";
 import GanglionyPoster from "@/app/assets/images/gangliony_gangliony.png";
@@ -34,20 +34,17 @@ export default function ProjectsPage() {
               return (
                 <Link key={project.id} href={`/projects/${project.id}`} className="block transition-transform duration-200 hover:scale-105">
                   <div className="relative w-full h-[250px] mb-5 cursor-pointer overflow-hidden">
-                    {/* Optimized background image using Next.js Image component */}
-
                     {posterImage ? (
                       <Image
                         src={posterImage}
                         alt={`Poster for ${project.name}`}
                         width={800}
-                        height={250}
                         className="w-full h-full object-cover"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                         priority={project.id <= 2}
                       />
                     ) : (
-                      <p className="text-gray-400 text-sm font-mono">(brak plakatu)</p>
+                      <p className="text-gray-400 text-sm font-mono text-center pt-14">(brak plakatu)</p>
                     )}
 
                     {/* Content overlay */}

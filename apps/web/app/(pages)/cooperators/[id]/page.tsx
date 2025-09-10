@@ -76,13 +76,12 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
                 src={cooperatorImage}
                 alt={`Image of ${cooperator.name}`}
                 width={800}
-                height={250}
                 className="w-full h-full object-cover object-top"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                 priority={cooperator.id <= 2}
               />
             ) : (
-              <p className="text-gray-400 text-sm font-mono">(brak zdjęcia)</p>
+              <p className="text-gray-400 text-sm font-mono text-center pt-14">(brak zdjęcia)</p>
             )}
 
             {/* Gradient overlay for better text readability */}
