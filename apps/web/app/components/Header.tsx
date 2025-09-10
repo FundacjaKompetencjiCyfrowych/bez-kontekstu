@@ -16,13 +16,13 @@ export function Header({ title = "", showLogo = true, showTitle = true }: Header
     <>
       {/* Title Section */}
       {showTitle && (
-        <div className="flex justify-between items-center my-10 mx-4 z-10">
+        <div className="flex justify-between items-center my-10 mx-4 md:my-12 md:mx-6 z-10">
           <div className="flex flex-col">
             {titleWords.map((word, index) => (
               <h1 key={index}>{word}</h1>
             ))}
           </div>
-          <Image src={SoundIcon} alt="Sound button" width={30} height={30} />
+          <Image src={SoundIcon} alt="Sound button" width={30} height={30} className="md:w-10 md:h-10" />
         </div>
       )}
 
@@ -33,7 +33,7 @@ export function Header({ title = "", showLogo = true, showTitle = true }: Header
             src={LogoViolet}
             priority
             alt="Bez Kontekstu"
-            className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
+            className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 xl:w-200 xl:h-200 opacity-50"
           />
         </div>
       )}
