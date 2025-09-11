@@ -19,9 +19,9 @@ export default function CooperatorsPage() {
       <Header title="WSPÓ ŁPR ACE" />
 
       {/* Content */}
-      <section className="overflow-hidden h-auto flex flex-col justify-around mx-4 mt-[170px]">
-        <div className="w-[85vw] text-center text-md sm:text-3xl md:text-4xl lg:text-5xl ">
-          <div className="w-100%] mx-auto flex flex-col gap-y-14 font-defectica">
+      <section className="overflow-hidden h-auto flex flex-col items-center mx-4 mt-[200px]">
+        <div className="w-[85vw] md:w-[70vw] text-center text-md sm:text-3xl md:text-4xl lg:text-5xl">
+          <div className="mx-auto flex flex-col gap-y-14 font-defectica">
             {cooperators.map((cooperator) => {
               const posterImage = posterImages[cooperator.id];
 
@@ -31,7 +31,7 @@ export default function CooperatorsPage() {
                   href={`/cooperators/${cooperator.id}`}
                   className="block transition-transform duration-200 hover:scale-105"
                 >
-                  <div className="relative w-full h-[250px] mb-5 cursor-pointer overflow-hidden">
+                  <div className="relative w-full h-[250px] md:h-[350px] mb-5 cursor-pointer overflow-hidden">
                     {posterImage ? (
                       <Image
                         src={posterImage}

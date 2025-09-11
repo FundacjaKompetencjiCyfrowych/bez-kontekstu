@@ -64,17 +64,17 @@ export function Navigation() {
                     ? "top-[418px] md:top-[550px]"
                     : "top-[120px] md:top-[150px]"
                   : isMenuOpen
-                    ? "top-[400px] md:top-[480px]"
-                    : "top-[220px] md:top-[250px]"
+                    ? "top-[405px] md:top-[545px]"
+                    : "top-[220px] md:top-[300px]"
               }`}
             >
               <div className="flex items-center justify-center w-full relative">
-                <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
+                <div className="absolute top-[-20px] bg-[#0d0b0e] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
                   <Image
                     src={MobileMenuIcon}
                     alt="Bez Kontekstu"
-                    className={`w-12 h-12 md:w-16 md:h-16 top-[-28px] md:top-[-36px] transition-transform opacity-90 duration-500 ease-in-out `}
+                    className={`w-12 h-12 md:w-16 md:h-16 transition-transform opacity-90 duration-500 ease-in-out `}
                   />
                 </button>
               </div>

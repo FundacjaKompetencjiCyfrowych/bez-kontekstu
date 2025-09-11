@@ -2,13 +2,13 @@
 import React, { useRef, useState } from "react";
 import { useCopyToClipboard, useTimeout } from "usehooks-ts";
 import Image from "next/image";
-import CopyIcon from "@/app/assets/icons/copy.png";
+import copyIcon from "@/app/assets/icons/copy.png";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 
 export default function DonorsPage() {
-  const iconSize = { width: 30, height: 30 };
-  const buttonClasses = "border border-violet-300 rounded-3xl p-3 mb-10 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
+  const buttonClasses =
+    "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
   const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-4 bg-neutral-600/70";
 
   // Create references to all copyable elements
@@ -36,35 +36,47 @@ export default function DonorsPage() {
       });
   };
 
+  // Copy icon component
+  const CopyIcon = () => {
+    return (
+      <div className="w-6 h-6 md:w-12 md:h-12 flex items-center justify-center">
+        {/* Mobile icon - visible on small screens */}
+        <Image src={copyIcon} alt="Copy" width={24} height={24} className="block md:hidden" />
+        {/* Tablet/Desktop icon - visible on md+ screens */}
+        <Image src={copyIcon} alt="Copy" width={40} height={40} className="hidden md:block" />
+      </div>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-[#0d0b0e] px-4 font-mono">
+    <div className="min-h-screen bg-[#0d0b0e] pt-5 px-4 md:px-8 font-mono">
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {copiedElements.size > 0 && "Tekst został skopiowany do schowka"}
       </div>
-      <div className="max-w-md mx-auto">
+      <div className="mx-auto">
         <Header title="DLA DARCZYŃ CÓW" />
 
         {/* Support section */}
         <section className="relative text-sm my-12 mx-5 mt-[100px] py-10 text-left">
           <div className="w-[90vw] mx-auto flex flex-col sm:text-3xl md:text-4xl lg:text-5xl font-mono">
-            <p className="leading-8">Twoje wsparcie</p>
-            <p className="leading-8">=</p>
-            <p className="leading-8">nowe przestrzenie sztuki</p>
+            <p className="leading-8  md:leading-14 ">Twoje wsparcie</p>
+            <p className="leading-8  md:leading-14">=</p>
+            <p className="leading-8  md:leading-14">nowe przestrzenie sztuki</p>
           </div>
         </section>
 
         {/* Info */}
-        <div className="mb-8 text-sm z-50">
+        <div className="relative mb-8 md:mb-18 text-sm z-50">
           <div className="mx-5 mb-4">
-            <h3 className="mb-6">
+            <h3 className="mb-6 md:text-2xl">
               <strong>Przelew jednorazowy</strong>
             </h3>
-            <p className="leading-6">Przekaż dowolną bezpośrednio na konto fundacji</p>
+            <p className="leading-6 md:text-2xl">Przekaż dowolną bezpośrednio na konto fundacji</p>
           </div>
 
           {/* Transfer details */}
-          <div className="space-y-4 mt-10 mx-5">
+          <div className="space-y-4 mt-10 mx-5 md:text-2xl md:leading-10">
             {/* Recipient */}
             <button
               className={buttonClasses}
@@ -76,9 +88,7 @@ export default function DonorsPage() {
                   <p className="mb-4">Odbiorca:</p>
                   <p ref={foundationNameRef}>{copiedElements.has("foundation") ? "Skopiowano ✓" : "Fundacja Bez Kontekstu"}</p>
                 </div>
-                <div className="w-6 h-6  flex items-center justify-center">
-                  <Image src={CopyIcon} alt="Copy" {...iconSize} />
-                </div>
+                <CopyIcon />
               </div>
             </button>
 
@@ -93,9 +103,7 @@ export default function DonorsPage() {
                   <p className="mb-4">Numer konta:</p>
                   <p>{copiedElements.has("account") ? "Skopiowano ✓" : "00 1140 2004 0000 3502 9481 8053"}</p>
                 </div>
-                <div className="w-6 h-6 flex items-center justify-center">
-                  <Image src={CopyIcon} alt="Copy" {...iconSize} />
-                </div>
+                <CopyIcon />
               </div>
             </button>
 
@@ -110,9 +118,7 @@ export default function DonorsPage() {
                   <p className="mb-4">Tytuł:</p>
                   <p ref={titleRef}>{copiedElements.has("title") ? "Skopiowano ✓" : "Wsparcie dla fundacji"}</p>
                 </div>
-                <div className="w-6 h-6 flex items-center justify-center">
-                  <Image src={CopyIcon} alt="Copy" {...iconSize} />
-                </div>
+                <CopyIcon />
               </div>
             </button>
 
@@ -125,13 +131,11 @@ export default function DonorsPage() {
               <div className="flex justify-between items-end mx-2 my-2">
                 <div>
                   <p className="mb-4">Adres:</p>
-                  <p ref={addressRef} className="w-[160px]">
+                  <p ref={addressRef} className="w-[160px] md:w-[250px]">
                     {copiedElements.has("address") ? "Skopiowano ✓" : "ul. Smulikowskiego 2 500-389 Warszawa"}
                   </p>
                 </div>
-                <div className="w-6 h-6 flex items-center justify-center">
-                  <Image src={CopyIcon} alt="Copy" {...iconSize} />
-                </div>
+                <CopyIcon />
               </div>
             </button>
 
@@ -148,9 +152,11 @@ export default function DonorsPage() {
         </div>
 
         {/* 1% PIT */}
-        <div className="mb-8 mx-5 relative">
-          <h3 className="mb-4 mx-2">1% PIT</h3>
-          <p className="mb-10 mx-2 leading-6">
+        <div className="mb-8 mx-5 relative md:text-2xl">
+          <h3 className="mb-4 mx-2 md:text-3xl">
+            <strong>1% PIT</strong>
+          </h3>
+          <p className="mb-10 mx-2 leading-6  md:leading-10">
             Przekaż darowiznę bezpośrednio na konto fundacji. W zeznaniu podatkowym wpisz nasz numer KRS.
           </p>
 
@@ -160,16 +166,16 @@ export default function DonorsPage() {
                 <p className="mb-4">KRS:</p>
                 <p ref={krsRef}>{copiedElements.has("krs") ? "Skopiowano ✓" : "0001102013"}</p>
               </div>
-              <div className="w-6 h-6 flex items-center justify-center">
-                <Image src={CopyIcon} alt="Copy" {...iconSize} />
-              </div>
+              <CopyIcon />
             </div>
           </button>
         </div>
 
         {/* Patronite */}
-        <div className="mx-5 relative">
-          <h3 className="mb-4 mx-2">Patronite</h3>
+        <div className="mx-5 relative md:text-2xl md:leading-10">
+          <h3 className="mb-4 mx-2 md:text-3xl">
+            <strong>Patronite</strong>
+          </h3>
           <p className="mb-10 mx-2">Wspieraj nas regularnie przez platformę Patronite</p>
 
           <div className={containerClasses}>
