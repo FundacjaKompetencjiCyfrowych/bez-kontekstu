@@ -69,7 +69,7 @@ export function Navigation() {
               }`}
             >
               <div className="flex items-center justify-center w-full relative">
-                <div className="absolute top-[-20px] bg-[#0d0b0e] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
+                <div className="absolute top-[-31px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
                   <Image
                     src={MobileMenuIcon}
