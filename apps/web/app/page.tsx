@@ -8,7 +8,6 @@ import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
 
 export default function Home() {
-  // Array with people data for the cooperation section
   const teamMembers = [
     { id: 1, name: "Anna Kowalska" },
     { id: 2, name: "Piotr Nowak" },
@@ -48,7 +47,6 @@ export default function Home() {
         />
       </section>
 
-      {/* ------------------------- */}
       <div className="relative">
         {/* Violet logo - sticky for all sections from Manifest */}
         <div className="h-[30vh]"></div>
@@ -145,7 +143,7 @@ export default function Home() {
             <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">ŃCOW</h1>
           </div>
 
-          <div className="w-[90vw] mx-auto flex flex-col items-center text-center text-base sm:text-3xl md:text-4xl lg:text-5xl font-mono">
+          <div className="mx-auto flex flex-col items-center text-center text-base sm:text-3xl md:text-4xl lg:text-5xl font-mono">
             <p className="leading-10">Twoje wsparcie</p>
             <p className="leading-10">=</p>
             <p className="leading-10">nowe przestrzenie sztuki</p>
@@ -160,8 +158,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-      {/* ------------------------- */}
-
       <Footer />
     </div>
   );
