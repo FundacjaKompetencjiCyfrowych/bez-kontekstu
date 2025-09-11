@@ -37,7 +37,7 @@ export default function DonorsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0b0e] pt-5 px-4 font-mono">
+    <div className="min-h-screen bg-[#0d0b0e] px-4 font-mono">
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {copiedElements.size > 0 && "Tekst został skopiowany do schowka"}
