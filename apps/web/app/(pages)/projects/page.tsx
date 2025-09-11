@@ -28,7 +28,7 @@ export default function ProjectsPage() {
       <Header title="PRO JEK TY" />
 
       {/* PROJECTS Section */}
-      <section className="overflow-hidden h-auto flex flex-col justify-around mx-4 mt-[170px]">
+      <section className="overflow-hidden h-auto flex flex-col items-center mx-4 mt-[170px]">
         <div className="w-[85vw] text-center text-md sm:text-3xl md:text-4xl lg:text-5xl font-mono">
           <div className="w-100%] mx-auto flex flex-col gap-y-14 font-defectica">
             {projects.map((project) => (

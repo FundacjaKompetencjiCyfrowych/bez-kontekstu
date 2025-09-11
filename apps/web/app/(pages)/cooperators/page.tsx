@@ -13,11 +13,14 @@ export default function CooperatorsPage() {
       <Header title="WSPÓ ŁPR ACE" />
 
       {/* Content */}
-      <section className="overflow-hidden h-auto flex flex-col justify-around mx-4 mt-[200px]">
-        <div className="w-[85vw] text-white text-center text-md sm:text-3xl md:text-4xl lg:text-5xl font-mono">
-          <div className="w-100%] mx-auto flex flex-col gap-y-14 font-defectica">
+      <section className="overflow-hidden h-auto flex flex-col items-center mx-4 mt-[200px]">
+        <div className="w-[85vw] md:w-[70vw] text-white text-center text-md sm:text-3xl md:text-4xl lg:text-5xl font-mono">
+          <div className="mx-auto flex flex-col gap-y-14 font-defectica">
             {teamMembers.map((teamMember) => (
-              <div key={teamMember.id} className="relative flex flex-col items-start justify-end p-3 bg-orange-500 w-[100%] h-[250px] mb-5">
+              <div
+                key={teamMember.id}
+                className="relative flex flex-col items-start justify-end p-3 bg-orange-500 w-[100%] h-[250px] md:h-[350px]  mb-5"
+              >
                 {/* Gradient overlay  */}
                 <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
                 <h2 className="relative text-2xl ml-4 z-10">{teamMember.name.toUpperCase()}</h2>
