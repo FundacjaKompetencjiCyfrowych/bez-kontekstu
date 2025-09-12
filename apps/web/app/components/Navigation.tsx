@@ -13,6 +13,7 @@ const navigationItems: NavItem[] = [
   { title: "WSPÓŁPRACE", href: "/cooperators" },
   { title: "DLA DARCZYŃCÓW", href: "/donators" },
   { title: "KONTAKT", href: "/contact" },
+  { title: "MUZYKA", href: "/music" },
 ];
 
 export function Navigation() {
@@ -40,7 +41,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center h-16">
           {/* Desktop Navigation */}
-          <div className="hidden absolute md:flex items-center space-x-8">
+          <div className="hidden absolute md:hidden lg:flex items-center space-x-8">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
@@ -55,20 +56,22 @@ export function Navigation() {
 
         {/* Mobile Navigation Container */}
         {!isProjectDetailPage && !isCooperatorDetailPage && (
-          <div className="md:hidden w-full top-0 flex justify-center">
-            {/* Animated menu button with gray line */}
-            <div
-              className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
-                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[420px]" : "top-[220px]"
-              }`}
-            >
-              <div className="flex items-center justify-center w-full relative">
-                <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
-                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
-                  <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
-                </button>
+          <div className="w-full lg:hidden top-0 flex justify-center">
+            {/* Menu button when closed */}
+            {!isMenuOpen && (
+              <div
+                className={`absolute z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
+                  isHomePage ? "top-[120px]" : "top-[220px]"
+                }`}
+              >
+                <div className="flex items-center justify-center w-full relative">
+                  <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
+                  <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
+                    <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Animated menu  */}
             <div
@@ -77,7 +80,7 @@ export function Navigation() {
                 top: 0,
                 left: 0,
                 right: 0,
-                height: "420px",
+                minHeight: "420px",
               }}
             >
               {/* Menu items */}
@@ -127,6 +130,16 @@ export function Navigation() {
                         ENG
                       </span>
                     </div>
+                  </div>
+                </div>
+
+                {/* Close button at the bottom of menu */}
+                <div className="flex justify-center pt-6 pb-0">
+                  <div className="flex items-center justify-center w-full relative">
+                    <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
+                    <button onClick={() => setIsMenuOpen(false)} className="z-100 absolute top-[-21px] flex justify-center">
+                      <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
+                    </button>
                   </div>
                 </div>
               </div>

@@ -1,18 +1,11 @@
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
-import { getAllCooperators } from "@/app/lib/cooperators";
+import { getAllCooperators, getCooperatorImage } from "@/app/lib/cooperators";
 import Image from "next/image";
 import Link from "next/link";
-import CatImage from "@/app/assets/images/cooperators/cat.png";
-import type { StaticImageData } from "next/image";
 
 export default function CooperatorsPage() {
   const cooperators = getAllCooperators();
-
-  // Map project IDs to imported poster images
-  const posterImages: { [key: number]: StaticImageData } = {
-    1: CatImage,
-  };
 
   return (
     <div className="bg-[#0d0b0e] px-5">
@@ -23,7 +16,7 @@ export default function CooperatorsPage() {
         <div className="w-[85vw] text-center text-md sm:text-3xl md:text-4xl lg:text-5xl ">
           <div className="w-100%] mx-auto flex flex-col gap-y-14 font-defectica">
             {cooperators.map((cooperator) => {
-              const posterImage = posterImages[cooperator.id];
+              const cooperatorImage = getCooperatorImage(cooperator.id);
 
               return (
                 <Link
@@ -32,12 +25,13 @@ export default function CooperatorsPage() {
                   className="block transition-transform duration-200 hover:scale-105"
                 >
                   <div className="relative w-full h-[250px] mb-5 cursor-pointer overflow-hidden">
-                    {posterImage ? (
+                    {cooperatorImage ? (
                       <Image
-                        src={posterImage}
-                        alt={`Image of ${cooperator.name}`}
+                        src={cooperatorImage}
+                        alt={`Image of ${cooperator.name} ${cooperator.surname}`}
                         width={800}
-                        className="w-full h-full object-cover object-top"
+                        height={250}
+                        className="w-full h-full object-cover object-top md:object-center"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                         priority={cooperator.id <= 2}
                       />

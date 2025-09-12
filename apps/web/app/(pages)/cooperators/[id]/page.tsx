@@ -3,12 +3,11 @@ import * as React from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCooperatorById, getPreviousCooperatorId, getNextCooperatorId } from "@/app/lib/cooperators";
+import { getCooperatorById, getPreviousCooperatorId, getNextCooperatorId, getCooperatorImage } from "@/app/lib/cooperators";
 import { Footer } from "@/app/components/Footer";
 import LogoViolet from "@/app/assets/images/logo_violet.png";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
-import CatImage from "@/app/assets/images/cooperators/cat.png";
 
 interface CooperatorPageProps {
   params: Promise<{
@@ -29,17 +28,8 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
   const cooperator = getCooperatorById(id);
 
-  // Map cooperator IDs to imported images
-  const cooperatorImages: { [key: number]: StaticImageData } = {
-    1: CatImage,
-    // Add more images here as you import them
-    // 2: AnnaImage,
-    // 3: PiotrImage,
-    // 4: MariaImage,
-  };
-
   // Get the image for current cooperator
-  const cooperatorImage = cooperator ? cooperatorImages[cooperator.id] : null;
+  const cooperatorImage = cooperator ? getCooperatorImage(cooperator.id) : null;
 
   if (!cooperator) {
     notFound();
@@ -76,6 +66,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
                 src={cooperatorImage}
                 alt={`Image of ${cooperator.name}`}
                 width={800}
+                height={250}
                 className="w-full h-full object-cover object-top"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                 priority={cooperator.id <= 2}
@@ -135,7 +126,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
         {/* Projects Section */}
         <div className="mb-12">
           <h3 className="text-base mb-4 font-bold">projekty:</h3>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 space-y-2">
             {cooperator.projects.map((project, index) => (
               <div key={index} className="text-sm">
                 <span>
@@ -146,11 +137,10 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
           </div>
         </div>
       </div>
-
       {/* ------------------------------------ */}
 
       {/* Cooperator Navigation */}
-      <div className="px-8 text-sm pt-10">
+      <div className="relative px-8 text-sm pt-10 z-10">
         <div className="flex justify-around items-center">
           {/* Previous Cooperator */}
           <div>
