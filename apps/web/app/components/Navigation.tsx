@@ -38,14 +38,14 @@ export function Navigation() {
   return (
     <nav className="w-full absolute flex justify-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center h-16">
+        <div className="flex justify-center h-16 mt-4">
           {/* Desktop Navigation */}
           <div className="hidden absolute md:flex items-center space-x-8">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md text-center text-sm font-medium transition-colors font-mono"
+                className="text-gray-500 hover:text-blue-600 px-3 py-2 rounded-md text-center text-sm font-medium transition-colors font-defectica"
               >
                 {item.title.toLocaleUpperCase()}
               </Link>

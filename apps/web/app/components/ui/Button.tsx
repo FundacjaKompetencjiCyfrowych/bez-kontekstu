@@ -15,7 +15,7 @@ export function Button({ children, variant = "primary", size = "md", onClick, di
   };
 
   const sizes = {
-    sm: "h-8 px-7 py-6 text-[0.8rem] w-[80vw]",
+    sm: "h-8 px-7 py-6 text-[0.8rem] w-[80vw] lg:w-[30vw] mx-auto",
     md: "h-10 px-4 py-2",
     lg: "h-12 px-6 text-lg",
   };
