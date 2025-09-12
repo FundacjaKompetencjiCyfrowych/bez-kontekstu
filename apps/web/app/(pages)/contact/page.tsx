@@ -39,6 +39,9 @@ export default function ContactPage() {
               <div className="mr-3 md:mr-6">
                 <ContactIcon src={PhoneIcon} alt="Phone" />
               </div>
+              <div className="mr-3 md:mr-6">
+                <ContactIcon src={PhoneIcon} alt="Phone" />
+              </div>
               608 486 769
             </li>
             <li className="flex items-center">
@@ -47,6 +50,7 @@ export default function ContactPage() {
               </div>
               ul.Smulikowskiego 2/5
             </li>
+            <li className="flex items-center ml-9 md:ml-14">00-389 Warszawa</li>
             <li className="flex items-center ml-9 md:ml-14">00-389 Warszawa</li>
           </ul>
         </div>
