@@ -18,12 +18,19 @@ export default function Home() {
   return (
     <div className="bg-[#0d0b0e]">
       {/*Title*/}
-      <div className="flex justify-end h-20 items-center mt-5 mb-24 mx-8 z-10">
-        <Image src={SoundIcon} alt="Logo" width={30} height={30} />
+
+      <div className=" hidden md:flex lg:hidden flex justify-between items-center my-10 mx-4 md:my-12 md:mx-6 z-10">
+        <div className="flex flex-col">
+          <h1>STRONA</h1>
+          <h1>GŁÓ</h1>
+          <h1>WNA</h1>
+        </div>
+        <Image src={SoundIcon} alt="Sound button" width={30} height={30} className="md:w-10 md:h-10" />
       </div>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden h-[80vh] flex flex-col justify-between mx-8  z-10">
-        <div className="relative flex flex-col justify-end items-end z-10">
+      <section className="relative overflow-hidden h-[80vh] flex flex-col justify-around md:justify-between mx-8 z-10">
+        <div className="relative flex flex-col justify-center md:justify-end items-end z-10 mt-20 md:mt-0">
           <h1>BEZ</h1>
         </div>
 
@@ -77,7 +84,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative flex justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center bottom-0 transform mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/manifest"}>
               <Button variant="dark" size="sm">
                 Poznaj nas lepiej
@@ -97,7 +104,7 @@ export default function Home() {
             <RandomRectangles />
           </div>
 
-          <div className="relative flex justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center bottom-0 transform mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/projects"}>
               <Button variant="dark" size="sm">
                 Sprawdź projekty
@@ -113,7 +120,7 @@ export default function Home() {
             <h1 className="ml-2 sm:ml-3 mt-2 sm:mt-3">PRACE</h1>
           </div>
 
-          <div className="w-[95%] mx-auto grid grid-cols-2 gap-x-5 gap-y-8 aspect-square z-10">
+          <div className="w-[95%] mx-auto md:mb-6 grid grid-cols-2 gap-x-5 gap-y-8 aspect-square z-10">
             {teamMembers.map((member) => (
               <div key={member.id} className="relative flex flex-col items-start justify-end font-mono p-3 bg-amber-200 overflow-hidden">
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -122,7 +129,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="relative flex justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center bottom-0 transform mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/cooperators"}>
               <Button variant="dark" size="sm">
                 Poznaj nasz zespół
@@ -145,7 +152,7 @@ export default function Home() {
             <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
 
-          <div className="relative flex justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center bottom-0 transform mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/donators"}>
               <Button variant="dark" size="sm">
                 Wesprzyj nas

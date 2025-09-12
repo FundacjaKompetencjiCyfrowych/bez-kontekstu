@@ -62,7 +62,7 @@ export function Navigation() {
                 isHomePage
                   ? isMenuOpen
                     ? "top-[418px] md:top-[550px]"
-                    : "top-[120px] md:top-[150px]"
+                    : "top-[120px] md:top-[300px]"
                   : isMenuOpen
                     ? "top-[405px] md:top-[545px]"
                     : "top-[220px] md:top-[300px]"
