@@ -73,10 +73,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   return (
     <div className="bg-[#0d0b0e] min-h-screen font-mono">
       {/* Navigation Header */}
-      <div className="relative px-8 py-6">
+      <div className="relative px-8 py-6 md:py-12">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-          <Image src={ArrowLeft} alt="Poprzedni" />
-          <p className="ml-4">Wstecz</p>
+          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
+          <p className="ml-4 md:text-xl">Wstecz</p>
         </Link>
       </div>
 
@@ -95,12 +95,12 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
         {/* Title and Year */}
         <div className="mb-8">
           <h1 className="mt-4 mb-16">{project.name.toUpperCase()}</h1>
-          <p className="text-xl">{project.year}</p>
+          <p className="text-xl md:text-3xl">{project.year}</p>
         </div>
 
         {/* Description  */}
         <div className="relative mb-12">
-          <p className="text-sm leading-relaxed ">{project.description}</p>
+          <p className="text-sm md:text-xl leading-relaxed ">{project.description}</p>
         </div>
 
         {/* Video Section */}
@@ -123,15 +123,15 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
 
         {/* Performers Section */}
         <div className="mb-4">
-          <h2>WYKONAWCY</h2>
+          <h2 className="md:text-6xl">WYKONAWCY</h2>
         </div>
 
-        <div className="mb-12 grid grid-cols-2 gap-0">
+        <div className="mb-12 md:mb-24 grid grid-cols-2 gap-0">
           {/* Left Column */}
           <div></div>
 
           {/* Right Column - Data */}
-          <div className="relative text-sm">
+          <div className="relative text-sm md:text-xl">
             <div className="space-y-3">
               {project.performers.map((performer: string, index: number) => (
                 <div key={index}>{performer}</div>
@@ -171,13 +171,13 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
         {/* Creators Section */}
         <div className="mb-4 flex">
           <div className="w-[50%]"></div>
-          <h2 className="text-left w-[50%]">TWÓRCY</h2>
+          <h2 className="text-left w-[50%] md:text-6xl">TWÓRCY</h2>
         </div>
 
         {project.creators && (
           <div className="mb-12 grid grid-cols-2 gap-0">
             {/* Left Column - Data */}
-            <div className="text-right text-sm">
+            <div className="text-right text-sm md:text-xl">
               {project.creators.direction && (
                 <div className="mb-10">
                   <h3 className="mb-4">
@@ -249,7 +249,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
         {/* Multimedia Section */}
         {project.images && project.images.length > 0 && (
           <div className="mb-12">
-            <h2 className="mb-6">MULTIMEDIA</h2>
+            <h2 className="mb-6 md:text-6xl ">MULTIMEDIA</h2>
             <div className="grid grid-cols-2 gap-4">
               {project.images.map((image: string, index: number) => (
                 <button
@@ -280,10 +280,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             {projectId && getPreviousProjectId(projectId) ? (
               <Link
                 href={`/projects/${getPreviousProjectId(projectId)}`}
-                className="flex items-center hover:text-gray-300 transition-colors"
+                className="flex items-center md:text-xl hover:text-gray-300 transition-colors"
               >
                 <div>
-                  <Image src={ArrowLeft} alt="Poprzedni" className="inline-block mr-4" />
+                  <Image src={ArrowLeft} alt="Poprzedni" className="inline-block mr-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                   <span>Poprzedni</span>
                 </div>
               </Link>
@@ -297,11 +297,11 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             {projectId && getNextProjectId(projectId) ? (
               <Link
                 href={`/projects/${getNextProjectId(projectId)}`}
-                className="flex items-center justify-end gap-2 hover:text-gray-300 transition-colors"
+                className="flex items-center justify-end gap-2 md:text-xl hover:text-gray-300 transition-colors"
               >
                 <div>
                   <span>Następny</span>
-                  <Image src={ArrowRight} alt="Następny" className="inline-block ml-4" />
+                  <Image src={ArrowRight} alt="Następny" className="inline-block ml-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                 </div>
               </Link>
             ) : (

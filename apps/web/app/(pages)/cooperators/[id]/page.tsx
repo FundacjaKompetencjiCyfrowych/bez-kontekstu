@@ -46,12 +46,12 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
   }
 
   return (
-    <div className="bg-[#0d0b0e] min-h-screen font-mono">
+    <div className="bg-[#0d0b0e] min-h-screen font-mono flex flex-col justify-between">
       {/* Navigation Header */}
       <div className="relative px-8 py-6">
         <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-          <Image src={ArrowLeft} alt="Poprzedni" />
-          <p className="ml-4">Wstecz</p>
+          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2 md:w-4 md:h-4" />
+          <p className="ml-4 md:text-xl">Wstecz</p>
         </Link>
       </div>
 
@@ -70,7 +70,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
       <div className="relative top-[30px] px-8 ">
         {/* Portrait Section */}
         <div className="mb-8">
-          <div className="relative w-full h-[250px] mb-5 cursor-pointer overflow-hidden">
+          <div className="relative w-full h-[250px] md:h-[350px] mb-5 cursor-pointer overflow-hidden">
             {cooperatorImage ? (
               <Image
                 src={cooperatorImage}
@@ -81,14 +81,14 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
                 priority={cooperator.id <= 2}
               />
             ) : (
-              <p className="text-gray-400 text-sm font-mono text-center pt-14">(brak zdjęcia)</p>
+              <p className="text-gray-400 text-sm md:text-xl font-mono text-center pt-14">(brak zdjęcia)</p>
             )}
 
             {/* Gradient overlay for better text readability */}
             <div className="absolute bottom-0 left-0 right-0 h-30 bg-gradient-to-t from-black/95 to-transparent pointer-events-none"></div>
 
             {/* Content overlay */}
-            <div className="absolute bottom-0 left-0 p-3 z-10 mb-4 ml-3 text-2xl text-left">
+            <div className="absolute bottom-0 left-0 p-3 z-10 mb-4 ml-3 text-2xl md:text-4xl xl:text-5xl text-left">
               <h3>{cooperator.name.toUpperCase()}</h3>
               <h3>{cooperator.surname.toUpperCase()}</h3>
             </div>
@@ -97,13 +97,13 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
         {/* Description Section */}
         <div className="relative mb-12">
-          <p className="text-md leading-relaxed">{cooperator.description}</p>
+          <p className="text-md md:text-xl leading-relaxed">{cooperator.description}</p>
         </div>
 
         {/* Social Media Section */}
-        <div className="mb-8 flex flex-row gap-2 justify-between">
+        <div className="mb-8 flex flex-row gap-2 justify-between md:justify-start">
           <div className="flex flex-col gap-2">
-            <h3 className="text-base mb-4">social media:</h3>
+            <h3 className="text-base md:text-xl mb-4">social media:</h3>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -114,7 +114,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-gray-300 transition-colors"
               >
-                <span>Instagram</span>
+                <span className="md:text-xl">Instagram</span>
                 <span className="text-xl">↗</span>
               </a>
             )}
@@ -125,7 +125,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-gray-300 transition-colors"
               >
-                <span>Facebook</span>
+                <span className="md:text-xl">Facebook</span>
                 <span className="text-xl">↗</span>
               </a>
             )}
@@ -134,10 +134,10 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
         {/* Projects Section */}
         <div className="mb-12">
-          <h3 className="text-base mb-4 font-bold">projekty:</h3>
+          <h3 className="text-base md:text-xl mb-4 font-bold">projekty:</h3>
           <div className="flex flex-col gap-2">
             {cooperator.projects.map((project, index) => (
-              <div key={index} className="text-sm">
+              <div key={index} className="text-sm md:text-lg">
                 <span>
                   "{project.title}", {project.year}
                 </span>
@@ -150,7 +150,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
       {/* ------------------------------------ */}
 
       {/* Cooperator Navigation */}
-      <div className="px-8 text-sm pt-10">
+      <div className="px-8 text-sm md:text-lg pt-10">
         <div className="flex justify-around items-center">
           {/* Previous Cooperator */}
           <div>
@@ -160,7 +160,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
                 className="flex items-center hover:text-gray-300 transition-colors"
               >
                 <div>
-                  <Image src={ArrowLeft} alt="Poprzedni" className="inline-block mr-4" />
+                  <Image src={ArrowLeft} alt="Poprzedni" className="inline-block mr-4 w-2 h-2 md:w-4 md:h-4" />
                   <span>Poprzedni</span>
                 </div>
               </Link>
@@ -178,7 +178,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
               >
                 <div>
                   <span>Następny</span>
-                  <Image src={ArrowRight} alt="Następny" className="inline-block ml-4" />
+                  <Image src={ArrowRight} alt="Następny" className="inline-block ml-4 w-2 h-2 md:w-4 md:h-4" />
                 </div>
               </Link>
             ) : (

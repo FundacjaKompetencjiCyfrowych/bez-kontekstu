@@ -55,7 +55,7 @@ export function Navigation() {
 
         {/* Mobile Navigation Container */}
         {!isProjectDetailPage && !isCooperatorDetailPage && (
-          <div className="md:hidden w-full top-0 flex justify-center">
+          <div className="lg:hidden w-full top-0 flex justify-center">
             {/* Animated menu button with gray line */}
             <div
               className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
