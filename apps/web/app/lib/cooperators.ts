@@ -1,10 +1,22 @@
+import { StaticImageData } from "next/image";
+
+// Import all cooperator images
+import PiotrKlauzaImage from "@/app/assets/images/cooperators/piotr_klauza.jpg";
+import AdriannaUrbanskaImage from "@/app/assets/images/cooperators/adrianna_urbanska.jpeg";
+import KirylPietruczukImage from "@/app/assets/images/cooperators/kiryl_pietruczuk.jpeg";
+import OlgaBuryImage from "@/app/assets/images/cooperators/olga_bury.jpg";
+import PiotrStanekImage from "@/app/assets/images/cooperators/piotr_stanek.jpg";
+import MateuszWierzbickiImage from "@/app/assets/images/cooperators/mateusz_wierzbicki.jpg";
+import BogumilaTrzeciakowskaImage from "@/app/assets/images/cooperators/bogumła_trzeciakowska.jpeg";
+import OliwiaAdamowiczImage from "@/app/assets/images/cooperators/oliwia_adamowicz.jpeg";
+
 // Cooperators data structure and mock data
 export interface Cooperator {
   id: number;
   name: string;
   surname: string;
   description: string;
-  image?: string;
+  image?: StaticImageData;
   socialMedia: {
     instagram?: string;
     facebook?: string;
@@ -19,14 +31,14 @@ export interface Cooperator {
 export const cooperators: Cooperator[] = [
   {
     id: 1,
-    name: "PHILIP",
-    surname: "STONE",
+    name: "PIOTR",
+    surname: "KLAUZA",
     description:
-      "Twórczyni, z którą eksplorujemy nowe formy wyrazu - od performansu po interaktywne formaty. Współpracujemy przy projektach łączących sztukę i technologię.",
-    image: "/assets/images/cooperators/cat.png",
+      "Współtwórca Fundacji. Specjalista w dziedzinie przestrzennych systemów nagłośnieniowych. Absolwent Wydziału Reżyserii Dźwięku na Uniwersytecie Muzycznym Fryderyka Chopina w Warszawie i absolwent Zespołu Szkół Muzycznych II stopnia im. Ignacego Paderewskiego w Białymstoku w klasie wiolonczeli.",
+    image: PiotrKlauzaImage,
     socialMedia: {
-      instagram: "https://instagram.com/philipstone",
-      facebook: "https://facebook.com/philipstone",
+      instagram: "https://instagram.com",
+      facebook: "https://facebook.com",
     },
     projects: [
       { title: "tytuł projektu", year: "2024" },
@@ -35,50 +47,115 @@ export const cooperators: Cooperator[] = [
   },
   {
     id: 2,
-    name: "ANNA",
-    surname: "KOWALSKA",
+    name: "ADRIANNA",
+    surname: "URBAŃSKA",
     description:
-      "Artystka wizualna specjalizująca się w nowoczesnych formach ekspresji. Współpracuje z nami przy projektach łączących tradycyjne techniki z nowoczesnymi technologiami.",
-    image: "/assets/images/cooperators/anna_kowalska.jpg",
+      "Twórczyni, z którą eksplorujemy formy obecności sztuki w przestrzeniach analogowych i wirtualnych. Współpracujemy przy projektach łączących sztukę, przestrzeń i narrację, tworząc wielowarstwowe doświadczenia wizualne.",
+    image: AdriannaUrbanskaImage,
     socialMedia: {
-      instagram: "https://instagram.com/annakowalska",
-      facebook: "https://facebook.com/annakowalska",
+      instagram: "https://www.instagram.com/au___aua",
+      facebook: "https://www.facebook.com/aua.adrianna.urbanska",
     },
     projects: [
-      { title: "projekt wizualny", year: "2024" },
-      { title: "instalacja interaktywna", year: "2023" },
+      { title: `Copy of Copy of NPC", scenografia, identyfikacja wizualna`, year: "2024" },
+      { title: `Rondo straconego czasu", przedsięwzięcie wystawiennicze`, year: "2024" },
+      { title: `Prawdy za grosz",  scenografia, identyfikacja wizualna`, year: "2024" },
+      { title: `Gangliony, gangliony...", scenografia, identyfikacja wizualna`, year: "2023" },
     ],
   },
   {
     id: 3,
-    name: "PIOTR",
-    surname: "NOWAK",
-    description:
-      "Reżyser i choreograf, który eksploruje granice między ciałem a przestrzenią. Jego prace charakteryzują się innowacyjnym podejściem do ruchu i narracji.",
-    image: "/assets/images/cooperators/piotr_nowak.jpg",
+    name: "KIRYŁ",
+    surname: "PIETRUCZUK",
+    description: "Aktor, absolwent wydziału aktorskiego Łódzkiej Szkoły Filmowej. Wspólpracuje z Fundacją w projektach teatralnych.",
+    image: KirylPietruczukImage,
     socialMedia: {
-      instagram: "https://instagram.com/piotrnowak",
-      facebook: "https://facebook.com/piotrnowak",
+      instagram: "https://www.instagram.com/kirylpietruczuk/?hl=en",
+      facebook: "https://facebook.com",
     },
     projects: [
-      { title: "spektakl eksperymentalny", year: "2024" },
-      { title: "performance site-specific", year: "2023" },
+      { title: "---", year: "2024" },
+      { title: "---", year: "2023" },
     ],
   },
   {
     id: 4,
-    name: "MARIA",
-    surname: "WIŚNIEWSKA",
+    name: "OLGA",
+    surname: "BURY",
     description:
-      "Kompozytorka i artystka dźwiękowa, która tworzy immersyjne doświadczenia audio. Współpracuje z nami przy projektach wykorzystujących przestrzenną technologię dźwiękową.",
-    image: "/assets/images/cooperators/maria_wisniewska.jpg",
+      "Aktorka, tancerka, choreografka. Ukończyła studia dziennikarskie. Absolwentka Akademii Sztuk Teatralnych im. Stanisława Wyspiańskiego w Krakowie, Wydziału Teatru Tańca w Bytomiu. Działa jako niezależna twórczyni, interesuje ją łączenie sztuki tańca, filmu i opery oraz to w jaki sposób przestrzeń wpływa na odbieraną sztukę.",
+    image: OlgaBuryImage,
     socialMedia: {
-      instagram: "https://instagram.com/mariawisniewska",
-      facebook: "https://facebook.com/mariawisniewska",
+      instagram: "https://www.instagram.com/olgabury_",
+      facebook: "https://www.facebook.com/share/1CdpMbG45K/?mibextid=wwXIfr",
     },
     projects: [
-      { title: "kompozycja przestrzenna", year: "2024" },
-      { title: "instalacja dźwiękowa", year: "2023" },
+      { title: "---", year: "2024" },
+      { title: "---", year: "2023" },
+    ],
+  },
+  {
+    id: 5,
+    name: "PIOTR",
+    surname: "STANEK",
+    description:
+      "Działa jako niezależny twórca w obszarze teatru, choreografii, filmu oraz opery.  Absolwent Akademii Sztuk Teatralnych im. Stanisława Wyspiańskiego w Krakowie, Wydziału Teatru Tańca w Bytomiu. Współpracuje z Teatrem O.de.la, kolektywem Sticky Fingers Club.",
+    image: PiotrStanekImage,
+    socialMedia: {
+      instagram: "https://www.instagram.com/piotrstanek_",
+      facebook: "https://www.facebook.com/share/1CbZ43WK1J/?mibextid=wwXIfr",
+    },
+    projects: [
+      { title: "---", year: "2024" },
+      { title: "---", year: "2023" },
+    ],
+  },
+  {
+    id: 6,
+    name: "MATEUSZ",
+    surname: "WIERZBICKI",
+    description:
+      "Tancerz, aktor, choreograf, absolwent Wydziału Teatru Tańca Akademii Sztuk Teatralnych im. St. Wyspiańskiego w Krakowie.Ukończył także Szkołę Aktorską Haliny i Jana Machulskich w Warszawie oraz studiował dziennikarstwo na Uniwersytecie Kardynała Stefana Wyszyńskiego. Wraz z Janem Łuciem i Fundacją Bez Kontekstu współtworzył monodram “Gangliony, Gangliony...” i spektakl “Copy of Copy of NPC”, które powstały w ramach programu Przestrzenie Sztuki.",
+    image: MateuszWierzbickiImage,
+    socialMedia: {
+      instagram: "https://www.instagram.com",
+      facebook: "https://www.facebook.com/profile.php?id=100007072501564",
+    },
+    projects: [
+      { title: "---", year: "2024" },
+      { title: "---", year: "2023" },
+    ],
+  },
+  {
+    id: 7,
+    name: "BOGUMIŁA",
+    surname: "TRZECIAKOWSKA",
+    description:
+      "Aktorka, autorka tekstów, uwielbia improwizację oraz eksperymenty w obszarze sztuki. Zgłębia psychologię granych przez siebie postaci bardziej, niż wydawałoby się to możliwe. W spektaklach docenia intertekstualność oraz wszelki absurd.",
+    image: BogumilaTrzeciakowskaImage,
+    socialMedia: {
+      instagram: "https://www.instagram.com",
+      facebook: "https://www.facebook.com",
+    },
+    projects: [
+      { title: "---", year: "2024" },
+      { title: "---", year: "2023" },
+    ],
+  },
+  {
+    id: 8,
+    name: "OLIWIA",
+    surname: "ADAMOWICZ",
+    description:
+      "Dyplomowana perkusista, pianistka i rytmiczka. Absolwentka Wydziału Aktorskiego PWSFTviT w Łodzi oraz Wydziału Wiedzy o Teatrze (specjalność: Zarządzanie Instytucjami Kultury) na Akademii Teatralnej w Warszawie. ",
+    image: OliwiaAdamowiczImage,
+    socialMedia: {
+      instagram: "https://www.instagram.com/heyimoliw/",
+      facebook: "https://www.facebook.com",
+    },
+    projects: [
+      { title: "---", year: "2024" },
+      { title: "---", year: "2023" },
     ],
   },
 ];
@@ -106,3 +183,23 @@ export function getNextCooperatorId(currentId: number): number | null {
   if (currentIndex === -1 || currentIndex >= cooperators.length - 1) return null;
   return cooperators[currentIndex + 1].id;
 }
+
+// Map cooperator IDs to imported images
+const cooperatorImages: { [key: number]: StaticImageData } = {
+  1: PiotrKlauzaImage,
+  2: AdriannaUrbanskaImage,
+  3: KirylPietruczukImage,
+  4: OlgaBuryImage,
+  5: PiotrStanekImage,
+  6: MateuszWierzbickiImage,
+  7: BogumilaTrzeciakowskaImage,
+  8: OliwiaAdamowiczImage,
+};
+
+// Function to get cooperator image by ID
+export function getCooperatorImage(id: number): StaticImageData | null {
+  return cooperatorImages[id] || null;
+}
+
+// Export the images mapping for direct access if needed
+export { cooperatorImages };
