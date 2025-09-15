@@ -16,13 +16,13 @@ export default function Home() {
   ];
 
   return (
-    <div className="max-w-[1200px] mx-auto bg-[#0d0b0e]">
+    <div className="max-w-7xl mx-auto bg-[#0d0b0e]">
       {/*Title*/}
-      <div className="flex justify-end h-20 items-center mt-5 mb-24 mx-8 z-10">
+      <div className="flex justify-end xl:hidden h-20 items-center mt-5 mb-24 mx-8 z-10">
         <Image src={SoundIcon} alt="Sound button" width={30} height={30} />
       </div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden h-[80vh] flex flex-col justify-between mx-8  z-10">
+      <section className="relative xl:top-[100px] overflow-hidden h-[80vh] flex flex-col justify-between mx-8 z-10">
         <div className="relative flex flex-col justify-end items-end z-10">
           <h1 className=" sm:text-4xl md:text-5xl lg:text-6xl ">BEZ</h1>
         </div>
@@ -40,8 +40,6 @@ export default function Home() {
         <Image
           src={Logo}
           priority
-          // width={350}
-          // height={350}
           alt="Bez Kontekstu logo"
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-62 h-62 sm:w-128 sm:h-128 md:w-160 md:h-160"
         />
@@ -49,21 +47,19 @@ export default function Home() {
 
       <div className="relative">
         {/* Violet logo - sticky for all sections from Manifest */}
-        <div className="h-[30vh]"></div>
+        <div className="h-[30vh] xl:h-[60vh]"></div>
         <div className="sticky top-1/2 h-0 z-0">
           <Image
             src={LogoViolet}
             priority
-            // width={350}
-            // height={350}
             alt="Bez Kontekstu logo"
             className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
           />
         </div>
 
         {/* MANIFEST Section*/}
-        <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 mt-[-120px]">
-          <div className="relative flex flex-col items-start justify-start z-10">
+        <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 mt-[-120px] xl:mt-[-280px]">
+          <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
             <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
             <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">EST</h1>
           </div>
