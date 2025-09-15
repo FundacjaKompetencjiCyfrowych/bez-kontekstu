@@ -11,11 +11,6 @@ const defectica = localFont({
       weight: "400",
       style: "normal",
     },
-    {
-      path: "./assets/fonts/defectica.ttf",
-      weight: "400",
-      style: "normal",
-    },
   ],
   variable: "--font-defectica",
   display: "swap",

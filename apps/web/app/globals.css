@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color: white;
 }
 
 @layer utilities {
@@ -17,9 +18,77 @@
 @layer base {
   h1 {
     font-family: var(--font-defectica);
-    font-size: 36px;
+    font-size: 42px;
+    color: white;
+    line-height: 1;
+  }
+
+  /* Responsive h1 sizes for tablets and desktop */
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 72px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 84px;
+    }
+  }
+
+  h2 {
+    font-family: var(--font-defectica);
+    font-size: 32px;
   }
   button {
     font-family: var(--font-space-mono);
+  }
+}
+
+@layer utilities {
+  /* Image slider animations */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromRight {
+    0% {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInFromLeft 0.5s ease-out;
+  }
+
+  .animate-slideInRight {
+    animation: slideInFromRight 0.5s ease-out;
   }
 }
