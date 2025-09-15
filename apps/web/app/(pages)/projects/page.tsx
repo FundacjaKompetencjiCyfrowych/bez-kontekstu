@@ -25,7 +25,7 @@ export default function ProjectsPage() {
       <Header title="PRO JEK TY" />
 
       {/* PROJECTS Section */}
-      <section className="overflow-hidden h-auto flex flex-col justify-around mx-4 mt-[170px]">
+      <section className="overflow-hidden h-auto flex flex-col items-center mx-4 mt-[170px]">
         <div className="w-[85vw] text-center text-md sm:text-3xl md:text-4xl lg:text-5xl font-mono">
           <div className="w-100%] mx-auto flex flex-col gap-y-14 font-defectica">
             {projects.map((project) => {
@@ -33,13 +33,13 @@ export default function ProjectsPage() {
 
               return (
                 <Link key={project.id} href={`/projects/${project.id}`} className="block transition-transform duration-200 hover:scale-105">
-                  <div className="relative w-full h-[250px] mb-5 cursor-pointer overflow-hidden">
+                  <div className="relative w-full h-[250px] md:h-[350px] mb-5 cursor-pointer overflow-hidden">
                     {posterImage ? (
                       <Image
                         src={posterImage}
                         alt={`Poster for ${project.name}`}
                         width={800}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover md:object-top"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                         priority={project.id <= 2}
                       />

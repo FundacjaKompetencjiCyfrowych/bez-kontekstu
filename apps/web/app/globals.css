@@ -22,6 +22,20 @@
     color: white;
     line-height: 1;
   }
+
+  /* Responsive h1 sizes for tablets and desktop */
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 72px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 84px;
+    }
+  }
+
   h2 {
     font-family: var(--font-defectica);
     font-size: 32px;
