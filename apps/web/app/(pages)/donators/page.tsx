@@ -20,7 +20,7 @@ export default function DonorsPage() {
 
   // State to track which elements are showing "copied" message
   const [copiedElements, setCopiedElements] = useState<Set<string>>(new Set());
-  const [copiedText, copy] = useCopyToClipboard();
+  const [, copy] = useCopyToClipboard();
 
   // Use useTimeout to hide "copied" messages after 2 seconds
   useTimeout(() => setCopiedElements(new Set()), copiedElements.size > 0 ? 2000 : null);
