@@ -28,9 +28,6 @@ export function Navigation() {
   // Check if we're on the home page
   const isHomePage = pathname === "/";
 
-  // Check if we're on any other page (not home, not project detail)
-  const isOtherPage = !isHomePage && !isProjectDetailPage;
-
   // Function to toggle language
   const toggleLanguage = () => {
     setCurrentLanguage((prev) => (prev === "PL" ? "ENG" : "PL"));

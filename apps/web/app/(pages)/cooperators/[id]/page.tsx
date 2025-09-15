@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCooperatorById, getPreviousCooperatorId, getNextCooperatorId, getCooperatorImage } from "@/app/lib/cooperators";
@@ -130,7 +130,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
             {cooperator.projects.map((project, index) => (
               <div key={index} className="text-sm md:text-lg">
                 <span>
-                  "{project.title}", {project.year}
+                  &quot;{project.title}&quot;, {project.year}
                 </span>
               </div>
             ))}
