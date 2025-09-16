@@ -41,7 +41,7 @@ export default function RootLayout({
     <html lang="pl" className="h-full">
       <body className={`antialiased h-full flex flex-col bg-background text-foreground ${defectica.variable} ${spaceMono.variable}`}>
         <Navigation />
-        <main className="flex-1 flex flex-col">{children}</main>
+        <main className="bg-amber-300 flex-1 flex flex-col">{children}</main>
       </body>
     </html>
   );

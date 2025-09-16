@@ -4,9 +4,9 @@ import { Header } from "@/app/components/Header";
 export default function ManifestPage() {
   return (
     <div className="min-h-screen bg-[#0d0b0e] px-5">
-      <Header title="MAN IF EST" />
-
       <div className="max-w-4xl mx-auto relative">
+        <Header title="MAN IF EST" />
+
         {/* Quote Section */}
         <section className="my-20 pt-20 mx-5 md:w-[60vw]  md:mx-auto">
           <div className=" pl-1 flex flex-row items-start z-100 relative">

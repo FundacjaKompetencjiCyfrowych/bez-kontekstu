@@ -16,7 +16,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="bg-[#0d0b0e]">
+    <div className="max-w-7xl mx-auto bg-[#0d0b0e]">
       {/*Title*/}
 
       <div className=" hidden md:flex lg:hidden flex justify-between items-center my-10 mx-4 md:my-12 md:mx-6 z-10">
@@ -54,7 +54,7 @@ export default function Home() {
 
       <div className="relative">
         {/* Violet logo - sticky for all sections from Manifest */}
-        <div className="h-[30vh]"></div>
+        <div className="h-[30vh] xl:h-[60vh]"></div>
         <div className="sticky top-1/2 h-0 z-0">
           <Image
             src={LogoViolet}
@@ -65,8 +65,8 @@ export default function Home() {
         </div>
 
         {/* MANIFEST Section*/}
-        <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 mt-[-120px]">
-          <div className="relative flex flex-col items-start justify-start z-10">
+        <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 mt-[-120px] xl:mt-[-280px]">
+          <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
             <h1 className="ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
             <h1 className="ml-2 sm:ml-3 mt-2 sm:mt-3">EST</h1>
           </div>
