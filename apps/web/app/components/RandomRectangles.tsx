@@ -122,8 +122,8 @@ const generateRectangles = () => {
       const scaleFactor = 0.8;
 
       // Scale both dimensions by the same factor to maintain exact proportions
-      let smallerWidth = rectWidth * scaleFactor;
-      let smallerHeight = rectHeight * scaleFactor;
+      const smallerWidth = rectWidth * scaleFactor;
+      const smallerHeight = rectHeight * scaleFactor;
 
       position = generateRandomPosition(rectanglesList, smallerWidth, smallerHeight, 50);
 
@@ -138,8 +138,8 @@ const generateRectangles = () => {
       const scaleFactor = 0.6;
 
       // Scale both dimensions by the same factor to maintain exact proportions
-      let evenSmallerWidth = rectWidth * scaleFactor;
-      let evenSmallerHeight = rectHeight * scaleFactor;
+      const evenSmallerWidth = rectWidth * scaleFactor;
+      const evenSmallerHeight = rectHeight * scaleFactor;
 
       position = generateRandomPosition(rectanglesList, evenSmallerWidth, evenSmallerHeight, 30);
 
@@ -187,7 +187,7 @@ const generateRectangles = () => {
       // If even fallback positions collide, use the assigned fallback position with even smaller size
       if (!fallbackPosition) {
         fallbackPosition = fallbackPositions[i];
-        let finalScaleFactor = 0.25;
+        const finalScaleFactor = 0.25;
 
         // Scale both dimensions by the same factor to maintain exact proportions
         fallbackWidth = rectWidth * finalScaleFactor;

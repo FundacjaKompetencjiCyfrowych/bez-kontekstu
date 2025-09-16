@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Footer } from "@/app/components/Footer";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import LocationIcon from "@/app/assets/icons/location.png";
 import InstagramIcon from "@/app/assets/icons/instagram.png";
 import FacebookIcon from "@/app/assets/icons/facebook.png";
@@ -10,7 +10,7 @@ import { Header } from "@/app/components/Header";
 
 export default function ContactPage() {
   // Icon component for responsive icons
-  const ContactIcon = ({ src, alt }: { src: any; alt: string }) => {
+  const ContactIcon = ({ src, alt }: { src: StaticImageData | string; alt: string }) => {
     return (
       <div className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center">
         {/* Mobile icon - visible on small screens */}
