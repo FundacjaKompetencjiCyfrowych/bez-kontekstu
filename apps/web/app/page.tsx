@@ -74,17 +74,17 @@ export default function Home() {
         {/* MANIFEST Section*/}
         <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 mt-[-120px] xl:mt-[-280px]">
           <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
-            {/* Mobile version - shows "BEZ" on screens smaller than xl (1280px) */}
+            {/* Mobile version - on screens smaller than xl (1280px) */}
             <div className="block xl:hidden">
               <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
               <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">EST</h1>
             </div>
 
-            {/* Desktop version - shows "BE" and "Z" separately on xl screens and larger (1280px+) */}
+            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
             <div className="hidden xl:block xl:text-right">{titleCutWord("MA N I")}</div>
           </div>
 
-          <div className="w-[75vw] lg:w-[50vw] leading-6 mx-auto z-10 text-center text-md  font-mono">
+          <div className="w-[75vw] lg:w-[50vw] leading-6 xl:leading-8 mx-auto z-10 text-center text-md font-mono">
             <p className="mb-4">
               Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty.
             </p>
@@ -97,40 +97,58 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/manifest"}>
               <Button variant="dark" size="sm">
                 Poznaj nas lepiej
               </Button>
             </Link>
           </div>
+
+          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+          <div className="hidden xl:block xl:text-left">{titleCutWord("F EST")}</div>
         </section>
 
         {/* PROJECTS Section */}
         <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8 bg-transparent">
           <div className="relative flex flex-col items-end justify-start z-10">
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">PROJ</h1>
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">EKTY</h1>
+            {/* Mobile version - on screens smaller than xl (1280px) */}
+            <div className="block xl:hidden">
+              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">PROJ</h1>
+              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">EKTY</h1>
+            </div>
+
+            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+            <div className="hidden xl:block xl:text-right">{titleCutWord("PR O")}</div>
           </div>
 
           <div className="w-[100%] h-[70vh] mx-auto z-10">
             <RandomRectangles />
           </div>
 
-          <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/projects"}>
               <Button variant="dark" size="sm">
                 Sprawdź projekty
               </Button>
             </Link>
           </div>
+
+          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+          <div className="hidden xl:block xl:text-left">{titleCutWord("J EKTY")}</div>
         </section>
 
         {/* PEOPLE Section */}
         <section className="relative overflow-hidden h-screen flex flex-col justify-evenly mx-8 bg-transparent">
-          <div className="relative flex flex-col items-start justify-start z-10">
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">WSPÓŁ</h1>
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">PRACE</h1>
+          <div className="relative flex flex-col items-end justify-start z-10">
+            {/* Mobile version - on screens smaller than xl (1280px) */}
+            <div className="block xl:hidden">
+              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">WSPÓŁ</h1>
+              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">PRACE</h1>
+            </div>
+
+            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+            <div className="hidden xl:block absolute top-0 xl:text-right ">{titleCutWord("WSP Ó Ł")}</div>
           </div>
 
           <div className="w-[90%] max-w-[600px] mx-auto grid grid-cols-2 gap-x-5 gap-y-8 aspect-square z-10">
@@ -142,36 +160,48 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/cooperators"}>
               <Button variant="dark" size="sm">
                 Poznaj nasz zespół
               </Button>
             </Link>
           </div>
+
+          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+          <div className="hidden xl:block absolute bottom-0 left-0 xl:text-left">{titleCutWord("P RACE")}</div>
         </section>
 
         {/* DONATORS Section */}
         <section className="relative overflow-hidden h-[60vh] flex flex-col justify-around mx-8 bg-transparent">
           <div className="relative flex flex-col items-end ">
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DLA</h1>
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">DARCZY</h1>
-            <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ">ŃCOW</h1>
+            {/* Mobile version - on screens smaller than xl (1280px) */}
+            <div className="block xl:hidden">
+              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">DLA</h1>
+              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">DARCZY</h1>
+              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">ŃCOW</h1>
+            </div>
+
+            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+            <div className="hidden xl:block absolute top-0 xl:text-right ">{titleCutWord("DL A")}</div>
           </div>
 
-          <div className="mx-auto flex flex-col items-center text-center text-base sm:text-3xl md:text-4xl lg:text-5xl font-mono">
+          <div className="mx-auto flex flex-col items-center text-center text-base sm:text-2xl font-mono">
             <p className="leading-10">Twoje wsparcie</p>
             <p className="leading-10">=</p>
             <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
 
-          <div className="relative flex justify-end items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
             <Link href={"/donators"}>
               <Button variant="dark" size="sm">
                 Wesprzyj nas
               </Button>
             </Link>
           </div>
+
+          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+          <div className="hidden xl:block absolute bottom-0 left-0 xl:text-left">{titleCutWord("DAR CZYŃCÓW")}</div>
         </section>
       </div>
       <Footer />
