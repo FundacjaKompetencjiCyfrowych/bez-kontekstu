@@ -38,10 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" className="h-full">
-      <body className={`antialiased h-full flex flex-col bg-background text-foreground ${defectica.variable} ${spaceMono.variable}`}>
+    <html lang="pl">
+      <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
         <Navigation />
-        <main className="flex-1 flex flex-col">{children}</main>
+        <main className="bg-amber-300">{children}</main>
       </body>
     </html>
   );

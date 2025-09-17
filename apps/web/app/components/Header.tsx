@@ -13,7 +13,7 @@ export function Header({ title = "", showLogo = true, showTitle = true }: Header
   const titleWords = title.split(" ");
 
   return (
-    <div className="lg:hidden">
+    <>
       {/* Title Section */}
       {showTitle && (
         <div className="flex justify-between items-center my-10 mx-4 md:my-12 md:mx-6 z-10">
@@ -37,6 +37,6 @@ export function Header({ title = "", showLogo = true, showTitle = true }: Header
           />
         </div>
       )}
-    </div>
+    </>
   );
 }
