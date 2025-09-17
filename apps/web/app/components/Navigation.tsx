@@ -110,7 +110,7 @@ export function Navigation() {
             </div>
 
             <div
-              className={`fixed z-[9998] bg-[#0d0b0e] w-[100vw] transition-all duration-500 ease-in-out ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+              className={`fixed z-[9998] bg-[#0d0b0e] w-full transition-all duration-500 ease-in-out ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
               style={{
                 top: 0,
                 left: 0,

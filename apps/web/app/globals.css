@@ -16,6 +16,13 @@
 }
 
 @layer base {
+  html,
+  body {
+    background-color: #0d0b0e;
+    margin: 0;
+    padding: 0;
+  }
+
   h1 {
     font-family: var(--font-defectica);
     font-size: 42px;

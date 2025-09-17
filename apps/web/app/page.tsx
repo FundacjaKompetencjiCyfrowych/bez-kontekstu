@@ -6,14 +6,11 @@ import LogoViolet from "@/app/assets/images/logo_violet.png";
 import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
+import { cooperators } from "@/app/lib/cooperators";
 
 export default function Home() {
-  const teamMembers = [
-    { id: 1, name: "Anna Kowalska" },
-    { id: 2, name: "Piotr Nowak" },
-    { id: 3, name: "Maria Wiśniewska" },
-    { id: 4, name: "Tomasz Zieliński" },
-  ];
+  // Get first 4 team members from cooperators data
+  const teamMembers = cooperators.slice(0, 4);
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
@@ -62,7 +59,7 @@ export default function Home() {
       <div className="relative">
         {/* Violet logo - sticky for all sections from Manifest */}
         <div className="h-[30vh] xl:h-[60vh]"></div>
-        <div className="sticky top-1/2 h-0 z-0">
+        <div className="sticky xl:relative top-1/2 h-0 z-0">
           <Image
             src={LogoViolet}
             priority
@@ -97,7 +94,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center transform z-10">
+            {" "}
             <Link href={"/manifest"}>
               <Button variant="dark" size="sm">
                 Poznaj nas lepiej
@@ -126,7 +124,8 @@ export default function Home() {
             <RandomRectangles />
           </div>
 
-          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center transform z-10">
+            {" "}
             <Link href={"/projects"}>
               <Button variant="dark" size="sm">
                 Sprawdź projekty
@@ -151,16 +150,33 @@ export default function Home() {
             <div className="hidden xl:block absolute top-0 xl:text-right ">{titleCutWord("WSP Ó Ł")}</div>
           </div>
 
-          <div className="w-[90%] max-w-[600px] mx-auto grid grid-cols-2 gap-x-5 gap-y-8 aspect-square z-10">
+          <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
             {teamMembers.map((member) => (
-              <div key={member.id} className="relative flex flex-col items-start justify-end p-3 bg-amber-200  overflow-hidden">
+              <div
+                key={member.id}
+                className="relative w-full aspect-square xl:w-[400px] xl:h-[300px] flex flex-col items-start justify-end p-3 bg-amber-200 overflow-hidden"
+              >
+                {/* Cooperator image */}
+                {member.image && (
+                  <Image
+                    src={member.image}
+                    alt={`${member.name} ${member.surname}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1280px) 50vw, 400px"
+                  />
+                )}
+                {/* Gradient overlay */}
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <h3 className="relative z-10 text-sm ">{member.name.toUpperCase()}</h3>
+                {/* Name */}
+                <h3 className="relative z-10 text-sm text-white">
+                  {member.name} {member.surname}
+                </h3>
               </div>
             ))}
           </div>
 
-          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center transform z-10">
             <Link href={"/cooperators"}>
               <Button variant="dark" size="sm">
                 Poznaj nasz zespół
@@ -192,7 +208,7 @@ export default function Home() {
             <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
 
-          <div className="relative flex justify-end xl:justify-center items-center bottom-0 transform mr-2 sm:mr-3 mb-2 sm:mb-3 right-0 z-10">
+          <div className="relative flex justify-center items-center transform z-10">
             <Link href={"/donators"}>
               <Button variant="dark" size="sm">
                 Wesprzyj nas
