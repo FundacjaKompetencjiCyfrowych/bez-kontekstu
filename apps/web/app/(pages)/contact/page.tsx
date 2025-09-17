@@ -22,7 +22,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex justify-between flex-col w-full h-full px-7 bg-[#0d0b0e] ">
+    <div className="max-w-7xl mx-auto flex justify-between flex-col w-full h-full px-7 bg-[#0d0b0e] ">
       {/*Title*/}
       <Header title="KON TA KT" />
       <div className="relative flex flex-col font-mono md:text-3xl md:leading-16">

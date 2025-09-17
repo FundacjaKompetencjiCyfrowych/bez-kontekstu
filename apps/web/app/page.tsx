@@ -19,6 +19,31 @@ export default function Home() {
       </h1>
     ));
 
+  // Function to render responsive titles - different layouts for mobile and desktop
+  const renderResponsiveTitle = (
+    mobileText: string | string[],
+    desktopText: string, // Text to be split by spaces for desktop layout
+    textAlign: "left" | "right" = "right"
+  ) => {
+    const mobileLines = Array.isArray(mobileText) ? mobileText : [mobileText];
+
+    return (
+      <>
+        {/* Mobile version - on screens smaller than xl (1280px) */}
+        <div className="block xl:hidden">
+          {mobileLines.map((line, index) => (
+            <h1 key={index} className="sm:text-4xl md:text-5xl lg:text-6xl ml-2 sm:ml-3 mt-2 sm:mt-3">
+              {line}
+            </h1>
+          ))}
+        </div>
+
+        {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+        <div className={`hidden xl:block xl:text-${textAlign}`}>{titleCutWord(desktopText)}</div>
+      </>
+    );
+  };
+
   return (
     <div className="max-w-7xl mx-auto bg-[#0d0b0e]">
       {/*Title*/}
@@ -71,14 +96,7 @@ export default function Home() {
         {/* MANIFEST Section*/}
         <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 mt-[-120px] xl:mt-[-280px]">
           <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
-            {/* Mobile version - on screens smaller than xl (1280px) */}
-            <div className="block xl:hidden">
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">MANIF</h1>
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">EST</h1>
-            </div>
-
-            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-            <div className="hidden xl:block xl:text-right">{titleCutWord("MA N I")}</div>
+            {renderResponsiveTitle(["MANIF", "EST"], "MA N I", "right")}
           </div>
 
           <div className="w-[75vw] lg:w-[50vw] leading-6 xl:leading-8 mx-auto z-10 text-center text-md font-mono">
@@ -95,29 +113,25 @@ export default function Home() {
           </div>
 
           <div className="relative flex justify-center items-center transform z-10">
-            {" "}
             <Link href={"/manifest"}>
-              <Button variant="dark" size="sm">
+              <Button
+                variant="dark"
+                size="sm"
+                className="xl:!bg-gradient-to-b xl:!from-white-900 xl:!via-black-900/30 xl:!to-[#6852f5] xl:!rounded-2xl xl:!text-white xl:!border xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-300 xl:!shadow-lg"
+              >
                 Poznaj nas lepiej
               </Button>
             </Link>
           </div>
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-          <div className="hidden xl:block xl:text-left">{titleCutWord("F EST")}</div>
+          {renderResponsiveTitle("", "F EST", "left")}
         </section>
 
         {/* PROJECTS Section */}
         <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8 bg-transparent">
           <div className="relative flex flex-col items-end justify-start z-10">
-            {/* Mobile version - on screens smaller than xl (1280px) */}
-            <div className="block xl:hidden">
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">PROJ</h1>
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">EKTY</h1>
-            </div>
-
-            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-            <div className="hidden xl:block xl:text-right">{titleCutWord("PR O")}</div>
+            {renderResponsiveTitle(["PROJ", "EKTY"], "PR O", "right")}
           </div>
 
           <div className="w-[100%] h-[70vh] mx-auto z-10">
@@ -134,27 +148,20 @@ export default function Home() {
           </div>
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-          <div className="hidden xl:block xl:text-left">{titleCutWord("J EKTY")}</div>
+          {renderResponsiveTitle("", "J EKTY", "left")}
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative overflow-hidden h-screen flex flex-col justify-evenly mx-8 bg-transparent">
-          <div className="relative flex flex-col items-end justify-start z-10">
-            {/* Mobile version - on screens smaller than xl (1280px) */}
-            <div className="block xl:hidden">
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">WSPÓŁ</h1>
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">PRACE</h1>
-            </div>
-
-            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-            <div className="hidden xl:block absolute top-0 xl:text-right ">{titleCutWord("WSP Ó Ł")}</div>
+        <section className="relative h-screen flex flex-col justify-evenly mx-8 bg-transparent">
+          <div className="absolute right-0 top-0 flex flex-col items-end justify-start z-10">
+            <div className="">{renderResponsiveTitle(["WSPÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
           </div>
 
           <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
             {teamMembers.map((member) => (
               <div
                 key={member.id}
-                className="relative w-full aspect-square xl:w-[400px] xl:h-[300px] flex flex-col items-start justify-end p-3 bg-amber-200 overflow-hidden"
+                className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-square xl:w-[400px] xl:h-[300px] flex flex-col items-start justify-end p-3 overflow-hidden"
               >
                 {/* Cooperator image */}
                 {member.image && (
@@ -176,7 +183,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="relative flex justify-center items-center transform z-10">
+          <div className="relative xl:absolute xl:bottom-15 xl:left-0 xl:right-0  flex justify-center items-center transform z-10">
             <Link href={"/cooperators"}>
               <Button variant="dark" size="sm">
                 Poznaj nasz zespół
@@ -185,21 +192,13 @@ export default function Home() {
           </div>
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-          <div className="hidden xl:block absolute bottom-0 left-0 xl:text-left">{titleCutWord("P RACE")}</div>
+          <div className="absolute bottom-0 left-0">{renderResponsiveTitle("", "P RACE", "left")}</div>
         </section>
 
         {/* DONATORS Section */}
-        <section className="relative overflow-hidden h-[60vh] flex flex-col justify-around mx-8 bg-transparent">
-          <div className="relative flex flex-col items-end ">
-            {/* Mobile version - on screens smaller than xl (1280px) */}
-            <div className="block xl:hidden">
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">DLA</h1>
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">DARCZY</h1>
-              <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3">ŃCOW</h1>
-            </div>
-
-            {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-            <div className="hidden xl:block absolute top-0 xl:text-right ">{titleCutWord("DL A")}</div>
+        <section className="relative xl:mb-20 h-[80vh] flex flex-col md:justify-between justify-evenly mx-8 bg-transparent">
+          <div className=" flex flex-col items-end ">
+            <div>{renderResponsiveTitle(["DLA", "DARCZY", "ŃCOW"], "DL A", "right")}</div>
           </div>
 
           <div className="mx-auto flex flex-col items-center text-center text-base sm:text-2xl font-mono">
@@ -208,7 +207,7 @@ export default function Home() {
             <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
 
-          <div className="relative flex justify-center items-center transform z-10">
+          <div className="flex justify-center items-center transform z-10">
             <Link href={"/donators"}>
               <Button variant="dark" size="sm">
                 Wesprzyj nas
@@ -217,7 +216,7 @@ export default function Home() {
           </div>
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-          <div className="hidden xl:block absolute bottom-0 left-0 xl:text-left">{titleCutWord("DAR CZYŃCÓW")}</div>
+          <div>{renderResponsiveTitle("", "DAR CZYŃCÓW", "left")}</div>
         </section>
       </div>
       <Footer />
