@@ -98,7 +98,7 @@ export function Navigation() {
             {/* Animated menu */}
             <div
               className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
-                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[420px]" : "top-[220px]"
+                isHomePage ? (isMenuOpen ? "top-[418px]" : "top-[120px]") : isMenuOpen ? "top-[470px]" : "top-[220px]"
               }`}
             >
               {/* Gray bottom line for menu open button */}
@@ -116,7 +116,7 @@ export function Navigation() {
                 top: 0,
                 left: 0,
                 right: 0,
-                height: "420px",
+                height: "470px",
               }}
             >
               {/* Menu items */}
@@ -134,7 +134,7 @@ export function Navigation() {
                 ))}
 
                 {/* Language Toggle Switch */}
-                <div className="mx-9 pt-4">
+                <div className="mx-9 pt-4 pb-4">
                   <div className="flex items-center justify-between">
                     {/* Language Labels */}
                     <div className="flex items-center gap-4">
