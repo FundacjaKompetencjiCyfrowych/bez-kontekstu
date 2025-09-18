@@ -23,7 +23,7 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
       {/* Play Button */}
       <button
         onClick={onPlay}
-        className={`relative w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+        className={`relative w-12 h-12 xl:align-middle rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
           isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 hover:border-purple-400/60"
         }`}
       >
