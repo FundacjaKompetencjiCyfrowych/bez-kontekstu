@@ -12,6 +12,7 @@ const navigationItems: NavItem[] = [
   { title: "MANIFEST", href: "/manifest" },
   { title: "PROJEKTY", href: "/projects" },
   { title: "WSPÓŁPRACE", href: "/cooperators" },
+  { title: "DŹWIĘKI", href: "/sounds" },
   { title: "DLA DARCZYŃCÓW", href: "/donators" },
   { title: "KONTAKT", href: "/contact" },
 ];
