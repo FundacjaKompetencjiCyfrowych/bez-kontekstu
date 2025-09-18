@@ -36,7 +36,7 @@ export default function SoundsPage() {
 
           {/* Title only for XL screens */}
           <div className="hidden xl:flex xl:flex-col">
-            <h1>BEATS'N'</h1>
+            <h1>BEATS&apos;N&apos;</h1>
             <h1>PIECES</h1>
           </div>
         </div>
