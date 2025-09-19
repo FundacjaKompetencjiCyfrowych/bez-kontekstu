@@ -19,21 +19,11 @@ export default function SoundsPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0d0b0e]">
+      <Header title="BEATS'N' PIECES" />
+
       <div className="max-w-7xl xl:mt-24 flex-1 flex flex-col xl:flex-row">
-        <div className="hidden xl:block">
-          <Image
-            src={logoViolet}
-            alt="Logo Violet"
-            className="absolute blur-[4px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 xl:w-140 xl:h-140 opacity-50"
-          />
-        </div>
         {/* Left column - Title */}
         <div className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20">
-          {/* Header for smaller screens */}
-          <div className="xl:hidden">
-            <Header title="BEATS'N' PIECES" />
-          </div>
-
           {/* Title only for XL screens */}
           <div className="hidden xl:flex xl:flex-col">
             <h1>BEATS&apos;N&apos;</h1>
