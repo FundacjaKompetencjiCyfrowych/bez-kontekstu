@@ -30,7 +30,7 @@ export default function ContactPage() {
     ));
 
   return (
-    <div className="max-w-7xl mx-auto flex h-screen justify-between flex-col w-full px-7 bg-[#0d0b0e] ">
+    <div className="justify-between w-full h-screen px-7 xl:flex xl:flex-col">
       {/*Title mobile*/}
       <Header title="KON TA KT" className="xl:hidden" />
       <div className="relative flex xl:justify-center xl:items-center xl:h-full xl:mt-[90px]">
