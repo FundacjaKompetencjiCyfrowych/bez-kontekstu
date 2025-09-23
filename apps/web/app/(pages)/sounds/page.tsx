@@ -19,7 +19,12 @@ export default function SoundsPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0d0b0e]">
-      <Header title="BEATS'N' PIECES" showTitle={false} />
+      <Header title="BEATS'N' PIECES" className="xl:hidden" />
+      <Image
+        src={logoViolet}
+        alt="Bez Kontekstu"
+        className="hidden xl:block absolute blur-[6px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 opacity-50"
+      />
 
       <div className="max-w-7xl xl:mt-24 flex-1 flex flex-col xl:flex-row">
         {/* Left column - Title */}
