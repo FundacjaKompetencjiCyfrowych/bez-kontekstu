@@ -7,6 +7,7 @@ import FacebookIcon from "@/app/assets/icons/facebook.png";
 import EmailIcon from "@/app/assets/icons/email.png";
 import PhoneIcon from "@/app/assets/icons/phone.png";
 import { Header } from "@/app/components/Header";
+import LogoViolet from "@/app/assets/images/logo_violet.png";
 
 export default function ContactPage() {
   // Icon component for responsive icons
@@ -21,54 +22,77 @@ export default function ContactPage() {
     );
   };
 
+  const titleCutWord = (title: string) =>
+    title.split(" ").map((word, index) => (
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+        {word}
+      </h1>
+    ));
+
   return (
-    <div className="max-w-7xl mx-auto flex justify-between flex-col w-full h-full px-7 bg-[#0d0b0e] ">
-      {/*Title*/}
-      <Header title="KON TA KT" />
-      <div className="relative flex flex-col font-mono md:text-3xl md:leading-16">
-        {/* Adres */}
-        <div className="flex-1 md:mx-4">
-          <ul className="my-2 space-y-2">
-            <li className="flex items-center">
-              <div className="mr-3 md:mr-6">
-                <ContactIcon src={EmailIcon} alt="Email" />
-              </div>
-              fundacjabezkontekstu@gmail.com
-            </li>
-            <li className="flex items-center pb-3">
-              <div className="mr-3 md:mr-6">
-                <ContactIcon src={PhoneIcon} alt="Phone" />
-              </div>
-              608 486 769
-            </li>
-            <li className="flex items-center">
-              <div className="mr-3 md:mr-6">
-                <ContactIcon src={LocationIcon} alt="Location" />
-              </div>
-              ul.Smulikowskiego 2/5
-            </li>
-            <li className="flex items-center ml-9 md:ml-14">00-389 Warszawa</li>
-          </ul>
+    <div className="justify-between w-full h-screen px-7 xl:flex xl:flex-col">
+      {/*Title mobile*/}
+      <Header title="KON TA KT" className="xl:hidden" />
+      <div className="relative flex xl:justify-center xl:items-center xl:h-full xl:mt-[90px]">
+        {/*Title desktop*/}
+        <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("KO N")}</div>
+
+        <div className="hidden xl:block">
+          <Image
+            src={LogoViolet}
+            alt="Bez Kontekstu"
+            className="absolute blur-[3px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain xl:w-140 xl:h-140 opacity-50"
+          />
         </div>
 
-        {/* Socials */}
-        <div className="flex-1 md:mx-4">
-          <ul className=" my-6 space-y-2">
-            <li className="flex items-center">
-              <div className="mr-3 md:mr-6">
-                <ContactIcon src={InstagramIcon} alt="Instagram" />
-              </div>
-              <Link href="https://www.instagram.com/fundacjabezkontekstu/">Instagram</Link>
-            </li>
+        <div className="relative xl:mt-[90px] flex flex-col font-mono md:text-xl md:leading-16 xl:text-base xl:leading-5 xl:flex xl:justify-center">
+          {/* Adres */}
+          <div className=" md:mx-4">
+            <ul className="my-2 space-y-2">
+              <li className="flex items-center">
+                <div className="mr-3 md:mr-6">
+                  <ContactIcon src={EmailIcon} alt="Email" />
+                </div>
+                fundacjabezkontekstu@gmail.com
+              </li>
+              <li className="flex items-center pb-3">
+                <div className="mr-3 md:mr-6">
+                  <ContactIcon src={PhoneIcon} alt="Phone" />
+                </div>
+                608 486 769
+              </li>
+              <li className="flex items-center">
+                <div className="mr-3 md:mr-6">
+                  <ContactIcon src={LocationIcon} alt="Location" />
+                </div>
+                ul.Smulikowskiego 2/5
+              </li>
+              <li className="flex items-center ml-9 md:ml-14">00-389 Warszawa</li>
+            </ul>
+          </div>
 
-            <li className="flex items-center pb-3">
-              <div className="mr-3 md:mr-6">
-                <ContactIcon src={FacebookIcon} alt="Facebook" />
-              </div>
-              <Link href="https://www.facebook.com/fundacjabezkontekstu/">Facebook</Link>
-            </li>
-          </ul>
+          {/* Socials */}
+          <div className="flex md:mx-4">
+            <ul className=" my-6 space-y-2">
+              <li className="flex items-center">
+                <div className="mr-3 md:mr-6">
+                  <ContactIcon src={InstagramIcon} alt="Instagram" />
+                </div>
+                <Link href="https://www.instagram.com/fundacjabezkontekstu/">Instagram</Link>
+              </li>
+
+              <li className="flex items-center pb-3">
+                <div className="mr-3 md:mr-6">
+                  <ContactIcon src={FacebookIcon} alt="Facebook" />
+                </div>
+                <Link href="https://www.facebook.com/fundacjabezkontekstu/">Facebook</Link>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        {/*Title desktop*/}
+        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("T AKT")}</div>
       </div>
 
       <Footer />

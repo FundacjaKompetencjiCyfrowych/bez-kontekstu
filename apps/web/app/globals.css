@@ -119,4 +119,14 @@
   .animate-neonGlow {
     animation: neonGlow 2s ease-in-out infinite;
   }
+
+  /* Hide scrollbar for cooperators slider (only desktop) */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 }

@@ -39,9 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
+      <body className={`bg-blue-600 antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
         <Navigation />
-        <main className="bg-amber-300">{children}</main>
+        <main className="bg-[#0d0b0e] max-w-7xl mx-auto flex h-auto flex-col">{children}</main>
       </body>
     </html>
   );
