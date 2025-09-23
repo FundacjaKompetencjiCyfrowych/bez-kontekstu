@@ -6,17 +6,18 @@ interface HeaderProps {
   title?: string;
   showLogo?: boolean;
   showTitle?: boolean;
+  className?: string;
 }
 
-export function Header({ title = "", showLogo = true, showTitle = true }: HeaderProps) {
+export function Header({ title = "", showLogo = true, showTitle = true, className }: HeaderProps) {
   // Split title into words for vertical display
   const titleWords = title.split(" ");
 
   return (
-    <div className="lg:hidden">
+    <>
       {/* Title Section */}
       {showTitle && (
-        <div className="flex justify-between items-center my-10 mx-4 md:my-12 md:mx-6 z-10">
+        <div className={`flex justify-between items-center my-10 mx-4 md:my-12 md:mx-6 z-10 ${className}`}>
           <div className="flex flex-col">
             {titleWords.map((word, index) => (
               <h1 key={index}>{word}</h1>
@@ -28,7 +29,7 @@ export function Header({ title = "", showLogo = true, showTitle = true }: Header
 
       {/* Violet logo - sticky background */}
       {showLogo && (
-        <div className="sticky top-1/2 h-0 z-0">
+        <div className={`sticky top-1/2 h-0 z-0 ${className}`}>
           <Image
             src={LogoViolet}
             priority
@@ -37,6 +38,6 @@ export function Header({ title = "", showLogo = true, showTitle = true }: Header
           />
         </div>
       )}
-    </div>
+    </>
   );
 }

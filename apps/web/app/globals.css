@@ -16,6 +16,13 @@
 }
 
 @layer base {
+  html,
+  body {
+    background-color: #0d0b0e;
+    margin: 0;
+    padding: 0;
+  }
+
   h1 {
     font-family: var(--font-defectica);
     font-size: 42px;
@@ -80,6 +87,23 @@
     }
   }
 
+  /* Neon glow effects for sounds page */
+  @keyframes neonGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 5px rgba(139, 92, 246, 0.3),
+        0 0 10px rgba(139, 92, 246, 0.2),
+        0 0 15px rgba(139, 92, 246, 0.1);
+    }
+    50% {
+      box-shadow:
+        0 0 10px rgba(139, 92, 246, 0.5),
+        0 0 20px rgba(139, 92, 246, 0.3),
+        0 0 30px rgba(139, 92, 246, 0.2);
+    }
+  }
+
   .animate-fadeIn {
     animation: fadeIn 0.5s ease-out;
   }
@@ -90,5 +114,19 @@
 
   .animate-slideInRight {
     animation: slideInFromRight 0.5s ease-out;
+  }
+
+  .animate-neonGlow {
+    animation: neonGlow 2s ease-in-out infinite;
+  }
+
+  /* Hide scrollbar for cooperators slider (only desktop) */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 }
