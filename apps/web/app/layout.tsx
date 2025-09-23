@@ -41,7 +41,7 @@ export default function RootLayout({
     <html lang="pl">
       <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
         <Navigation />
-        <main className="bg-[#0d0b0e]">{children}</main>
+        <main className="bg-[#0d0b0e] max-w-7xl mx-auto">{children}</main>
       </body>
     </html>
   );
