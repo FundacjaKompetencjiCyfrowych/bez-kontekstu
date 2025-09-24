@@ -16,7 +16,7 @@ export default function DonorsPage() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
       </h1>
     ));
@@ -67,15 +67,22 @@ export default function DonorsPage() {
 
       {/*Title mobile*/}
       <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" />
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[60vh] xl:mt-[90px]">
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[70vh] xl:mt-[90px]">
         {/*Title desktop - top right*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
 
+        {/* Violet logos - sticky background */}
         <div className="hidden xl:block">
           <Image
             src={LogoViolet}
             alt="Bez Kontekstu"
-            className="absolute blur-[3px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain xl:w-140 xl:h-140 opacity-50"
+            className="absolute blur-[3px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain xl:w-200 xl:h-200 opacity-50"
+          />
+
+          <Image
+            src={LogoViolet}
+            alt="Bez Kontekstu"
+            className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[80vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
           />
         </div>
 
