@@ -72,34 +72,34 @@ export default function Home() {
           <h1>TEKSTU</h1>
         </div>
 
-        {/* Logo w tle - koło z rozmyciem */}
+        {/* Logo w tle - białe */}
         <Image
           src={Logo}
           priority
           alt="Bez Kontekstu logo"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-62 h-62 sm:w-128 sm:h-128 md:w-160 md:h-160"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-62 h-62 sm:w-128 sm:h-128 md:w-160 md:h-160 xl:w-192 xl:h-192"
         />
       </section>
 
       <div className="relative">
         {/* Violet logo - sticky for all sections from Manifest */}
-        <div className="h-[30vh] xl:h-[60vh]"></div>
+        <div className="h-[30vh] xl:h-[40vh]"></div>
         <div className="sticky xl:relative top-1/2 h-0 z-0">
           <Image
             src={LogoViolet}
             priority
             alt="Bez Kontekstu logo"
-            className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
+            className="absolute blur-[3px] xl:blur-[6px] xl:top-[100px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 xl:w-220 xl:h-220 opacity-50"
           />
         </div>
 
         {/* MANIFEST Section*/}
-        <section className="overflow-hidden h-screen flex flex-col justify-around mx-8 mt-[-120px] xl:mt-[-280px]">
+        <section className="overflow-hidden h-screen xl:h-[800px] flex flex-col justify-around mx-8 mt-[-120px] xl:mt-[-280px]">
           <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
             {renderResponsiveTitle(["MANIF", "EST"], "MA N I", "right")}
           </div>
 
-          <div className="w-[75vw] lg:w-[50vw] leading-6 xl:leading-8 mx-auto z-10 text-center text-md font-mono">
+          <div className="w-[75vw] lg:w-[50vw] xl:w-[60vw]  leading-6 xl:leading-8 mx-auto z-10 text-center text-md font-mono">
             <p className="mb-4">
               Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty.
             </p>
@@ -129,7 +129,7 @@ export default function Home() {
         </section>
 
         {/* PROJECTS Section */}
-        <section className="relative overflow-hidden h-screen flex flex-col justify-around mx-8 bg-transparent">
+        <section className="relative overflow-hidden h-screen xl:h-[1000px] flex flex-col justify-around mx-8 bg-transparent">
           <div className="relative flex flex-col items-end justify-start z-10">
             {renderResponsiveTitle(["PROJ", "EKTY"], "PR O", "right")}
           </div>
@@ -152,7 +152,7 @@ export default function Home() {
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative h-screen flex flex-col justify-evenly mx-8 bg-transparent">
+        <section className="relative h-screen xl:h-[1100px] flex flex-col justify-evenly mx-8 bg-transparent">
           <div className="absolute right-0 top-0 flex flex-col items-end justify-start z-10">
             <div className="">{renderResponsiveTitle(["WSPÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
           </div>
@@ -174,7 +174,7 @@ export default function Home() {
                   />
                 )}
                 {/* Gradient overlay */}
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent"></div>
                 {/* Name */}
                 <h3 className="relative z-10 text-sm text-white">
                   {member.name} {member.surname}
@@ -196,7 +196,7 @@ export default function Home() {
         </section>
 
         {/* DONATORS Section */}
-        <section className="relative xl:mb-20 h-[80vh] flex flex-col md:justify-between justify-evenly mx-8 bg-transparent">
+        <section className="relative xl:mb-20 h-[80vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly mx-8 bg-transparent">
           <div className=" flex flex-col items-end ">
             <div>{renderResponsiveTitle(["DLA", "DARCZY", "ŃCOW"], "DL A", "right")}</div>
           </div>
