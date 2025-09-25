@@ -34,7 +34,7 @@ export function Header({ title = "", showLogo = true, showTitle = true, classNam
             src={LogoViolet}
             priority
             alt="Bez Kontekstu"
-            className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 xl:w-200 xl:h-200 opacity-50"
+            className="absolute blur-[6px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160  opacity-50"
           />
         </div>
       )}
