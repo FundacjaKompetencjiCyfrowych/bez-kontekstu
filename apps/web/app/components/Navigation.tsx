@@ -44,7 +44,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-500 hover:text-blue-600 text-center text-sm xl:text-lg font-medium transition-colors font-defectica whitespace-nowrap"
+                className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-lg font-medium transition-colors font-defectica"
               >
                 {item.title.toLocaleUpperCase()}
               </Link>
@@ -56,7 +56,7 @@ export function Navigation() {
                 {/* Language Labels */}
                 <div className="flex items-center gap-4">
                   <span
-                    className={`text-sm font-defectica transition-colors ${currentLanguage === "PL" ? "text-gray-500 font-bold" : "text-gray-500"}`}
+                    className={`text-sm xl:text-lg font-defectica transition-colors ${currentLanguage === "PL" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
                   >
                     PL
                   </span>
@@ -78,7 +78,7 @@ export function Navigation() {
                   </label>
 
                   <span
-                    className={`text-sm font-defectica transition-colors ${currentLanguage === "ENG" ? "text-gray-500 font-bold" : "text-gray-500"}`}
+                    className={`text-sm xl:text-lg font-defectica transition-colors ${currentLanguage === "ENG" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
                   >
                     ENG
                   </span>
