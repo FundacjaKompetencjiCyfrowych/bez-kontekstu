@@ -10,6 +10,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto">
         {/* Copyright */}
         <div className="border-t border-[#f5f5f5] mt-4 pt-2 text-center text-[#f5f5f5]">
+          <span className="hidden xl:inline"> Funacja Bez Kontekstu | </span>
           <Link href={"/contact"}>Kontakt |</Link>
           <Link href={"/privacy-policy"} className=" ml-2">
             Polityka prywatności
@@ -25,9 +26,12 @@ export function Footer() {
             </Link>
           </div>
           <div className="text-[#3f3f42]">
-            <p>
+            <p className="xl:hidden">
               Page made with <Image src={HeartIcon} alt="Heart" width={15} className="inline-block" /> by
             </p>
+            <span className="hidden xl:inline">
+              Page made with <Image src={HeartIcon} alt="Heart" width={15} className="inline-block" /> by{" "}
+            </span>
             <Link href="https://cyfrowe.org/?utm_source=itgirls&utm_medium=referral&utm_campaign=partners">
               Fundacja Kompetencji Cyfrowych
             </Link>

@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import CopyOfCopyOfNpcPoster from "@/app/assets/images/copy_of_copy_of_npc.png";
+import PrawdyZaGroszPoster from "@/app/assets/images/prawdy_za_grosz.png";
+import GanglionyPoster from "@/app/assets/images/gangliony_gangliony.png";
+import LimboPoster from "@/app/assets/images/limbo.png";
 
 // Type for rectangle position and size
 interface Rectangle {
@@ -9,11 +14,11 @@ interface Rectangle {
   y: number; // position Y in percentage
   width: number; // width in percentage
   height: number; // height in percentage
-  backgroundColor: string;
+  imagePath: string; // path to project image
 }
 
-// Array of different background colors for rectangles
-const backgroundColors = ["bg-blue-500", "bg-green-500", "bg-purple-500", "bg-yellow-500"];
+// Array of project images for rectangles
+const projectImages = [CopyOfCopyOfNpcPoster, PrawdyZaGroszPoster, GanglionyPoster, LimboPoster];
 
 // Function to check if two rectangles overlap (including gap)
 // This ensures rectangles never touch each other
@@ -66,7 +71,7 @@ const generateRandomPosition = (
       y,
       width: rectWidth,
       height: rectHeight,
-      backgroundColor: "",
+      imagePath: "",
     };
 
     // Check collision with existing rectangles
@@ -167,7 +172,7 @@ const generateRectangles = () => {
           y: fallback.y,
           width: fallbackWidth,
           height: fallbackHeight,
-          backgroundColor: "",
+          imagePath: "",
         };
 
         let hasCollision = false;
@@ -206,7 +211,7 @@ const generateRectangles = () => {
       y: position.y,
       width: rectWidth,
       height: rectHeight,
-      backgroundColor: backgroundColors[i],
+      imagePath: projectImages[i].src,
     });
   }
 
@@ -254,7 +259,7 @@ export function RandomRectangles() {
       {rectangles.map((rect) => (
         <div
           key={rect.id}
-          className={`absolute ${rect.backgroundColor} shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl`}
+          className="absolute shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden"
           style={{
             left: `${rect.x}%`,
             top: `${rect.y}%`,
@@ -262,8 +267,13 @@ export function RandomRectangles() {
             aspectRatio: "2/1", // All rectangles are horizontal with 2:1 proportions
           }}
         >
-          {/* Optional content inside rectangle */}
-          <div className="w-full h-full flex items-center justify-center text-white font-bold text-sm">{rect.id}</div>
+          <Image
+            src={rect.imagePath}
+            alt={`Project image ${rect.id}`}
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 25vw"
+          />
         </div>
       ))}
 

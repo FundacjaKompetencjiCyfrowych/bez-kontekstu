@@ -39,12 +39,12 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center h-16 mt-6">
           {/* Desktop Navigation */}
-          <div className="hidden absolute xl:flex items-center space-x-8">
+          <div className="hidden absolute xl:flex items-center space-x-8 ">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-500 hover:text-blue-600 text-center text-sm xl:text-lg font-medium transition-colors font-defectica"
+                className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-lg font-medium transition-colors font-defectica"
               >
                 {item.title.toLocaleUpperCase()}
               </Link>
@@ -56,7 +56,7 @@ export function Navigation() {
                 {/* Language Labels */}
                 <div className="flex items-center gap-4">
                   <span
-                    className={`text-sm font-defectica transition-colors ${currentLanguage === "PL" ? "text-gray-500 font-bold" : "text-gray-500"}`}
+                    className={`text-sm xl:text-lg font-defectica transition-colors ${currentLanguage === "PL" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
                   >
                     PL
                   </span>
@@ -78,7 +78,7 @@ export function Navigation() {
                   </label>
 
                   <span
-                    className={`text-sm font-defectica transition-colors ${currentLanguage === "ENG" ? "text-gray-500 font-bold" : "text-gray-500"}`}
+                    className={`text-sm xl:text-lg font-defectica transition-colors ${currentLanguage === "ENG" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
                   >
                     ENG
                   </span>
@@ -104,7 +104,7 @@ export function Navigation() {
               {/* Gray bottom line for menu open button */}
               <div className="flex items-center justify-center w-full relative">
                 <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
-                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-21px] flex justify-center">
+                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-20px] flex justify-center">
                   <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
                 </button>
               </div>

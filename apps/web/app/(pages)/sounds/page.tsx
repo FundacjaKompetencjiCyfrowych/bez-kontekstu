@@ -19,7 +19,12 @@ export default function SoundsPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0d0b0e]">
-      <Header title="BEATS'N' PIECES" />
+      <Header title="BEATS'N' PIECES" className="xl:hidden" />
+      <Image
+        src={logoViolet}
+        alt="Bez Kontekstu"
+        className="hidden xl:block absolute blur-[6px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 opacity-50"
+      />
 
       <div className="max-w-7xl xl:mt-24 flex-1 flex flex-col xl:flex-row">
         {/* Left column - Title */}
@@ -32,8 +37,8 @@ export default function SoundsPage() {
         </div>
 
         {/* Right column - Tracklist */}
-        <div className="xl:w-1/2 flex-1 flex items-end justify-center px-7">
-          <div className="max-w-4xl w-full space-y-1">
+        <div className="xl:w-1/2 xl:mb-10 flex-1 flex items-end justify-center xl:justify-start px-7">
+          <div className="max-w-4xl w-full xl:w-3/4 md:w-1/2">
             {tracks.map((track, index) => (
               <TrackItem key={index} title={track} isPlaying={currentTrack === index} onPlay={() => handlePlay(index)} />
             ))}
