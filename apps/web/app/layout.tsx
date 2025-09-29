@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "./components/Navigation";
+import { SanityLive } from "./lib/sanity/live";
 
 const defectica = localFont({
   src: [
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Navigation />
         <main className="bg-[#0d0b0e] max-w-7xl mx-auto">{children}</main>
       </body>
+      <SanityLive />
     </html>
   );
 }
