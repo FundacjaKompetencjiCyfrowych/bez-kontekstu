@@ -1,8 +1,14 @@
 // sanity/singleton.ts
 import {StructureBuilder} from 'sanity/structure'
 
+/**
+ * List of singleton document types; **All new singleton documents must be added here**
+ */
 export const singletonTypes = new Set(['homepage', 'aboutPage', 'helpCenterPage', 'helpUsPage'])
 
+/**
+ * List of actions available on singleton documents
+ */
 export const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 
 /**

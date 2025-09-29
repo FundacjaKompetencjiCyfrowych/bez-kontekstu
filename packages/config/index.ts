@@ -1,3 +1,7 @@
+/* 
+  Contains config shared across apps in the monorepo.
+*/
+
 type SanityConfig = {
   projectId: string;
   dataset: string;

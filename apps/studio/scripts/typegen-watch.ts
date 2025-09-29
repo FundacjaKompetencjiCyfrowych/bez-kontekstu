@@ -1,3 +1,11 @@
+/* 
+  This script sets up a file watcher that automatically regenerates 
+  Sanity type definitions when configuration, schema, or query files change. 
+
+  It also ensures that the `sanity-typegen.json` file is always up-to-date
+  with the current configuration from the config package.
+*/
+
 import chokidar from 'chokidar'
 import {ChildProcess, spawn} from 'child_process'
 import debounce from 'lodash.debounce'

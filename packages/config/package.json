@@ -1,5 +1,6 @@
 {
   "name": "config",
+  "description": "Global monorepo config",
   "version": "1.0.0",
   "main": "index.ts",
   "exports": {
