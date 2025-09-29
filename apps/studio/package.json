@@ -5,27 +5,39 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity dev",
+    "dev": "concurrently \"sanity dev\" \"pnpm typegen-watch\" -n \"studio,typegen\" -c \"magenta,cyan\"",
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "typegen": "sanity schema extract && sanity typegen generate",
+    "typegen-watch": "tsx scripts/typegen-watch.ts",
+    "check-types": "tsc --noEmit"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
+    "config": "workspace:^",
     "@sanity/vision": "^4.8.1",
     "react": "^19.1",
     "react-dom": "^19.1",
     "sanity": "^4.8.1",
-    "styled-components": "^6.1.18"
+    "styled-components": "^6.1.18",
+    "tsx": "^4.20.6"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
+    "@types/emoji-strip": "^1.0.2",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/react": "^19.1",
+    "chokidar": "^4.0.3",
+    "concurrently": "^9.2.1",
+    "emoji-strip": "^1.0.1",
     "eslint": "^9.28",
+    "lodash.debounce": "^4.0.8",
     "prettier": "^3.5",
+    "studio": "^0.13.5",
     "typescript": "^5.8"
   },
   "prettier": {
