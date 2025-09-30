@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Space_Mono } from "next/font/google";
-import "./globals.css";
-import { Navigation } from "./components/Navigation";
-import { SanityLive } from "./lib/sanity/live";
+import "../globals.css";
+import { Navigation } from "../components/Navigation";
+import { SanityLive } from "../lib/sanity/live";
 
 const defectica = localFont({
   src: [
     {
-      path: "./assets/fonts/defectica.otf",
+      path: "../assets/fonts/defectica.otf",
       weight: "400",
       style: "normal",
     },

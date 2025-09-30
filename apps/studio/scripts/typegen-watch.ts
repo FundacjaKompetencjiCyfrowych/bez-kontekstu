@@ -32,7 +32,7 @@ if (!fs.existsSync(queriesPath)) {
 
 console.log('> Starting type generation watcher')
 
-// Watch config and regenerate sanity-config.json
+// Watch config and regenerate sanity-typegen.json
 
 type TypegenConfig = {
   path: string
