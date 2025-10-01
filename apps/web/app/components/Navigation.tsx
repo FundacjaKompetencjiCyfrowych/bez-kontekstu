@@ -5,7 +5,7 @@ import { NavItem } from "@/app/lib/types";
 import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
-import { useLocale } from "../lib/locales";
+import { useLocale, useRoutePath } from "../lib/locales";
 
 const navigationItems: NavItem[] = [
   { title: "STRONA GŁÓWNA", href: "/" },
@@ -19,7 +19,8 @@ const navigationItems: NavItem[] = [
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { locale, setLocale, routePath } = useLocale();
+  const { locale, setLocale } = useLocale();
+  const routePath = useRoutePath();
 
   // Check if we're on a project detail page (e.g., /projects/1, /projects/2, etc.)
   const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";

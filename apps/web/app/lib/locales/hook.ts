@@ -14,7 +14,7 @@ const setLocaleCookie = (locale: Locale) => {
 };
 
 /**
- * Client tools for managing locale.
+ * Standalone hook for switching global locale and managing locale state for dynamic UI updates in client components.
  */
 export const useLocale = () => {
   const router = useRouter();
@@ -38,20 +38,20 @@ export const useLocale = () => {
     router.push(newPath + window.location.search);
   };
 
-  const routePath = (() => {
-    const segments = pathname.split("/").filter(Boolean);
-    if (segments[0] && isLocale(segments[0])) {
-      segments.shift();
-    }
-    return "/" + segments.join("/");
-  })();
-
   return {
     /** Current locale state initialized from pathname */
     locale,
     /** Updates locale state, sets preference cookie and triggers router.push to update pathname*/
     setLocale,
-    /** Pathname without locale prefix */
-    routePath,
   };
+};
+
+/** Returns pathname without locale prefix */
+export const useRoutePath = () => {
+  const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments[0] && isLocale(segments[0])) {
+    segments.shift();
+  }
+  return "/" + segments.join("/");
 };
