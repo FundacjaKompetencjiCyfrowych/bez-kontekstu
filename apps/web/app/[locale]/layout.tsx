@@ -33,15 +33,16 @@ export const metadata: Metadata = {
   description: "Profesjonalna strona internetowa zbudowana przez Fundację Kompetencji Cyfrowych",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
         <Navigation />
         <main className="bg-[#0d0b0e] max-w-7xl mx-auto">{children}</main>

@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { NavItem } from "@/app/lib/types";
 import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
@@ -20,15 +19,14 @@ const navigationItems: NavItem[] = [
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const { locale, setLocale } = useLocale();
+  const { locale, setLocale, routePath } = useLocale();
 
   // Check if we're on a project detail page (e.g., /projects/1, /projects/2, etc.)
-  const isProjectDetailPage = pathname.startsWith("/projects/") && pathname !== "/projects";
-  const isCooperatorDetailPage = pathname.startsWith("/cooperators/") && pathname !== "/cooperators";
+  const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";
+  const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
 
   // Check if we're on the home page
-  const isHomePage = pathname === "/";
+  const isHomePage = routePath === "/";
 
   // Function to toggle language
   const toggleLanguage = () => {

@@ -14,8 +14,7 @@ const setLocaleCookie = (locale: Locale) => {
 };
 
 /**
- * Returns the current locale read from pathname and a function to set the locale.
- * Setting locale will create a preference cookie and update the pathname.
+ * Client tools for managing locale.
  */
 export const useLocale = () => {
   const router = useRouter();
@@ -39,5 +38,20 @@ export const useLocale = () => {
     router.push(newPath + window.location.search);
   };
 
-  return { locale, setLocale };
+  const routePath = (() => {
+    const segments = pathname.split("/").filter(Boolean);
+    if (segments[0] && isLocale(segments[0])) {
+      segments.shift();
+    }
+    return "/" + segments.join("/");
+  })();
+
+  return {
+    /** Current locale state initialized from pathname */
+    locale,
+    /** Updates locale state, sets preference cookie and triggers router.push to update pathname*/
+    setLocale,
+    /** Pathname without locale prefix */
+    routePath,
+  };
 };
