@@ -35,11 +35,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
   return (
-    <html lang="pl">
+    <html lang={params.locale}>
       <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
         <Navigation />
         <main className="bg-[#0d0b0e] max-w-7xl mx-auto">{children}</main>

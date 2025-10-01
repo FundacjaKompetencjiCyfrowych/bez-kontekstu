@@ -10,9 +10,11 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "config": "workspace:^",
+    "@formatjs/intl-localematcher": "^0.6.1",
     "@sanity/image-url": "^1.2.0",
     "clsx": "^2.1.1",
+    "config": "workspace:^",
+    "negotiator": "^1.0.0",
     "next": "15.4.5",
     "next-sanity": "^10.1.4",
     "react": "19.1.0",
@@ -24,6 +26,7 @@
     "@eslint/eslintrc": "^3",
     "@sanity/client": "^7.11.2",
     "@tailwindcss/postcss": "^4",
+    "@types/negotiator": "^0.6.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
