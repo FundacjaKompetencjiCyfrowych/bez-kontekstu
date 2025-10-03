@@ -1,4 +1,4 @@
-export * from "./hook";
+export * from "./client";
 
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";

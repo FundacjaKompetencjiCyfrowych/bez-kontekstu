@@ -1,10 +1,10 @@
-// sanity/singleton.ts
-import {StructureBuilder} from 'sanity/structure'
+import {type StructureBuilder} from 'sanity/structure'
+import {capitalize} from './utils'
 
 /**
  * List of singleton document types; **All new singleton documents must be added here**
  */
-export const singletonTypes = new Set(['homepage', 'aboutPage', 'helpCenterPage', 'helpUsPage'])
+export const singletonTypes = new Set(['home'])
 
 /**
  * List of actions available on singleton documents
@@ -30,16 +30,10 @@ export const filterSingletonTemplates = (templates: any[]) =>
   templates.filter(({schemaType}) => !singletonTypes.has(schemaType))
 
 /**
- * Helper to create a singleton list item
- *
- * Example: `S.list().items([singletonItem(S, 'homepage')])`
+ * Structure API helper to create a singleton list item
  */
-export const singletonItem = (S: StructureBuilder, type: string, title?: string) =>
+export const Singleton = (S: StructureBuilder, type: string, title?: string) =>
   S.listItem()
     .title(title || capitalize(type))
     .id(type)
     .child(S.document().schemaType(type).documentId(type))
-
-function capitalize(str: string) {
-  return str.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())
-}

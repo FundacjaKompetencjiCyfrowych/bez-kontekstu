@@ -13,6 +13,16 @@
  */
 
 // Source: schema.json
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+};
+
 export type BlockContent = Array<
   | {
       children?: Array<{
@@ -47,14 +57,41 @@ export type BlockContent = Array<
     }
 >;
 
-export type Category = {
+export type TranslationMetadata = {
   _id: string;
-  _type: "category";
+  _type: "translation.metadata";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  description?: string;
+  translations?: Array<
+    {
+      _key: string;
+    } & InternationalizedArrayReferenceValue
+  >;
+  schemaTypes?: Array<string>;
+};
+
+export type InternationalizedArrayReferenceValue = {
+  _type: "internationalizedArrayReferenceValue";
+  value?:
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "home";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "author";
+      };
 };
 
 export type Post = {
@@ -92,6 +129,7 @@ export type Post = {
   }>;
   publishedAt?: string;
   body?: BlockContent;
+  language?: string;
 };
 
 export type Author = {
@@ -132,7 +170,24 @@ export type Author = {
     _type: "block";
     _key: string;
   }>;
+  language?: string;
 };
+
+export type Home = {
+  _id: string;
+  _type: "home";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  language?: string;
+};
+
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayReferenceValue
+>;
 
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
@@ -253,10 +308,14 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
-  | BlockContent
   | Category
+  | BlockContent
+  | TranslationMetadata
+  | InternationalizedArrayReferenceValue
   | Post
   | Author
+  | Home
+  | InternationalizedArrayReference
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -311,6 +370,7 @@ export type AllQueryResult = Array<
         _type: "block";
         _key: string;
       }>;
+      language?: string;
     }
   | {
       _id: string;
@@ -320,6 +380,15 @@ export type AllQueryResult = Array<
       _rev: string;
       title?: string;
       description?: string;
+    }
+  | {
+      _id: string;
+      _type: "home";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      title?: string;
+      language?: string;
     }
   | {
       _id: string;
@@ -356,6 +425,7 @@ export type AllQueryResult = Array<
       }>;
       publishedAt?: string;
       body?: BlockContent;
+      language?: string;
     }
   | {
       _id: string;
@@ -399,6 +469,19 @@ export type AllQueryResult = Array<
       url?: string;
       metadata?: SanityImageMetadata;
       source?: SanityAssetSourceData;
+    }
+  | {
+      _id: string;
+      _type: "translation.metadata";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      translations?: Array<
+        {
+          _key: string;
+        } & InternationalizedArrayReferenceValue
+      >;
+      schemaTypes?: Array<string>;
     }
 >;
 
