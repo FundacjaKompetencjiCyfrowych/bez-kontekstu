@@ -1,18 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --font-defectica: var(--font-defectica), sans-serif;
+  --font-space-mono: var(--font-space-mono), monospace;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
   color: white;
-}
-
-@layer utilities {
-  .font-defectica {
-    font-family: var(--font-defectica);
-  }
-  .font-mono {
-    font-family: var(--font-space-mono);
-  }
 }
 
 @layer base {
