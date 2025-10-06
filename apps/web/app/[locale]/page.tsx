@@ -2,11 +2,11 @@ import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import Logo from "@/app/assets/images/logo.png";
-import LogoViolet from "@/app/components/LogoViolet";
 import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
 import { cooperators } from "@/app/lib/cooperators";
+import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 export default function Home() {
   // Get first 4 team members from cooperators data
@@ -14,7 +14,7 @@ export default function Home() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:mt-0 xl:ml-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
       </h1>
     ));
@@ -50,6 +50,7 @@ export default function Home() {
       <div className="flex justify-end xl:hidden h-20 items-center mt-5 mb-24 mx-8 z-10">
         <Image src={SoundIcon} alt="Sound button" width={30} height={30} />
       </div>
+      
       {/* Hero Section */}
       <section className="relative xl:top-[100px] overflow-hidden h-[80vh] flex flex-col justify-between mx-8 z-10">
         <div className="relative flex flex-col justify-end items-end z-10">
@@ -72,7 +73,7 @@ export default function Home() {
           <h1>TEKSTU</h1>
         </div>
 
-        {/* Logo w tle - białe */}
+        {/* Logo - white */}
         <Image
           src={Logo}
           priority
@@ -81,50 +82,54 @@ export default function Home() {
         />
       </section>
 
-      <div className="relative">
-        {/* Violet logo - sticky for all sections from Manifest */}
-        <div className="h-[30vh] xl:h-[40vh]"></div>
-        <div className="sticky xl:relative top-1/2 h-0 z-0">
-          <LogoViolet />
-        </div>
-
+      <div className="relative xl:top-40"> 
         {/* MANIFEST Section*/}
-        <section className="overflow-hidden h-screen xl:h-[800px] flex flex-col justify-around mx-8 mt-[-120px] xl:mt-[-280px]">
+        <section className="overflow-hidden h-screen xl:h-[800px] xl:mb-20 flex flex-col justify-around mx-8">
+
+        {/* Violet logo - sticky for all sections from Manifest */}
+        <Image
+            src={LogoVioletImage}
+            alt="Bez Kontekstu"
+            className="hidden xl:block xl:absolute blur-[8px] left-1/2 transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
+          />
+
           <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
             {renderResponsiveTitle(["MANIF", "EST"], "MA N I", "right")}
           </div>
 
-          <div className="w-[75vw] lg:w-[50vw] xl:w-[60vw]  leading-6 xl:leading-8 mx-auto z-10 text-center text-md font-mono">
+          <div className="w-[75vw] lg:w-[50vw] xl:w-[60vw] xl:text-xl leading-6 xl:leading-10 mx-auto z-10 text-center text-md font-mono">
             <p className="mb-4">
               Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty.
             </p>
             <p className="mb-4">
               Działamy z myślą o tworzeniu innowacyjnych doświadczeń artystycznych, które przełamują granice tradycyjnych form wyrazu.
             </p>
-            <p className="mb-4">
+            <p className="mb-8">
               Poprzez łączenie immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnychwprowadzamy
               odbiorców w świat, gdzie teatr spotyka się z cyfrową rzeczywistością.
             </p>
-          </div>
-
-          <div className="relative flex justify-center items-center transform z-10">
+            
+            <div className="flex justify-center items-center transform z-10">
             <Link href={"/manifest"}>
               <Button
                 variant="dark"
                 size="sm"
-                className="xl:!bg-gradient-to-b xl:!from-white-900 xl:!via-black-900/30 xl:!to-[#6852f5] xl:!rounded-2xl xl:!text-white xl:!border xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-300 xl:!shadow-lg"
+                className="xl:w-[250px] xl:text-base xl:!bg-gradient-to-b xl:!from-white-900 xl:!via-black-900/30 xl:!to-[#6852f5] xl:!rounded-2xl xl:!text-white xl:!border xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-300 xl:!shadow-lg"
               >
                 Poznaj nas lepiej
               </Button>
             </Link>
           </div>
+          </div>
+
+          
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           {renderResponsiveTitle("", "F EST", "left")}
         </section>
 
         {/* PROJECTS Section */}
-        <section className="relative overflow-hidden h-screen xl:h-[1000px] flex flex-col justify-around mx-8 bg-transparent">
+        <section className="relative overflow-hidden h-screen xl:h-[1000px] xl:mb-20 flex flex-col justify-around mx-8 bg-transparent">
           <div className="relative flex flex-col items-end justify-start z-10">
             {renderResponsiveTitle(["PROJ", "EKTY"], "PR O", "right")}
           </div>
@@ -147,7 +152,7 @@ export default function Home() {
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative h-screen xl:h-[1100px] flex flex-col justify-evenly mx-8 bg-transparent">
+        <section className="relative h-screen xl:h-[1100px] xl:mb-20 flex flex-col justify-center mx-8 bg-transparent">
           <div className="absolute right-0 top-0 flex flex-col items-end justify-start z-10">
             <div className="">{renderResponsiveTitle(["WSPÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
           </div>
@@ -178,7 +183,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="relative xl:absolute xl:bottom-15 xl:left-0 xl:right-0  flex justify-center items-center transform z-10">
+          <div className="relative xl:block xl:mx-auto flex justify-center items-center transform z-10">
             <Link href={"/cooperators"}>
               <Button variant="dark" size="sm">
                 Poznaj nasz zespół
@@ -213,8 +218,9 @@ export default function Home() {
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           <div>{renderResponsiveTitle("", "DAR CZYŃCÓW", "left")}</div>
         </section>
-      </div>
-      <Footer />
+
+         <Footer /> 
+      </div>    
     </div>
   );
 }
