@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState, useRef } from "react";
 import prevIcon from "@/app/assets/icons/prev.png";
 import nextIcon from "@/app/assets/icons/next.png";
+import LogoViolet from "@/app/components/LogoViolet";
 
 export default function CooperatorsPage() {
   const cooperators = getAllCooperators();
@@ -57,6 +58,8 @@ export default function CooperatorsPage() {
   return (
     <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
       <Header title="WSPÓ ŁPR ACE" className="xl:hidden" />
+
+      <LogoViolet />
 
       <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
         {/*Title desktop*/}

@@ -4,8 +4,7 @@ import { useState } from "react";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 import { TrackItem } from "@/app/components/TrackItem";
-import logoViolet from "@/app/assets/images/logo_violet.png";
-import Image from "next/image";
+import LogoViolet from "@/app/components/LogoViolet";
 
 export default function SoundsPage() {
   const [currentTrack, setCurrentTrack] = useState<number | null>(null);
@@ -20,11 +19,7 @@ export default function SoundsPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#0d0b0e]">
       <Header title="BEATS'N' PIECES" className="xl:hidden" />
-      <Image
-        src={logoViolet}
-        alt="Bez Kontekstu"
-        className="hidden xl:block absolute blur-[6px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 opacity-50"
-      />
+      <LogoViolet />
 
       <div className="max-w-7xl xl:mt-24 flex-1 flex flex-col xl:flex-row">
         {/* Left column - Title */}

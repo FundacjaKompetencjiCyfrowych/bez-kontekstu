@@ -7,7 +7,8 @@ import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 import DonatorsLeftImage from "@/app/assets/images/donators_left.png";
 import DonatorsRightImage from "@/app/assets/images/donators_right.png";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import LogoViolet from "@/app/components/LogoViolet";
+import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 export default function DonorsPage() {
   const buttonClasses =
@@ -71,20 +72,16 @@ export default function DonorsPage() {
         {/*Title desktop - top right*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
 
-        {/* Violet logos - sticky background */}
-        <div className="hidden xl:block">
+        <LogoViolet />
+                {/*Second violet logo - desktop */}
+                <div className="hidden xl:block">              
           <Image
-            src={LogoViolet}
+            src={LogoVioletImage}
             alt="Bez Kontekstu"
-            className="absolute blur-[3px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain xl:w-200 xl:h-200 opacity-50"
-          />
-
-          <Image
-            src={LogoViolet}
-            alt="Bez Kontekstu"
-            className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[80vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
+            className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
           />
         </div>
+
 
         {/* Two column layout for desktop */}
         <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">

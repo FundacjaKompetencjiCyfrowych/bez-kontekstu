@@ -7,7 +7,7 @@ import FacebookIcon from "@/app/assets/icons/facebook.png";
 import EmailIcon from "@/app/assets/icons/email.png";
 import PhoneIcon from "@/app/assets/icons/phone.png";
 import { Header } from "@/app/components/Header";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import LogoViolet from "@/app/components/LogoViolet";
 
 export default function ContactPage() {
   // Icon component for responsive icons
@@ -24,7 +24,7 @@ export default function ContactPage() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl  ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
       </h1>
     ));
@@ -37,15 +37,9 @@ export default function ContactPage() {
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("KO N")}</div>
 
-        <div className="hidden xl:block">
-          <Image
-            src={LogoViolet}
-            alt="Bez Kontekstu"
-            className="absolute blur-[3px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain xl:w-140 xl:h-140 opacity-50"
-          />
-        </div>
+        <LogoViolet />
 
-        <div className="relative xl:mt-[90px] flex flex-col font-mono md:text-xl md:leading-16 xl:text-base xl:leading-5 xl:flex xl:justify-center">
+        <div className="relative flex flex-col font-mono md:text-xl md:leading-16 xl:text-base xl:leading-5 xl:flex xl:justify-center">
           {/* Adres */}
           <div className=" md:mx-4">
             <ul className="my-2 space-y-2">
