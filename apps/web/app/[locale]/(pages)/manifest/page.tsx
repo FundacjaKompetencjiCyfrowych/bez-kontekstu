@@ -4,7 +4,8 @@ import Image from "next/image";
 import ManifestManImage from "@/app/assets/images/manifest_man.png";
 import ManifestOurGoalImage from "@/app/assets/images/manifest_our-goal.png";
 import ManifestFusionImage from "@/app/assets/images/manifest_fusion.png";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import LogoViolet from "@/app/components/LogoViolet";
+import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 export default function ManifestPage() {
   const titleCutWord = (title: string) =>
@@ -22,20 +23,17 @@ export default function ManifestPage() {
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
 
-        <div className="hidden xl:block">
+        <LogoViolet />
+                {/*Second violet logo - desktop */}
+                <div className="hidden xl:block">              
           <Image
-            src={LogoViolet}
-            alt="Bez Kontekstu"
-            className="absolute blur-[3px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain xl:w-140 xl:h-140 opacity-50"
-          />
-
-          <Image
-            src={LogoViolet}
+            src={LogoVioletImage}
             alt="Bez Kontekstu"
             className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
           />
         </div>
 
+ 
         {/* Two column layout for desktop */}
         <div className="relative xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Quote */}
@@ -220,7 +218,7 @@ export default function ManifestPage() {
         {/* Fusion - Desktop Layout */}
         <section className="py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-center xl:mx-0">
           {/* Left Column - Image */}
-          <div className="xl:col-span-1 xl:flex xl:justify-center hidden xl:block">
+          <div className="xl:col-span-1 xl:flex xl:justify-center hidden">
             <div className="relative w-full h-96 xl:h-[500px] xl:w-[400px] mt-8 xl:mt-0">
               <Image src={ManifestFusionImage} alt="Fuzja - grupa artystów na scenie" fill className="object-cover" />
             </div>

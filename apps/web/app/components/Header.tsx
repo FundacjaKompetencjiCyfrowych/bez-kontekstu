@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import LogoViolet from "@/app/components/LogoViolet";
 
 interface HeaderProps {
   title?: string;
@@ -30,12 +30,7 @@ export function Header({ title = "", showLogo = true, showTitle = true, classNam
       {/* Violet logo - sticky background */}
       {showLogo && (
         <div className={`sticky top-1/2 h-0 z-0 ${className}`}>
-          <Image
-            src={LogoViolet}
-            priority
-            alt="Bez Kontekstu"
-            className="absolute blur-[6px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160  opacity-50"
-          />
+          <LogoViolet />
         </div>
       )}
     </>

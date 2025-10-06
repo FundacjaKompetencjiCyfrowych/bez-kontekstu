@@ -7,6 +7,7 @@ import { getAllProjects } from "@/app/lib/projects";
 import { useState, useRef } from "react";
 import prevIcon from "@/app/assets/icons/prev.png";
 import nextIcon from "@/app/assets/icons/next.png";
+import LogoViolet from "@/app/components/LogoViolet";
 
 import CopyOfCopyOfNpcPoster from "@/app/assets/images/copy_of_copy_of_npc.png";
 import PrawdyZaGroszPoster from "@/app/assets/images/prawdy_za_grosz.png";
@@ -70,6 +71,8 @@ export default function ProjectsPage() {
   return (
     <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
       <Header title="PRO JEK TY" className="xl:hidden" />
+
+      <LogoViolet />
 
       <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
         {/*Title desktop*/}

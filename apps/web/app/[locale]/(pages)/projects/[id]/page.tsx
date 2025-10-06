@@ -8,9 +8,10 @@ import { useState } from "react";
 import { getProjectById, getPreviousProjectId, getNextProjectId, Project } from "@/app/lib/projects";
 import { Footer } from "@/app/components/Footer";
 import { ImageSlider } from "@/app/components/ImageSlider";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import LogoViolet from "@/app/components/LogoViolet";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
+import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 // Function to convert YouTube URL to embed format
 function getYouTubeEmbedUrl(url: string): string {
@@ -80,15 +81,16 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
         </Link>
       </div>
 
-      {/* Violet logo - sticky  */}
-      <div className="sticky top-1/2 h-0 z-0">
-        <Image
-          src={LogoViolet}
-          priority
-          alt="Bez Kontekstu"
-          className="absolute blur-[3px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 opacity-50"
-        />
-      </div>
+      <LogoViolet />
+              {/*Second violet logo - desktop */}
+              <div className="hidden xl:block">              
+          <Image
+            src={LogoVioletImage}
+            alt="Bez Kontekstu"
+            className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
+          />
+        </div>
+
 
       {/* Main Content */}
       <div className="relative px-8 pb-16">

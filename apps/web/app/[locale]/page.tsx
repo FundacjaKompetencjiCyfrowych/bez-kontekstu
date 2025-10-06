@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import Logo from "@/app/assets/images/logo.png";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import LogoViolet from "@/app/components/LogoViolet";
 import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
@@ -85,12 +85,7 @@ export default function Home() {
         {/* Violet logo - sticky for all sections from Manifest */}
         <div className="h-[30vh] xl:h-[40vh]"></div>
         <div className="sticky xl:relative top-1/2 h-0 z-0">
-          <Image
-            src={LogoViolet}
-            priority
-            alt="Bez Kontekstu logo"
-            className="absolute blur-[3px] xl:blur-[6px] xl:top-[100px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160 lg:w-192 lg:h-192 xl:w-220 xl:h-220 opacity-50"
-          />
+          <LogoViolet />
         </div>
 
         {/* MANIFEST Section*/}
