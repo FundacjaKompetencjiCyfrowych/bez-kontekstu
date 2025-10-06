@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Space_Mono } from "next/font/google";
-import "./globals.css";
-import { Navigation } from "./components/Navigation";
-import { SanityLive } from "./lib/sanity/live";
+import "../globals.css";
+import { Navigation } from "../components/Navigation";
+import { SanityLive } from "../lib/sanity/live";
 
 const defectica = localFont({
   src: [
     {
-      path: "./assets/fonts/defectica.otf",
+      path: "../assets/fonts/defectica.otf",
       weight: "400",
       style: "normal",
     },
@@ -33,13 +33,16 @@ export const metadata: Metadata = {
   description: "Profesjonalna strona internetowa zbudowana przez Fundację Kompetencji Cyfrowych",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
   return (
-    <html lang="pl">
+    <html lang={locale}>
       <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
         <Navigation />
         <main className="bg-[#0d0b0e] max-w-7xl mx-auto">{children}</main>

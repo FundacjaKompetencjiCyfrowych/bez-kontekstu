@@ -18,8 +18,9 @@
     "sanity"
   ],
   "dependencies": {
-    "config": "workspace:^",
+    "@sanity/document-internationalization": "^4.0.0",
     "@sanity/vision": "^4.8.1",
+    "config": "workspace:^",
     "react": "^19.1",
     "react-dom": "^19.1",
     "sanity": "^4.8.1",

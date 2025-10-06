@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { NavItem } from "@/app/lib/types";
 import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
+import { useLocale, useRoutePath } from "../lib/locales";
 
 const navigationItems: NavItem[] = [
   { title: "STRONA GŁÓWNA", href: "/" },
@@ -19,19 +19,19 @@ const navigationItems: NavItem[] = [
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState<"PL" | "ENG">("PL");
-  const pathname = usePathname();
+  const { locale, setLocale } = useLocale();
+  const routePath = useRoutePath();
 
   // Check if we're on a project detail page (e.g., /projects/1, /projects/2, etc.)
-  const isProjectDetailPage = pathname.startsWith("/projects/") && pathname !== "/projects";
-  const isCooperatorDetailPage = pathname.startsWith("/cooperators/") && pathname !== "/cooperators";
+  const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";
+  const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
 
   // Check if we're on the home page
-  const isHomePage = pathname === "/";
+  const isHomePage = routePath === "/";
 
   // Function to toggle language
   const toggleLanguage = () => {
-    setCurrentLanguage((prev) => (prev === "PL" ? "ENG" : "PL"));
+    setLocale(locale === "pl" ? "en" : "pl");
   };
 
   return (
@@ -56,7 +56,7 @@ export function Navigation() {
                 {/* Language Labels */}
                 <div className="flex items-center gap-4">
                   <span
-                    className={`text-sm xl:text-lg font-defectica transition-colors ${currentLanguage === "PL" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
+                    className={`text-sm xl:text-lg font-defectica transition-colors ${locale === "pl" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
                   >
                     PL
                   </span>
@@ -65,20 +65,20 @@ export function Navigation() {
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={currentLanguage === "ENG"}
+                      checked={locale === "en"}
                       onChange={toggleLanguage}
                       className="sr-only peer"
-                      aria-label={`Switch to ${currentLanguage === "PL" ? "English" : "Polish"}`}
+                      aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
                     />
                     <div className="relative w-10 h-5 bg-neutral-600 border border-white peer-focus:outline-none rounded-full peer flex items-center">
                       <div
-                        className={`w-4 h-4 bg-white border border-gray-500 rounded-full transition-all duration-300 transform ${currentLanguage === "ENG" ? "translate-x-5" : "translate-x-0"}`}
+                        className={`w-4 h-4 bg-white border border-gray-500 rounded-full transition-all duration-300 transform ${locale === "en" ? "translate-x-5" : "translate-x-0"}`}
                       ></div>
                     </div>
                   </label>
 
                   <span
-                    className={`text-sm xl:text-lg font-defectica transition-colors ${currentLanguage === "ENG" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
+                    className={`text-sm xl:text-lg font-defectica transition-colors ${locale === "en" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
                   >
                     ENG
                   </span>
@@ -139,7 +139,7 @@ export function Navigation() {
                     {/* Language Labels */}
                     <div className="flex items-center gap-4">
                       <span
-                        className={`text-xl font-defectica transition-colors ${currentLanguage === "PL" ? "text-gray-100 font-bold" : "text-gray-100"}`}
+                        className={`text-xl font-defectica transition-colors ${locale === "pl" ? "text-gray-100 font-bold" : "text-gray-100"}`}
                       >
                         PL
                       </span>
@@ -148,20 +148,20 @@ export function Navigation() {
                       <label className="relative inline-flex items-center cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={currentLanguage === "ENG"}
+                          checked={locale === "en"}
                           onChange={toggleLanguage}
                           className="sr-only peer"
-                          aria-label={`Switch to ${currentLanguage === "PL" ? "English" : "Polish"}`}
+                          aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
                         />
                         <div className="relative w-15 h-8 bg-neutral-600 border border-white peer-focus:outline-none rounded-full peer flex items-center">
                           <div
-                            className={`w-5 h-5 bg-white border border-gray-300 rounded-full transition-all duration-300 transform ${currentLanguage === "ENG" ? "translate-x-8" : "translate-x-1"}`}
+                            className={`w-5 h-5 bg-white border border-gray-300 rounded-full transition-all duration-300 transform ${locale === "en" ? "translate-x-8" : "translate-x-1"}`}
                           ></div>
                         </div>
                       </label>
 
                       <span
-                        className={`text-xl font-defectica transition-colors ${currentLanguage === "ENG" ? "text-gray-100 font-bold" : "text-gray-100"}`}
+                        className={`text-xl font-defectica transition-colors ${locale === "en" ? "text-gray-100 font-bold" : "text-gray-100"}`}
                       >
                         ENG
                       </span>
