@@ -121,7 +121,7 @@ export default function DonorsPage() {
           {/* Left Column - Image */}
           <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
             <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-              <Image src={DonatorsLeftImage} alt="Wsparcie dla fundacji" fill className="object-cover" />
+              <Image src={DonatorsLeftImage} alt="Wsparcie dla fundacji" fill sizes="auto" className="object-cover" />
             </div>
           </div>
 
@@ -251,7 +251,7 @@ export default function DonorsPage() {
           {/* Right Column - Image */}
           <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
             <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-              <Image src={DonatorsRightImage} alt="1% PIT dla fundacji" fill className="object-cover" />
+              <Image src={DonatorsRightImage} alt="1% PIT dla fundacji" fill sizes="auto" className="object-cover" />
             </div>
           </div>
         </div>

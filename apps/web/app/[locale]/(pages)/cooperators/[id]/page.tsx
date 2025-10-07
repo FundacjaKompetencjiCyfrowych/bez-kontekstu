@@ -37,19 +37,21 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
   return (
     <div className="bg-[#0d0b0e] min-h-screen max-w-7xl mx-auto font-mono flex flex-col justify-between">
-      {/* Navigation Header */}
-      <div className="relative px-8 py-6 xl:hidden">
-        <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2 md:w-4 md:h-4" />
-          <p className="ml-4 md:text-xl">Wstecz</p>
-        </Link>
-      </div>
-
+ 
       <LogoViolet />
 
       {/* Main Content */}
       <div className="relative top-[30px] px-8">
         {/* Mobile and Tablet Layout (default) */}
+
+ {/* Back button */}
+            <div className="relative xl:hidden w-fit px-4 py-6 my-[50px]">
+              <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
+                <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-3" />
+                <p className="ml-2 text-sm">Wstecz</p>
+              </Link>
+            </div>
+
         <div className="xl:hidden">
           {/* Portrait Section */}
           <div className="mb-8">
@@ -175,13 +177,13 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
         <div className="px-8 hidden xl:flex xl:gap-12 xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Biography */}
           <div className="w-1/2 flex flex-col justify-center">
-            {/* Back button */}
-            <div className="relative w-fit px-4 py-6 my-[50px]">
-              <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-                <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-3" />
-                <p className="ml-2 text-sm">Wstecz</p>
-              </Link>
-            </div>
+           
+<div className="relative py-6 md:py-12">
+        <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
+          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
+          <p className="ml-4 md:text-xl">Wstecz</p>
+        </Link>
+      </div>
 
             {/* Name Section */}
             <div className="mb-8">

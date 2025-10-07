@@ -115,7 +115,7 @@ export default function CooperatorsPage() {
                 className="flex overflow-x-auto scrollbar-hide gap-6 pb-4"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
-                {cooperators.map((cooperator) => {
+                {cooperators.map((cooperator, index) => {
                   const cooperatorImage = getCooperatorImage(cooperator.id);
 
                   return (
@@ -130,9 +130,7 @@ export default function CooperatorsPage() {
                           <Image
                             src={cooperatorImage}
                             alt={`Image of ${cooperator.name} ${cooperator.surname}`}
-                            width={800}
-                            height={400}
-                            className="w-full h-full object-cover object-center"
+                            className={`w-full h-full object-cover ${index === 0 ? 'object-right' : 'object-center'}`}
                             sizes="25vw"
                             priority={cooperator.id <= 4}
                           />

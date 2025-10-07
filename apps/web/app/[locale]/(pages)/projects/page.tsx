@@ -97,10 +97,8 @@ export default function ProjectsPage() {
                         <Image
                           src={posterImage}
                           alt={`Poster for ${project.name}`}
-                          width={800}
-                          height={250}
                           className="w-full h-full object-cover object-top md:object-center"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
+                          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                           priority={project.id <= 2}
                         />
                       ) : (
@@ -143,8 +141,6 @@ export default function ProjectsPage() {
                           <Image
                             src={posterImage}
                             alt={`Poster for ${project.name}`}
-                            width={800}
-                            height={400}
                             className="w-full h-full object-cover object-center grayscale hover:grayscale-0"
                             sizes="25vw"
                             priority={project.id <= 4}

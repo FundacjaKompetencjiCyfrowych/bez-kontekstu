@@ -58,7 +58,7 @@ export default function ManifestPage() {
         {/* Man Image - Absolute positioned in bottom center */}
         <div className="hidden xl:block absolute bottom-0 left-1/2">
           <div className="relative w-[400px] h-[500px]">
-            <Image src={ManifestManImage} alt="Mężczyzna z mikrofonem" fill className="object-cover" priority />
+            <Image src={ManifestManImage} alt="Mężczyzna z mikrofonem" fill sizes="auto" className="object-cover" priority />
           </div>
         </div>
 
@@ -122,7 +122,7 @@ export default function ManifestPage() {
           {/* Left Column - Image */}
           <div className="xl:col-span-1 xl:justify-self-center hidden xl:block">
             <div className="relative w-full h-96 xl:h-[500px] xl:w-[400px] mt-8 xl:mt-0">
-              <Image src={ManifestOurGoalImage} alt="Nasz cel - osoba w świetle" fill className="object-cover" />
+              <Image src={ManifestOurGoalImage} alt="Nasz cel - osoba w świetle" fill sizes="auto" className="object-cover" />
             </div>
           </div>
 
@@ -223,7 +223,7 @@ export default function ManifestPage() {
           {/* Left Column - Image */}
           <div className="xl:col-span-1 xl:flex xl:justify-center hidden">
             <div className="relative w-full h-96 xl:h-[500px] xl:w-[400px] mt-8 xl:mt-0">
-              <Image src={ManifestFusionImage} alt="Fuzja - grupa artystów na scenie" fill className="object-cover" />
+              <Image src={ManifestFusionImage} alt="Fuzja - grupa artystów na scenie" fill sizes="auto" className="object-cover" />
             </div>
           </div>
 

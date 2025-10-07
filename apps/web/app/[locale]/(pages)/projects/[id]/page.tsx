@@ -72,7 +72,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   }
 
   return (
-    <div className="bg-[#0d0b0e] min-h-screen font-mono">
+    <div className="bg-[#0d0b0e] min-h-screen font-mono xl:absolute xl:top-[50px]">
       {/* Navigation Header */}
       <div className="relative px-8 py-6 md:py-12">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
