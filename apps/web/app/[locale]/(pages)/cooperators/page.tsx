@@ -50,7 +50,7 @@ export default function CooperatorsPage() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl ml-2 sm:ml-3 mt-2 xl:mt-0 sm:mt-3" key={index}>
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
       </h1>
     ));
@@ -115,7 +115,7 @@ export default function CooperatorsPage() {
                 className="flex overflow-x-auto scrollbar-hide gap-6 pb-4"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
-                {cooperators.map((cooperator) => {
+                {cooperators.map((cooperator, index) => {
                   const cooperatorImage = getCooperatorImage(cooperator.id);
 
                   return (
@@ -130,9 +130,7 @@ export default function CooperatorsPage() {
                           <Image
                             src={cooperatorImage}
                             alt={`Image of ${cooperator.name} ${cooperator.surname}`}
-                            width={800}
-                            height={400}
-                            className="w-full h-full object-cover object-center"
+                            className={`w-full h-full object-cover ${index === 0 ? 'object-right' : 'object-center'}`}
                             sizes="25vw"
                             priority={cooperator.id <= 4}
                           />

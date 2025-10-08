@@ -10,7 +10,7 @@ import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 export default function ManifestPage() {
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 xl:ml-0 xl:mt-0 sm:mt-3" key={index}>
         {word}
       </h1>
     ));
@@ -19,11 +19,14 @@ export default function ManifestPage() {
     <div className="justify-between w-full min-h-screen px-7 xl:flex xl:flex-col">
       {/*Title mobile*/}
       <Header title="MAN IF EST" className="xl:hidden" />
+
+  <LogoViolet />
+
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
 
-        <LogoViolet />
+      
                 {/*Second violet logo - desktop */}
                 <div className="hidden xl:block">              
           <Image
@@ -56,7 +59,7 @@ export default function ManifestPage() {
         {/* Man Image - Absolute positioned in bottom center */}
         <div className="hidden xl:block absolute bottom-0 left-1/2">
           <div className="relative w-[400px] h-[500px]">
-            <Image src={ManifestManImage} alt="Mężczyzna z mikrofonem" fill className="object-cover" priority />
+            <Image src={ManifestManImage} alt="Mężczyzna z mikrofonem" fill sizes="auto" className="object-cover" priority />
           </div>
         </div>
 

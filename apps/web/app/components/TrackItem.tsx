@@ -48,7 +48,7 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
                   : "bg-white/10 border-white/30 hover:bg-white/15"
               }`}
             >
-              <Image src={CloudIcon} alt="Cloud" width={30} height={30} />
+              <Image src={CloudIcon} alt="Cloud" width={30} height={30} sizes="auto" />
             </div>
           </div>
         </div>

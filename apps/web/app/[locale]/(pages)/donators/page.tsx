@@ -17,7 +17,7 @@ export default function DonorsPage() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
       </h1>
     ));
@@ -61,6 +61,12 @@ export default function DonorsPage() {
 
   return (
     <div className="justify-between font-mono w-full min-h-screen px-7 xl:flex xl:flex-col">
+
+    {/*Title mobile*/}
+      <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" />
+
+      <LogoViolet />
+
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {copiedElements.size > 0 && "Tekst został skopiowany do schowka"}
@@ -68,21 +74,20 @@ export default function DonorsPage() {
 
       {/*Title mobile*/}
       <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" />
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[70vh] xl:mt-[90px]">
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
         {/*Title desktop - top right*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
 
-        <LogoViolet />
+       
                 {/*Second violet logo - desktop */}
-                <div className="hidden xl:block">              
+        <div className="hidden xl:block">              
           <Image
             src={LogoVioletImage}
             alt="Bez Kontekstu"
             className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
           />
         </div>
-
-
+        
         {/* Two column layout for desktop */}
         <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Empty space */}
@@ -90,7 +95,7 @@ export default function DonorsPage() {
 
           {/* Right Column - Support message */}
           <div className="xl:col-span-1 xl:flex xl:items-center">
-            <div className="hidden xl:flex flex-col text-left font-mono xl:text-2xl xl:leading-8">
+            <div className="hidden xl:flex flex-col text-left font-mono xl:text-4xl xl:leading-12">
               <p>Twoje wsparcie</p>
               <p>=</p>
               <p>nowe przestrzenie sztuki</p>
@@ -118,7 +123,7 @@ export default function DonorsPage() {
           {/* Left Column - Image */}
           <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
             <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-              <Image src={DonatorsLeftImage} alt="Wsparcie dla fundacji" fill className="object-cover" />
+              <Image src={DonatorsLeftImage} alt="Wsparcie dla fundacji" fill sizes="auto" className="object-cover" />
             </div>
           </div>
 
@@ -248,7 +253,7 @@ export default function DonorsPage() {
           {/* Right Column - Image */}
           <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
             <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-              <Image src={DonatorsRightImage} alt="1% PIT dla fundacji" fill className="object-cover" />
+              <Image src={DonatorsRightImage} alt="1% PIT dla fundacji" fill sizes="auto" className="object-cover" />
             </div>
           </div>
         </div>
