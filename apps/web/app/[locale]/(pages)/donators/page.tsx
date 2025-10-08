@@ -28,6 +28,8 @@ export default function DonorsPage() {
   const titleRef = useRef<HTMLParagraphElement>(null);
   const addressRef = useRef<HTMLParagraphElement>(null);
   const krsRef = useRef<HTMLParagraphElement>(null);
+  const regonRef = useRef<HTMLParagraphElement>(null);
+  const nipRef = useRef<HTMLParagraphElement>(null);
 
   // State to track which elements are showing "copied" message
   const [copiedElements, setCopiedElements] = useState<Set<string>>(new Set());
@@ -62,10 +64,9 @@ export default function DonorsPage() {
   return (
     <div className="justify-between font-mono w-full min-h-screen px-7 xl:flex xl:flex-col">
 
-    {/*Title mobile*/}
-      <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" />
-
-      <LogoViolet />
+      <div className="md:block hidden">
+        <LogoViolet />
+      </div>
 
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
@@ -73,14 +74,14 @@ export default function DonorsPage() {
       </div>
 
       {/*Title mobile*/}
-      <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" />
+      <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" showLogo={false} />
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
         {/*Title desktop - top right*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
 
        
-                {/*Second violet logo - desktop */}
-        <div className="hidden xl:block">              
+        {/*Second violet logo - desktop */}
+        <div className="hidden md:block">              
           <Image
             src={LogoVioletImage}
             alt="Bez Kontekstu"
@@ -111,7 +112,7 @@ export default function DonorsPage() {
       <div className="max-w-4xl xl:max-w-7xl mx-auto relative">
         {/* Support section - Mobile/Tablet */}
         <section className="relative text-sm my-12 mx-5 mt-[100px] py-10 text-left xl:hidden">
-          <div className="w-[90vw] mx-auto flex flex-col sm:text-3xl md:text-4xl lg:text-5xl font-mono">
+          <div className="w-[90vw] mx-auto flex flex-col sm:text-2xl md:text-2xl lg:text-5xl font-mono">
             <p className="leading-8  md:leading-14 ">Twoje wsparcie</p>
             <p className="leading-8  md:leading-14">=</p>
             <p className="leading-8  md:leading-14">nowe przestrzenie sztuki</p>
@@ -119,7 +120,7 @@ export default function DonorsPage() {
         </section>
 
         {/* Info - Desktop 2-column layout */}
-        <div className="relative mb-8 md:mb-18 text-sm z-50 xl:grid xl:grid-cols-2 xl:gap-16 xl:max-w-7xl xl:mx-auto xl:py-20">
+        <div className="relative mb-8 text-sm z-50 xl:grid xl:grid-cols-2 xl:gap-16 xl:max-w-7xl xl:mx-auto xl:py-20">
           {/* Left Column - Image */}
           <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
             <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
@@ -129,15 +130,15 @@ export default function DonorsPage() {
 
           {/* Right Column - Payment details */}
           <div className="xl:col-span-1">
-            <div className="mx-5 mb-4 xl:mx-0">
-              <h3 className="mb-6 md:text-2xl xl:text-3xl">
+            <div className="mx-5 mb-4 md:text-2xl xl:text-3xl xl:mx-0">
+              <h3 className="mb-6">
                 <strong>Przelew jednorazowy</strong>
               </h3>
-              <p className="leading-6 md:text-2xl xl:text-xl xl:leading-8">Przekaż dowolną bezpośrednio na konto fundacji</p>
+              <p className="leading-6 xl:leading-10">Przekaż dowolną bezpośrednio na konto fundacji</p>
             </div>
 
             {/* Transfer details */}
-            <div className="space-y-4 mt-10 mx-5 md:text-2xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
+            <div className="space-y-4 mt-10 mx-5 md:text-xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
               {/* Recipient */}
               <button
                 className={buttonClasses}
@@ -192,7 +193,7 @@ export default function DonorsPage() {
                 <div className="flex justify-between items-end mx-2 my-2">
                   <div>
                     <p className="mb-4">Adres:</p>
-                    <p ref={addressRef} className="w-[160px] md:w-[250px]">
+                    <p ref={addressRef} className="w-[160px] md:w-auto">
                       {copiedElements.has("address") ? "Skopiowano ✓" : "ul. Smulikowskiego 2 500-389 Warszawa"}
                     </p>
                   </div>
@@ -200,21 +201,65 @@ export default function DonorsPage() {
                 </div>
               </button>
 
-              {/* Foundation data */}
-              <div className={containerClasses}>
-                <p className="mb-4 mx-2">Dane fundacji:</p>
-                <div className="space-y-3 mx-2">
-                  <p>KRS 0001102013</p>
-                  <p>REGON 528434787</p>
-                  <p>NIP 525 300 09 32</p>
+          {/* Foundation data */}
+           {/* KRS */}
+              <button
+                className={buttonClasses}
+                onClick={handleCopy("0001102013", "krs")}
+                aria-label="Skopiuj KRS: 0001102013"
+              >
+                <div className="flex justify-between items-end mx-2 my-2">
+                  <div>
+                    <p className="mb-4">KRS:</p>
+                    <p ref={krsRef} className="w-[160px] md:w-[250px]">
+                      {copiedElements.has("krs") ? "Skopiowano ✓" : "0001102013"}
+                    </p>
+                  </div>
+                  <CopyIcon />
                 </div>
-              </div>
+              </button>
+
+
+              {/* REGON */}
+              <button
+                className={buttonClasses}
+                onClick={handleCopy("528434787", "regon")}
+                aria-label="Skopiuj REGON: 528434787"
+              >
+                <div className="flex justify-between items-end mx-2 my-2">
+                  <div>
+                    <p className="mb-4">REGON:</p>
+                    <p ref={regonRef} className="w-[160px] md:w-[250px]">
+                      {copiedElements.has("regon") ? "Skopiowano ✓" : "528434787"}
+                    </p>
+                  </div>
+                  <CopyIcon />
+                </div>
+              </button>
+
+              {/* NIP */}
+              <button
+                className={buttonClasses}
+                onClick={handleCopy("5253000932", "nip")}
+                aria-label="Skopiuj NIP: 5253000932"
+              >
+                <div className="flex justify-between items-end mx-2 my-2">
+                  <div>
+                    <p className="mb-4">NIP:</p>
+                    <p ref={nipRef} className="w-[160px] md:w-[250px]">
+                      {copiedElements.has("nip") ? "Skopiowano ✓" : "5253000932"}
+                    </p>
+                  </div>
+                  <CopyIcon />
+                </div>
+              </button>
+           
             </div>
           </div>
         </div>
 
         {/* 1% PIT - Desktop 2-column layout */}
-        <div className="mb-8 mx-5 relative md:text-2xl xl:grid xl:grid-cols-2 xl:gap-16 xl:max-w-7xl xl:mx-auto xl:py-20">
+        <div className="mb-8 mx-5 relative md:text-xl xl:grid xl:grid-cols-2 xl:gap-16 xl:max-w-7xl xl:mx-auto xl:py-20">
           {/* Left Column - 1% PIT content */}
           <div className="xl:col-span-1">
             <h3 className="mb-4 mx-2 md:text-3xl xl:text-4xl xl:mx-0">
@@ -235,7 +280,7 @@ export default function DonorsPage() {
             </button>
 
             {/* Patronite */}
-            <div className="relative md:text-2xl md:leading-10 xl:py-20">
+            <div className="relative md:text-xl md:leading-10 xl:py-20">
               <h3 className="mb-4 mx-2 md:text-3xl">
                 <strong>Patronite</strong>
               </h3>
