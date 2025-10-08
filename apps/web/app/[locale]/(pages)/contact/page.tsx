@@ -24,7 +24,7 @@ export default function ContactPage() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
       </h1>
     ));
@@ -33,11 +33,12 @@ export default function ContactPage() {
     <div className="justify-between w-full h-screen px-7 xl:flex xl:flex-col">
       {/*Title mobile*/}
       <Header title="KON TA KT" className="xl:hidden" />
+
+       <LogoViolet />
+
       <div className="relative flex xl:justify-center xl:items-center xl:h-full xl:mt-[90px]">
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("KO N")}</div>
-
-        <LogoViolet />
 
         <div className="relative flex flex-col font-mono md:text-xl md:leading-16 xl:text-base xl:leading-5 xl:flex xl:justify-center">
           {/* Adres */}
