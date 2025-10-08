@@ -72,7 +72,9 @@ export default function DonorsPage() {
         {copiedElements.size > 0 && "Tekst został skopiowany do schowka"}
       </div>
 
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[70vh] xl:mt-[90px]">
+      {/*Title mobile*/}
+      <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" />
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
         {/*Title desktop - top right*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
 
@@ -93,7 +95,7 @@ export default function DonorsPage() {
 
           {/* Right Column - Support message */}
           <div className="xl:col-span-1 xl:flex xl:items-center">
-            <div className="hidden xl:flex flex-col text-left font-mono xl:text-2xl xl:leading-8">
+            <div className="hidden xl:flex flex-col text-left font-mono xl:text-4xl xl:leading-12">
               <p>Twoje wsparcie</p>
               <p>=</p>
               <p>nowe przestrzenie sztuki</p>
