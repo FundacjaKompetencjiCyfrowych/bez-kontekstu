@@ -23,17 +23,17 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
       {/* Play Button */}
       <button
         onClick={onPlay}
-        className={`relative w-12 h-12 xl:align-middle rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+        className={`relative md:bg-neutral-600/30 xl:bg-neutral-600/0 w-14 h-14 xl:align-middle rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
           isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 hover:border-purple-400/60"
         }`}
       >
-        <Image src={PlayIcon} alt="Play" width={35} height={35} />
+        <Image src={PlayIcon} alt="Play" width={40} height={40} />
       </button>
 
       {/* Song Name Field */}
       <div className="flex-1 relative">
         <div
-          className={`bg-black/30 border rounded-2xl px-4 py-3 transition-all duration-300 ${
+          className={`bg-black/30 flex items-center h-[60px] md:bg-neutral-600/30 xl:bg-neutral-600/0 border rounded-2xl px-4 py-2 transition-all duration-300 ${
             isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 hover:border-purple-400/60"
           }`}
         >

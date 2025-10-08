@@ -17,7 +17,7 @@ export default function SoundsPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0d0b0e]">
+    <div className="min-h-screen md:w-[90%] mx-auto flex flex-col bg-[#0d0b0e]">
       <Header title="BEATS'N' PIECES" className="xl:hidden" />
       <LogoViolet />
 
@@ -32,8 +32,8 @@ export default function SoundsPage() {
         </div>
 
         {/* Right column - Tracklist */}
-        <div className="xl:w-1/2 flex-1 flex items-center justify-center xl:justify-start xl:self-center xl:mt-20 px-7 xl:px-0">
-        <div className="max-w-4xl w-full xl:w-[85%] md:w-1/2">
+        <div className="xl:w-1/2 w-full flex-1 flex items-center justify-center xl:justify-start xl:self-center xl:mt-20 px-7 xl:px-0">
+        <div className="max-w-4xl w-full xl:w-[85%] ">
             {tracks.map((track, index) => (
               <TrackItem key={index} title={track} isPlaying={currentTrack === index} onPlay={() => handlePlay(index)} />
             ))}
