@@ -6,7 +6,7 @@ import FacebookIcon from "../assets/icons/facebook.png";
 
 export function Footer() {
   return (
-    <footer className="py-6 px-4 w-[90%] mx-auto font-mono text-xs">
+    <footer className="py-6 px-4 md:px-0 w-[90%] md:w-full mx-auto font-mono text-xs">
       <div className="max-w-6xl mx-auto">
         {/* Copyright */}
         <div className="border-t border-[#f5f5f5] mt-4 pt-2 text-center text-[#f5f5f5]">
