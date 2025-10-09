@@ -36,16 +36,24 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
   }
 
   return (
-    <div className="bg-[#0d0b0e] min-h-screen max-w-7xl mx-auto font-mono flex flex-col justify-between">
+    <div className="bg-[#0d0b0e] xl:min-h-screen max-w-7xl mx-auto font-mono flex flex-col xl:justify-between justify-center">
  
       <LogoViolet />
 
-      {/* Main Content */}
-      <div className="relative top-[30px] px-8">
-        {/* Mobile and Tablet Layout (default) */}
+      {/* XL Desktop Back Button - Top */}
+      <div className="hidden xl:block px-8">
+        <div className="relative py-6 md:py-12 xl:ml-8">
+          <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
+            <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
+            <p className="ml-4 md:text-xl">Wstecz</p>
+          </Link>
+        </div>
+      </div>
 
+      {/* Main Content */}
+      <div className="relative px-8">
  {/* Back button */}
-            <div className="relative xl:hidden w-fit px-4 py-6 my-[50px]">
+            <div className="relative xl:hidden w-fit px-4 my-[50px]">
               <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
                 <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-3" />
                 <p className="ml-2 text-sm">Wstecz</p>
@@ -87,7 +95,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
           </div>
 
           {/* Social Media Section */}
-          <div className="mb-8 flex flex-row gap-2 justify-between md:justify-start">
+          <div className="mb-8 flex flex-row gap-2 justify-between">
             <div className="flex flex-col gap-2">
               <h3 className="text-base md:text-xl mb-4">social media:</h3>
             </div>
@@ -134,8 +142,8 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
         </div>
 
         {/* Mobile and Tablet Navigation */}
-        <div className="xl:hidden relative px-8 text-sm pt-10 z-10">
-          <div className="flex justify-around items-center">
+        <div className="xl:hidden relative text-sm z-10">
+          <div className="flex justify-between xl:justify-around items-center">
             {/* Previous Cooperator */}
             <div>
               {getPreviousCooperatorId(id) ? (
@@ -177,13 +185,6 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
         <div className="px-8 hidden xl:flex xl:gap-12 xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Biography */}
           <div className="w-1/2 flex flex-col justify-center">
-           
-<div className="relative py-6 md:py-12">
-        <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
-          <p className="ml-4 md:text-xl">Wstecz</p>
-        </Link>
-      </div>
 
             {/* Name Section */}
             <div className="mb-8">
@@ -250,13 +251,13 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
           <div className="w-1/2 flex flex-col justify-center">
             {/* Portrait Section */}
             <div className="mb-8">
-              <div className="relative w-full h-[400px] overflow-hidden">
+              <div className="relative w-full h-[500px] overflow-hidden">
                 {cooperatorImage ? (
                   <Image
                     src={cooperatorImage}
                     alt={`Image of ${cooperator.name}`}
-                    width={800}
-                    height={500}
+                    // width={800}
+                    // height={500}
                     className="w-full h-full object-contain"
                     sizes="(max-width: 1280px) 0px, 50vw"
                     priority={cooperator.id <= 2}
@@ -306,10 +307,10 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
               </div>
             </div>
           </div>
-        </div>
+        </div>        
       </div>
 
-      <Footer />
+        <Footer />
     </div>
   );
 }
