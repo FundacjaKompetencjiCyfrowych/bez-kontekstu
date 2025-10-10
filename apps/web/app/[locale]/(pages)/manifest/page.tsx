@@ -16,7 +16,7 @@ export default function ManifestPage() {
     ));
 
   return (
-    <div className="flex flex-col justify-between w-full min-h-screen px-7 xl:flex xl:flex-col">
+    <div className="flex flex-col justify-between w-full min-h-screen px-5 xl:flex xl:flex-col">
 
        {/*Title mobile*/}
        <Header title="MAN IF EST" className="xl:hidden" showLogo={false} />
@@ -38,7 +38,7 @@ export default function ManifestPage() {
 
  
         {/* Two column layout for desktop */}
-        <div className="relative xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
+        <div className="relative top-[10vh] lg:top-0 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Quote */}
           <div className="md:w-[60%] md:mx-auto xl:mx-0 xl:w-[80%] xl:col-span-1 flex flex-col font-mono md:text-xl md:leading-16 xl:ml-auto">
             <div className="md:mx-4">
@@ -72,7 +72,7 @@ export default function ManifestPage() {
         {/* Beyond Schema */}
         <section className="py-40 xl:mt-20 xl:grid xl:grid-cols-2 xl:gap-16 xl:items-center">
           {/* Left Column - Titles */}
-          <div className="md:mb-30 xl:mb-0 xl:col-span-1 xl:flex xl:items-center">
+          <div className="my-30 xl:my-0 xl:col-span-1 xl:flex xl:items-center">
             <div className="flex flex-col items-center xl:font-mono md:text-5xl text-3xl xl:text-4xl md:my-10 xl:items-end xl:my-0 xl:ml-auto">
               <h2 className="mb-4 xl:hidden md:text-5xl">POZA SCHEMATEM</h2>
               <p className="mb-4 hidden xl:inline-block xl:font-bold">Poza schematem</p>
@@ -102,7 +102,7 @@ export default function ManifestPage() {
         </section>
 
         {/* Our Logo */}
-        <section className="py-20 xl:py-40 ml-20 text-right mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:ml-0 xl:mx-0">
+        <section className="pb-20 xl:pb-40 ml-20 text-right mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:ml-0 xl:mx-0">
           {/* Left Column - Empty for spacing */}
           <div className="xl:col-span-1">
             <h1 className="mb-12 xl:text-6xl">NASZE LOGO</h1>
@@ -122,7 +122,7 @@ export default function ManifestPage() {
         </section>
 
         {/* Our Goal */}
-        <section className="py-20 xl:py-40 ml-3 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-center xl:ml-0 xl:mx-0">
+        <section className="py-10 md:py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-center xl:ml-0 xl:mx-0">
           {/* Left Column - Image */}
           <div className="xl:col-span-1 xl:justify-self-center hidden xl:block">
             <div className="relative w-full h-96 xl:h-[600px] xl:w-[500px] mt-8 xl:mt-0">
@@ -142,7 +142,7 @@ export default function ManifestPage() {
         </section>
 
         {/* Our Vision */}
-        <section className="py-20 xl:py-40 text-right mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:mx-0">
+        <section className="py-10 md:py-20 xl:py-40 text-right mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:mx-0">
           {/* Left Column - Empty for spacing */}
           <div className="xl:col-span-1">
             <h1 className="mb-12 xl:text-6xl">NASZA WIZJA</h1>
@@ -158,7 +158,7 @@ export default function ManifestPage() {
         </section>
 
         {/* Our Cooperation */}
-        <section className="py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:mx-0">
+        <section className="py-10 md:py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:mx-0">
           {/* Left Column - Title */}
           <div className="xl:col-span-1"></div>
 
@@ -184,7 +184,7 @@ export default function ManifestPage() {
         </section>
 
         {/* Artists */}
-        <section className="text-center py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:mx-0 xl:text-left">
+        <section className="text-center py-10 md:py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:mx-0 xl:text-left">
           {/* Left Column - Title and intro */}
           <div className="xl:col-span-1 xl:text-right ">
             <h1 className="mb-12 xl:text-6xl">ARTYŚCI</h1>
@@ -223,7 +223,7 @@ export default function ManifestPage() {
         </section>
 
         {/* Fusion */}
-        <section className="py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-center xl:mx-0">
+        <section className="py-10 md:py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-center xl:mx-0">
           {/* Left Column - Image */}
           <div className="xl:col-span-1 xl:flex xl:justify-center hidden">
             <div className="relative w-full h-96 xl:h-[600px] xl:w-[500px] mt-8 xl:mt-0">

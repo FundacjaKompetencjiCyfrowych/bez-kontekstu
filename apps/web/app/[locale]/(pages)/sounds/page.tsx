@@ -32,7 +32,7 @@ export default function SoundsPage() {
         </div>
 
         {/* Right column - Tracklist */}
-        <div className="xl:w-1/2 w-full flex-1 flex lg:mt-20 items-center justify-center xl:justify-start xl:self-center xl:mt-20 px-7 xl:px-0">
+        <div className="xl:w-1/2 w-full flex-1 flex lg:mt-20 items-end md:items-center justify-center xl:justify-start xl:self-center xl:mt-20 px-7 xl:px-0">
         <div className="max-w-4xl w-full xl:w-[85%] ">
             {tracks.map((track, index) => (
               <TrackItem key={index} title={track} isPlaying={currentTrack === index} onPlay={() => handlePlay(index)} />

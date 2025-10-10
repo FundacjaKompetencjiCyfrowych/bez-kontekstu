@@ -62,7 +62,7 @@ export default function DonorsPage() {
   };
 
   return (
-    <div className="flex flex-col justify-between font-mono w-full min-h-screen px-7 xl:flex xl:flex-col">
+    <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col">
 
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
@@ -108,8 +108,8 @@ export default function DonorsPage() {
       {/* Rest of content */}
       <div className="max-w-4xl xl:max-w-7xl mx-auto relative">
         {/* Support section - Mobile/Tablet */}
-        <section className="relative text-sm my-12 mx-5 mt-[100px] py-10 text-left xl:hidden">
-          <div className="w-[90vw] mx-auto flex flex-col sm:text-2xl md:text-2xl lg:text-5xl font-mono">
+        <section className="relative text-sm my-12 mx-3 mt-[100px] py-10 text-left xl:hidden">
+          <div className="pl-3 mx-auto flex flex-col sm:text-2xl md:text-2xl lg:text-5xl font-mono">
             <p className="leading-8  md:leading-14 ">Twoje wsparcie</p>
             <p className="leading-8  md:leading-14">=</p>
             <p className="leading-8  md:leading-14">nowe przestrzenie sztuki</p>

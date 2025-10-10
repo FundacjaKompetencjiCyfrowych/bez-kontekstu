@@ -98,7 +98,7 @@ export function Navigation() {
             {/* Animated menu */}
             <div
               className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
-                isHomePage ? (isMenuOpen ? "top-[470px]" : "top-[150px] md:top-[250px]") : isMenuOpen ? "top-[470px]" : "top-[300px]"
+                isHomePage ? (isMenuOpen ? "top-[470px]" : "top-[150px] md:top-[250px]") : isMenuOpen ? "top-[470px]" : "top-[25vh]"
               }`}
             >
               {/* Gray bottom line for menu open button */}

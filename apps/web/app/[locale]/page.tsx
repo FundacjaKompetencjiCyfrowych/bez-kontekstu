@@ -53,7 +53,7 @@ export default function Home() {
         </div>
 
       {/* Hero Section */}
-      <section className="relative md:top-[20px] xl:top-[100px] overflow-hidden h-[60vh] xl:h-[80vh] flex flex-col justify-between mx-8 z-10">
+      <section className="relative top-[50px] xl:top-[100px] overflow-hidden h-[65vh] xl:h-[80vh] flex flex-col justify-between mx-6 z-10">
     
          {/*Title */}
          <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ")}</div>
@@ -70,7 +70,7 @@ export default function Home() {
 
       <div className="relative xl:top-40 px-5 xl:px-0"> 
         {/* MANIFEST Section*/}
-        <section className="overflow-hidden h-screen md:h-[70vh] lg:h-[80vh] md:mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around mx-8">
+        <section className="overflow-hidden h-screen md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
 
         {/* Violet logo - sticky for all sections from Manifest */}
         <Image
@@ -115,7 +115,7 @@ export default function Home() {
         </section>
 
         {/* PROJECTS Section */}
-        <section className="relative overflow-hidden h-screen md:h-[70vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around mx-8 bg-transparent">
+        <section className="relative overflow-hidden h-[70vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent">
           <div className="relative flex flex-col items-end justify-start z-10">
             {renderResponsiveTitle(["PRO", "JEK", "TY"], "PR O", "right")}
           </div>
@@ -125,7 +125,6 @@ export default function Home() {
           </div>
 
           <div className="relative flex justify-center items-center transform z-10">
-            {" "}
             <Link href={"/projects"} className="w-full md:w-full lg:w-auto">
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 Sprawdź projekty
@@ -138,7 +137,7 @@ export default function Home() {
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative h-screen md:mt-[150px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center mx-8 bg-transparent">
+        <section className="relative h-screen md:mt-[150px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center bg-transparent">
           <div className="absolute xl:right-0 top-[50px] xl:top-0 flex flex-col z-10">
             <div className="">{renderResponsiveTitle(["WSP", "ÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
           </div>
@@ -169,9 +168,9 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="relative md:top-[50px] xl:top-[0px] xl:block xl:mx-auto flex justify-center items-center transform z-10">
+          <div className="relative mt-[50px] xl:mt-[0px] flex justify-center items-center transform z-10">
             <Link href={"/cooperators"} className="w-full md:w-full lg:w-auto">
-              <Button variant="dark" size="sm" className="w-3/4 md:w-full lg:w-auto">
+              <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 Poznaj nasz zespół
               </Button>
             </Link>
@@ -182,7 +181,7 @@ export default function Home() {
         </section>
 
         {/* DONATORS Section */}
-        <section className="relative xl:mb-20 h-[70vh] md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly mx-8 bg-transparent">
+        <section className="relative xl:mb-20 h-[50vh] md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent">
           <div className=" flex flex-col items-end ">
             <div>{renderResponsiveTitle(["DLA", "DARCZY", "ŃCOW"], "DL A", "right")}</div>
           </div>
@@ -193,9 +192,9 @@ export default function Home() {
             <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
 
-          <div className="flex justify-center items-center transform z-10">
+          <div className="relative flex justify-center items-center transform z-10">
             <Link href={"/donators"} className="w-full md:w-full lg:w-auto">
-              <Button variant="dark" size="sm" className="w-3/4 md:w-full lg:w-auto">
+              <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 Wesprzyj nas
               </Button>
             </Link>
