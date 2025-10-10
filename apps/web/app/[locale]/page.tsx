@@ -68,9 +68,9 @@ export default function Home() {
         />
       </section>
 
-      <div className="relative xl:top-40"> 
+      <div className="relative xl:top-40 px-5 xl:px-0"> 
         {/* MANIFEST Section*/}
-        <section className="overflow-hidden h-screen md:h-[70vh] md:mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around mx-8">
+        <section className="overflow-hidden h-screen md:h-[70vh] lg:h-[80vh] md:mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around mx-8">
 
         {/* Violet logo - sticky for all sections from Manifest */}
         <Image
@@ -83,7 +83,7 @@ export default function Home() {
             {renderResponsiveTitle(["MAN", "IF", "EST"], "MA N I", "right")}
           </div>
 
-          <div className="w-[75vw] md:w-[85vw] lg:w-[50vw] xl:w-[60vw] xl:text-xl leading-6 xl:leading-10 mx-auto z-10 text-center text-md font-mono">
+          <div className="w-[75vw] lg:w-[65vw] xl:w-[60vw] lg:text-xl lg:leading-10 xl:text-xl leading-6 xl:leading-10 mx-auto z-10 text-center text-md font-mono">
             <p className="mb-4">
               Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty.
             </p>
@@ -138,7 +138,7 @@ export default function Home() {
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative h-screen md:mt-[150px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center mx-8 bg-transparent">
+        <section className="relative h-screen md:mt-[150px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center mx-8 bg-transparent">
           <div className="absolute xl:right-0 top-[50px] xl:top-0 flex flex-col z-10">
             <div className="">{renderResponsiveTitle(["WSP", "ÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
           </div>
@@ -162,7 +162,7 @@ export default function Home() {
                 {/* Gradient overlay */}
                 <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent"></div>
                 {/* Name */}
-                <h3 className="relative z-10 text-sm text-white">
+                <h3 className="relative z-10 text-sm md:text-base text-white">
                   {member.name} {member.surname}
                 </h3>
               </div>

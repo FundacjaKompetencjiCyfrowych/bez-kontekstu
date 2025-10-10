@@ -32,7 +32,7 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col justify-between w-full h-screen px-7 xl:flex xl:flex-col">
       {/*Title mobile*/}
-      <Header title="KON TA KT" className="xl:hidden" />
+      <Header title="KON TA KT" className="xl:hidden" showLogo={false} />
 
        <LogoViolet />
 
@@ -40,10 +40,10 @@ export default function ContactPage() {
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("KO N")}</div>
 
-        <div className="relative flex flex-col font-mono md:text-xl md:leading-16 xl:text-base xl:leading-5 xl:flex xl:justify-center">
+        <div className="relative flex flex-col font-mono md:text-xl md:leading-12 xl:text-base xl:leading-5 xl:flex xl:justify-center">
           {/* Adres */}
           <div className="xl:text-xl md:mx-8">
-            <ul className="my-2 space-y-2">
+            <ul className="space-y-2">
               <li className="flex items-center">
                 <div className="mr-3 md:mr-6">
                   <ContactIcon src={EmailIcon} alt="Email" />

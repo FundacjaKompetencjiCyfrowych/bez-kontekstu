@@ -44,14 +44,14 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
   return (
     <div
       id={sliderId}
-      className="fixed inset-0 z-50 bg-black bg-opacity-95 flex flex-col"
+      className="fixed inset-0 z-50 bg-black bg-opacity-95 flex flex-col overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby={mainImageId}
       aria-describedby={thumbnailsId}
     >
       {/* Header with close button */}
-      <div className="flex justify-end p-4">
+      <div className="absolute right-4 p-4 z-10">
         <button
           id={closeButtonId}
           onClick={onClose}
@@ -63,7 +63,7 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
       </div>
 
       {/* Main image container */}
-      <div className="flex-1 flex items-center justify-center relative px-4">
+      <div className="flex-1 flex items-center justify-center relative px-4 min-h-0 lg:min-h-[60vh]">
         {/* Previous arrow */}
         <button
           id={prevButtonId}
@@ -108,10 +108,10 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
       </div>
 
       {/* Thumbnails */}
-      <div className="p-4 pb-6">
+      <div className="p-4 pb-6 flex-shrink-0">
         <div
           id={thumbnailsId}
-          className="flex justify-center gap-2 overflow-x-auto overflow-y-hidden py-2"
+          className="flex justify-center gap-2 overflow-x-auto overflow-y-hidden py-2 max-w-full"
           role="tablist"
           aria-label="Image thumbnails"
         >

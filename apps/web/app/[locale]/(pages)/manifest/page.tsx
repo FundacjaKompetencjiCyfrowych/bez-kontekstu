@@ -16,16 +16,13 @@ export default function ManifestPage() {
     ));
 
   return (
-    <div className="justify-between w-full min-h-screen px-7 xl:flex xl:flex-col">
-
-      <div className="md:block hidden">
-        <LogoViolet />
-      </div>
+    <div className="flex flex-col justify-between w-full min-h-screen px-7 xl:flex xl:flex-col">
 
        {/*Title mobile*/}
        <Header title="MAN IF EST" className="xl:hidden" showLogo={false} />
+       <LogoViolet />
 
-      <div className="relative flex md:mt-[200px] xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
 
@@ -248,14 +245,14 @@ export default function ManifestPage() {
                 I choć stawiamy na eksperyment, jedno pozostaje niezmienne:{" "}
               </p>
 
-              <p className="text-center text-lg md:text-2xl md:w-[90vw] md:leading-10 md:mx-auto xl:text-left xl:leading-8 xl:w-full">
+              <p className="text-center text-lg md:text-2xl md:w-[50vw] md:leading-10 md:mx-auto xl:text-left xl:leading-8 xl:w-full">
                 <strong>Teatr jest miejscem, które przyjmie wszystko — każdą ideę, każdą emocję, każdy impuls do zmiany.</strong>
               </p>
             </div>
           </div>
         </section>
+            </div>
         <Footer />
-      </div>
     </div>
   );
 }

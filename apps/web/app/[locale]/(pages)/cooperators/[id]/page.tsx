@@ -36,7 +36,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
   }
 
   return (
-    <div className="bg-[#0d0b0e] xl:min-h-screen max-w-7xl mx-auto font-mono flex flex-col xl:justify-between justify-center">
+    <div className="bg-[#0d0b0e] px-5 xl:min-h-screen max-w-7xl mx-auto font-mono flex flex-col xl:justify-between justify-center">
  
       <LogoViolet />
 

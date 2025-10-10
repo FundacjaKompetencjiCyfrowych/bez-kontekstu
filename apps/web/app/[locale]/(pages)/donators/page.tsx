@@ -62,11 +62,7 @@ export default function DonorsPage() {
   };
 
   return (
-    <div className="justify-between font-mono w-full min-h-screen px-7 xl:flex xl:flex-col">
-
-      <div className="md:block hidden">
-        <LogoViolet />
-      </div>
+    <div className="flex flex-col justify-between font-mono w-full min-h-screen px-7 xl:flex xl:flex-col">
 
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
@@ -75,6 +71,7 @@ export default function DonorsPage() {
 
       {/*Title mobile*/}
       <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" showLogo={false} />
+      <LogoViolet />
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
         {/*Title desktop - top right*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
@@ -302,9 +299,8 @@ export default function DonorsPage() {
             </div>
           </div>
         </div>
-
-        <Footer />
-      </div>
+</div>   
+       <Footer />
     </div>
   );
 }
