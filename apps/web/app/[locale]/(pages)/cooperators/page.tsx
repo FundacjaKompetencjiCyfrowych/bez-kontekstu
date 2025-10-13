@@ -95,7 +95,7 @@ export default function CooperatorsPage() {
                       )}
 
                       {/* Gradient overlay for better text readability */}
-                      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
+                      <div className="absolute bottom-0 left-0 right-0 h-70 bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
 
                       {/* Content overlay */}
                       <div className="absolute bottom-0 left-0 p-3 z-10 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl text-left">

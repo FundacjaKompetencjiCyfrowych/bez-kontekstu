@@ -1,4 +1,8 @@
-// Project data structure and mock data
+
+import CopyOfCopyOfNpc1 from "@/app/assets/images/copy_of_copy_of_npc/1.png";
+import CopyOfCopyOfNpc2 from "@/app/assets/images/copy_of_copy_of_npc/2.png";
+import CopyOfCopyOfNpc3 from "@/app/assets/images/copy_of_copy_of_npc/3.png";
+import CopyOfCopyOfNpc4 from "@/app/assets/images/copy_of_copy_of_npc/4.png";
 export interface Project {
   id: number;
   name: string;
@@ -133,10 +137,10 @@ export function getProjectImages(projectName: string): string[] {
   // Define known project images based on existing folders
   const projectImageMap: { [key: string]: string[] } = {
     copy_of_copy_of_npc: [
-      "/api/images/copy_of_copy_of_npc/1.png",
-      "/api/images/copy_of_copy_of_npc/2.png",
-      "/api/images/copy_of_copy_of_npc/3.png",
-      "/api/images/copy_of_copy_of_npc/4.png",
+      CopyOfCopyOfNpc1.src,
+      CopyOfCopyOfNpc2.src,
+      CopyOfCopyOfNpc3.src,
+      CopyOfCopyOfNpc4.src,
     ],
     prawdy_za_grosz: [],
     gangliony_gangliony: [],
