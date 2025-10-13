@@ -18,17 +18,17 @@ export default function ManifestPage() {
   return (
     <div className="flex flex-col justify-between w-full min-h-screen px-2 md:px-5 xl:flex xl:flex-col">
 
-       {/*Title mobile*/}
-       <Header title="MAN IF EST" className="xl:hidden" showLogo={false} />
-       <LogoViolet />
+      {/*Title mobile*/}
+      <Header title="MAN IF EST" className="xl:hidden" showLogo={false} />
+      <LogoViolet />
 
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
+      <div className="relative flex md:landscape:justify-center xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
 
-      
+
         {/*Second violet logo - desktop */}
-        <div className="hidden xl:block">              
+        <div className="hidden xl:block">
           <Image
             src={LogoVioletImage}
             alt="Bez Kontekstu"
@@ -36,15 +36,15 @@ export default function ManifestPage() {
           />
         </div>
 
- 
+
         {/* Two column layout for desktop */}
         <div className="relative top-[10vh] lg:top-0 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Quote */}
           <div className="md:w-[60%] md:mx-auto xl:mx-0 xl:w-[80%] xl:col-span-1 flex flex-col font-mono md:text-xl md:leading-16 xl:ml-auto">
             <div className="md:mx-4">
-              <div className="pl-1 flex flex-row items-start z-100 relative xl:justify-end">
+              <div className="mt-0 md:landscape:mt-20 xl:landscape:mt-0 flex flex-row items-start z-100 relative xl:justify-end">
                 <div className="text-7xl font-mono rotate-180 md:mr-4">„</div>
-                <div className="xl:text-right text-lg md:text-2xl xl:text-3xl xl:leading-12 font-mono mr-4 mt-1">
+                <div className="xl:text-right text-lg md:text-2xl xl:text-3xl xl:leading-12 font-mono mr-4">
                   Dobry wpływ wcale nie istnieje, panie Gray.<br />
                   Ze stanowiska naukowego każdy wpływ jest <strong> niemoralny.</strong>
                 </div>
@@ -68,7 +68,7 @@ export default function ManifestPage() {
       </div>
 
       {/* Rest of content */}
-      <div className="max-w-4xl xl:max-w-7xl mx-auto relative">
+      <div className="xl:max-w-7xl mx-auto relative">
         {/* Beyond Schema */}
         <section className="py-20 md:py-40 xl:mt-20 xl:grid xl:grid-cols-2 xl:gap-16 xl:items-center">
           {/* Left Column - Titles */}
@@ -86,7 +86,7 @@ export default function ManifestPage() {
           <div className="xl:col-span-1">
             <div className="flex flex-col text-left font-mono mx-5 md:text-xl md:leading-8 xl:leading-10 xl:mx-0 xl:mt-0">
               <p>
-             <strong> Fundacja Bez Kontekstu</strong> to przestrzeń, w której <strong>fuzja sztuki i nowoczesnych technologii</strong> wyznacza nowe horyzonty.
+                <strong> Fundacja Bez Kontekstu</strong> to przestrzeń, w której <strong>fuzja sztuki i nowoczesnych technologii</strong> wyznacza nowe horyzonty.
               </p>
               <p className="mt-20 mb-5 xl:mt-0">
                 <strong>
@@ -251,8 +251,8 @@ export default function ManifestPage() {
             </div>
           </div>
         </section>
-            </div>
-        <Footer />
+      </div>
+      <Footer />
     </div>
   );
 }
