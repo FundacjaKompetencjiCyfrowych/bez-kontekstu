@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
-import SoundIcon from "@/app/assets/icons/sound_button.png";
 import Logo from "@/app/assets/images/logo.png";
 import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
@@ -47,17 +46,17 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto bg-[#0d0b0e]">
-        {/*Title mobile*/}
-        <div className="mx-4">
-        <Header title="STRONA GŁÓ WNA" className="xl:hidden" showLogo={false} />
-        </div>
+      {/*Title mobile*/}
+      <div className="mx-4">
+        <Header title="STRONA GŁÓ WNA" className="xl:hidden" showLogo={false} hideTitleOnMobile={true} />
+      </div>
 
       {/* Hero Section */}
-      <section className="relative top-[50px] xl:top-[100px] overflow-hidden h-[65vh] xl:h-[80vh] flex flex-col justify-between mx-6 z-10">
-    
-         {/*Title */}
-         <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ")}</div>
-         <div className="block absolute left-0 bottom-0">{titleCutWord("K O N TEKSTU")}</div>
+      <section className="relative top-[50px] xl:top-[100px] overflow-hidden h-[65vh] sm:landscape:h-[200vh] md:landscape:h-[100vh] lg:landscape:h-[80vh] xl:h-[80vh] flex flex-col justify-between mx-6 z-10">
+
+        {/*Title */}
+        <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ")}</div>
+        <div className="block absolute left-0 bottom-0">{titleCutWord("K O N TEKSTU")}</div>
 
         {/* Logo - white */}
         <Image
@@ -68,12 +67,12 @@ export default function Home() {
         />
       </section>
 
-      <div className="relative xl:top-40 px-5 xl:px-0"> 
+      <div className="xl:top-40 px-5 xl:px-0">
         {/* MANIFEST Section*/}
-        <section className="overflow-hidden h-screen md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
+        <section className="h-screen md:landscape:h-[150vh] lg:landscape:h-[80vh] md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
 
-        {/* Violet logo - sticky for all sections from Manifest */}
-        <Image
+          {/* Violet logo - sticky for all sections from Manifest */}
+          <Image
             src={LogoVioletImage}
             alt="Bez Kontekstu"
             className="hidden md:block md:absolute blur-[8px] left-1/2 transform -translate-x-1/2 md:w-160 md:h-160 xl:w-200 xl:h-200 opacity-25"
@@ -94,9 +93,11 @@ export default function Home() {
               Poprzez łączenie immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnychwprowadzamy
               odbiorców w świat, gdzie teatr spotyka się z cyfrową rzeczywistością.
             </p>
-            
-            <div className="flex justify-center items-center transform z-10">
-            <Link href={"/manifest"} className="w-full md:w-full lg:w-auto">
+
+
+          </div>
+          <div className="flex justify-center items-center transform z-10">
+            <Link href={"/manifest"} className="w-[90%] lg:w-auto">
               <Button
                 variant="dark"
                 size="sm"
@@ -106,17 +107,17 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          </div>
 
-          
+
+
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           {renderResponsiveTitle("", "F EST", "left")}
         </section>
 
         {/* PROJECTS Section */}
-        <section className="relative overflow-hidden h-[70vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent">
-          <div className="relative flex flex-col items-end justify-start z-10">
+        <section className="h-[70vh] md:landscape:h-[200vh] lg:landscape:h-[80vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent">
+          <div className="flex flex-col items-end">
             {renderResponsiveTitle(["PRO", "JEK", "TY"], "PR O", "right")}
           </div>
 
@@ -125,7 +126,7 @@ export default function Home() {
           </div>
 
           <div className="relative flex justify-center items-center transform z-10">
-            <Link href={"/projects"} className="w-full md:w-full lg:w-auto">
+            <Link href={"/projects"} className="w-[90%] lg:w-auto">
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 Sprawdź projekty
               </Button>
@@ -137,39 +138,39 @@ export default function Home() {
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative h-screen md:mt-[150px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center bg-transparent">
-          <div className="absolute xl:right-0 top-[50px] xl:top-0 flex flex-col z-10">
-            <div className="">{renderResponsiveTitle(["WSP", "ÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
+        <section className="py-20 min-h-screen lg:min-h-[1200px] xl:min-h-[1100px] xl:mb-20 flex flex-col justify-between bg-transparent">
+          {renderResponsiveTitle(["WSP", "ÓŁ", "PRACE"], "WSP Ó Ł", "right")}
+
+          <div className="flex">
+            <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2/1] z-10 place-items-center content-center">
+              {teamMembers.map((member) => (
+                <div
+                  key={member.id}
+                  className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-square xl:w-[400px] xl:h-[300px] flex flex-col items-start justify-end p-3 overflow-hidden"
+                >
+                  {/* Cooperator image */}
+                  {member.image && (
+                    <Image
+                      src={member.image}
+                      alt={`${member.name} ${member.surname}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1280px) 50vw, 400px"
+                    />
+                  )}
+                  {/* Gradient overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  {/* Name */}
+                  <h3 className="relative z-10 text-sm md:text-base text-white">
+                    {member.name} {member.surname}
+                  </h3>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
-            {teamMembers.map((member) => (
-              <div
-                key={member.id}
-                className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-square xl:w-[400px] xl:h-[300px] flex flex-col items-start justify-end p-3 overflow-hidden"
-              >
-                {/* Cooperator image */}
-                {member.image && (
-                  <Image
-                    src={member.image}
-                    alt={`${member.name} ${member.surname}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1280px) 50vw, 400px"
-                  />
-                )}
-                {/* Gradient overlay */}
-                <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent"></div>
-                {/* Name */}
-                <h3 className="relative z-10 text-sm md:text-base text-white">
-                  {member.name} {member.surname}
-                </h3>
-              </div>
-            ))}
-          </div>
-
-          <div className="relative mt-[50px] xl:mt-[0px] flex justify-center items-center transform z-10">
-            <Link href={"/cooperators"} className="w-full md:w-full lg:w-auto">
+          <div className="flex justify-center items-center transform z-10">
+            <Link href={"/cooperators"} className="w-[90%] lg:w-auto">
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 Poznaj nasz zespół
               </Button>
@@ -177,11 +178,11 @@ export default function Home() {
           </div>
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-          <div className="absolute bottom-0 left-0">{renderResponsiveTitle("", "P RACE", "left")}</div>
+          {renderResponsiveTitle("", "P RACE", "left")}
         </section>
 
         {/* DONATORS Section */}
-        <section className="relative xl:mb-20 h-[50vh] md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent">
+        <section className="h-[80vh] md:landscape:h-[150vh] lg:landscape:h-[80vh] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-between bg-transparent">
           <div className=" flex flex-col items-end ">
             <div>{renderResponsiveTitle(["DLA", "DARCZY", "ŃCOW"], "DL A", "right")}</div>
           </div>
@@ -192,20 +193,19 @@ export default function Home() {
             <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
 
-          <div className="relative flex justify-center items-center transform z-10">
-            <Link href={"/donators"} className="w-full md:w-full lg:w-auto">
+          <div className="flex justify-center items-center md:landscape:mt-20 lg:landscape:mt-0">
+            <Link href={"/donators"} className="w-[90%] lg:w-auto">
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 Wesprzyj nas
               </Button>
             </Link>
           </div>
 
-          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
-          <div>{renderResponsiveTitle("", "DAR CZYŃCÓW", "left")}</div>
+          {renderResponsiveTitle("", "DAR CZYŃCÓW", "left")}
         </section>
 
-         <Footer /> 
-      </div>    
+        <Footer />
+      </div>
     </div>
   );
 }

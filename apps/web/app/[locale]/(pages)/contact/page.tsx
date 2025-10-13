@@ -33,8 +33,7 @@ export default function ContactPage() {
     <div className="flex flex-col justify-between w-full h-screen px-2 md:px-5 xl:flex xl:flex-col">
       {/*Title mobile*/}
       <Header title="KON TA KT" className="xl:hidden" showLogo={false} />
-
-       <LogoViolet />
+      <LogoViolet />
 
       <div className="relative px-5 md:px-0 flex xl:justify-center xl:items-center xl:h-full xl:mt-[90px]">
         {/*Title desktop*/}
@@ -43,7 +42,7 @@ export default function ContactPage() {
         <div className="relative flex flex-col font-mono md:text-xl md:leading-12 xl:text-base xl:leading-5 xl:flex xl:justify-center">
           {/* Adres */}
           <div className="xl:text-xl md:mx-8">
-            <ul className="space-y-2">
+            <ul className="space-y-6">
               <li className="flex items-center">
                 <div className="mr-3 md:mr-6">
                   <ContactIcon src={EmailIcon} alt="Email" />
@@ -68,7 +67,7 @@ export default function ContactPage() {
 
           {/* Socials */}
           <div className="flex xl:text-xl md:mx-8">
-            <ul className=" my-6 space-y-2">
+            <ul className=" my-6 space-y-6">
               <li className="flex items-center">
                 <div className="mr-3 md:mr-6">
                   <ContactIcon src={InstagramIcon} alt="Instagram" />
