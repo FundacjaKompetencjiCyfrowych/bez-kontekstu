@@ -16,7 +16,7 @@ export default function ManifestPage() {
     ));
 
   return (
-    <div className="flex flex-col justify-between w-full min-h-screen px-5 xl:flex xl:flex-col">
+    <div className="flex flex-col justify-between w-full min-h-screen px-2 md:px-5 xl:flex xl:flex-col">
 
        {/*Title mobile*/}
        <Header title="MAN IF EST" className="xl:hidden" showLogo={false} />
@@ -70,7 +70,7 @@ export default function ManifestPage() {
       {/* Rest of content */}
       <div className="max-w-4xl xl:max-w-7xl mx-auto relative">
         {/* Beyond Schema */}
-        <section className="py-40 xl:mt-20 xl:grid xl:grid-cols-2 xl:gap-16 xl:items-center">
+        <section className="py-20 md:py-40 xl:mt-20 xl:grid xl:grid-cols-2 xl:gap-16 xl:items-center">
           {/* Left Column - Titles */}
           <div className="my-30 xl:my-0 xl:col-span-1 xl:flex xl:items-center">
             <div className="flex flex-col items-center xl:font-mono md:text-5xl text-3xl xl:text-4xl md:my-10 xl:items-end xl:my-0 xl:ml-auto">
@@ -85,7 +85,7 @@ export default function ManifestPage() {
           {/* Right Column - Description */}
           <div className="xl:col-span-1">
             <div className="flex flex-col text-left font-mono mx-5 md:text-xl md:leading-8 xl:leading-10 xl:mx-0 xl:mt-0">
-              <p className="mb-5">
+              <p>
              <strong> Fundacja Bez Kontekstu</strong> to przestrzeń, w której <strong>fuzja sztuki i nowoczesnych technologii</strong> wyznacza nowe horyzonty.
               </p>
               <p className="mt-20 mb-5 xl:mt-0">
