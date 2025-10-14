@@ -27,6 +27,7 @@ export function Navigation() {
   const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
 
   const isHomePage = routePath === "/";
+  const isSoundPage = routePath === "/sounds";
 
   const toggleLanguage = () => {
     setLocale(locale === "pl" ? "en" : "pl");
@@ -95,7 +96,13 @@ export function Navigation() {
           <div className="xl:hidden w-full top-0 flex justify-center">
             {/* Animated menu */}
             <div
-              className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isHomePage ? (isMenuOpen ? "top-[470px] md:landscape:top-[330px] lg:landscape:top-[470px]" : "top-[150px] md:top-[250px] md:landscape:top-[290px] lg:landscape:top-[38vh]") : isMenuOpen ? "top-[470px]" : "top-[25vh] md:landscape:top-[290px] lg:landscape:top-[38vh]"
+              className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isHomePage
+                ? (isMenuOpen
+                  ? "top-[470px] md:landscape:top-[330px] lg:landscape:top-[470px]"
+                  : `top-[150px] md:top-[250px] md:landscape:top-[290px] lg:landscape:top-[38vh]`)
+                : (isMenuOpen
+                  ? "top-[470px]"
+                  : `top-[25vh] ${isSoundPage ? "md:landscape:top-[215px]" : "md:landscape:top-[290px]"} lg:landscape:top-[38vh]`)
                 }`}
             >
               {/* Gray bottom line for menu open button */}
