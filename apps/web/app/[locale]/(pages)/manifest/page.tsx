@@ -40,11 +40,11 @@ export default function ManifestPage() {
         {/* Two column layout for desktop */}
         <div className="relative top-[10vh] lg:top-0 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Quote */}
-          <div className="md:w-[60%] md:mx-auto xl:mx-0 xl:w-[80%] xl:col-span-1 flex flex-col font-mono md:text-xl md:leading-16 xl:ml-auto">
+          <div className="w-3/4 mx-auto md:w-[60%] md:mx-auto xl:mx-0 xl:w-[80%] xl:col-span-1 flex flex-col font-mono md:text-xl md:leading-16 xl:ml-auto">
             <div className="md:mx-4">
               <div className="mt-0 md:landscape:mt-20 xl:landscape:mt-0 flex flex-row items-start z-100 relative xl:justify-end">
                 <div className="text-7xl font-mono rotate-180 md:mr-4">„</div>
-                <div className="xl:text-right text-lg md:text-2xl xl:text-3xl xl:leading-12 font-mono mr-4">
+                <div className="xl:text-right text-lg md:text-2xl xl:text-3xl xl:leading-12 font-mono xl:mr-4">
                   Dobry wpływ wcale nie istnieje, panie Gray.<br />
                   Ze stanowiska naukowego każdy wpływ jest <strong> niemoralny.</strong>
                 </div>

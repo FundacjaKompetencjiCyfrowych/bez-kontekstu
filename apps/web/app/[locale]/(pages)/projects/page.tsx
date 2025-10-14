@@ -70,7 +70,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
-      <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" showLogo={false} />
+      <Header title="PRO JEK TY" className="xl:hidden" showLogo={false} />
       <LogoViolet />
 
       <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
@@ -186,8 +186,8 @@ export default function ProjectsPage() {
                   onClick={handleNextSlide}
                   disabled={currentSlide === totalSlides - 1}
                   className={`transition-all duration-200 ${currentSlide === totalSlides - 1
-                      ? "opacity-30 cursor-not-allowed"
-                      : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+                    ? "opacity-30 cursor-not-allowed"
+                    : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
                     }`}
                 >
                   <Image src={nextIcon} alt="Next slide" width={25} height={25} />

@@ -37,7 +37,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
   return (
     <div className="bg-[#0d0b0e] px-5 xl:min-h-screen max-w-7xl mx-auto font-mono flex flex-col xl:justify-between justify-center">
- 
+
       <LogoViolet />
 
       {/* XL Desktop Back Button - Top */}
@@ -51,14 +51,14 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
       </div>
 
       {/* Main Content */}
-      <div className="relative px-8">
- {/* Back button */}
-            <div className="relative xl:hidden w-fit px-4 my-[50px]">
-              <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-                <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-3" />
-                <p className="ml-2 text-sm">Wstecz</p>
-              </Link>
-            </div>
+      <div className="relative px-4">
+        {/* Back button */}
+        <div className="relative xl:hidden w-fit px-4 my-[50px]">
+          <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
+            <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-3" />
+            <p className="ml-2 text-sm">Wstecz</p>
+          </Link>
+        </div>
 
         <div className="xl:hidden">
           {/* Portrait Section */}
@@ -307,10 +307,10 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
 
-        <Footer />
+      <Footer />
     </div>
   );
 }

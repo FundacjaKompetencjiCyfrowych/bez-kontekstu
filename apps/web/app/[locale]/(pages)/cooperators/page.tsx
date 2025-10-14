@@ -97,7 +97,7 @@ export default function CooperatorsPage() {
                       <div className="absolute bottom-0 left-0 right-0 h-70 bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
 
                       {/* Content overlay */}
-                      <div className="absolute bottom-0 left-0 p-3 z-10 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl text-left">
+                      <div className="absolute bottom-0 left-0 md:p-3 z-10 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl text-left">
                         <h3>{cooperator.name.toUpperCase()}</h3>
                         <h3>{cooperator.surname.toUpperCase()}</h3>
                       </div>
@@ -175,8 +175,8 @@ export default function CooperatorsPage() {
                   onClick={handleNextSlide}
                   disabled={currentSlide === totalSlides - 1}
                   className={`transition-all duration-200 ${currentSlide === totalSlides - 1
-                      ? "opacity-30 cursor-not-allowed"
-                      : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+                    ? "opacity-30 cursor-not-allowed"
+                    : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
                     }`}
                 >
                   <Image src={nextIcon} alt="Next slide" width={25} height={25} />

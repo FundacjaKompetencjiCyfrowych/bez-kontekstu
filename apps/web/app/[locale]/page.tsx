@@ -169,7 +169,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center transform z-10">
+          <div className="mt-10 md:mt-0 flex justify-center items-center transform z-10">
             <Link href={"/cooperators"} className="w-[90%] lg:w-auto">
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 Poznaj nasz zespół
