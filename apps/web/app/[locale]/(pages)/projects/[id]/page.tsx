@@ -43,6 +43,12 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   const [loading, setLoading] = useState(true);
   const [projectId, setProjectId] = useState<number | null>(null);
 
+  const isYouTube = (url: string) => url.includes("youtu.be/") || url.includes("youtube.com/watch");
+  const isLocalVideo = (url: string) => url.startsWith("/api/assets/") || url.startsWith("/app/assets/") || url.startsWith("/assets/");
+
+  // Function to get video source URL
+  const getVideoSource = (url: string) => url;
+
   React.useEffect(() => {
     const loadProject = async () => {
       const resolvedParams = await params;
@@ -109,16 +115,33 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
         {project.videoUrl && (
           <div className="mb-12">
             <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video w-full">
-              <iframe
-                src={getYouTubeEmbedUrl(project.videoUrl)}
-                title={`${project.name} - Video`}
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                loading="lazy"
-                // Mobile accessibility: ensure proper touch targets and viewport
-                style={{ minHeight: "200px" }}
-              />
+
+              {isYouTube(project.videoUrl) ? (
+                <iframe
+                  src={getYouTubeEmbedUrl(project.videoUrl)}
+                  title={`${project.name} - Video`}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                  // Mobile accessibility: ensure proper touch targets and viewport
+                  style={{ minHeight: "200px" }}
+                />
+              ) : (
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <source
+                    src={getVideoSource(project.videoUrl)}
+                    type={isLocalVideo(project.videoUrl) ? "video/webm" : "video/quicktime"}
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+
             </div>
           </div>
         )}

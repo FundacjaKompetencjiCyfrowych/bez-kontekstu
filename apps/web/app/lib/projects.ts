@@ -1,8 +1,20 @@
-
 import CopyOfCopyOfNpc1 from "@/app/assets/images/copy_of_copy_of_npc/1.png";
 import CopyOfCopyOfNpc2 from "@/app/assets/images/copy_of_copy_of_npc/2.png";
 import CopyOfCopyOfNpc3 from "@/app/assets/images/copy_of_copy_of_npc/3.png";
 import CopyOfCopyOfNpc4 from "@/app/assets/images/copy_of_copy_of_npc/4.png";
+import PrawdyZaGrosz1 from "@/app/assets/images/prawdy_za_grosz/1.jpg";
+import PrawdyZaGrosz2 from "@/app/assets/images/prawdy_za_grosz/2.jpg";
+import PrawdyZaGrosz3 from "@/app/assets/images/prawdy_za_grosz/3.jpg";
+import PrawdyZaGrosz4 from "@/app/assets/images/prawdy_za_grosz/4.jpg";
+import GanglionyGangliony1 from "@/app/assets/images/gangliony_gangliony/1.jpg";
+import GanglionyGangliony2 from "@/app/assets/images/gangliony_gangliony/2.jpg";
+import GanglionyGangliony3 from "@/app/assets/images/gangliony_gangliony/3.jpg";
+import GanglionyGangliony4 from "@/app/assets/images/gangliony_gangliony/4.jpg";
+import Limbo1 from "@/app/assets/images/limbo/1.jpg";
+import Limbo2 from "@/app/assets/images/limbo/2.jpg";
+import Limbo3 from "@/app/assets/images/limbo/3.jpg";
+import Limbo4 from "@/app/assets/images/limbo/4.jpg";
+
 export interface Project {
   id: number;
   name: string;
@@ -61,7 +73,7 @@ export const projects: Project[] = [
       production: ["Fundacja Bez Kontekstu"],
     },
     images: getProjectImages("PRAWDY ZA GROSZ"),
-    videoUrl: "https://example.com/video2.mp4",
+    videoUrl: "/api/assets/video/prawdy_za_grosz.webm",
   },
   {
     id: 3,
@@ -79,7 +91,7 @@ export const projects: Project[] = [
       scenography: ["Adrianna Urbańska"],
       lightDirection: ["Szymon Stęchły"],
     },
-    images: getProjectImages("GANGLIONY, GANGLIONY..."),
+    images: getProjectImages("GANGLIONY GANGLIONY"),
     videoUrl: "https://www.youtube.com/watch?v=-MJFk5q0DeE",
   },
   {
@@ -142,9 +154,9 @@ export function getProjectImages(projectName: string): string[] {
       CopyOfCopyOfNpc3.src,
       CopyOfCopyOfNpc4.src,
     ],
-    prawdy_za_grosz: [],
-    gangliony_gangliony: [],
-    limbo: [],
+    prawdy_za_grosz: [ PrawdyZaGrosz1.src, PrawdyZaGrosz2.src, PrawdyZaGrosz3.src, PrawdyZaGrosz4.src ],
+    gangliony_gangliony: [ GanglionyGangliony1.src, GanglionyGangliony2.src, GanglionyGangliony3.src, GanglionyGangliony4.src ],
+    limbo: [ Limbo1.src, Limbo2.src, Limbo3.src, Limbo4.src ],
   };
 
   // Return images for the project if they exist, otherwise return empty array
