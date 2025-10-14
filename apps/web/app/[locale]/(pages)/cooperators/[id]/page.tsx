@@ -42,7 +42,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
       {/* XL Desktop Back Button - Top */}
       <div className="hidden xl:block px-8">
-        <div className="relative py-6 md:py-12 xl:ml-8">
+        <div className="relative py-6 md:py-12 xl:py-0 xl:mt-25 xl:ml-8">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
             <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
             <p className="ml-4 md:text-xl">Wstecz</p>
