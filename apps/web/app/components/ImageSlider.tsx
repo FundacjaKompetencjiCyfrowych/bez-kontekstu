@@ -44,7 +44,7 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
   return (
     <div
       id={sliderId}
-      className="fixed inset-0 z-50 bg-black bg-opacity-95 flex flex-col overflow-y-auto"
+      className="fixed inset-0 z-50 bg-black bg-opacity-95 flex flex-col overflow-y-auto md:landscape:h-screen"
       role="dialog"
       aria-modal="true"
       aria-labelledby={mainImageId}
@@ -63,7 +63,7 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
       </div>
 
       {/* Main image container */}
-      <div className="flex-1 flex items-center justify-center relative px-4 min-h-0 lg:min-h-[60vh]">
+      <div className="flex-1 flex items-center justify-center relative px-4 lg:min-h-[60vh]">
         {/* Previous arrow */}
         <button
           id={prevButtonId}
@@ -84,13 +84,12 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
               alt={`Image ${currentIndex + 1} of ${images.length}`}
               width={800}
               height={600}
-              className={`max-w-full max-h-full object-contain transition-all duration-500 ease-in-out transform ${
-                animationDirection === "left"
-                  ? "animate-slideInLeft"
-                  : animationDirection === "right"
-                    ? "animate-slideInRight"
-                    : "animate-fadeIn"
-              }`}
+              className={`max-w-full max-h-full md:landscape:h-screen object-contain transition-all duration-500 ease-in-out transform ${animationDirection === "left"
+                ? "animate-slideInLeft"
+                : animationDirection === "right"
+                  ? "animate-slideInRight"
+                  : "animate-fadeIn"
+                }`}
               priority
             />
           </div>
@@ -119,9 +118,8 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
             <button
               key={index}
               onClick={() => goToItem(index)}
-              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden border-2 transition-all duration-300 transform hover:scale-110 ${
-                index === currentIndex ? "border-violet-800 scale-105" : "border-transparent"
-              }`}
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden border-2 transition-all duration-300 transform hover:scale-110 ${index === currentIndex ? "border-violet-800 scale-105" : "border-transparent"
+                }`}
               role="tab"
               aria-selected={index === currentIndex}
               aria-label={`Go to image ${index + 1} of ${images.length}`}
