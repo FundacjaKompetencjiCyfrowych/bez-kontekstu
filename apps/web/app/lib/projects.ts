@@ -73,7 +73,7 @@ export const projects: Project[] = [
       production: ["Fundacja Bez Kontekstu"],
     },
     images: getProjectImages("PRAWDY ZA GROSZ"),
-    videoUrl: "/api/assets/video/prawdy_za_grosz.webm",
+    videoUrl: "",
   },
   {
     id: 3,
