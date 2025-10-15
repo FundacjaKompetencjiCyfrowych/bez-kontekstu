@@ -69,7 +69,7 @@ export default function Home() {
 
       <div className="xl:top-40 px-5 xl:px-0">
         {/* MANIFEST Section*/}
-        <section className="h-screen md:landscape:h-[150vh] lg:landscape:h-[80vh] md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
+        <section className="md:landscape:h-[150vh] lg:landscape:h-[130vh] md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
 
           {/* Violet logo - sticky for all sections from Manifest */}
           <Image
@@ -116,7 +116,7 @@ export default function Home() {
         </section>
 
         {/* PROJECTS Section */}
-        <section className="h-[70vh] md:landscape:h-[200vh] lg:landscape:h-[80vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent">
+        <section className="h-[70vh] pt-20 md:pt-0 sm:h-screen sm:landscape:h-[150vh] md:landscape:h-[200vh] lg:landscape:h-[130vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent">
           <div className="flex flex-col items-end">
             {renderResponsiveTitle(["PRO", "JEK", "TY"], "PR O", "right")}
           </div>

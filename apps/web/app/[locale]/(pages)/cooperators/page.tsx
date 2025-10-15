@@ -85,7 +85,7 @@ export default function CooperatorsPage() {
                           alt={`Image of ${cooperator.name} ${cooperator.surname}`}
                           width={800}
                           height={250}
-                          className="w-full h-full object-cover object-top md:object-center"
+                          className="w-full h-full object-cover object-top sm:object-center"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                           priority={cooperator.id <= 2}
                         />

@@ -84,7 +84,7 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
               alt={`Image ${currentIndex + 1} of ${images.length}`}
               width={800}
               height={600}
-              className={`max-w-full max-h-full md:landscape:h-screen object-contain transition-all duration-500 ease-in-out transform ${animationDirection === "left"
+              className={`max-w-full max-h-full sm:landscape:h-screen object-contain transition-all duration-500 ease-in-out transform ${animationDirection === "left"
                 ? "animate-slideInLeft"
                 : animationDirection === "right"
                   ? "animate-slideInRight"

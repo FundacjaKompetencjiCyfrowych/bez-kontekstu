@@ -102,7 +102,7 @@ export function Navigation() {
                   : `top-[150px] md:top-[250px] md:landscape:top-[290px] lg:landscape:top-[38vh]`)
                 : (isMenuOpen
                   ? "top-[470px]"
-                  : `top-[25vh] ${isSoundPage ? "md:landscape:top-[215px]" : "md:landscape:top-[290px]"} lg:landscape:top-[38vh]`)
+                  : `top-[25vh] ${isSoundPage ? "sm:landscape:top-[140px] md:landscape:top-[215px]" : "sm:landscape:top-[180px] md:landscape:top-[290px]"} lg:landscape:top-[38vh]`)
                 }`}
             >
               {/* Gray bottom line for menu open button */}
@@ -129,7 +129,7 @@ export function Navigation() {
                   <div key={item.href} className="mx-6">
                     <Link
                       href={item.href}
-                      className="text-gray-200 hover:text-blue-600 block px-3 py-3 md:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
+                      className="text-gray-200 hover:text-blue-600 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.title}

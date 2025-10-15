@@ -39,10 +39,10 @@ export default function ContactPage() {
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("KO N")}</div>
 
-        <div className="relative flex flex-col font-mono md:text-xl md:leading-12 xl:text-base xl:leading-5 xl:flex xl:justify-center">
+        <div className="relative flex flex-col font-mono sm:landscape:pt-10 md:text-xl md:leading-12 xl:text-base xl:leading-5 xl:flex xl:justify-center">
           {/* Adres */}
           <div className="xl:text-xl md:mx-8">
-            <ul className="space-y-6">
+            <ul className="space-y-6 sm:landscape:space-y-3">
               <li className="flex items-center">
                 <div className="mr-3 md:mr-6">
                   <ContactIcon src={EmailIcon} alt="Email" />
@@ -67,7 +67,7 @@ export default function ContactPage() {
 
           {/* Socials */}
           <div className="flex xl:text-xl md:mx-8">
-            <ul className=" my-6 space-y-6">
+            <ul className=" my-6 space-y-6 sm:landscape:space-y-3">
               <li className="flex items-center">
                 <div className="mr-3 md:mr-6">
                   <ContactIcon src={InstagramIcon} alt="Instagram" />
