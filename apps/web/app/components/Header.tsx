@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
-import LogoViolet from "@/app/assets/images/logo_violet.png";
+import LogoViolet from "@/app/components/LogoViolet";
+import { useRoutePath } from "../lib/locales";
 
 interface HeaderProps {
   title?: string;
@@ -13,6 +17,9 @@ export function Header({ title = "", showLogo = true, showTitle = true, classNam
   // Split title into words for vertical display
   const titleWords = title.split(" ");
 
+  const routePath = useRoutePath();
+  const isSoundPage = routePath !== "/sounds";
+
   return (
     <>
       {/* Title Section */}
@@ -23,19 +30,14 @@ export function Header({ title = "", showLogo = true, showTitle = true, classNam
               <h1 key={index}>{word}</h1>
             ))}
           </div>
-          <Image src={SoundIcon} alt="Sound button" width={30} height={30} className="md:w-10 md:h-10" />
+          {isSoundPage && <Image src={SoundIcon} alt="Sound button" width={30} height={30} className="md:w-10 md:h-10" />}
         </div>
       )}
 
       {/* Violet logo - sticky background */}
       {showLogo && (
         <div className={`sticky top-1/2 h-0 z-0 ${className}`}>
-          <Image
-            src={LogoViolet}
-            priority
-            alt="Bez Kontekstu"
-            className="absolute blur-[6px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-160 md:h-160  opacity-50"
-          />
+          <LogoViolet />
         </div>
       )}
     </>

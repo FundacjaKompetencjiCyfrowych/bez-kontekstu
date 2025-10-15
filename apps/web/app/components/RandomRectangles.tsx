@@ -278,12 +278,12 @@ export function RandomRectangles() {
       ))}
 
       {/* Button to regenerate rectangles */}
-      <button
+      {/* <button
         onClick={regenerate}
         className="absolute bottom-4 right-4 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded text-sm transition-colors"
       >
         Nowe ułożenie
-      </button>
+      </button> */}
     </div>
   );
 }

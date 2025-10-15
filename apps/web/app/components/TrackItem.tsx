@@ -23,21 +23,21 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
       {/* Play Button */}
       <button
         onClick={onPlay}
-        className={`relative w-12 h-12 xl:align-middle rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+        className={`relative md:bg-neutral-600/30 xl:bg-neutral-600/0 w-10 h-10 md:w-18 md:h-18 xl:align-middle rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
           isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 hover:border-purple-400/60"
         }`}
       >
-        <Image src={PlayIcon} alt="Play" width={35} height={35} />
+        <Image src={PlayIcon} alt="Play" width={30} height={30} className="md:w-14 md:h-14" />
       </button>
 
       {/* Song Name Field */}
       <div className="flex-1 relative">
         <div
-          className={`bg-black/30 border rounded-2xl px-4 py-3 transition-all duration-300 ${
+          className={`bg-black/30 flex items-center h-[40px] md:h-[60px] md:bg-neutral-600/30 xl:bg-neutral-600/0 border rounded-2xl px-4 py-2 transition-all duration-300 ${
             isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 hover:border-purple-400/60"
           }`}
         >
-          <span className="text-white font-mono text-sm md:text-base tracking-wider">{title}</span>
+          <span className="text-white font-mono text-sm md:text-xl tracking-wider">{title}</span>
 
           {/* Cloud Icon */}
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -48,7 +48,7 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
                   : "bg-white/10 border-white/30 hover:bg-white/15"
               }`}
             >
-              <Image src={CloudIcon} alt="Cloud" width={30} height={30} />
+              <Image src={CloudIcon} alt="Cloud" width={30} height={30} sizes="auto" />
             </div>
           </div>
         </div>
