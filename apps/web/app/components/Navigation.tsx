@@ -26,10 +26,9 @@ export function Navigation() {
   const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";
   const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
 
-  // Check if we're on the home page
   const isHomePage = routePath === "/";
+  const isSoundPage = routePath === "/sounds";
 
-  // Function to toggle language
   const toggleLanguage = () => {
     setLocale(locale === "pl" ? "en" : "pl");
   };
@@ -97,9 +96,14 @@ export function Navigation() {
           <div className="xl:hidden w-full top-0 flex justify-center">
             {/* Animated menu */}
             <div
-              className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${
-                isHomePage ? (isMenuOpen ? "top-[470px]" : "top-[150px] md:top-[250px]") : isMenuOpen ? "top-[470px]" : "top-[25vh]"
-              }`}
+              className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isHomePage
+                ? (isMenuOpen
+                  ? "top-[470px] md:landscape:top-[330px] lg:landscape:top-[470px]"
+                  : `top-[150px] md:top-[250px] md:landscape:top-[290px] lg:landscape:top-[38vh]`)
+                : (isMenuOpen
+                  ? "top-[470px]"
+                  : `top-[25vh] ${isSoundPage ? "sm:landscape:top-[140px] md:landscape:top-[215px]" : "sm:landscape:top-[180px] md:landscape:top-[290px]"} lg:landscape:top-[38vh]`)
+                }`}
             >
               {/* Gray bottom line for menu open button */}
               <div className="flex items-center justify-center w-full relative">
@@ -125,7 +129,7 @@ export function Navigation() {
                   <div key={item.href} className="mx-6">
                     <Link
                       href={item.href}
-                      className="text-gray-200 hover:text-blue-600 block px-3 py-3 text-xl rounded-md font-defectica"
+                      className="text-gray-200 hover:text-blue-600 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.title}
@@ -134,7 +138,7 @@ export function Navigation() {
                 ))}
 
                 {/* Language Toggle Switch */}
-                <div className="mx-9 pt-4 pb-4">
+                <div className="mx-9 py-4 md:landscape:py-1 lg:landscape:py-3">
                   <div className="flex items-center justify-between">
                     {/* Language Labels */}
                     <div className="flex items-center gap-4">

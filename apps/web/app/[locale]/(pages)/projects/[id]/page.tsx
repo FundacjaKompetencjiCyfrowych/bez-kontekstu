@@ -15,7 +15,6 @@ import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 // Function to convert YouTube URL to embed format
 function getYouTubeEmbedUrl(url: string): string {
-  // Handle youtu.be format
   if (url.includes("youtu.be/")) {
     const videoId = url.split("youtu.be/")[1].split("?")[0];
     return `https://www.youtube.com/embed/${videoId}`;
@@ -42,6 +41,8 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [projectId, setProjectId] = useState<number | null>(null);
+
+  const isYouTube = (url: string) => url.includes("youtu.be/") || url.includes("youtube.com/watch");
 
   React.useEffect(() => {
     const loadProject = async () => {
@@ -72,28 +73,28 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   }
 
   return (
-    <div className="bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:absolute xl:top-[50px]">
+    <div className="bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl xl:absolute xl:top-[50px]">
       {/* Navigation Header */}
-      <div className="relative px-8 py-6 md:py-12">
+      <div className="relative px-8 py-6 md:py-12 z-10">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
+          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2 md:w-4 md:h-4 xl:w-6 xl:h-6" />
           <p className="ml-4 md:text-xl">Wstecz</p>
         </Link>
       </div>
 
       <LogoViolet />
-              {/*Second violet logo - desktop */}
-              <div className="hidden xl:block">              
-          <Image
-            src={LogoVioletImage}
-            alt="Bez Kontekstu"
-            className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
-          />
-        </div>
+      {/*Second violet logo - desktop */}
+      <div className="hidden xl:block">
+        <Image
+          src={LogoVioletImage}
+          alt="Bez Kontekstu"
+          className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
+        />
+      </div>
 
 
       {/* Main Content */}
-      <div className="relative px-8 pb-16">
+      <div className="relative pb-16">
         {/* Title and Year */}
         <div className="mb-8">
           <h1 className="mt-4 mb-16">{project.name.toUpperCase()}</h1>
@@ -109,16 +110,20 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
         {project.videoUrl && (
           <div className="mb-12">
             <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video w-full">
-              <iframe
-                src={getYouTubeEmbedUrl(project.videoUrl)}
-                title={`${project.name} - Video`}
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                loading="lazy"
-                // Mobile accessibility: ensure proper touch targets and viewport
-                style={{ minHeight: "200px" }}
-              />
+
+              {isYouTube(project.videoUrl) && (
+                <iframe
+                  src={getYouTubeEmbedUrl(project.videoUrl)}
+                  title={`${project.name} - Video`}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                  // Mobile accessibility: ensure proper touch targets and viewport
+                  style={{ minHeight: "200px" }}
+                />
+              ) }
+
             </div>
           </div>
         )}

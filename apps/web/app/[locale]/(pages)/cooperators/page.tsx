@@ -57,8 +57,7 @@ export default function CooperatorsPage() {
 
   return (
     <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
-      <Header title="WSPÓ ŁPR ACE" className="xl:hidden" />
-
+      <Header title="WSPÓ ŁPR ACE" className="xl:hidden" showLogo={false} />
       <LogoViolet />
 
       <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
@@ -86,7 +85,7 @@ export default function CooperatorsPage() {
                           alt={`Image of ${cooperator.name} ${cooperator.surname}`}
                           width={800}
                           height={250}
-                          className="w-full h-full object-cover object-top md:object-center"
+                          className="w-full h-full object-cover object-top sm:object-center"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                           priority={cooperator.id <= 2}
                         />
@@ -98,7 +97,7 @@ export default function CooperatorsPage() {
                       <div className="absolute bottom-0 left-0 right-0 h-70 bg-gradient-to-t from-black/90 to-transparent pointer-events-none"></div>
 
                       {/* Content overlay */}
-                      <div className="absolute bottom-0 left-0 p-3 z-10 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl text-left">
+                      <div className="absolute bottom-0 left-0 md:p-3 z-10 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl text-left">
                         <h3>{cooperator.name.toUpperCase()}</h3>
                         <h3>{cooperator.surname.toUpperCase()}</h3>
                       </div>
@@ -158,9 +157,8 @@ export default function CooperatorsPage() {
                 <button
                   onClick={handlePrevSlide}
                   disabled={currentSlide === 0}
-                  className={`transition-all duration-200 ${
-                    currentSlide === 0 ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
-                  }`}
+                  className={`transition-all duration-200 ${currentSlide === 0 ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+                    }`}
                 >
                   <Image src={prevIcon} alt="Previous slide" width={25} height={25} />
                 </button>
@@ -176,11 +174,10 @@ export default function CooperatorsPage() {
                 <button
                   onClick={handleNextSlide}
                   disabled={currentSlide === totalSlides - 1}
-                  className={`transition-all duration-200 ${
-                    currentSlide === totalSlides - 1
-                      ? "opacity-30 cursor-not-allowed"
-                      : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
-                  }`}
+                  className={`transition-all duration-200 ${currentSlide === totalSlides - 1
+                    ? "opacity-30 cursor-not-allowed"
+                    : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+                    }`}
                 >
                   <Image src={nextIcon} alt="Next slide" width={25} height={25} />
                 </button>

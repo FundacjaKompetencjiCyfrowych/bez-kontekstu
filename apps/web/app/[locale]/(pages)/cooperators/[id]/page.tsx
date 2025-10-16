@@ -37,12 +37,12 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
   return (
     <div className="bg-[#0d0b0e] px-5 xl:min-h-screen max-w-7xl mx-auto font-mono flex flex-col xl:justify-between justify-center">
- 
+
       <LogoViolet />
 
       {/* XL Desktop Back Button - Top */}
       <div className="hidden xl:block px-8">
-        <div className="relative py-6 md:py-12 xl:ml-8">
+        <div className="relative py-6 md:py-12 xl:py-0 xl:mt-25 xl:ml-8">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
             <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
             <p className="ml-4 md:text-xl">Wstecz</p>
@@ -51,14 +51,14 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
       </div>
 
       {/* Main Content */}
-      <div className="relative px-8">
- {/* Back button */}
-            <div className="relative xl:hidden w-fit px-4 my-[50px]">
-              <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-                <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-3" />
-                <p className="ml-2 text-sm">Wstecz</p>
-              </Link>
-            </div>
+      <div className="relative px-4">
+        {/* Back button */}
+        <div className="relative xl:hidden w-fit px-4 my-[50px]">
+          <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
+            <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-3" />
+            <p className="ml-2 text-sm">Wstecz</p>
+          </Link>
+        </div>
 
         <div className="xl:hidden">
           {/* Portrait Section */}
@@ -70,7 +70,7 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
                   alt={`Image of ${cooperator.name}`}
                   width={800}
                   height={250}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-top sm:object-center"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 85vw"
                   priority={cooperator.id <= 2}
                 />
@@ -307,10 +307,10 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
 
-        <Footer />
+      <Footer />
     </div>
   );
 }
