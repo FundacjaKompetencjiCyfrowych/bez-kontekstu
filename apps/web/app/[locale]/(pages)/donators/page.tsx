@@ -62,7 +62,7 @@ export default function DonorsPage() {
   };
 
   return (
-    <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col">
+    <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
 
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
@@ -72,20 +72,21 @@ export default function DonorsPage() {
       {/*Title mobile*/}
       <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" showLogo={false} />
       <LogoViolet />
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
+
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
         {/*Title desktop - top right*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
 
-       
+
         {/*Second violet logo - desktop */}
-        <div className="hidden md:block">              
+        <div className="hidden md:block">
           <Image
             src={LogoVioletImage}
             alt="Bez Kontekstu"
             className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
           />
         </div>
-        
+
         {/* Two column layout for desktop */}
         <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Empty space */}
@@ -198,8 +199,8 @@ export default function DonorsPage() {
                 </div>
               </button>
 
-          {/* Foundation data */}
-           {/* KRS */}
+              {/* Foundation data */}
+              {/* KRS */}
               <button
                 className={buttonClasses}
                 onClick={handleCopy("0001102013", "krs")}
@@ -250,7 +251,7 @@ export default function DonorsPage() {
                   <CopyIcon />
                 </div>
               </button>
-           
+
             </div>
           </div>
         </div>
@@ -299,8 +300,8 @@ export default function DonorsPage() {
             </div>
           </div>
         </div>
-</div>   
-       <Footer />
+      </div>
+      <Footer />
     </div>
   );
 }

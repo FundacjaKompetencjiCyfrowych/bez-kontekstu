@@ -69,11 +69,11 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
+    <div className="h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
       <Header title="PRO JEK TY" className="xl:hidden" showLogo={false} />
-      <LogoViolet />
 
-      <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
+
+      <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]"><LogoViolet />
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("PR O")}</div>
 

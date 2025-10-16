@@ -23,9 +23,9 @@ export default function ManifestPage() {
       <LogoViolet />
 
       <div className="relative flex md:landscape:justify-center xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
+
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
-
 
         {/*Second violet logo - desktop */}
         <div className="hidden xl:block">
@@ -42,7 +42,7 @@ export default function ManifestPage() {
           {/* Left Column - Quote */}
           <div className="w-3/4 mx-auto md:w-[60%] md:mx-auto xl:mx-0 xl:w-[80%] xl:col-span-1 flex flex-col font-mono md:text-xl md:leading-16 xl:ml-auto">
             <div className="md:mx-4">
-              <div className="mt-0 md:landscape:mt-20 xl:landscape:mt-0 flex flex-row items-start z-100 relative xl:justify-end">
+              <div className="mt-0 md:landscape:mt-20 xl:landscape:mt-0 flex flex-row items-start z-10 relative xl:justify-end">
                 <div className="text-7xl font-mono rotate-180 md:mr-4">„</div>
                 <div className="xl:text-right text-lg md:text-2xl xl:text-3xl xl:leading-12 font-mono xl:mr-4">
                   Dobry wpływ wcale nie istnieje, panie Gray.<br />
