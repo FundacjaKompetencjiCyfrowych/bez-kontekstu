@@ -11,7 +11,9 @@ export default function LogoViolet({ pageType = 'default' }: LogoVioletProps) {
     switch (pageType) {
       case 'home':
         return 'top-[200px] md:top-[300px] md:landscape:top-[340px] lg:landscape:top-[42vh]';
-      case 'sounds' || 'contact':
+      case 'sounds':
+        return 'top-[10vh] sm:landscape:top-0 md:landscape:top-0 md:landscape:max-h-screen lg:landscape:top-0 sm:landscape:max-h-screen';
+      case 'contact':
         return 'top-[10vh] sm:landscape:top-0 md:landscape:top-0 md:landscape:max-h-screen lg:landscape:top-0 sm:landscape:max-h-screen';
       default:
         return 'top-[30vh]  sm:landscape:top-[300px] lg:landscape:top-[42vh] md:landscape:max-h-[450px] lg:landscape:max-h-screen';
