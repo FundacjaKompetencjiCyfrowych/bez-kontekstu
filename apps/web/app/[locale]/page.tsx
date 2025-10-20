@@ -4,7 +4,7 @@ import Logo from "@/app/assets/images/logo.png";
 import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
-import { cooperators } from "@/app/lib/cooperators";
+import { cooperators } from "@/app/lib/placeholders_old/cooperators";
 import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 import { Header } from "../components/Header";
 
@@ -53,7 +53,6 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative top-[50px] xl:top-[100px] overflow-hidden h-[65vh] sm:landscape:h-[200vh] md:landscape:h-[100vh] lg:landscape:h-[80vh] xl:h-[80vh] flex flex-col justify-between mx-6 z-10">
-
         {/*Title */}
         <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ")}</div>
         <div className="block absolute left-0 bottom-0">{titleCutWord("K O N TEKSTU")}</div>
@@ -70,7 +69,6 @@ export default function Home() {
       <div className="xl:top-40 px-5 xl:px-0">
         {/* MANIFEST Section*/}
         <section className="md:landscape:h-[150vh] lg:landscape:h-[130vh] md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
-
           {/* Violet logo - sticky for all sections from Manifest */}
           <Image
             src={LogoVioletImage}
@@ -93,8 +91,6 @@ export default function Home() {
               Poprzez łączenie immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnychwprowadzamy
               odbiorców w świat, gdzie teatr spotyka się z cyfrową rzeczywistością.
             </p>
-
-
           </div>
           <div className="flex justify-center items-center transform z-10">
             <Link href={"/manifest"} className="w-[90%] lg:w-auto">
@@ -108,18 +104,13 @@ export default function Home() {
             </Link>
           </div>
 
-
-
-
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           {renderResponsiveTitle("", "F EST", "left")}
         </section>
 
         {/* PROJECTS Section */}
         <section className="h-[70vh] pt-20 md:pt-0 sm:h-screen sm:landscape:h-[150vh] md:landscape:h-[200vh] lg:landscape:h-[130vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent">
-          <div className="flex flex-col items-end">
-            {renderResponsiveTitle(["PRO", "JEK", "TY"], "PR O", "right")}
-          </div>
+          <div className="flex flex-col items-end">{renderResponsiveTitle(["PRO", "JEK", "TY"], "PR O", "right")}</div>
 
           <div className="w-[100%] h-[70vh] mx-auto z-10">
             <RandomRectangles />

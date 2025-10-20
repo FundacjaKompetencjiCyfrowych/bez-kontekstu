@@ -17,3 +17,7 @@ export interface ButtonProps {
 
 // Typy dla responsywności
 export type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
+
+export type NullableOptional<T> = {
+  [K in keyof T]?: T[K] | null;
+};
