@@ -22,7 +22,7 @@ export default function SoundsPage() {
 
 
       <div className="relative max-w-7xl xl:mt-24 flex-1 flex flex-col xl:flex-row">
-        <LogoViolet />
+        <LogoViolet pageType="sounds" />
 
         {/* Left column - Title */}
         <div className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20">

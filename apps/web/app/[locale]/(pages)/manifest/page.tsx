@@ -5,7 +5,6 @@ import ManifestManImage from "@/app/assets/images/manifest_man.png";
 import ManifestOurGoalImage from "@/app/assets/images/manifest_our-goal.png";
 import ManifestFusionImage from "@/app/assets/images/manifest_fusion.png";
 import LogoViolet from "@/app/components/LogoViolet";
-import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 export default function ManifestPage() {
   const titleCutWord = (title: string) =>
@@ -22,53 +21,49 @@ export default function ManifestPage() {
       <Header title="MAN IF EST" className="xl:hidden" showLogo={false} />
       <LogoViolet />
 
-      <div className="relative flex md:landscape:justify-center xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
-
-        {/*Title desktop*/}
-        <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
-
-        {/*Second violet logo - desktop */}
-        <div className="hidden xl:block">
-          <Image
-            src={LogoVioletImage}
-            alt="Bez Kontekstu"
-            className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
-          />
-        </div>
-
-
-        {/* Two column layout for desktop */}
-        <div className="relative top-[10vh] lg:top-0 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
-          {/* Left Column - Quote */}
-          <div className="w-3/4 mx-auto md:w-[60%] md:mx-auto xl:mx-0 xl:w-[80%] xl:col-span-1 flex flex-col font-mono md:text-xl md:leading-16 xl:ml-auto">
-            <div className="md:mx-4">
-              <div className="mt-0 md:landscape:mt-20 xl:landscape:mt-0 flex flex-row items-start z-10 relative xl:justify-end">
-                <div className="text-7xl font-mono rotate-180 md:mr-4">„</div>
-                <div className="xl:text-right text-lg md:text-2xl xl:text-3xl xl:leading-12 font-mono xl:mr-4">
-                  Dobry wpływ wcale nie istnieje, panie Gray.<br />
-                  Ze stanowiska naukowego każdy wpływ jest <strong> niemoralny.</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Empty space */}
-          <div className="xl:col-span-1"></div>
-        </div>
-
-        {/* Man Image - Absolute positioned in bottom center */}
-        <div className="hidden xl:block absolute bottom-0 left-1/2">
-          <div className="relative w-[400px] h-[500px]">
-            <Image src={ManifestManImage} alt="Mężczyzna z mikrofonem" fill sizes="auto" className="object-cover" priority />
-          </div>
-        </div>
-
-        {/*Title desktop*/}
-        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("F EST")}</div>
-      </div>
 
       {/* Rest of content */}
       <div className="xl:max-w-7xl mx-auto relative">
+
+
+        <div className="relative flex md:landscape:justify-center xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
+
+          {/*Title desktop*/}
+          <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
+
+
+
+          {/* Two column layout for desktop */}
+          <div className="relative top-[10vh] lg:top-0 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
+            {/* Left Column - Quote */}
+            <div className="w-3/4 mx-auto md:w-[60%] md:mx-auto xl:mx-0 xl:w-[80%] xl:col-span-1 flex flex-col font-mono md:text-xl md:leading-16 xl:ml-auto">
+              <div className="md:mx-4">
+                <div className="mt-0 md:landscape:mt-20 xl:landscape:mt-0 flex flex-row items-start z-10 relative xl:justify-end">
+                  <div className="text-7xl font-mono rotate-180 md:mr-4">„</div>
+                  <div className="xl:text-right text-lg md:text-2xl xl:text-3xl xl:leading-12 font-mono xl:mr-4">
+                    Dobry wpływ wcale nie istnieje, panie Gray.<br />
+                    Ze stanowiska naukowego każdy wpływ jest <strong> niemoralny.</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Empty space */}
+            <div className="xl:col-span-1"></div>
+          </div>
+
+          {/* Man Image - Absolute positioned in bottom center */}
+          <div className="hidden xl:block absolute bottom-0 left-1/2">
+            <div className="relative w-[400px] h-[500px]">
+              <Image src={ManifestManImage} alt="Mężczyzna z mikrofonem" fill sizes="auto" className="object-cover" priority />
+            </div>
+          </div>
+
+          {/*Title desktop*/}
+          <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("F EST")}</div>
+        </div>
+
+
         {/* Beyond Schema */}
         <section className="py-20 md:py-40 xl:mt-20 xl:grid xl:grid-cols-2 xl:gap-16 xl:items-center">
           {/* Left Column - Titles */}
