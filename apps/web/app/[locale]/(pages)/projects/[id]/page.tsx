@@ -11,7 +11,6 @@ import { ImageSlider } from "@/app/components/ImageSlider";
 import LogoViolet from "@/app/components/LogoViolet";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
-import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 // Function to convert YouTube URL to embed format
 function getYouTubeEmbedUrl(url: string): string {
@@ -83,21 +82,13 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
       </div>
 
       <LogoViolet />
-      {/*Second violet logo - desktop */}
-      <div className="hidden xl:block">
-        <Image
-          src={LogoVioletImage}
-          alt="Bez Kontekstu"
-          className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
-        />
-      </div>
 
 
       {/* Main Content */}
       <div className="relative pb-16">
         {/* Title and Year */}
         <div className="mb-8">
-          <h1 className="mt-4 mb-16">{project.name.toUpperCase()}</h1>
+          <h2 className="mt-4 mb-16">{project.name.toUpperCase()}</h2>
           <p className="text-xl md:text-3xl">{project.year}</p>
         </div>
 
@@ -122,7 +113,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                   // Mobile accessibility: ensure proper touch targets and viewport
                   style={{ minHeight: "200px" }}
                 />
-              ) }
+              )}
 
             </div>
           </div>

@@ -24,22 +24,23 @@ export default function ContactPage() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h2 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
-      </h1>
+      </h2>
     ));
 
   return (
-    <div className="flex flex-col justify-between w-full h-screen px-2 md:px-5 xl:flex xl:flex-col">
+    <div className="flex flex-col justify-between w-full h-screen px-2 md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
       {/*Title mobile*/}
       <Header title="KON TA KT" className="xl:hidden" showLogo={false} />
-      <LogoViolet />
+      <LogoViolet pageType="contact" />
+      <div className="relative px-5 md:px-0  flex xl:justify-center xl:items-center xl:h-full xl:mt-[90px]">
 
-      <div className="relative px-5 md:px-0 flex xl:justify-center xl:items-center xl:h-full xl:mt-[90px]">
+
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("KO N")}</div>
 
-        <div className="relative flex flex-col font-mono sm:landscape:pt-10 md:text-xl md:leading-12 xl:text-base xl:leading-5 xl:flex xl:justify-center">
+        <div className="relative flex flex-col font-mono sm:landscape:pt-10 md:text-xl lg:landscape:h-screen xl:landscape:h-auto md:leading-12 xl:text-base xl:leading-5 xl:flex xl:justify-center">
           {/* Adres */}
           <div className="xl:text-xl md:mx-8">
             <ul className="space-y-6 sm:landscape:space-y-3">

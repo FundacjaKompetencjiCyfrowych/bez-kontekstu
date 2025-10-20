@@ -50,17 +50,18 @@ export default function CooperatorsPage() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+      <h2 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
         {word}
-      </h1>
+      </h2>
     ));
 
   return (
-    <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
+    <div className="h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
       <Header title="WSPÓ ŁPR ACE" className="xl:hidden" showLogo={false} />
-      <LogoViolet />
 
       <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
+        <LogoViolet />
+
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("WSP Ó Ł")}</div>
 
@@ -108,7 +109,7 @@ export default function CooperatorsPage() {
             </div>
 
             {/* Desktop layout - horizontal slider */}
-            <div className="hidden xl:block w-full">
+            <div className="hidden xl:block w-full xl:w-[85%] xl:mx-auto">
               <div
                 ref={sliderRef}
                 className="flex overflow-x-auto scrollbar-hide gap-6 pb-4"
