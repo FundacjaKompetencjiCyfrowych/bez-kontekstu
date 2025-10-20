@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
@@ -8,8 +7,6 @@ import LogoViolet from "@/app/components/LogoViolet";
 
 export default function SoundsPage() {
   const [currentTrack, setCurrentTrack] = useState<number | null>(null);
-
-  // Sample tracks data
   const tracks = ["Nazwa utworu", "Nazwa utworu", "Nazwa utworu", "Nazwa utworu", "Nazwa utworu", "Nazwa utworu"];
 
   const handlePlay = (index: number) => {
@@ -20,10 +17,8 @@ export default function SoundsPage() {
     <div className="min-h-screen px-5 mx-auto flex flex-col bg-[#0d0b0e]">
       <Header title="BEATS'N' PIECES" className="xl:hidden" showLogo={false} />
 
-
       <div className="relative max-w-7xl xl:mt-24 flex-1 flex flex-col xl:flex-row">
         <LogoViolet pageType="sounds" />
-
         {/* Left column - Title */}
         <div className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20">
           {/* Title only for XL screens */}
@@ -32,7 +27,6 @@ export default function SoundsPage() {
             <h2>PIECES</h2>
           </div>
         </div>
-
         {/* Right column - Tracklist */}
         <div className="xl:w-1/2 w-full flex-1 flex lg:mt-20 items-end md:items-center justify-center xl:justify-start xl:self-center xl:mt-20 md:px-5 xl:px-0">
           <div className="max-w-4xl w-full xl:w-[85%] ">
@@ -42,7 +36,6 @@ export default function SoundsPage() {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

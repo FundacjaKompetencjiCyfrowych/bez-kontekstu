@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import LogoViolet from "@/app/components/LogoViolet";
@@ -36,7 +35,7 @@ export function Header({ title = "", showLogo = true, showTitle = true, classNam
         </div>
       )}
 
-      {/* Violet logo - sticky background */}
+      {/* Violet logo - background */}
       {showLogo && (
         <div className={`sticky top-1/2 h-0 z-0 ${className}`}>
           <LogoViolet />

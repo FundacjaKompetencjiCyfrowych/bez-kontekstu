@@ -21,17 +21,13 @@ export default function ManifestPage() {
       <Header title="MAN IF EST" className="xl:hidden" showLogo={false} />
       <LogoViolet />
 
-
       {/* Rest of content */}
       <div className="xl:max-w-7xl mx-auto relative">
-
-
         <div className="relative flex md:landscape:justify-center xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
 
           {/*Title desktop*/}
           <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
-
-
+          <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("F EST")}</div>
 
           {/* Two column layout for desktop */}
           <div className="relative top-[10vh] lg:top-0 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
@@ -47,7 +43,6 @@ export default function ManifestPage() {
                 </div>
               </div>
             </div>
-
             {/* Right Column - Empty space */}
             <div className="xl:col-span-1"></div>
           </div>
@@ -58,17 +53,14 @@ export default function ManifestPage() {
               <Image src={ManifestManImage} alt="Mężczyzna z mikrofonem" fill sizes="auto" className="object-cover" priority />
             </div>
           </div>
-
-          {/*Title desktop*/}
-          <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("F EST")}</div>
         </div>
-
 
         {/* Beyond Schema */}
         <section className="py-20 md:py-40 xl:mt-20 xl:grid xl:grid-cols-2 xl:gap-16 xl:items-center">
           {/* Left Column - Titles */}
           <div className="my-30 xl:my-0 xl:col-span-1 xl:flex xl:items-center">
             <div className="flex flex-col items-center xl:font-mono md:text-5xl text-3xl xl:text-4xl md:my-10 xl:items-end xl:my-0 xl:ml-auto">
+              {/* Mobile and desktop versions of the title */}
               <h3 className="mb-4 xl:hidden md:text-5xl">POZA SCHEMATEM</h3>
               <p className="mb-4 hidden xl:inline-block xl:font-bold">Poza schematem</p>
               <p className="mb-4 md:text-6xl md:mb-8 xl:mb-4">=</p>
@@ -111,7 +103,6 @@ export default function ManifestPage() {
               </p>
             </div>
           </div>
-
           {/* Right Column - Logo content */}
           <div className="xl:col-span-1"></div>
         </section>
@@ -147,7 +138,6 @@ export default function ManifestPage() {
               współpracy.
             </p>
           </div>
-
           {/* Right Column - Vision content */}
           <div className="xl:col-span-1"></div>
         </section>
@@ -156,12 +146,10 @@ export default function ManifestPage() {
         <section className="py-10 md:py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start xl:mx-0">
           {/* Left Column - Title */}
           <div className="xl:col-span-1"></div>
-
           {/* Right Column - Content */}
           <div className="xl:col-span-1">
             <h2 className="xl:text-6xl">NASZE</h2>
             <h2 className="mb-12 xl:text-6xl">WSPÓŁPRACE</h2>
-
             <div className="font-mono md:text-xl md:leading-8 xl:w-[90%] xl:leading-10">
               <p className="mt-7 mb-6 xl:mt-0">
                 W czasie naszej działalności współpracowaliśmy z uznanymi instytucjami kultury, takimi jak: <br />
@@ -212,7 +200,6 @@ export default function ManifestPage() {
               </div>
             </div>
           </div>
-
           {/* Right Column - Artists list */}
           <div className="xl:col-span-1"></div>
         </section>
@@ -225,7 +212,6 @@ export default function ManifestPage() {
               <Image src={ManifestFusionImage} alt="Fuzja - grupa artystów na scenie" fill className="object-cover" />
             </div>
           </div>
-
           {/* Right Column - Text */}
           <div className="xl:col-span-1 xl:flex xl:flex-col xl:justify-center">
             <h2 className="mb-12 xl:mb-4 xl:text-6xl">FUZJA</h2>
@@ -235,11 +221,9 @@ export default function ManifestPage() {
                 <strong>zaawansowanej technologii, odwagi w poszukiwaniu innowacji oraz twórczego potencjału ludzi </strong>, z którymi
                 współpracujemy — pozwala nam wciąż odkrywać nowe obszary ekspresji.
               </p>
-
               <p className="ml-16 my-6 xl:my-2 py-6 md:w-[30vw] md:mx-auto md:ml-100 md:my-10 xl:ml-0 xl:w-full">
                 I choć stawiamy na eksperyment, jedno pozostaje niezmienne:{" "}
               </p>
-
               <p className="text-center text-lg md:text-2xl md:w-[50vw] md:leading-10 md:mx-auto xl:text-left xl:leading-8 xl:w-full">
                 <strong>Teatr jest miejscem, które przyjmie wszystko — każdą ideę, każdą emocję, każdy impuls do zmiany.</strong>
               </p>

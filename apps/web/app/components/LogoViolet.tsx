@@ -29,14 +29,14 @@ export default function LogoViolet({ pageType = 'default' }: LogoVioletProps) {
         className={`absolute left-1/2 transform -translate-x-1/2 w-80 h-80 sm:w-128 sm:h-128 md:w-190 md:h-190 object-contain blur-[6px] opacity-50 xl:hidden ${getMobilePositioning()}`}
       />
 
-      {/* Desktop Logo - positioned at 50vh, blurred */}
+      {/* Desktop Logo */}
       <Image
         src={LogoVioletImage}
         alt="Bez Kontekstu"
         className="hidden xl:block absolute left-1/2 top-[50vh] xl:top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-200 h-200 object-contain blur-[4px] opacity-50"
       />
 
-      {/* Desktop Second Logo - positioned at bottom for donators/manifest pages */}
+      {/* Desktop Second Logo */}
       <Image
         src={LogoVioletImage}
         alt="Bez Kontekstu"

@@ -23,10 +23,8 @@ export function Navigation() {
   const { locale, setLocale } = useLocale();
   const routePath = useRoutePath();
 
-  // Check if we're on a project detail page (e.g., /projects/1, /projects/2, etc.)
   const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";
   const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
-
   const isHomePage = routePath === "/";
   const isSoundPage = routePath === "/sounds";
 
@@ -41,8 +39,8 @@ export function Navigation() {
   return (
     <nav className="w-full h-12 absolute flex justify-center z-50">
       <div className="max-w-7xl mt-6 mx-auto">
+        {/* Desktop Navigation */}
         <div className="flex justify-center">
-          {/* Desktop Navigation */}
           <div className="hidden absolute xl:flex space-x-8 ">
             {navigationItems.map((item) => (
               <Link
@@ -166,6 +164,7 @@ export function Navigation() {
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>

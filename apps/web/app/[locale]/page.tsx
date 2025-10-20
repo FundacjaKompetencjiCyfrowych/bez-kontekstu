@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
-import SoundIcon from "@/app/assets/icons/sound_button.png";
 import Logo from "@/app/assets/images/logo.png";
 import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
@@ -30,7 +29,7 @@ export default function Home() {
 
     return (
       <>
-        {/* Mobile version - on screens smaller than xl (1280px) */}
+        {/* Mobile version */}
         <div className="block xl:hidden">
           {mobileLines.map((line, index) => (
             <h3 key={index} className="sm:text-4xl md:text-6xl ml-2 sm:ml-3 mt-2 sm:mt-3">
@@ -39,7 +38,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Desktop version - text separately on xl screens and larger (1280px+) */}
+        {/* Desktop version */}
         <div className={`hidden xl:block xl:text-${textAlign}`}>{titleCutWord(desktopText)}</div>
       </>
     );
@@ -59,7 +58,6 @@ export default function Home() {
         {/*Title */}
         <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ")}</div>
         <div className="block absolute left-0 bottom-0">{titleCutWord("K O N TEKSTU")}</div>
-
         {/* Logo - white */}
         <Image
           src={Logo}
@@ -72,13 +70,12 @@ export default function Home() {
       <div className="relative xl:top-40 px-5 xl:px-0">
         {/* MANIFEST Section*/}
         <section className="overflow-hidden h-screen md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
-          {/* Violet logo - sticky for all sections from Manifest */}
+          {/* Violet logo */}
           <Image
             src={LogoVioletImage}
             alt="Bez Kontekstu"
             className="hidden md:block md:absolute blur-[8px] left-1/2 transform -translate-x-1/2 md:w-160 md:h-160 xl:w-200 xl:h-200 opacity-25"
           />
-
           <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
             {renderResponsiveTitle(["MAN", "IF", "EST"], "MA N I", "right")}
           </div>
@@ -107,8 +104,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
-          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           {renderResponsiveTitle("", "F EST", "left")}
         </section>
 
@@ -129,8 +124,6 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-
-          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           {renderResponsiveTitle("", "J EKTY", "left")}
         </section>
 
@@ -173,8 +166,6 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-
-          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           <div className="absolute bottom-0 left-0">{renderResponsiveTitle("", "P RACE", "left")}</div>
         </section>
 
@@ -183,13 +174,11 @@ export default function Home() {
           <div className=" flex flex-col items-end ">
             <div>{renderResponsiveTitle(["DLA", "DARCZY", "ŃCOW"], "DL A", "right")}</div>
           </div>
-
           <div className="mx-auto flex flex-col items-center text-center text-base sm:text-2xl font-mono">
             <p className="leading-10">Twoje wsparcie</p>
             <p className="leading-10">=</p>
             <p className="leading-10">nowe przestrzenie sztuki</p>
           </div>
-
           <div className="relative flex justify-center items-center transform z-10">
             <Link href={"/donators"} className="w-full md:w-full lg:w-auto">
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
@@ -197,8 +186,6 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-
-          {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           <div>{renderResponsiveTitle("", "DAR CZYŃCÓW", "left")}</div>
         </section>
 

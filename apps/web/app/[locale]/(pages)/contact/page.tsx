@@ -1,22 +1,23 @@
 import Link from "next/link";
 import { Footer } from "@/app/components/Footer";
 import Image, { StaticImageData } from "next/image";
+
 import LocationIcon from "@/app/assets/icons/location.png";
 import InstagramIcon from "@/app/assets/icons/instagram.png";
 import FacebookIcon from "@/app/assets/icons/facebook.png";
 import EmailIcon from "@/app/assets/icons/email.png";
 import PhoneIcon from "@/app/assets/icons/phone.png";
+
 import { Header } from "@/app/components/Header";
 import LogoViolet from "@/app/components/LogoViolet";
 
 export default function ContactPage() {
-  // Icon component for responsive icons
   const ContactIcon = ({ src, alt }: { src: StaticImageData | string; alt: string }) => {
     return (
       <div className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center">
-        {/* Mobile icon - visible on small screens */}
+        {/* Mobile icon */}
         <Image src={src} alt={alt} width={20} height={20} className="block md:hidden" />
-        {/* Tablet/Desktop icon - visible on md+ screens */}
+        {/* Tablet/Desktop icon */}
         <Image src={src} alt={alt} width={32} height={32} className="hidden md:block" />
       </div>
     );
@@ -34,11 +35,11 @@ export default function ContactPage() {
       {/*Title mobile*/}
       <Header title="KON TA KT" className="xl:hidden" showLogo={false} />
       <LogoViolet pageType="contact" />
+
       <div className="relative px-5 md:px-0  flex xl:justify-center xl:items-center xl:h-full xl:mt-[90px]">
-
-
         {/*Title desktop*/}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("KO N")}</div>
+        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("T AKT")}</div>
 
         <div className="relative flex flex-col font-mono sm:landscape:pt-10 md:text-xl lg:landscape:h-screen xl:landscape:h-auto md:leading-12 xl:text-base xl:leading-5 xl:flex xl:justify-center">
           {/* Adres */}
@@ -85,11 +86,7 @@ export default function ContactPage() {
             </ul>
           </div>
         </div>
-
-        {/*Title desktop*/}
-        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("T AKT")}</div>
       </div>
-
       <Footer />
     </div>
   );

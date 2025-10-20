@@ -48,13 +48,12 @@ export default function DonorsPage() {
       });
   };
 
-  // Copy icon component
   const CopyIcon = () => {
     return (
       <div className="w-6 h-6 md:w-12 md:h-12 flex items-center justify-center">
-        {/* Mobile icon - visible on small screens */}
+        {/* Mobile icon */}
         <Image src={copyIcon} alt="Copy" width={24} height={24} className="block md:hidden" />
-        {/* Tablet/Desktop icon - visible on md+ screens */}
+        {/* Tablet/Desktop icon */}
         <Image src={copyIcon} alt="Copy" width={40} height={40} className="hidden md:block" />
       </div>
     );
@@ -73,10 +72,9 @@ export default function DonorsPage() {
       <LogoViolet />
 
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
-        {/*Title desktop - top right*/}
+        {/*Title desktop */}
         <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
-
-
+        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("DAR CZYŃCÓW")}</div>
 
         {/* Two column layout for desktop */}
         <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">
@@ -92,9 +90,6 @@ export default function DonorsPage() {
             </div>
           </div>
         </div>
-
-        {/*Title desktop - bottom left*/}
-        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("DAR CZYŃCÓW")}</div>
       </div>
 
       {/* Rest of content */}
@@ -207,7 +202,6 @@ export default function DonorsPage() {
                   <CopyIcon />
                 </div>
               </button>
-
 
               {/* REGON */}
               <button
