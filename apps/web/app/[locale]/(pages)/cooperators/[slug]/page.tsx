@@ -190,11 +190,11 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
           <div className="w-1/2 flex flex-col justify-center">
             {/* Name Section */}
             <div className="mb-8">
-              <h1 className="text-4xl xl:text-6xl mb-8">
+              <h2 className="text-4xl xl:text-6xl mb-8">
                 {name?.split(" ").map((word, index) => (
                   <div key={index + word}>{word}</div>
                 ))}
-              </h1>
+              </h2>
             </div>
 
             {/* Description Section */}

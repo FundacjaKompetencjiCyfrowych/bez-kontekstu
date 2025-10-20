@@ -6,6 +6,7 @@ import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import { useLocale, useRoutePath } from "../lib/locales";
+import LanguageIcon from "@/app/assets/icons/lang_glob.png";
 
 const navigationItems: NavItem[] = [
   { title: "STRONA GŁÓWNA", href: "/" },
@@ -33,76 +34,69 @@ export function Navigation() {
     setLocale(locale === "pl" ? "en" : "pl");
   };
 
+  const toggleSound = () => {
+    console.log("toggleSound");
+  };
+
   return (
-    <nav className="w-full absolute flex justify-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center h-16 mt-6">
+    <nav className="w-full h-12 absolute flex justify-center z-50">
+      <div className="max-w-7xl mt-6 mx-auto">
+        <div className="flex justify-center">
           {/* Desktop Navigation */}
-          <div className="hidden absolute xl:flex items-center space-x-8 ">
+          <div className="hidden absolute xl:flex space-x-8 ">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-lg font-medium transition-colors font-defectica"
+                className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
               >
                 {item.title.toLocaleUpperCase()}
               </Link>
             ))}
 
-            {/* Language Toggle Switch */}
-            <div className="hidden lg:block space-x-8">
-              <div className="flex items-center justify-between">
-                {/* Language Labels */}
-                <div className="flex items-center gap-4">
-                  <span
-                    className={`text-sm xl:text-lg font-defectica transition-colors ${locale === "pl" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
-                  >
-                    PL
-                  </span>
+            {/* Language */}
+            <div className="w-[85px] flex items-center justify-center gap-3">
+              {/* Toggle Switch */}
+              <button
+                onClick={toggleLanguage}
+                aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
+                className="cursor-pointer"
+              >
+                <Image
+                  src={LanguageIcon}
+                  alt="Language button"
+                  width={20}
+                  height={20}
+                  className="brightness-20 hover:brightness-100 transition-all duration-300"
+                />
+              </button>
+              <span className={`text-sm xl:text-lg font-defectica leading-0 text-[#3f3f41]`}>{locale === "en" ? "EN" : "PL"}</span>
 
-                  {/* Toggle Switch */}
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={locale === "en"}
-                      onChange={toggleLanguage}
-                      className="sr-only peer"
-                      aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
-                    />
-                    <div className="relative w-10 h-5 bg-neutral-600 border border-white peer-focus:outline-none rounded-full peer flex items-center">
-                      <div
-                        className={`w-4 h-4 bg-white border border-gray-500 rounded-full transition-all duration-300 transform ${locale === "en" ? "translate-x-5" : "translate-x-0"}`}
-                      ></div>
-                    </div>
-                  </label>
-
-                  <span
-                    className={`text-sm xl:text-lg font-defectica transition-colors ${locale === "en" ? "text-[#3f3f41] font-bold" : "text-[#3f3f41]"}`}
-                  >
-                    ENG
-                  </span>
-                </div>
-
-                <div className="flex justify-end items-center xl:ml-6">
-                  <Image src={SoundIcon} alt="Sound button" width={20} height={20} className="brightness-50" />
-                </div>
-              </div>
             </div>
+            <button onClick={toggleSound} aria-label={`Toggle sound`} className="cursor-pointer">
+              <Image
+                src={SoundIcon}
+                alt="Sound button"
+                width={20}
+                height={20}
+                className="brightness-30 hover:brightness-100 transition-all duration-300"
+              />
+            </button>
           </div>
         </div>
 
         {/* Mobile Navigation Container */}
         {!isProjectDetailPage && !isCooperatorDetailPage && (
-          <div className="xl:hidden w-full top-0 flex justify-center">
+          <div className="xl:hidden w-full top-0 flex justify-center z-50">
             {/* Animated menu */}
             <div
               className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isHomePage
-                ? (isMenuOpen
+                ? isMenuOpen
                   ? "top-[470px] md:landscape:top-[330px] lg:landscape:top-[470px]"
-                  : `top-[150px] md:top-[250px] md:landscape:top-[290px] lg:landscape:top-[38vh]`)
-                : (isMenuOpen
+                  : `top-[150px] md:top-[250px] md:landscape:top-[290px] lg:landscape:top-[38vh]`
+                : isMenuOpen
                   ? "top-[470px]"
-                  : `top-[25vh] ${isSoundPage ? "sm:landscape:top-[140px] md:landscape:top-[215px]" : "sm:landscape:top-[180px] md:landscape:top-[290px]"} lg:landscape:top-[38vh]`)
+                  : `top-[25vh] ${isSoundPage ? "sm:landscape:top-[140px] md:landscape:top-[215px]" : "sm:landscape:top-[180px] md:landscape:top-[290px]"} lg:landscape:top-[38vh]`
                 }`}
             >
               {/* Gray bottom line for menu open button */}
@@ -124,7 +118,7 @@ export function Navigation() {
               }}
             >
               {/* Menu items */}
-              <div className="overflow-visible pt-5 bg-[#0d0b0e]">
+              <div className="overflow-visible pt-5">
                 {navigationItems.map((item) => (
                   <div key={item.href} className="mx-6">
                     <Link
@@ -141,7 +135,7 @@ export function Navigation() {
                 <div className="mx-9 py-4 md:landscape:py-1 lg:landscape:py-3">
                   <div className="flex items-center justify-between">
                     {/* Language Labels */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                       <span
                         className={`text-xl font-defectica transition-colors ${locale === "pl" ? "text-gray-100 font-bold" : "text-gray-100"}`}
                       >
@@ -157,9 +151,9 @@ export function Navigation() {
                           className="sr-only peer"
                           aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
                         />
-                        <div className="relative w-15 h-8 bg-neutral-600 border border-white peer-focus:outline-none rounded-full peer flex items-center">
+                        <div className="relative w-13 h-7 bg-neutral-600 peer-focus:outline-none rounded-full peer flex items-center">
                           <div
-                            className={`w-5 h-5 bg-white border border-gray-300 rounded-full transition-all duration-300 transform ${locale === "en" ? "translate-x-8" : "translate-x-1"}`}
+                            className={`w-5 h-5 bg-white border border-gray-300 rounded-full transition-all duration-300 transform ${locale === "en" ? "translate-x-7" : "translate-x-1"}`}
                           ></div>
                         </div>
                       </label>
@@ -167,7 +161,7 @@ export function Navigation() {
                       <span
                         className={`text-xl font-defectica transition-colors ${locale === "en" ? "text-gray-100 font-bold" : "text-gray-100"}`}
                       >
-                        ENG
+                        EN
                       </span>
                     </div>
                   </div>

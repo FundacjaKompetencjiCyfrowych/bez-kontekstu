@@ -15,6 +15,9 @@ type SliderProps = {
   onSlideChange?: (slide: number) => void;
 };
 
+/**
+ * A reusable, client-side horizontal slider with pagination for displaying groups of elements (e.g., project cards or images).
+ */
 export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSlideChange }: SliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const totalSlides = Math.ceil(children.length / itemsPerSlide);

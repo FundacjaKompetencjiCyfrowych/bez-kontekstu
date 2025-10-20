@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
-import LogoViolet from "@/app/components/LogoViolet";
 import { CollectionShowcase } from "@/app/components/CollectionShowcase";
 
 const getProjectsPage = cache(async (locale: string) => {
@@ -28,9 +27,8 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projects = data?.projects || [];
 
   return (
-    <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
+    <div className="h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
       <Header title="PRO JEK TY" className="xl:hidden" showLogo={false} />
-      <LogoViolet />
       <CollectionShowcase collection={projects} lang={locale} directory="projects" />
       <Footer />
     </div>

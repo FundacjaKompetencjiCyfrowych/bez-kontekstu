@@ -1,6 +1,5 @@
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
-import LogoViolet from "@/app/components/LogoViolet";
 import { CollectionShowcase } from "@/app/components/CollectionShowcase";
 import { cache } from "react";
 import { cooperatorsPageQuery } from "@/app/lib/sanity/queries";
@@ -24,9 +23,8 @@ export default async function CooperatorsPage({ params }: { params: Promise<{ lo
   const cooperators = data?.cooperators || [];
 
   return (
-    <div className="h-screen px-5 xl:overflow-hidden flex flex-col">
+    <div className="h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
       <Header title="WSPÓ ŁPR ACE" className="xl:hidden" showLogo={false} />
-      <LogoViolet />
       <CollectionShowcase collection={cooperators} lang={locale} directory="cooperators" />
       <Footer />
     </div>

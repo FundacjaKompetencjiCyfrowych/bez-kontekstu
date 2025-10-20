@@ -1,5 +1,6 @@
 import { Image } from "./cms/ContentImage";
 import { ImageCard } from "./ImageCard";
+import LogoViolet from "./LogoViolet";
 import { Slider } from "./Slider";
 
 type CollectionItem = {
@@ -20,14 +21,18 @@ type CollectionShowcaseProps = {
 
 const titleCutWord = (title: string) =>
   title.split(" ").map((word, index) => (
-    <h1 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
+    <h2 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
       {word}
-    </h1>
+    </h2>
   ));
 
+/**
+ * CollectionShowcase: displays a collection of items as a vertical stack on mobile/tablet and a horizontal slider on desktop
+ */
 export function CollectionShowcase({ collection = [], lang, directory }: CollectionShowcaseProps) {
   return (
     <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
+      <LogoViolet />
       <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("PR O")}</div>
 
       <section className="xl:overflow-hidden h-auto mx-auto flex flex-col items-center mt-[50px] xl:mt-0 w-full max-w-[1600px]">

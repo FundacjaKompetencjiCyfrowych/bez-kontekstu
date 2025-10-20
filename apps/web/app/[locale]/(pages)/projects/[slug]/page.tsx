@@ -11,7 +11,6 @@ import { Footer } from "@/app/components/Footer";
 import LogoViolet from "@/app/components/LogoViolet";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
-import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
@@ -41,7 +40,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const images = multimedia?.filter((item) => item._type === "img") || [];
 
   return (
-    <div className="bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl xl:absolute xl:top-[50px] w-full">
+    <div className="w-full bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl xl:absolute xl:top-[50px]">
       {/* Navigation Header */}
       <div className="relative px-8 py-6 md:py-12 z-10">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
@@ -51,20 +50,12 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       <LogoViolet />
-      {/*Second violet logo - desktop */}
-      <div className="hidden xl:block">
-        <Image
-          src={LogoVioletImage}
-          alt="Bez Kontekstu"
-          className="hidden xl:block xl:absolute blur-[8px] left-1/2 top-[100vh] transform -translate-x-1/2 xl:w-200 xl:h-200 opacity-25"
-        />
-      </div>
 
       {/* Main Content */}
       <div className="relative pb-16">
         {/* Title and Year */}
         <div className="mb-8">
-          <h1 className="mt-4 mb-16">{name?.toUpperCase()}</h1>
+          <h2 className="mt-4 mb-16">{name?.toUpperCase()}</h2>
           <p className="text-xl md:text-3xl">{timestamp?.slice(0, 4)}</p>
         </div>
 
