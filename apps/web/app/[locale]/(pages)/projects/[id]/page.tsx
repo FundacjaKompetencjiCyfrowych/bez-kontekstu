@@ -88,7 +88,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
       <div className="relative pb-16">
         {/* Title and Year */}
         <div className="mb-8">
-          <h1 className="mt-4 mb-16">{project.name.toUpperCase()}</h1>
+          <h2 className="mt-4 mb-16">{project.name.toUpperCase()}</h2>
           <p className="text-xl md:text-3xl">{project.year}</p>
         </div>
 

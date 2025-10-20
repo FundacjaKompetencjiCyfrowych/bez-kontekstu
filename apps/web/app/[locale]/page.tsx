@@ -15,9 +15,9 @@ export default function Home() {
 
   const titleCutWord = (title: string) =>
     title.split(" ").map((word, index) => (
-      <h1 className="xl:mt-0 xl:ml-0" key={index}>
+      <h2 className="xl:mt-0 xl:ml-0" key={index}>
         {word}
-      </h1>
+      </h2>
     ));
 
   // Function to render responsive titles - different layouts for mobile and desktop
@@ -33,9 +33,9 @@ export default function Home() {
         {/* Mobile version - on screens smaller than xl (1280px) */}
         <div className="block xl:hidden">
           {mobileLines.map((line, index) => (
-            <h1 key={index} className="sm:text-4xl md:text-6xl ml-2 sm:ml-3 mt-2 sm:mt-3">
+            <h3 key={index} className="sm:text-4xl md:text-6xl ml-2 sm:ml-3 mt-2 sm:mt-3">
               {line}
-            </h1>
+            </h3>
           ))}
         </div>
 
@@ -47,6 +47,8 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto bg-[#0d0b0e]">
+      <h1 className="sr-only">Fundacja Bez Kontekstu</h1>
+
       {/*Title mobile*/}
       <div className="mx-4">
         <Header title="STRONA GŁÓ WNA" className="xl:hidden" showLogo={false} />

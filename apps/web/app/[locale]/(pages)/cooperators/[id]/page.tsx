@@ -188,8 +188,8 @@ export default function CooperatorBioPage({ params }: CooperatorPageProps) {
 
             {/* Name Section */}
             <div className="mb-8">
-              <h1 className="text-4xl xl:text-6xl mb-2">{cooperator.name.toUpperCase()}</h1>
-              <h1 className="text-4xl xl:text-6xl mb-8">{cooperator.surname.toUpperCase()}</h1>
+              <h2 className="text-4xl xl:text-6xl mb-2">{cooperator.name.toUpperCase()}</h2>
+              <h2 className="text-4xl xl:text-6xl mb-8">{cooperator.surname.toUpperCase()}</h2>
             </div>
 
             {/* Description Section */}

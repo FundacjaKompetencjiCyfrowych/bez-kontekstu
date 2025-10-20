@@ -28,8 +28,8 @@ export default function SoundsPage() {
         <div className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20">
           {/* Title only for XL screens */}
           <div className="hidden xl:flex xl:flex-col">
-            <h1>BEATS&apos;N&apos;</h1>
-            <h1>PIECES</h1>
+            <h2>BEATS&apos;N&apos;</h2>
+            <h2>PIECES</h2>
           </div>
         </div>
 

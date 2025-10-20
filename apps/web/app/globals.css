@@ -19,7 +19,7 @@
     padding: 0;
   }
 
-  h1 {
+  h2 {
     font-family: var(--font-defectica);
     font-size: 42px;
     color: white;
@@ -28,18 +28,18 @@
 
   /* Responsive h1 sizes for tablets and desktop */
   @media (min-width: 768px) {
-    h1 {
+    h2 {
       font-size: 72px;
     }
   }
 
   @media (min-width: 1024px) {
-    h1 {
+    h2 {
       font-size: 84px;
     }
   }
 
-  h2 {
+  h3 {
     font-family: var(--font-defectica);
     font-size: 32px;
   }
