@@ -46,6 +46,15 @@ export const useLocale = () => {
   };
 };
 
+/**
+ * Returns the current locale string (e.g. 'en-US' or 'pl').
+ */
+export const useCurrentLocale = (): Locale => {
+  const pathname = usePathname();
+  const seg = pathname.split("/").filter(Boolean)[0];
+  return seg && isLocale(seg) ? seg : defaultLocale;
+};
+
 /** Returns pathname without locale prefix */
 export const useRoutePath = () => {
   const pathname = usePathname();

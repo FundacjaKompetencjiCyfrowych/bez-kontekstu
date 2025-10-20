@@ -12,4 +12,5 @@ export const SANITY_CONFIG = {
   serverToken: false,
   queries: "apps/web/app/lib/sanity/queries.ts",
   types: "apps/web/app/lib/sanity/types.ts",
+  imageQuality: 75,
 } as const;

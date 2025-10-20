@@ -13,15 +13,42 @@
  */
 
 // Source: schema.json
-export type Category = {
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: string;
+export type ImgOrVideo = Array<
+  | {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "img";
+      _key: string;
+    }
+  | {
+      url?: string;
+      _type: "video";
+      _key: string;
+    }
+>;
+
+export type LinkList = Array<
+  {
+    _key: string;
+  } & Link
+>;
+
+export type Link = {
+  _type: "link";
+  url?: string;
+  label?: string;
+  newTab?: boolean;
 };
+
+export type UrlOrPath = string;
 
 export type BlockContent = Array<
   | {
@@ -84,62 +111,101 @@ export type InternationalizedArrayReferenceValue = {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
+        [internalGroqTypeReferenceTo]?: "manifest";
       }
     | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "author";
+        [internalGroqTypeReferenceTo]?: "projects";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "cooperators";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "donators";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sounds";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "project";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "cooperator";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "privacy";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "settings";
       };
 };
 
-export type Post = {
+export type Settings = {
   _id: string;
-  _type: "post";
+  _type: "settings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  slug?: Slug;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
+  footer?: {
+    links?: LinkList;
+    socials?: Array<
+      {
+        _key: string;
+      } & Link
+    >;
   };
-  mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  publishedAt?: string;
-  body?: BlockContent;
-  language?: string;
 };
 
-export type Author = {
+export type Privacy = {
   _id: string;
-  _type: "author";
+  _type: "privacy";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Cooperator = {
+  _id: string;
+  _type: "cooperator";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
   name?: string;
   slug?: Slug;
+  description?: string;
   image?: {
     asset?: {
       _ref: string;
@@ -150,27 +216,130 @@ export type Author = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    alt?: string;
+    _type: "richImage";
   };
-  bio?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+  socials?: Array<
+    {
+      _key: string;
+    } & Link
+  >;
+  projects?: Array<string>;
+};
+
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+  name?: string;
+  slug?: Slug;
+  timestamp?: string;
+  description?: string;
+  cover?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "richImage";
+  };
+  featured?: ImgOrVideo;
+  contributors?: Array<{
+    category?: string;
+    people?: Array<string>;
+    subcategories?: Array<{
+      subCategory?: string;
+      people?: Array<string>;
+      _type: "subcategoryGroup";
       _key: string;
     }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+    _type: "categoryGroup";
     _key: string;
   }>;
+  multimedia?: ImgOrVideo;
+};
+
+export type RichImage = {
+  _type: "richImage";
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
+};
+
+export type Sounds = {
+  _id: string;
+  _type: "sounds";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   language?: string;
+  meta?: Meta;
+};
+
+export type Donators = {
+  _id: string;
+  _type: "donators";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Cooperators = {
+  _id: string;
+  _type: "cooperators";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Contact = {
+  _id: string;
+  _type: "contact";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Projects = {
+  _id: string;
+  _type: "projects";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Manifest = {
+  _id: string;
+  _type: "manifest";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
 };
 
 export type Home = {
@@ -179,8 +348,15 @@ export type Home = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
   language?: string;
+  meta?: Meta;
+};
+
+export type Meta = {
+  _type: "meta";
+  title?: string;
+  description?: string;
+  ogImage?: RichImage;
 };
 
 export type InternationalizedArrayReference = Array<
@@ -308,13 +484,26 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
-  | Category
+  | ImgOrVideo
+  | LinkList
+  | Link
+  | UrlOrPath
   | BlockContent
   | TranslationMetadata
   | InternationalizedArrayReferenceValue
-  | Post
-  | Author
+  | Settings
+  | Privacy
+  | Cooperator
+  | Project
+  | RichImage
+  | Sounds
+  | Donators
+  | Cooperators
+  | Contact
+  | Projects
+  | Manifest
   | Home
+  | Meta
   | InternationalizedArrayReference
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -329,18 +518,206 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/app/lib/sanity/queries.ts
-// Variable: allQuery
-// Query: *
-export type AllQueryResult = Array<
+// Variable: projectsPageQuery
+// Query: *[_type == "projects" && language == $lang][0]{  "projects": *[_type == "project" && language == $lang] | order(timestamp desc){    _id,    cover {      "lqip": asset->metadata.lqip,      ...    },    name,    slug,    timestamp  },  meta}
+export type ProjectsPageQueryResult = {
+  projects: Array<{
+    _id: string;
+    cover: {
+      lqip: string | null;
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    } | null;
+    name: string | null;
+    slug: Slug | null;
+    timestamp: string | null;
+  }>;
+  meta: Meta | null;
+} | null;
+// Variable: projectPageQuery
+// Query: *[slug.current == $slug && language == $lang][0]{  meta,  _id,  name,  timestamp,  slug,  "next":    *[_type == "project" && language == $lang && timestamp > ^.timestamp]    | order(timestamp asc)[0]{      name,      slug    },  "previous":    *[_type == "project" && language == $lang && timestamp < ^.timestamp]    | order(timestamp desc)[0]{      name,      slug    },  contributors,  featured,  multimedia,  description}
+export type ProjectPageQueryResult =
   | {
+      meta: null;
       _id: string;
-      _type: "author";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      name?: string;
-      slug?: Slug;
-      image?: {
+      name: null;
+      timestamp: null;
+      slug: null;
+      next: null;
+      previous: null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: null;
+      timestamp: null;
+      slug: null;
+      next: null;
+      previous: null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: null;
+    }
+  | {
+      meta: null;
+      _id: string;
+      name: null;
+      timestamp: null;
+      slug: null;
+      next: null;
+      previous: null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: string | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      timestamp: null;
+      slug: Slug | null;
+      next: null;
+      previous: null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: string | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      timestamp: string | null;
+      slug: Slug | null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      contributors: Array<{
+        category?: string;
+        people?: Array<string>;
+        subcategories?: Array<{
+          subCategory?: string;
+          people?: Array<string>;
+          _type: "subcategoryGroup";
+          _key: string;
+        }>;
+        _type: "categoryGroup";
+        _key: string;
+      }> | null;
+      featured: ImgOrVideo | null;
+      multimedia: ImgOrVideo | null;
+      description: string | null;
+    }
+  | null;
+// Variable: cooperatorsPageQuery
+// Query: *[_type == "cooperator" && language == $lang][0]{  "cooperators": *[_type == "cooperator" && language == $lang] | order(name asc){    _id,    image {      "lqip": asset->metadata.lqip,      ...    },    name,    slug,  },  meta}
+export type CooperatorsPageQueryResult = {
+  cooperators: Array<{
+    _id: string;
+    image: {
+      lqip: string | null;
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    } | null;
+    name: string | null;
+    slug: Slug | null;
+  }>;
+  meta: Meta | null;
+} | null;
+// Variable: cooperatorPageQuery
+// Query: *[slug.current == $slug && language == $lang][0]{  meta,  _id,  name,  slug,  description,  image {    "lqip": asset->metadata.lqip,    ...  },  socials[],  projects[],    "next":    *[_type == "cooperator" && language == $lang && name > ^.name]    | order(name asc)[0]{      name,      slug    },  "previous":    *[_type == "cooperator" && language == $lang && name < ^.name]    | order(name desc)[0]{      name,      slug    },}
+export type CooperatorPageQueryResult =
+  | {
+      meta: null;
+      _id: string;
+      name: null;
+      slug: null;
+      description: null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: null;
+      previous: null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: null;
+      slug: null;
+      description: null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: null;
+      previous: null;
+    }
+  | {
+      meta: null;
+      _id: string;
+      name: null;
+      slug: null;
+      description: string | null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: null;
+      previous: null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      slug: Slug | null;
+      description: string | null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      slug: Slug | null;
+      description: string | null;
+      image: {
+        lqip: string | null;
         asset?: {
           _ref: string;
           _type: "reference";
@@ -350,145 +727,33 @@ export type AllQueryResult = Array<
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
-        _type: "image";
-      };
-      bio?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal";
-        listItem?: never;
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }>;
-      language?: string;
-    }
-  | {
-      _id: string;
-      _type: "category";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      description?: string;
-    }
-  | {
-      _id: string;
-      _type: "home";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      language?: string;
-    }
-  | {
-      _id: string;
-      _type: "post";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      slug?: Slug;
-      author?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "author";
-      };
-      mainImage?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      };
-      categories?: Array<{
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        _key: string;
-        [internalGroqTypeReferenceTo]?: "category";
-      }>;
-      publishedAt?: string;
-      body?: BlockContent;
-      language?: string;
-    }
-  | {
-      _id: string;
-      _type: "sanity.fileAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      source?: SanityAssetSourceData;
-    }
-  | {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    }
-  | {
-      _id: string;
-      _type: "translation.metadata";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      translations?: Array<
+        alt?: string;
+        _type: "richImage";
+      } | null;
+      socials: Array<
         {
           _key: string;
-        } & InternationalizedArrayReferenceValue
-      >;
-      schemaTypes?: Array<string>;
+        } & Link
+      > | null;
+      projects: Array<string> | null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
     }
->;
+  | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*": AllQueryResult;
+    '*[_type == "projects" && language == $lang][0]{\n  "projects": *[_type == "project" && language == $lang] | order(timestamp desc){\n    _id,\n    cover {\n      "lqip": asset->metadata.lqip,\n      ...\n    },\n    name,\n    slug,\n    timestamp\n  },\n  meta\n}': ProjectsPageQueryResult;
+    '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  timestamp,\n  slug,\n  "next":\n    *[_type == "project" && language == $lang && timestamp > ^.timestamp]\n    | order(timestamp asc)[0]{\n      name,\n      slug\n    },\n  "previous":\n    *[_type == "project" && language == $lang && timestamp < ^.timestamp]\n    | order(timestamp desc)[0]{\n      name,\n      slug\n    },\n  contributors,\n  featured,\n  multimedia,\n  description\n}': ProjectPageQueryResult;
+    '*[_type == "cooperator" && language == $lang][0]{\n  "cooperators": *[_type == "cooperator" && language == $lang] | order(name asc){\n    _id,\n    image {\n      "lqip": asset->metadata.lqip,\n      ...\n    },\n    name,\n    slug,\n  },\n  meta\n}': CooperatorsPageQueryResult;
+    '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  slug,\n  description,\n  image {\n    "lqip": asset->metadata.lqip,\n    ...\n  },\n  socials[],\n  projects[],\n    "next":\n    *[_type == "cooperator" && language == $lang && name > ^.name]\n    | order(name asc)[0]{\n      name,\n      slug\n    },\n  "previous":\n    *[_type == "cooperator" && language == $lang && name < ^.name]\n    | order(name desc)[0]{\n      name,\n      slug\n    },\n}': CooperatorPageQueryResult;
   }
 }

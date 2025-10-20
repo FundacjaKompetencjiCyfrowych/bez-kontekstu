@@ -5,7 +5,7 @@ import Logo from "@/app/assets/images/logo.png";
 import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
-import { cooperators } from "@/app/lib/cooperators";
+import { cooperators } from "@/app/lib/placeholders_old/cooperators";
 import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 import { Header } from "../components/Header";
 
@@ -56,7 +56,6 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative top-[50px] xl:top-[100px] overflow-hidden h-[65vh] xl:h-[800px] flex flex-col justify-between mx-6 z-10">
-
         {/*Title */}
         <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ")}</div>
         <div className="block absolute left-0 bottom-0">{titleCutWord("K O N TEKSTU")}</div>
@@ -73,7 +72,6 @@ export default function Home() {
       <div className="relative xl:top-40 px-5 xl:px-0">
         {/* MANIFEST Section*/}
         <section className="overflow-hidden h-screen md:h-[70vh] lg:h-[80vh] mt-[150px] xl:h-[800px] xl:mb-20 flex flex-col justify-around">
-
           {/* Violet logo - sticky for all sections from Manifest */}
           <Image
             src={LogoVioletImage}
@@ -109,8 +107,6 @@ export default function Home() {
               </Link>
             </div>
           </div>
-
-
 
           {/* Desktop version - text separately on xl screens and larger (1280px+) */}
           {renderResponsiveTitle("", "F EST", "left")}

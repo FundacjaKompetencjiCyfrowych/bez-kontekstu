@@ -1,19 +1,19 @@
 "use client";
 
 import React, { useId } from "react";
-import Image from "next/image";
 import { useSliderNavigation } from "./hooks/useSliderNavigation";
 import { useKeyboardNavigation } from "./hooks/useKeyboardNavigation";
 import { useBodyScrollLock } from "./hooks/useBodyScrollLock";
+import { ContentImage, Image } from "./cms/ContentImage";
 
-interface ImageSliderProps {
-  images: string[];
+interface LightboxProps {
+  images: Image[];
   isOpen: boolean;
   onClose: () => void;
   initialIndex?: number;
 }
 
-function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: ImageSliderProps) {
+function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: LightboxProps) {
   // Generate unique IDs for accessibility
   const sliderId = useId();
   const closeButtonId = useId();
@@ -77,19 +77,19 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
         {/* Current image */}
         <div className="relative max-w-full max-h-full">
           <div className="relative overflow-hidden">
-            <Image
+            <ContentImage
               id={mainImageId}
               key={currentIndex} // Force re-render for animation
-              src={images[currentIndex]}
-              alt={`Image ${currentIndex + 1} of ${images.length}`}
+              image={images[currentIndex]}
               width={800}
               height={600}
-              className={`max-w-full max-h-full sm:landscape:h-screen object-contain transition-all duration-500 ease-in-out transform ${animationDirection === "left"
-                ? "animate-slideInLeft"
-                : animationDirection === "right"
-                  ? "animate-slideInRight"
-                  : "animate-fadeIn"
-                }`}
+              className={`max-w-full max-h-full sm:landscape:h-screen object-contain transition-all duration-500 ease-in-out transform ${
+                animationDirection === "left"
+                  ? "animate-slideInLeft"
+                  : animationDirection === "right"
+                    ? "animate-slideInRight"
+                    : "animate-fadeIn"
+              }`}
               priority
             />
           </div>
@@ -118,14 +118,15 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
             <button
               key={index}
               onClick={() => goToItem(index)}
-              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden border-2 transition-all duration-300 transform hover:scale-110 ${index === currentIndex ? "border-violet-800 scale-105" : "border-transparent"
-                }`}
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden border-2 transition-all duration-300 transform hover:scale-110 ${
+                index === currentIndex ? "border-violet-800 scale-105" : "border-transparent"
+              }`}
               role="tab"
               aria-selected={index === currentIndex}
               aria-label={`Go to image ${index + 1} of ${images.length}`}
               aria-controls={mainImageId}
             >
-              <Image src={image} alt={`Thumbnail ${index + 1}`} fill className="object-cover" sizes="64px" />
+              <ContentImage image={image} fill className="object-cover" sizes="64px" />
             </button>
           ))}
         </div>
@@ -135,4 +136,4 @@ function ImageSliderComponent({ images, isOpen, onClose, initialIndex = 0 }: Ima
 }
 
 // Export with React.memo for performance optimization
-export const ImageSlider = React.memo(ImageSliderComponent);
+export const Lightbox = React.memo(LightboxComponent);

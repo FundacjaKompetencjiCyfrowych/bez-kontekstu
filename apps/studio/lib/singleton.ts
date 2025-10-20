@@ -4,7 +4,17 @@ import {capitalize} from './utils'
 /**
  * List of singleton document types; **All new singleton documents must be added here**
  */
-export const singletonTypes = new Set(['home'])
+export const singletonTypes = new Set([
+  'home',
+  'manifest',
+  'projects',
+  'contact',
+  'cooperators',
+  'donators',
+  'sounds',
+  'privacy',
+  'settings',
+])
 
 /**
  * List of actions available on singleton documents
@@ -32,8 +42,12 @@ export const filterSingletonTemplates = (templates: any[]) =>
 /**
  * Structure API helper to create a singleton list item
  */
-export const Singleton = (S: StructureBuilder, type: string, title?: string) =>
+export const Singleton = (
+  S: StructureBuilder,
+  options: {type: string; title?: string; icon?: any},
+) =>
   S.listItem()
-    .title(title || capitalize(type))
-    .id(type)
-    .child(S.document().schemaType(type).documentId(type))
+    .title(options.title || capitalize(options.type))
+    .id(options.type)
+    .child(S.document().schemaType(options.type).documentId(options.type))
+    .icon(options.icon)
