@@ -1,41 +1,74 @@
+// Client Component - wymagany dla interaktywności (useState, handlePlay)
 "use client";
 import { useState } from "react";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 import { TrackItem } from "@/app/components/TrackItem";
 import LogoViolet from "@/app/components/LogoViolet";
+import { Metadata } from "next";
+
+const metadata: Metadata = {
+  title: "Beats'n'Pieces - Fundacja Bez Kontekstu",
+  description: "Posłuchaj utworów muzycznych Fundacji Bez Kontekstu. Kolekcja dźwięków i kompozycji.",
+  keywords: ["muzyka", "beats", "pieces", "fundacja", "bez kontekstu", "dźwięki", "kompozycje"],
+};
+
+interface Track {
+  id: number;
+  title: string;
+}
+
+interface SoundsPageState {
+  currentTrack: number | null;
+}
 
 export default function SoundsPage() {
   const [currentTrack, setCurrentTrack] = useState<number | null>(null);
-  const tracks = ["Nazwa utworu", "Nazwa utworu", "Nazwa utworu", "Nazwa utworu", "Nazwa utworu", "Nazwa utworu"];
+  const tracks: Track[] = [
+    { id: 1, title: "Nazwa utworu" },
+    { id: 2, title: "Nazwa utworu" },
+    { id: 3, title: "Nazwa utworu" },
+    { id: 4, title: "Nazwa utworu" },
+    { id: 5, title: "Nazwa utworu" },
+    { id: 6, title: "Nazwa utworu" }
+  ];
 
   const handlePlay = (index: number) => {
     setCurrentTrack(currentTrack === index ? null : index);
   };
 
   return (
-    <div className="min-h-screen px-5 mx-auto flex flex-col bg-[#0d0b0e]">
+    <div className="flex min-h-screen flex-col bg-[#0d0b0e] px-5 mx-auto">
       <Header title="BEATS'N' PIECES" className="xl:hidden" showLogo={false} />
 
-      <div className="relative max-w-7xl xl:mt-24 flex-1 flex flex-col xl:flex-row">
+      <main className="relative flex max-w-7xl flex-1 flex-col xl:mt-24 xl:flex-row">
         <LogoViolet pageType="sounds" />
         {/* Left column - Title */}
-        <div className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20">
+        <section className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20" aria-labelledby="page-title">
           {/* Title only for XL screens */}
-          <div className="hidden xl:flex xl:flex-col">
+          <div className="hidden text-7xl  xl:flex xl:flex-col">
             <h2>BEATS&apos;N&apos;</h2>
             <h2>PIECES</h2>
           </div>
-        </div>
+        </section>
         {/* Right column - Tracklist */}
-        <div className="xl:w-1/2 w-full flex-1 flex lg:mt-20 items-end md:items-center justify-center xl:justify-start xl:self-center xl:mt-20 md:px-5 xl:px-0">
-          <div className="max-w-4xl w-full xl:w-[85%] ">
-            {tracks.map((track, index) => (
-              <TrackItem key={index} title={track} isPlaying={currentTrack === index} onPlay={() => handlePlay(index)} />
-            ))}
+        <section className="flex w-full flex-1 items-end justify-center lg:mt-20 md:items-center md:px-5 xl:w-1/2 xl:mt-20 xl:self-center xl:justify-start xl:px-0" aria-labelledby="tracklist-title">
+          <div className="w-full max-w-4xl xl:w-[85%]">
+            <h2 id="tracklist-title" className="sr-only">Lista utworów</h2>
+            <div role="list" aria-label="Lista utworów muzycznych">
+              {tracks.map((track, index) => (
+                <TrackItem
+                  key={track.id}
+                  title={track.title}
+                  isPlaying={currentTrack === index}
+                  onPlay={() => handlePlay(index)}
+                  aria-label={`${track.title} - ${currentTrack === index ? 'Odtwarzanie' : 'Kliknij aby odtworzyć'}`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
       <Footer />
     </div>
   );
