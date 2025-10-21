@@ -7,17 +7,11 @@ import Link from "next/link";
 import { cooperators } from "@/app/lib/placeholders_old/cooperators";
 import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 import { Header } from "../components/Header";
+import titleCutWord from "@/app/lib/titleCutWord";
 
 export default function Home() {
   // Get first 4 team members from cooperators data
   const teamMembers = cooperators.slice(0, 4);
-
-  const titleCutWord = (title: string) =>
-    title.split(" ").map((word, index) => (
-      <h2 className="xl:mt-0 xl:ml-0" key={index}>
-        {word}
-      </h2>
-    ));
 
   // Function to render responsive titles - different layouts for mobile and desktop
   const renderResponsiveTitle = (
@@ -56,8 +50,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative top-[50px] xl:top-[100px] overflow-hidden h-[65vh] xl:h-[800px] flex flex-col justify-between mx-6 z-10">
         {/*Title */}
-        <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ")}</div>
-        <div className="block absolute left-0 bottom-0">{titleCutWord("K O N TEKSTU")}</div>
+        <div className="block absolute right-0 top-0 text-right">{titleCutWord("BEZ", "xl:mt-0 xl:ml-0")}</div>
+        <div className="block absolute left-0 bottom-0">{titleCutWord("K O N TEKSTU", "xl:mt-0 xl:ml-0")}</div>
         {/* Logo - white */}
         <Image
           src={Logo}

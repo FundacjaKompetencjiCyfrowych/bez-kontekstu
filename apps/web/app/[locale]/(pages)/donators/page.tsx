@@ -8,18 +8,12 @@ import { Header } from "@/app/components/Header";
 import DonatorsLeftImage from "@/app/assets/images/donators_left.png";
 import DonatorsRightImage from "@/app/assets/images/donators_right.png";
 import LogoViolet from "@/app/components/LogoViolet";
+import titleCutWord from "@/app/lib/titleCutWord";
 
 export default function DonorsPage() {
   const buttonClasses =
     "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
   const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-4 bg-neutral-600/70";
-
-  const titleCutWord = (title: string) =>
-    title.split(" ").map((word, index) => (
-      <h2 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
-        {word}
-      </h2>
-    ));
 
   // Create references to all copyable elements
   const foundationNameRef = useRef<HTMLParagraphElement>(null);
@@ -73,8 +67,8 @@ export default function DonorsPage() {
 
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
         {/*Title desktop */}
-        <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
-        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("DAR CZYŃCÓW")}</div>
+        <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
+        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("DAR CZYŃCÓW", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
 
         {/* Two column layout for desktop */}
         <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">

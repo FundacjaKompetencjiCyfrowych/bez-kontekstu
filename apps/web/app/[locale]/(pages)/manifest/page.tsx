@@ -5,15 +5,9 @@ import ManifestManImage from "@/app/assets/images/manifest_man.png";
 import ManifestOurGoalImage from "@/app/assets/images/manifest_our-goal.png";
 import ManifestFusionImage from "@/app/assets/images/manifest_fusion.png";
 import LogoViolet from "@/app/components/LogoViolet";
+import titleCutWord from "@/app/lib/titleCutWord";
 
 export default function ManifestPage() {
-  const titleCutWord = (title: string) =>
-    title.split(" ").map((word, index) => (
-      <h2 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 xl:ml-0 xl:mt-0 sm:mt-3" key={index}>
-        {word}
-      </h2>
-    ));
-
   return (
     <div className="flex flex-col justify-between w-full min-h-screen px-2 md:px-5 xl:flex xl:flex-col">
 
@@ -26,8 +20,8 @@ export default function ManifestPage() {
         <div className="relative flex md:landscape:justify-center xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px]">
 
           {/*Title desktop*/}
-          <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I")}</div>
-          <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("F EST")}</div>
+          <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("MA N I", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 xl:ml-0 xl:mt-0 sm:mt-3")}</div>
+          <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("F EST", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 xl:ml-0 xl:mt-0 sm:mt-3")}</div>
 
           {/* Two column layout for desktop */}
           <div className="relative top-[10vh] lg:top-0 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto">
