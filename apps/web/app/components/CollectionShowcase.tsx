@@ -32,7 +32,7 @@ export function CollectionShowcase({ collection = [], lang, directory }: Collect
         <div className="w-[85vw] md:w-[70vw] xl:w-full text-center text-md sm:text-3xl md:text-4xl lg:text-5xl">
           {/* Mobile and tablet layout - vertical stack */}
           <div className="xl:hidden mx-auto flex flex-col gap-y-14 font-defectica">
-            {collection.map((item, index) => {
+            {collection.slice().reverse().map((item, index) => {
               return (
                 <ImageCard
                   key={item._id}
@@ -50,7 +50,7 @@ export function CollectionShowcase({ collection = [], lang, directory }: Collect
           {/* Desktop layout - horizontal slider */}
           <div className="hidden xl:block">
             <Slider itemsPerSlide={4} gap={24}>
-              {collection.map((item, index) => {
+              {collection.slice().reverse().map((item, index) => {
                 return (
                   <ImageCard
                     key={item._id}
