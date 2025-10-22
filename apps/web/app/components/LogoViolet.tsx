@@ -3,9 +3,10 @@ import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 interface LogoVioletProps {
   pageType?: 'home' | 'sounds' | 'contact' | 'default';
+  isHidden?: boolean;
 }
 
-export default function LogoViolet({ pageType = 'default' }: LogoVioletProps) {
+export default function LogoViolet({ pageType = 'default', isHidden = false }: LogoVioletProps) {
   // Get positioning classes based on page type
   const getMobilePositioning = () => {
     switch (pageType) {
@@ -40,7 +41,7 @@ export default function LogoViolet({ pageType = 'default' }: LogoVioletProps) {
       <Image
         src={LogoVioletImage}
         alt="Bez Kontekstu"
-        className={`hidden xl:block absolute left-1/2 top-[100vh] xl:top-[50vh] transform -translate-x-1/2 w-250 h-250 object-contain blur-[8px] opacity-25 ${pageType === 'sounds' || pageType === 'contact' ? 'xl:hidden' : ''}`}
+        className={`hidden xl:block absolute left-1/2 top-[100vh] xl:top-[50vh] transform -translate-x-1/2 w-250 h-250 object-contain blur-[8px] opacity-25 ${isHidden ? 'xl:hidden' : ''}`}
       />
     </>
   )

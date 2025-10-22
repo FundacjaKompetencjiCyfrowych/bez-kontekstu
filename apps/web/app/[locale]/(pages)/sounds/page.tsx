@@ -42,7 +42,7 @@ export default function SoundsPage() {
       <Header title="BEATS'N' PIECES" className="xl:hidden" showLogo={false} />
 
       <main className="relative flex max-w-7xl flex-1 flex-col xl:mt-24 xl:flex-row">
-        <LogoViolet pageType="sounds" />
+        <LogoViolet pageType="sounds" isHidden={true} />
         {/* Left column - Title */}
         <section className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20" aria-labelledby="page-title">
           {/* Title only for XL screens */}
@@ -52,7 +52,7 @@ export default function SoundsPage() {
           </div>
         </section>
         {/* Right column - Tracklist */}
-        <section className="flex w-full flex-1 items-end justify-center lg:mt-20 md:items-center md:px-5 xl:w-1/2 xl:mt-20 xl:self-center xl:justify-start xl:px-0" aria-labelledby="tracklist-title">
+        <section className="flex w-full flex-1 items-end justify-center lg:mt-20 md:items-center md:px-5 xl:w-1/2 xl:mt-20 xl:pt-40 xl:self-center xl:justify-start xl:px-0" aria-labelledby="tracklist-title">
           <div className="w-full max-w-4xl xl:w-[85%]">
             <h2 id="tracklist-title" className="sr-only">Lista utworów</h2>
             <div role="list" aria-label="Lista utworów muzycznych">

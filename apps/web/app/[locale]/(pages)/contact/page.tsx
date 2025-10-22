@@ -25,7 +25,7 @@ export default function ContactPage() {
     <div className="flex w-full h-screen flex-col justify-between px-2 md:px-5 xl:min-h-[1024px] xl:flex xl:flex-col">
       {/*Title mobile*/}
       <Header title="KON TA KT" className="xl:hidden" showLogo={false} />
-      <LogoViolet pageType="contact" />
+      <LogoViolet pageType="contact" isHidden={true} />
 
       <div className="relative flex px-5 md:px-0 xl:mt-[90px] xl:h-full xl:items-center xl:justify-center">
         {/*Title desktop*/}

@@ -23,7 +23,7 @@ type CollectionShowcaseProps = {
 /* CollectionShowcase: displays a collection of items as a vertical stack on mobile/tablet and a horizontal slider on desktop */
 export function CollectionShowcase({ collection = [], lang, directory }: CollectionShowcaseProps) {
   return (
-    <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px]">
+    <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px] xl:min-h-[900px]">
       <LogoViolet />
       <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("PR O", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
       <div className="hidden xl:block absolute left-0 bottom-0 text-left">{titleCutWord("J EKTY", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
