@@ -33,7 +33,7 @@ export default function Home() {
         {/* Mobile version */}
         <div className="block xl:hidden">
           {mobileLines.map((line, index) => (
-            <h3 key={index} className="sm:text-4xl md:text-6xl ml-2 sm:ml-3 mt-2 sm:mt-3">
+            <h3 key={index} className="sm:text-4xl md:text-6xl ml-2 sm:ml-3 leading-10 sm:leading-18">
               {line}
             </h3>
           ))}
@@ -55,7 +55,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 mx-6 flex h-[65vh] flex-col justify-between overflow-hidden top-[50px] xl:h-[800px] xl:top-[100px]" aria-labelledby="hero-title">
+      <section className="relative z-10 mx-6 flex h-[65vh] flex-col justify-between overflow-hidden top-[50px] md:landscape:h-[150vh] lg:landscape:h-[65vh] xl:h-[800px] xl:top-[100px]" aria-labelledby="hero-title">
         {/*Title */}
         <h2 className="sr-only" id="hero-title">Bez Kontekstu</h2>
         <div className="absolute right-0 top-0 block text-right" aria-hidden="true">{titleCutWord("BEZ", "xl:mt-0 xl:ml-0")}</div>
@@ -72,7 +72,7 @@ export default function Home() {
 
       <div className="relative px-5 xl:top-40 xl:px-0">
         {/* MANIFEST Section*/}
-        <section className="flex h-screen flex-col justify-around overflow-hidden mt-[150px] md:h-[70vh] lg:h-[80vh] xl:mb-20 xl:h-[800px]" aria-labelledby="manifest-title">
+        <section className="flex h-screen flex-col justify-around overflow-hidden mt-[150px] md:landscape:h-[150vh] lg:landscape:h-[80vh] md:h-[70vh] lg:h-[80vh] xl:mb-20 xl:h-[800px]" aria-labelledby="manifest-title">
           {/* Violet logo */}
           <Image
             src={LogoVioletImage}
@@ -112,14 +112,12 @@ export default function Home() {
         </section>
 
         {/* PROJECTS Section */}
-        <section className="relative overflow-hidden h-[70vh] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent" aria-labelledby="projects-title">
+        <section className="relative overflow-hidden h-[70vh]  md:landscape:h-[150vh] lg:landscape:h-[1000px] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent" aria-labelledby="projects-title">
           <div className="relative flex flex-col items-end justify-start z-10">
             {renderResponsiveTitle(["PRO", "JEK", "TY"], "PR O", "right")}
           </div>
 
-          <div className="w-[100%] h-[70vh] mx-auto z-10">
-            <RandomRectangles />
-          </div>
+          <RandomRectangles />
 
           <div className="relative flex justify-center items-center transform z-10">
             <Link href={"/projects"} className="w-full md:w-full lg:w-auto">
@@ -132,7 +130,7 @@ export default function Home() {
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative h-screen md:mt-[150px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center bg-transparent" aria-labelledby="people-title">
+        <section className="relative h-screen md:mt-[150px] md:landscape:h-[300vh] lg:landscape:h-[1200px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center bg-transparent" aria-labelledby="people-title">
           <div className="absolute xl:right-0 top-[50px] xl:top-0 flex flex-col z-10">
             <div className="">{renderResponsiveTitle(["WSP", "ÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
           </div>
@@ -174,7 +172,7 @@ export default function Home() {
         </section>
 
         {/* DONATORS Section */}
-        <section className="relative xl:mb-20 h-[50vh] md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent" aria-labelledby="donators-title">
+        <section className="relative md:landscape:h-[150vh] lg:landscape:h-[65vh] xl:mb-20 h-[50vh] md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent" aria-labelledby="donators-title">
           <div className=" flex flex-col items-end ">
             <div>{renderResponsiveTitle(["DLA", "DARCZY", "ŃCOW"], "DL A", "right")}</div>
           </div>

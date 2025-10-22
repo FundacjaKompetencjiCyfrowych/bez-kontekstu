@@ -255,7 +255,7 @@ export function RandomRectangles() {
   }, [containerWidth]);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full sm:top-[-100px]">
       {rectangles.map((rect) => (
         <div
           key={rect.id}
