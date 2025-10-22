@@ -101,7 +101,7 @@ export default function Home() {
                 <Button
                   variant="dark"
                   size="sm"
-                  className="w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:!bg-gradient-to-b xl:!from-white-900 xl:!via-black-900/30 xl:!to-[#6852f5] xl:!rounded-2xl xl:!text-white xl:!border xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-300 xl:!shadow-lg"
+                  className="w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500"
                 >
                   Poznaj nas lepiej
                 </Button>
