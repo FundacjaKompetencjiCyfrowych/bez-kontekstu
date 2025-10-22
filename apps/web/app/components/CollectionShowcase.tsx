@@ -37,7 +37,7 @@ export function CollectionShowcase({ collection = [], lang, directory }: Collect
                 <ImageCard
                   key={item._id}
                   priority={index <= 2}
-                  image={item.cover}
+                  image={item.cover || item.image}
                   href={`/${directory}/${item.slug?.current}`}
                   tag={item.timestamp?.slice(0, 4)}
                   title={item.name ?? ""}
