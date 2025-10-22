@@ -55,7 +55,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 mx-6 flex h-[65vh] flex-col justify-between overflow-hidden top-[50px] md:landscape:h-[150vh] lg:landscape:h-[65vh] xl:h-[800px] xl:top-[100px]" aria-labelledby="hero-title">
+      <section className="relative z-10 mx-6 flex h-[65vh] flex-col justify-between overflow-hidden top-[50px] md:landscape:h-[150vh] lg:landscape:h-[800px] xl:h-[800px] xl:top-[100px]" aria-labelledby="hero-title">
         {/*Title */}
         <h2 className="sr-only" id="hero-title">Bez Kontekstu</h2>
         <div className="absolute right-0 top-0 block text-right" aria-hidden="true">{titleCutWord("BEZ", "xl:mt-0 xl:ml-0")}</div>
@@ -72,7 +72,7 @@ export default function Home() {
 
       <div className="relative px-5 xl:top-40 xl:px-0">
         {/* MANIFEST Section*/}
-        <section className="flex h-screen flex-col justify-around overflow-hidden mt-[150px] md:landscape:h-[150vh] lg:landscape:h-[80vh] md:h-[70vh] lg:h-[80vh] xl:mb-20 xl:h-[800px]" aria-labelledby="manifest-title">
+        <section className="flex h-screen flex-col justify-around overflow-hidden mt-[150px] md:landscape:h-[150vh] lg:landscape:h-[800px] md:h-[70vh] lg:h-[80vh] xl:mb-20 xl:h-[800px]" aria-labelledby="manifest-title">
           {/* Violet logo */}
           <Image
             src={LogoVioletImage}
