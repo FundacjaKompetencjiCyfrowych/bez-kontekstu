@@ -49,7 +49,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </Link>
       </div>
 
-      <LogoViolet />
+      <div className="relative xl:top-[50vh]">
+        <LogoViolet />
+      </div>
 
       {/* Main Content */}
       <div className="relative pb-16">

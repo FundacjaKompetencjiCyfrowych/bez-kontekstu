@@ -3,9 +3,10 @@ import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
 interface LogoVioletProps {
   pageType?: 'home' | 'sounds' | 'contact' | 'default';
+  isHidden?: boolean;
 }
 
-export default function LogoViolet({ pageType = 'default' }: LogoVioletProps) {
+export default function LogoViolet({ pageType = 'default', isHidden = false }: LogoVioletProps) {
   // Get positioning classes based on page type
   const getMobilePositioning = () => {
     switch (pageType) {
@@ -14,7 +15,7 @@ export default function LogoViolet({ pageType = 'default' }: LogoVioletProps) {
       case 'sounds':
         return 'top-[10vh] sm:landscape:top-0 md:landscape:top-0 md:landscape:max-h-screen lg:landscape:top-0 sm:landscape:max-h-screen';
       case 'contact':
-        return 'top-[10vh] sm:landscape:top-0 md:landscape:top-0 md:landscape:max-h-screen lg:landscape:top-0 sm:landscape:max-h-screen';
+        return 'top-[25vh] sm:landscape:top-0 md:landscape:top-[80vh] lg:landscape:top-[40vh] md:landscape:max-h-screen lg:landscape:max-h-screen sm:landscape:max-h-screen';
       default:
         return 'top-[30vh]  sm:landscape:top-[300px] lg:landscape:top-[42vh] md:landscape:max-h-[450px] lg:landscape:max-h-screen';
     }
@@ -29,18 +30,18 @@ export default function LogoViolet({ pageType = 'default' }: LogoVioletProps) {
         className={`absolute left-1/2 transform -translate-x-1/2 w-80 h-80 sm:w-128 sm:h-128 md:w-190 md:h-190 object-contain blur-[6px] opacity-50 xl:hidden ${getMobilePositioning()}`}
       />
 
-      {/* Desktop Logo - positioned at 50vh, blurred */}
+      {/* Desktop Logo */}
       <Image
         src={LogoVioletImage}
         alt="Bez Kontekstu"
-        className="hidden xl:block absolute left-1/2 top-[50vh] xl:top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-200 h-200 object-contain blur-[4px] opacity-50"
+        className="hidden xl:block absolute left-1/2 top-[50vh] xl:top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-160 h-160 object-contain blur-[4px] opacity-50"
       />
 
-      {/* Desktop Second Logo - positioned at bottom for donators/manifest pages */}
+      {/* Desktop Second Logo */}
       <Image
         src={LogoVioletImage}
         alt="Bez Kontekstu"
-        className={`hidden xl:block absolute left-1/2 top-[100vh] transform -translate-x-1/2 w-250 h-250 object-contain blur-[8px] opacity-25 ${pageType === 'sounds' || pageType === 'contact' ? 'xl:hidden' : ''}`}
+        className={`hidden xl:block absolute left-1/2 top-[100vh] xl:top-[50vh] transform -translate-x-1/2 w-250 h-250 object-contain blur-[8px] opacity-25 ${isHidden ? 'xl:hidden' : ''}`}
       />
     </>
   )

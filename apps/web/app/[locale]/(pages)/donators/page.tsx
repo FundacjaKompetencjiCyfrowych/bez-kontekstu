@@ -1,82 +1,28 @@
-"use client";
-import React, { useRef, useState } from "react";
-import { useCopyToClipboard, useTimeout } from "usehooks-ts";
 import Image from "next/image";
-import copyIcon from "@/app/assets/icons/copy.png";
 import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 import DonatorsLeftImage from "@/app/assets/images/donators_left.png";
 import DonatorsRightImage from "@/app/assets/images/donators_right.png";
 import LogoViolet from "@/app/components/LogoViolet";
+import titleCutWord from "@/app/lib/titleCutWord";
+import CopyField from "@/app/components/CopyField";
 
 export default function DonorsPage() {
   const buttonClasses =
     "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
   const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-4 bg-neutral-600/70";
 
-  const titleCutWord = (title: string) =>
-    title.split(" ").map((word, index) => (
-      <h2 className="sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3" key={index}>
-        {word}
-      </h2>
-    ));
-
-  // Create references to all copyable elements
-  const foundationNameRef = useRef<HTMLParagraphElement>(null);
-  const accountNumberRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLParagraphElement>(null);
-  const addressRef = useRef<HTMLParagraphElement>(null);
-  const krsRef = useRef<HTMLParagraphElement>(null);
-  const regonRef = useRef<HTMLParagraphElement>(null);
-  const nipRef = useRef<HTMLParagraphElement>(null);
-
-  // State to track which elements are showing "copied" message
-  const [copiedElements, setCopiedElements] = useState<Set<string>>(new Set());
-  const [, copy] = useCopyToClipboard();
-
-  // Use useTimeout to hide "copied" messages after 2 seconds
-  useTimeout(() => setCopiedElements(new Set()), copiedElements.size > 0 ? 2000 : null);
-
-  const handleCopy = (text: string, elementId: string) => () => {
-    copy(text)
-      .then(() => {
-        // Show "copied" message
-        setCopiedElements((prev) => new Set([...prev, elementId]));
-      })
-      .catch((error) => {
-        console.error("Failed to copy!", error);
-      });
-  };
-
-  // Copy icon component
-  const CopyIcon = () => {
-    return (
-      <div className="w-6 h-6 md:w-12 md:h-12 flex items-center justify-center">
-        {/* Mobile icon - visible on small screens */}
-        <Image src={copyIcon} alt="Copy" width={24} height={24} className="block md:hidden" />
-        {/* Tablet/Desktop icon - visible on md+ screens */}
-        <Image src={copyIcon} alt="Copy" width={40} height={40} className="hidden md:block" />
-      </div>
-    );
-  };
-
   return (
     <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
-
-      {/* Screen reader announcements */}
-      <div aria-live="polite" aria-atomic="true" className="sr-only">
-        {copiedElements.size > 0 && "Tekst został skopiowany do schowka"}
-      </div>
 
       {/*Title mobile*/}
       <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" showLogo={false} />
       <LogoViolet />
 
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
-        {/*Title desktop - top right*/}
-        <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A")}</div>
-
-
+        {/*Title desktop */}
+        <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
+        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("DAR CZYŃCÓW", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
 
         {/* Two column layout for desktop */}
         <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">
@@ -92,9 +38,6 @@ export default function DonorsPage() {
             </div>
           </div>
         </div>
-
-        {/*Title desktop - bottom left*/}
-        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("DAR CZYŃCÓW")}</div>
       </div>
 
       {/* Rest of content */}
@@ -129,119 +72,73 @@ export default function DonorsPage() {
             {/* Transfer details */}
             <div className="space-y-4 mt-10 mx-5 md:text-xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
               {/* Recipient */}
-              <button
+              <CopyField
                 className={buttonClasses}
-                onClick={handleCopy("Fundacja Bez Kontekstu", "foundation")}
-                aria-label="Skopiuj nazwę fundacji: Fundacja Bez Kontekstu"
-              >
-                <div className="flex justify-between items-end mx-2 my-2 ">
-                  <div>
-                    <p className="mb-4">Odbiorca:</p>
-                    <p ref={foundationNameRef}>{copiedElements.has("foundation") ? "Skopiowano ✓" : "Fundacja Bez Kontekstu"}</p>
-                  </div>
-                  <CopyIcon />
-                </div>
-              </button>
+                label="Odbiorca:"
+                value="Fundacja Bez Kontekstu"
+                elementId="foundation"
+                copiedText="Skopiowano ✓"
+                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                ariaLabel="Skopiuj nazwę fundacji: Fundacja Bez Kontekstu"
+              />
 
               {/* Account number */}
-              <button
+              <CopyField
                 className={buttonClasses}
-                onClick={handleCopy("00114020040000350294818053", "account")}
-                aria-label="Skopiuj numer konta: 00 1140 2004 0000 3502 9481 8053"
-              >
-                <div className="flex justify-between items-end mx-2 my-2">
-                  <div ref={accountNumberRef}>
-                    <p className="mb-4">Numer konta:</p>
-                    <p>{copiedElements.has("account") ? "Skopiowano ✓" : "00 1140 2004 0000 3502 9481 8053"}</p>
-                  </div>
-                  <CopyIcon />
-                </div>
-              </button>
+                label="Numer konta:"
+                value="00 1140 2004 0000 3502 9481 8053"
+                elementId="account"
+                copiedText="Skopiowano ✓"
+                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                ariaLabel="Skopiuj numer konta: 00 1140 2004 0000 3502 9481 8053"
+              />
 
               {/* Title */}
-              <button
+              <CopyField
                 className={buttonClasses}
-                onClick={handleCopy("Wsparcie dla fundacji", "title")}
-                aria-label="Skopiuj tytuł przelewu: Wsparcie dla fundacji"
-              >
-                <div className="flex justify-between items-end mx-2 my-2">
-                  <div>
-                    <p className="mb-4">Tytuł:</p>
-                    <p ref={titleRef}>{copiedElements.has("title") ? "Skopiowano ✓" : "Wsparcie dla fundacji"}</p>
-                  </div>
-                  <CopyIcon />
-                </div>
-              </button>
+                label="Tytuł:"
+                value="Wsparcie dla fundacji"
+                elementId="title"
+                copiedText="Skopiowano ✓"
+                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                ariaLabel="Skopiuj tytuł przelewu: Wsparcie dla fundacji"
+              />
 
               {/* Address */}
-              <button
+              <CopyField
                 className={buttonClasses}
-                onClick={handleCopy("ul. Smulikowskiego 2, 500-389 Warszawa", "address")}
-                aria-label="Skopiuj adres fundacji: ul. Smulikowskiego 2, 500-389 Warszawa"
-              >
-                <div className="flex justify-between items-end mx-2 my-2">
-                  <div>
-                    <p className="mb-4">Adres:</p>
-                    <p ref={addressRef} className="w-[160px] md:w-auto">
-                      {copiedElements.has("address") ? "Skopiowano ✓" : "ul. Smulikowskiego 2 500-389 Warszawa"}
-                    </p>
-                  </div>
-                  <CopyIcon />
-                </div>
-              </button>
+                label="Adres:"
+                value="ul. Smulikowskiego 2 500-389 Warszawa"
+                elementId="address"
+                copiedText="Skopiowano ✓"
+                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                valueClassName="w-[160px] md:w-auto"
+                ariaLabel="Skopiuj adres fundacji: ul. Smulikowskiego 2 500-389 Warszawa"
+              />
 
               {/* Foundation data */}
-              {/* KRS */}
-              <button
+              <CopyField
                 className={buttonClasses}
-                onClick={handleCopy("0001102013", "krs")}
-                aria-label="Skopiuj KRS: 0001102013"
-              >
-                <div className="flex justify-between items-end mx-2 my-2">
-                  <div>
-                    <p className="mb-4">KRS:</p>
-                    <p ref={krsRef} className="w-[160px] md:w-[250px]">
-                      {copiedElements.has("krs") ? "Skopiowano ✓" : "0001102013"}
-                    </p>
-                  </div>
-                  <CopyIcon />
-                </div>
-              </button>
-
-
-              {/* REGON */}
-              <button
-                className={buttonClasses}
-                onClick={handleCopy("528434787", "regon")}
-                aria-label="Skopiuj REGON: 528434787"
-              >
-                <div className="flex justify-between items-end mx-2 my-2">
-                  <div>
-                    <p className="mb-4">REGON:</p>
-                    <p ref={regonRef} className="w-[160px] md:w-[250px]">
-                      {copiedElements.has("regon") ? "Skopiowano ✓" : "528434787"}
-                    </p>
-                  </div>
-                  <CopyIcon />
-                </div>
-              </button>
+                label="REGON:"
+                value="528434787"
+                elementId="regon"
+                copiedText="Skopiowano ✓"
+                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                valueClassName="w-[160px] md:w-[250px]"
+                ariaLabel="Skopiuj REGON: 528434787"
+              />
 
               {/* NIP */}
-              <button
+              <CopyField
                 className={buttonClasses}
-                onClick={handleCopy("5253000932", "nip")}
-                aria-label="Skopiuj NIP: 5253000932"
-              >
-                <div className="flex justify-between items-end mx-2 my-2">
-                  <div>
-                    <p className="mb-4">NIP:</p>
-                    <p ref={nipRef} className="w-[160px] md:w-[250px]">
-                      {copiedElements.has("nip") ? "Skopiowano ✓" : "5253000932"}
-                    </p>
-                  </div>
-                  <CopyIcon />
-                </div>
-              </button>
+                label="NIP:"
+                value="5253000932"
+                elementId="nip"
+                copiedText="Skopiowano ✓"
+                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                valueClassName="w-[160px] md:w-[250px]"
+                ariaLabel="Skopiuj NIP: 5253000932"
+              />
 
             </div>
           </div>
@@ -258,15 +155,15 @@ export default function DonorsPage() {
               Przekaż darowiznę bezpośrednio na konto fundacji. W zeznaniu podatkowym wpisz nasz numer KRS.
             </p>
 
-            <button className={buttonClasses} onClick={handleCopy("0001102013", "krs")} aria-label="Skopiuj numer KRS: 0001102013">
-              <div className="flex justify-between items-end mx-2 my-2">
-                <div>
-                  <p className="mb-4">KRS:</p>
-                  <p ref={krsRef}>{copiedElements.has("krs") ? "Skopiowano ✓" : "0001102013"}</p>
-                </div>
-                <CopyIcon />
-              </div>
-            </button>
+            <CopyField
+              className={buttonClasses}
+              label="KRS:"
+              value="0001102013"
+              elementId="krs"
+              copiedText="Skopiowano ✓"
+              ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+              ariaLabel="Skopiuj numer KRS: 0001102013"
+            />
 
             {/* Patronite */}
             <div className="relative md:text-xl md:leading-10 xl:py-20">

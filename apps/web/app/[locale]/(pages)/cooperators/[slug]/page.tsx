@@ -43,9 +43,9 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
 
   return (
     <div className="bg-[#0d0b0e] px-5 xl:min-h-screen max-w-7xl mx-auto font-mono flex flex-col xl:justify-between justify-center w-full">
-      <LogoViolet />
+      <LogoViolet isHidden={true} />
 
-      {/* XL Desktop Back Button - Top */}
+      {/* Desktop Back Button - Top */}
       <div className="hidden xl:block px-8">
         <div className="relative py-6 md:py-12 xl:py-0 xl:mt-25 xl:ml-8">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
@@ -66,7 +66,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         </div>
 
         <div className="xl:hidden">
-          {/* Portrait Section */}
+          {/* Portrait */}
           <div className="mb-8">
             <div className="relative w-full h-[250px] md:h-[350px] mb-5 cursor-pointer overflow-hidden">
               {image ? (
@@ -95,12 +95,12 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
             </div>
           </div>
 
-          {/* Description Section */}
+          {/* Description */}
           <div className="relative mb-12">
             <p className="text-md md:text-xl leading-relaxed">{description}</p>
           </div>
 
-          {/* Social Media Section */}
+          {/* Social Media */}
           <div className="mb-8 flex flex-row gap-2 justify-between">
             <div className="flex flex-col gap-2">
               <h3 className="text-base md:text-xl mb-4">social media:</h3>
@@ -124,7 +124,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
             </div>
           </div>
 
-          {/* Projects Section */}
+          {/* Projects */}
           <div className="mb-12">
             <h3 className="text-base md:text-xl mb-4 font-bold">projekty:</h3>
             <div className="flex flex-col gap-2">
@@ -184,7 +184,8 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         </div>
 
         {/* ---------------------------------------------------------- */}
-        {/* XL Desktop Layout (2 columns) */}
+
+        {/* Desktop Layout (2 columns) */}
         <div className="px-8 hidden xl:flex xl:gap-12 xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Biography */}
           <div className="w-1/2 flex flex-col justify-center">
@@ -197,12 +198,12 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
               </h2>
             </div>
 
-            {/* Description Section */}
+            {/* Description */}
             <div className="relative mb-12">
               <p className="text-xl xl:text-base leading-relaxed">{description}</p>
             </div>
 
-            {/* Social Media Section */}
+            {/* Social Media */}
             <div className="mb-8 flex flex-row gap-2 justify-between">
               <div className="flex flex-col gap-2">
                 <h3 className="text-xl xl:text-base mb-4">social media:</h3>
@@ -226,7 +227,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
               </div>
             </div>
 
-            {/* Projects Section */}
+            {/* Projects */}
             <div className="mb-12 flex flex-row gap-2 justify-between">
               <div className="flex flex-row gap-2 ">
                 <h3 className="text-xl xl:text-base mb-4 font-bold">projekty:</h3>
@@ -246,7 +247,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
 
           {/* Right Column - Image and Navigation */}
           <div className="w-1/2 flex flex-col justify-center">
-            {/* Portrait Section */}
+            {/* Portrait */}
             <div className="mb-8">
               <div className="relative w-full h-[500px] overflow-hidden">
                 {image ? (
@@ -263,7 +264,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
               </div>
             </div>
 
-            {/* Navigation Section */}
+            {/* Navigation */}
             <div className="text-base">
               <div className="flex justify-evenly items-center">
                 {/* Previous Cooperator */}

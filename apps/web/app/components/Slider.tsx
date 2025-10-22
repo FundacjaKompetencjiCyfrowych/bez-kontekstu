@@ -15,9 +15,7 @@ type SliderProps = {
   onSlideChange?: (slide: number) => void;
 };
 
-/**
- * A reusable, client-side horizontal slider with pagination for displaying groups of elements (e.g., project cards or images).
- */
+/* A reusable, client-side horizontal slider with pagination for displaying groups of elements (e.g., project cards or images) */
 export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSlideChange }: SliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const totalSlides = Math.ceil(children.length / itemsPerSlide);
@@ -66,9 +64,8 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
           <button
             onClick={goToPrevStep}
             disabled={isFirstSlide}
-            className={`transition-all duration-200 flex-shrink-0 ${
-              isFirstSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
-            }`}
+            className={`transition-all duration-200 flex-shrink-0 ${isFirstSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+              }`}
             aria-label="Previous slide"
           >
             <Image src={prevIcon} alt="" width={25} height={25} />
@@ -83,9 +80,8 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
           <button
             onClick={goToNextStep}
             disabled={isLastSlide}
-            className={`transition-all duration-200 flex-shrink-0 ${
-              isLastSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
-            }`}
+            className={`transition-all duration-200 flex-shrink-0 ${isLastSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+              }`}
             aria-label="Next slide"
           >
             <Image src={nextIcon} alt="" width={25} height={25} />

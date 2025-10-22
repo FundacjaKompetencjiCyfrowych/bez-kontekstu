@@ -8,8 +8,8 @@ export interface NavItem {
 
 export interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline" | "dark";
-  size?: "sm" | "md" | "lg";
+  variant?: "dark";
+  size?: "sm" ;
   onClick?: () => void;
   disabled?: boolean;
   className?: string;

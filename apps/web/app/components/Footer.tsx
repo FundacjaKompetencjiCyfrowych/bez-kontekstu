@@ -26,10 +26,7 @@ export function Footer() {
             </Link>
           </div>
           <div className="text-[#3f3f42]">
-            <p className="lg:hidden">
-              Page made with <Image src={HeartIcon} alt="Heart" width={15} className="inline-block" /> by
-            </p>
-            <span className="hidden lg:inline">
+            <span className="block lg:inline">
               Page made with <Image src={HeartIcon} alt="Heart" width={15} className="inline-block" /> by{" "}
             </span>
             <Link href="https://cyfrowe.org/?utm_source=itgirls&utm_medium=referral&utm_campaign=partners">
