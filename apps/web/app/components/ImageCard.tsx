@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ContentImage, Image } from "@/app/components/cms/ContentImage";
 import { cn } from "@/app/lib/utils";
+import { getDictionary } from "../lib/intl/dictionaries/dynamic";
 
 type ImageCardProps = {
   title: string;
@@ -12,7 +13,8 @@ type ImageCardProps = {
   variant?: "mobile" | "slider";
 };
 
-export function ImageCard({ title, tag, priority = false, image, href, lang, variant = "mobile" }: ImageCardProps) {
+export async function ImageCard({ title, tag, priority = false, image, href, lang, variant = "mobile" }: ImageCardProps) {
+  const dictionary = await getDictionary(lang);
   const isMobile = variant === "mobile";
 
   return (
@@ -31,7 +33,7 @@ export function ImageCard({ title, tag, priority = false, image, href, lang, var
           />
         ) : (
           <p className={cn("text-gray-400 font-mono text-center", isMobile ? "text-sm md:text-xl pt-14" : "text-xl pt-32")}>
-            {lang === "en" ? "No image" : "(brak plakatu)"}
+            {dictionary.noImage}
           </p>
         )}
         <div

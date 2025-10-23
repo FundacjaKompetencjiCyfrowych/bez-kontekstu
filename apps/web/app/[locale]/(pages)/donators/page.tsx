@@ -1,28 +1,27 @@
 import Image from "next/image";
-import { Footer } from "@/app/components/Footer";
-import { Header } from "@/app/components/Header";
 import DonatorsLeftImage from "@/app/assets/images/donators_left.png";
 import DonatorsRightImage from "@/app/assets/images/donators_right.png";
-import LogoViolet from "@/app/components/LogoViolet";
 import titleCutWord from "@/app/lib/titleCutWord";
 import CopyField from "@/app/components/CopyField";
+import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
-export default function DonorsPage() {
+export default async function DonorsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const dictionary = await getDictionary(locale);
   const buttonClasses =
     "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
   const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-4 bg-neutral-600/70";
 
   return (
     <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
-
-      {/*Title mobile*/}
-      <Header title="DLA DARCZYŃ CÓW" className="xl:hidden" showLogo={false} />
-      <LogoViolet />
-
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
         {/*Title desktop */}
-        <div className="hidden xl:block absolute right-0 top-0 text-right">{titleCutWord("DL A", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
-        <div className="xl:block hidden absolute left-0 bottom-0">{titleCutWord("DAR CZYŃCÓW", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}</div>
+        <div className="hidden xl:block absolute right-0 top-0 text-right">
+          {titleCutWord("DL A", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
+        </div>
+        <div className="xl:block hidden absolute left-0 bottom-0">
+          {titleCutWord("DAR CZYŃCÓW", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
+        </div>
 
         {/* Two column layout for desktop */}
         <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">
@@ -77,8 +76,8 @@ export default function DonorsPage() {
                 label="Odbiorca:"
                 value="Fundacja Bez Kontekstu"
                 elementId="foundation"
-                copiedText="Skopiowano ✓"
-                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                copiedText={dictionary.copied + " ✓"}
+                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
                 ariaLabel="Skopiuj nazwę fundacji: Fundacja Bez Kontekstu"
               />
 
@@ -88,8 +87,8 @@ export default function DonorsPage() {
                 label="Numer konta:"
                 value="00 1140 2004 0000 3502 9481 8053"
                 elementId="account"
-                copiedText="Skopiowano ✓"
-                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                copiedText={dictionary.copied + " ✓"}
+                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
                 ariaLabel="Skopiuj numer konta: 00 1140 2004 0000 3502 9481 8053"
               />
 
@@ -99,8 +98,8 @@ export default function DonorsPage() {
                 label="Tytuł:"
                 value="Wsparcie dla fundacji"
                 elementId="title"
-                copiedText="Skopiowano ✓"
-                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                copiedText={dictionary.copied + " ✓"}
+                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
                 ariaLabel="Skopiuj tytuł przelewu: Wsparcie dla fundacji"
               />
 
@@ -110,8 +109,8 @@ export default function DonorsPage() {
                 label="Adres:"
                 value="ul. Smulikowskiego 2 500-389 Warszawa"
                 elementId="address"
-                copiedText="Skopiowano ✓"
-                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                copiedText={dictionary.copied + " ✓"}
+                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
                 valueClassName="w-[160px] md:w-auto"
                 ariaLabel="Skopiuj adres fundacji: ul. Smulikowskiego 2 500-389 Warszawa"
               />
@@ -122,8 +121,8 @@ export default function DonorsPage() {
                 label="REGON:"
                 value="528434787"
                 elementId="regon"
-                copiedText="Skopiowano ✓"
-                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                copiedText={dictionary.copied + " ✓"}
+                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
                 valueClassName="w-[160px] md:w-[250px]"
                 ariaLabel="Skopiuj REGON: 528434787"
               />
@@ -134,12 +133,11 @@ export default function DonorsPage() {
                 label="NIP:"
                 value="5253000932"
                 elementId="nip"
-                copiedText="Skopiowano ✓"
-                ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+                copiedText={dictionary.copied + " ✓"}
+                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
                 valueClassName="w-[160px] md:w-[250px]"
                 ariaLabel="Skopiuj NIP: 5253000932"
               />
-
             </div>
           </div>
         </div>
@@ -161,7 +159,7 @@ export default function DonorsPage() {
               value="0001102013"
               elementId="krs"
               copiedText="Skopiowano ✓"
-              ariaLiveCopiedMessage="Tekst został skopiowany do schowka"
+              ariaLiveCopiedMessage={dictionary.copiedToClipboard}
               ariaLabel="Skopiuj numer KRS: 0001102013"
             />
 
@@ -189,7 +187,6 @@ export default function DonorsPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

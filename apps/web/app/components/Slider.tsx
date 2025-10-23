@@ -6,6 +6,7 @@ import Image from "next/image";
 import prevIcon from "@/app/assets/icons/prev.png";
 import nextIcon from "@/app/assets/icons/next.png";
 import { cn } from "../lib/utils";
+import { useIntl } from "../lib/intl/context";
 
 type SliderProps = {
   itemsPerSlide?: number;
@@ -20,6 +21,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
   const sliderRef = useRef<HTMLDivElement>(null);
   const totalSlides = Math.ceil(children.length / itemsPerSlide);
   const [currentSlide, { goToNextStep, goToPrevStep }] = useStep(totalSlides);
+  const { dictionary } = useIntl();
 
   useEffect(() => {
     if (!sliderRef.current) return;
@@ -64,9 +66,10 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
           <button
             onClick={goToPrevStep}
             disabled={isFirstSlide}
-            className={`transition-all duration-200 flex-shrink-0 ${isFirstSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
-              }`}
-            aria-label="Previous slide"
+            className={`transition-all duration-200 flex-shrink-0 ${
+              isFirstSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+            }`}
+            aria-label={dictionary.previousSlide}
           >
             <Image src={prevIcon} alt="" width={25} height={25} />
           </button>
@@ -80,9 +83,10 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
           <button
             onClick={goToNextStep}
             disabled={isLastSlide}
-            className={`transition-all duration-200 flex-shrink-0 ${isLastSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
-              }`}
-            aria-label="Next slide"
+            className={`transition-all duration-200 flex-shrink-0 ${
+              isLastSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+            }`}
+            aria-label={dictionary.nextSlide}
           >
             <Image src={nextIcon} alt="" width={25} height={25} />
           </button>

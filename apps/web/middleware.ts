@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { localeMiddleware } from "./app/lib/locales";
+import { localeMiddleware } from "./app/lib/intl/middleware";
 
 const middlewares = [localeMiddleware];
 

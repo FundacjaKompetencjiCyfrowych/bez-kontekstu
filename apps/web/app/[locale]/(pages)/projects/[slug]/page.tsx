@@ -3,12 +3,12 @@ import { sanityFetch } from "@/app/lib/sanity/live";
 import { projectPageQuery } from "@/app/lib/sanity/queries";
 import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
+import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/app/components/Footer";
-import LogoViolet from "@/app/components/LogoViolet";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
 
@@ -33,6 +33,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   if (!data) notFound();
 
+  const dictionary = await getDictionary(locale);
   const { name, description, multimedia, contributors, next, previous, timestamp } = data;
   const featured = Array.isArray(data.featured) ? data.featured[0] : null;
 
@@ -47,10 +48,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2 md:w-4 md:h-4 xl:w-6 xl:h-6" />
           <p className="ml-4 md:text-xl">Wstecz</p>
         </Link>
-      </div>
-
-      <div className="relative xl:top-[50vh]">
-        <LogoViolet />
       </div>
 
       {/* Main Content */}
@@ -149,10 +146,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 <div>
                   <Image
                     src={ArrowLeft}
-                    alt={locale === "en" ? "Previous" : "Poprzedni"}
+                    alt={dictionary.previous}
                     className="inline-block mr-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
                   />
-                  <span>{locale === "en" ? "Previous" : "Poprzedni"}</span>
+                  <span>{dictionary.previous}</span>
                 </div>
               </Link>
             ) : (
@@ -168,10 +165,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 className="flex items-center justify-end gap-2 md:text-xl hover:text-gray-300 transition-colors"
               >
                 <div>
-                  <span>{locale === "en" ? "Next" : "Następny"}</span>
+                  <span>{dictionary.next}</span>
                   <Image
                     src={ArrowRight}
-                    alt={locale === "en" ? "Next" : "Następny"}
+                    alt={dictionary.next}
                     className="inline-block ml-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
                   />
                 </div>
@@ -182,7 +179,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -3,17 +3,18 @@ import Image from "next/image";
 import HeartIcon from "../assets/icons/heart.png";
 import InstagramIcon from "../assets/icons/instagram.png";
 import FacebookIcon from "../assets/icons/facebook.png";
+import { Dictionary } from "../lib/intl/dictionaries/type";
 
-export function Footer() {
+export async function Footer({ dictionary }: { dictionary: Dictionary }) {
   return (
     <footer className="py-6 w-[90%] mx-auto md:w-full font-mono text-xs">
       <div className="mx-auto">
         {/* Copyright */}
         <div className="border-t border-[#f5f5f5] mt-4 pt-2 text-center text-[#f5f5f5]">
-          <span className="hidden xl:inline"> Funacja Bez Kontekstu | </span>
-          <Link href={"/contact"}>Kontakt |</Link>
+          <span className="hidden xl:inline"> {dictionary.noContextFoundation} | </span>
+          <Link href={"/contact"}>{dictionary.contact} |</Link>
           <Link href={"/privacy-policy"} className=" ml-2">
-            Polityka prywatności
+            {dictionary.privacy}
           </Link>
 
           {/* Socials */}
@@ -30,7 +31,7 @@ export function Footer() {
               Page made with <Image src={HeartIcon} alt="Heart" width={15} className="inline-block" /> by{" "}
             </span>
             <Link href="https://cyfrowe.org/?utm_source=itgirls&utm_medium=referral&utm_campaign=partners">
-              Fundacja Kompetencji Cyfrowych
+              {dictionary.noContextFoundation}
             </Link>
           </div>
         </div>
