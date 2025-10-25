@@ -23,6 +23,7 @@ type CollectionShowcaseProps = {
 
 /* CollectionShowcase: displays a collection of items as a vertical stack on mobile/tablet and a horizontal slider on desktop */
 export function CollectionShowcase({ collection = [], lang, directory, title }: CollectionShowcaseProps) {
+  console.log("collection", collection);
   return (
     <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px] xl:min-h-[900px]">
       <LogoViolet />
@@ -37,44 +38,38 @@ export function CollectionShowcase({ collection = [], lang, directory, title }: 
         <div className="w-[85vw] md:w-[70vw] xl:w-full text-center text-md sm:text-3xl md:text-4xl lg:text-5xl">
           {/* Mobile and tablet layout - vertical stack */}
           <div className="xl:hidden mx-auto flex flex-col gap-y-14 font-defectica">
-            {collection
-              .slice()
-              .reverse()
-              .map((item, index) => {
-                return (
-                  <ImageCard
-                    key={item._id}
-                    priority={index <= 2}
-                    image={item.cover || item.image}
-                    href={`/${directory}/${item.slug?.current}`}
-                    tag={item.timestamp?.slice(0, 4)}
-                    title={item.name ?? ""}
-                    lang={lang}
-                  />
-                );
-              })}
+            {collection.map((item, index) => {
+              return (
+                <ImageCard
+                  key={item._id}
+                  priority={index <= 2}
+                  image={item.cover || item.image}
+                  href={`/${directory}/${item.slug?.current}`}
+                  tag={item.timestamp?.slice(0, 4)}
+                  title={item.name ?? ""}
+                  lang={lang}
+                />
+              );
+            })}
           </div>
 
           {/* Desktop layout - horizontal slider */}
           <div className="hidden xl:block">
             <Slider itemsPerSlide={4} gap={24}>
-              {collection
-                .slice()
-                .reverse()
-                .map((item, index) => {
-                  return (
-                    <ImageCard
-                      key={item._id}
-                      title={item.name?.toUpperCase() || ""}
-                      tag={item.timestamp?.slice(0, 4)}
-                      href={`/${directory}/${item.slug?.current}`}
-                      image={item.cover || item.image}
-                      priority={index <= 3}
-                      variant="slider"
-                      lang={lang}
-                    />
-                  );
-                })}
+              {collection.map((item, index) => {
+                return (
+                  <ImageCard
+                    key={item._id}
+                    title={item.name?.toUpperCase() || ""}
+                    tag={item.timestamp?.slice(0, 4)}
+                    href={`/${directory}/${item.slug?.current}`}
+                    image={item.cover || item.image}
+                    priority={index <= 3}
+                    variant="slider"
+                    lang={lang}
+                  />
+                );
+              })}
             </Slider>
           </div>
         </div>
