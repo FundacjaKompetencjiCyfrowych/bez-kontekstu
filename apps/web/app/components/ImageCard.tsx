@@ -22,6 +22,7 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
       <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "h-[250px] md:h-[350px] mb-5" : "h-[400px]")}>
         {image ? (
           <ContentImage
+            lqip
             image={image}
             className={cn(
               "w-full h-full object-cover",

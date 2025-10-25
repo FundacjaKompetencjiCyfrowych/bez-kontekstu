@@ -7,8 +7,17 @@ export const projectsPageQuery = defineQuery(`*[_type == "projects" && language 
     | order(timestamp desc, _id asc){
       _id,
       cover {
-        "lqip": asset->metadata.lqip,
-        ...
+        asset->{
+          _id,
+          url,
+          metadata{
+            lqip,
+            dimensions,
+          }
+        },
+        alt,
+        hotspot,
+        crop
       },
       name,
       slug,
@@ -50,7 +59,22 @@ export const projectPageQuery = defineQuery(`*[slug.current == $slug && language
 
   contributors,
   featured,
-  multimedia,
+  multimedia[]{
+    _type == "richImage" => {
+      asset->{
+        _id,
+        url,
+        metadata{
+          lqip,
+          dimensions,
+        }
+      },
+      alt,
+      hotspot,
+      crop
+    },
+    _type != "richImage" => @,
+  },
   description
 }`);
 
@@ -59,8 +83,17 @@ export const cooperatorsPageQuery = defineQuery(`*[_type == "cooperator" && lang
     | order(slug.current asc, _id asc){
       _id,
       image {
-        "lqip": asset->metadata.lqip,
-        ...
+        asset->{
+          _id,
+          url,
+          metadata{
+            lqip,
+            dimensions,
+          }
+        },
+        alt,
+        hotspot,
+        crop
       },
       name,
       slug,
@@ -75,8 +108,17 @@ export const cooperatorPageQuery = defineQuery(`*[slug.current == $slug && langu
   slug,
   description,
   image {
-    "lqip": asset->metadata.lqip,
-    ...
+    asset->{
+      _id,
+      url,
+      metadata{
+        lqip,
+        dimensions,
+      }
+    },
+    alt,
+    hotspot,
+    crop
   },
   socials[],
   projects[],
