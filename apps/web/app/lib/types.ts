@@ -1,7 +1,7 @@
 // Podstawowe typy dla aplikacji
 
 export interface NavItem {
-  title: string;
+  key: "home" | "manifest" | "projects" | "collaborators" | "sounds" | "support" | "contact";
   href: string;
   description?: string;
 }
@@ -9,7 +9,7 @@ export interface NavItem {
 export interface ButtonProps {
   children: React.ReactNode;
   variant?: "dark";
-  size?: "sm" ;
+  size?: "sm";
   onClick?: () => void;
   disabled?: boolean;
   className?: string;

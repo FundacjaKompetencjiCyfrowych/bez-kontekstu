@@ -4,6 +4,9 @@ import { Space_Mono } from "next/font/google";
 import "../globals.css";
 import { Navigation } from "../components/Navigation";
 import { SanityLive } from "../lib/sanity/live";
+import { IntlProvider } from "../lib/intl/context";
+import { getDictionary } from "../lib/intl/dictionaries/dynamic";
+import { Footer } from "../components/Footer";
 
 const defectica = localFont({
   src: [
@@ -41,12 +44,18 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const dict = await getDictionary(locale);
   return (
     <html lang={locale}>
-      <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
-        <Navigation />
-        <main className="bg-[#0d0b0e] max-w-7xl mx-auto">{children}</main>
-      </body>
+      <IntlProvider locale={locale} dictionary={dict}>
+        <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
+          <Navigation />
+          <div className="bg-[#0d0b0e] max-w-7xl mx-auto">
+            <main>{children}</main>
+            <Footer dictionary={dict} />
+          </div>
+        </body>
+      </IntlProvider>
       <SanityLive />
     </html>
   );

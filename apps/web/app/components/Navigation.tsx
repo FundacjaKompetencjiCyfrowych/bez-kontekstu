@@ -5,31 +5,49 @@ import { NavItem } from "@/app/lib/types";
 import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
-import { useLocale, useRoutePath } from "../lib/locales";
+import { useRoutePath, useSwitchLocale } from "@/app/lib/intl/hooks";
+import { useIntl } from "@/app/lib/intl/context";
 import LanguageIcon from "@/app/assets/icons/lang_glob.png";
+import { Header } from "./Header";
+import { cn } from "../lib/utils";
 
 const navigationItems: NavItem[] = [
-  { title: "STRONA GŁÓWNA", href: "/" },
-  { title: "MANIFEST", href: "/manifest" },
-  { title: "PROJEKTY", href: "/projects" },
-  { title: "WSPÓŁPRACE", href: "/cooperators" },
-  { title: "DŹWIĘKI", href: "/sounds" },
-  { title: "DLA DARCZYŃCÓW", href: "/donators" },
-  { title: "KONTAKT", href: "/contact" },
+  { key: "home", href: "/" },
+  { key: "manifest", href: "/manifest" },
+  { key: "projects", href: "/projects" },
+  { key: "collaborators", href: "/cooperators" },
+  { key: "sounds", href: "/sounds" },
+  { key: "support", href: "/donators" },
+  { key: "contact", href: "/contact" },
 ];
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { locale, setLocale } = useLocale();
+  const { locale, dictionary } = useIntl();
   const routePath = useRoutePath();
+  const switchLocale = useSwitchLocale();
+
+  const getMobilePageTitle = (path: string) => {
+    const foundItem = navigationItems.find((item) => {
+      if (item.href === path) return true;
+      if (item.href === "/projects" && path.startsWith("/projects/")) return true;
+      if (item.href === "/cooperators" && path.startsWith("/cooperators/")) return true;
+      return false;
+    });
+    if (foundItem) {
+      return dictionary.split[foundItem.key];
+    }
+    return undefined;
+  };
+
+  const mobileTitle = getMobilePageTitle(routePath);
 
   const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";
   const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
-  const isHomePage = routePath === "/";
-  const isSoundPage = routePath === "/sounds";
+  const isMobileMenuEnabled = !isProjectDetailPage && !isCooperatorDetailPage;
 
   const toggleLanguage = () => {
-    setLocale(locale === "pl" ? "en" : "pl");
+    switchLocale(locale === "pl" ? "en" : "pl");
   };
 
   const toggleSound = () => {
@@ -37,86 +55,36 @@ export function Navigation() {
   };
 
   return (
-    <nav className="w-full h-12 absolute flex justify-center z-50">
-      <div className="max-w-7xl mt-6 mx-auto">
-        {/* Desktop Navigation */}
-        <div className="flex justify-center">
-          <div className="hidden absolute xl:flex space-x-8 ">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
-              >
-                {item.title.toLocaleUpperCase()}
-              </Link>
-            ))}
+    <nav className="w-full flex flex-col justify-center relative z-50 mb-10 xl:mb-0">
+      {/* Mobile */}
+      {isMobileMenuEnabled && (
+        <div className="xl:hidden flex justify-between items-center px-5 overflow-hidden">
+          {/* Header */}
+          <Header title={mobileTitle} className="xl:hidden" showLogo={false} />
+          <button onClick={toggleSound} aria-label={`Toggle sound`} className="cursor-pointer">
+            <Image
+              src={SoundIcon}
+              alt="Sound button"
+              width={20}
+              height={20}
+              className="brightness-30 hover:brightness-100 transition-all duration-300 w-10 h-10"
+            />
+          </button>
 
-            {/* Language */}
-            <div className="w-[85px] flex items-center justify-center gap-3">
-              {/* Toggle Switch */}
-              <button
-                onClick={toggleLanguage}
-                aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
-                className="cursor-pointer"
-              >
-                <Image
-                  src={LanguageIcon}
-                  alt="Language button"
-                  width={20}
-                  height={20}
-                  className="brightness-20 hover:brightness-100 transition-all duration-300"
-                />
-              </button>
-              <span className={`text-sm xl:text-lg font-defectica leading-0 text-[#3f3f41]`}>{locale === "en" ? "EN" : "PL"}</span>
-
-            </div>
-            <button onClick={toggleSound} aria-label={`Toggle sound`} className="cursor-pointer">
-              <Image
-                src={SoundIcon}
-                alt="Sound button"
-                width={20}
-                height={20}
-                className="brightness-30 hover:brightness-100 transition-all duration-300"
-              />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Container */}
-        {!isProjectDetailPage && !isCooperatorDetailPage && (
-          <div className="xl:hidden w-full top-0 flex justify-center z-50">
-            {/* Animated menu */}
+          {/* Menu */}
+          <div
+            className={cn("absolute -bottom-0 left-0 right-0 border-b-1 border-gray-700 transition-all duration-300 z-30", {
+              "translate-y-[200px] md:translate-y-[170px] lg:translate-y-[130px]": isMenuOpen,
+            })}
+          >
+            {/* Collapsible */}
             <div
-              className={`${isMenuOpen ? "fixed" : "absolute"} z-[9999] transition-all duration-200 ease-in-out w-full max-w-full ${isHomePage
-                ? isMenuOpen
-                  ? "top-[470px] md:landscape:top-[330px] lg:landscape:top-[470px]"
-                  : `top-[150px] md:top-[250px] md:landscape:top-[290px] lg:landscape:top-[38vh]`
-                : isMenuOpen
-                  ? "top-[470px]"
-                  : `top-[25vh] ${isSoundPage ? "sm:landscape:top-[140px] md:landscape:top-[215px]" : "sm:landscape:top-[180px] md:landscape:top-[290px]"} lg:landscape:top-[38vh]`
-                }`}
-            >
-              {/* Gray bottom line for menu open button */}
-              <div className="flex items-center justify-center w-full relative">
-                <div className="absolute top-[-33px] left-0 right-0 flex justify-center h-[35px] border-b-1 border-gray-700"></div>
-                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-100 absolute top-[-20px] flex justify-center">
-                  <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
-                </button>
-              </div>
-            </div>
-
-            <div
-              className={`fixed z-[9998] bg-[#0d0b0e] w-full transition-all duration-500 ease-in-out ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-              style={{
-                top: 0,
-                left: 0,
-                right: 0,
-                height: "470px",
-              }}
+              className={cn("bg-[#0d0b0e] h-screen absolute bottom-0 left-0 right-0 opacity-0 transition-all duration-300", {
+                "opacity-100": isMenuOpen,
+              })}
             >
               {/* Menu items */}
-              <div className="overflow-visible pt-5">
+              <div className="overflow-hidden pb-5 absolute bottom-0 left-0 right-0">
                 {navigationItems.map((item) => (
                   <div key={item.href} className="mx-6">
                     <Link
@@ -124,7 +92,7 @@ export function Navigation() {
                       className="text-gray-200 hover:text-blue-600 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {item.title}
+                      {dictionary[item.key].toLocaleUpperCase()}
                     </Link>
                   </div>
                 ))}
@@ -164,11 +132,47 @@ export function Navigation() {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
+            {/* Toggler */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="absolute top-[-20px] left-1/2 -translate-x-1/2 flex justify-center cursor-pointer"
+            >
+              <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
+            </button>
           </div>
-        )}
+        </div>
+      )}
+
+      {/* Desktop */}
+      <div className="hidden xl:flex justify-center py-8 sticky top-0">
+        <div className="flex space-x-8 ">
+          {navigationItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
+            >
+              {dictionary[item.key].toLocaleUpperCase()}
+            </Link>
+          ))}
+
+          {/* Language */}
+          <div className="w-[85px] flex items-center justify-center gap-3">
+            {/* Toggle Switch */}
+            <button onClick={toggleLanguage} aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`} className="cursor-pointer">
+              <Image
+                src={LanguageIcon}
+                alt="Language button"
+                width={20}
+                height={20}
+                className="brightness-20 hover:brightness-100 transition-all duration-300"
+              />
+            </button>
+            <span className={`text-sm xl:text-lg font-defectica leading-0 text-[#3f3f41]`}>{locale === "en" ? "EN" : "PL"}</span>
+          </div>
+        </div>
       </div>
     </nav>
   );

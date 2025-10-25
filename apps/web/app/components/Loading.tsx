@@ -1,9 +1,9 @@
 "use client";
 
-import { useCurrentLocale } from "../lib/locales";
+import { useIntl } from "../lib/intl/context";
 
 export function Loading() {
-  const locale = useCurrentLocale();
-  const message = locale === "en" ? "Loading..." : "Ładowanie...";
+  const { dictionary } = useIntl();
+  const message = dictionary.loading;
   return <div className="bg-[#0d0b0e] min-h-screen font-mono flex items-center justify-center">{message}</div>;
 }

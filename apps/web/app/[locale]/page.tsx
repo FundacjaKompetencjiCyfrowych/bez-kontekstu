@@ -1,32 +1,35 @@
 import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
 import Logo from "@/app/assets/images/logo.png";
-import { Footer } from "@/app/components/Footer";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
-import { cooperators } from "@/app/lib/placeholders_old/cooperators";
+import { cooperators } from "@/app/lib/placeholders/cooperators";
 import LogoVioletImage from "@/app/assets/images/logo_violet.png";
-import { Header } from "../components/Header";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
+import { getDictionary } from "../lib/intl/dictionaries/dynamic";
 
 export const metadata: Metadata = {
   title: "Fundacja Bez Kontekstu - Sztuka i Technologia",
-  description: "Fundacja Bez Kontekstu to przestrzeń, w której fuzja sztuki i nowoczesnych technologii wyznacza nowe horyzonty. Projekty, współpraca i innowacyjne doświadczenia artystyczne.",
+  description:
+    "Fundacja Bez Kontekstu to przestrzeń, w której fuzja sztuki i nowoczesnych technologii wyznacza nowe horyzonty. Projekty, współpraca i innowacyjne doświadczenia artystyczne.",
   keywords: ["fundacja", "bez kontekstu", "sztuka", "technologia", "teatr", "projekty", "współpraca", "innowacje"],
 };
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const dictionary = await getDictionary(locale);
+
   // Get first 4 team members from cooperators data
   const teamMembers = cooperators.slice(0, 4);
 
   // Function to render responsive titles - different layouts for mobile and desktop
   const renderResponsiveTitle = (
-    mobileText: string | string[],
+    mobileText: string,
     desktopText: string, // Text to be split by spaces for desktop layout
     textAlign: "left" | "right" = "right"
   ) => {
-    const mobileLines = Array.isArray(mobileText) ? mobileText : [mobileText];
+    const mobileLines = mobileText.split(" ");
 
     return (
       <>
@@ -46,25 +49,25 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl bg-[#0d0b0e]">
-      <h1 className="sr-only">Fundacja Bez Kontekstu</h1>
-
-      {/*Title mobile*/}
-      <div className="mx-4">
-        <Header title="STRONA GŁÓ WNA" className="xl:hidden" showLogo={false} />
-      </div>
-
+    <div className="">
+      <h1 className="sr-only">{dictionary.noContext}</h1>
       {/* Hero Section */}
-      <section className="relative z-10 mx-6 flex h-[65vh] flex-col justify-between overflow-hidden top-[50px] md:landscape:h-[150vh] lg:landscape:h-[800px] xl:h-[800px] xl:top-[100px]" aria-labelledby="hero-title">
+      <section className="relative flex flex-col min-h-[70vh] items-center justify-center" aria-labelledby="hero-title">
         {/*Title */}
-        <h2 className="sr-only" id="hero-title">Bez Kontekstu</h2>
-        <div className="absolute right-0 top-0 block text-right" aria-hidden="true">{titleCutWord("BEZ", "xl:mt-0 xl:ml-0")}</div>
-        <div className="absolute bottom-0 left-0 block" aria-hidden="true">{titleCutWord("K O N TEKSTU", "xl:mt-0 xl:ml-0")}</div>
+        <h2 className="sr-only" id="hero-title">
+          Bez Kontekstu
+        </h2>
+        <div className="absolute right-0 top-0 block text-right" aria-hidden="true">
+          {titleCutWord(dictionary.split2.noContext[0], "xl:mt-0 xl:ml-0")}
+        </div>
+        <div className="absolute bottom-0 left-0 block" aria-hidden="true">
+          {titleCutWord(dictionary.split2.noContext[1], "xl:mt-0 xl:ml-0")}
+        </div>
         {/* Logo - white */}
         <Image
           src={Logo}
           priority
-          alt="Bez Kontekstu logo"
+          alt={dictionary.noContextFoundation + " logo"}
           className="absolute left-1/2 top-1/2 h-[40vw] w-[40vw] min-h-48 min-w-48 max-h-192 max-w-192 -translate-x-1/2 -translate-y-1/2 transform object-contain"
           sizes="(max-width: 768px) 40vw, (max-width: 1280px) 40vw, 192px"
         />
@@ -72,7 +75,10 @@ export default function Home() {
 
       <div className="relative px-5 xl:top-40 xl:px-0">
         {/* MANIFEST Section*/}
-        <section className="flex h-screen flex-col justify-around overflow-hidden mt-[150px] md:landscape:h-[150vh] lg:landscape:h-[800px] md:h-[70vh] lg:h-[80vh] xl:mb-20 xl:h-[800px]" aria-labelledby="manifest-title">
+        <section
+          className="flex h-screen flex-col justify-around overflow-hidden mt-[150px] md:landscape:h-[150vh] lg:landscape:h-[800px] md:h-[70vh] lg:h-[80vh] xl:mb-20 xl:h-[800px]"
+          aria-labelledby="manifest-title"
+        >
           {/* Violet logo */}
           <Image
             src={LogoVioletImage}
@@ -81,7 +87,7 @@ export default function Home() {
             sizes="(max-width: 1280px) 160px, 200px"
           />
           <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
-            {renderResponsiveTitle(["MAN", "IF", "EST"], "MA N I", "right")}
+            {renderResponsiveTitle(dictionary.split.manifest, dictionary.split2.manifest[0], "right")}
           </div>
 
           <div className="z-10 mx-auto w-[75vw] text-center text-md font-mono leading-6 lg:w-[65vw] lg:text-xl lg:leading-10 xl:w-[60vw] xl:text-xl xl:leading-10">
@@ -108,13 +114,16 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          {renderResponsiveTitle("", "F EST", "left")}
+          {renderResponsiveTitle("", dictionary.split2.manifest[1], "left")}
         </section>
 
         {/* PROJECTS Section */}
-        <section className="relative overflow-hidden h-[70vh]  md:landscape:h-[150vh] lg:landscape:h-[1000px] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent" aria-labelledby="projects-title">
+        <section
+          className="relative overflow-hidden h-[70vh]  md:landscape:h-[150vh] lg:landscape:h-[1000px] xl:h-[1000px] xl:mb-20 flex flex-col justify-around bg-transparent"
+          aria-labelledby="projects-title"
+        >
           <div className="relative flex flex-col items-end justify-start z-10">
-            {renderResponsiveTitle(["PRO", "JEK", "TY"], "PR O", "right")}
+            {renderResponsiveTitle(dictionary.split.projects, dictionary.split2.projects[0], "right")}
           </div>
 
           <RandomRectangles />
@@ -126,13 +135,16 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          {renderResponsiveTitle("", "J EKTY", "left")}
+          {renderResponsiveTitle("", dictionary.split2.projects[1], "left")}
         </section>
 
         {/* PEOPLE Section */}
-        <section className="relative h-screen md:mt-[150px] md:landscape:h-[300vh] lg:landscape:h-[1200px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center bg-transparent" aria-labelledby="people-title">
+        <section
+          className="relative h-screen md:mt-[150px] md:landscape:h-[300vh] lg:landscape:h-[1200px] lg:h-[1200px] xl:h-[1100px] xl:mb-20 flex flex-col justify-center bg-transparent"
+          aria-labelledby="people-title"
+        >
           <div className="absolute xl:right-0 top-[50px] xl:top-0 flex flex-col z-10">
-            <div className="">{renderResponsiveTitle(["WSP", "ÓŁ", "PRACE"], "WSP Ó Ł", "right")}</div>
+            <div className="">{renderResponsiveTitle(dictionary.split.collaborators, dictionary.split2.collaborators[0], "right")}</div>
           </div>
 
           <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
@@ -168,13 +180,16 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="absolute bottom-0 left-0">{renderResponsiveTitle("", "P RACE", "left")}</div>
+          <div className="absolute bottom-0 left-0">{renderResponsiveTitle("", dictionary.split2.collaborators[1], "left")}</div>
         </section>
 
         {/* DONATORS Section */}
-        <section className="relative md:landscape:h-[150vh] lg:landscape:h-[65vh] xl:mb-20 h-[50vh] md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent" aria-labelledby="donators-title">
+        <section
+          className="relative md:landscape:h-[150vh] lg:landscape:h-[65vh] xl:mb-20 h-[50vh] md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent"
+          aria-labelledby="donators-title"
+        >
           <div className=" flex flex-col items-end ">
-            <div>{renderResponsiveTitle(["DLA", "DARCZY", "ŃCOW"], "DL A", "right")}</div>
+            <div>{renderResponsiveTitle(dictionary.split.support, dictionary.split2.support[0], "right")}</div>
           </div>
           <div className="mx-auto flex flex-col items-center text-center text-base sm:text-2xl font-mono">
             <p className="leading-10">Twoje wsparcie</p>
@@ -188,10 +203,8 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div>{renderResponsiveTitle("", "DAR CZYŃCÓW", "left")}</div>
+          <div>{renderResponsiveTitle("", dictionary.split2.support[1], "left")}</div>
         </section>
-
-        <Footer />
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import { cooperatorPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { ContentImage } from "@/app/components/cms/ContentImage";
+import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
 const getCooperatorPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: cooperatorPageQuery, params: { lang: locale, slug } });
@@ -39,6 +40,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
     notFound();
   }
 
+  const dictionary = await getDictionary(locale);
   const { name, description, projects, socials, image, next, previous } = data || {};
 
   return (
@@ -49,8 +51,8 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
       <div className="hidden xl:block px-8">
         <div className="relative py-6 md:py-12 xl:py-0 xl:mt-25 xl:ml-8">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-            <Image src={ArrowLeft} alt={locale === "pl" ? "Poprzedni" : "Previous"} className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
-            <p className="ml-4 md:text-xl">Wstecz</p>
+            <Image src={ArrowLeft} alt={dictionary.back} className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
+            <p className="ml-4 md:text-xl">{dictionary.back}</p>
           </Link>
         </div>
       </div>
@@ -60,8 +62,8 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         {/* Back button */}
         <div className="relative xl:hidden w-fit px-4 my-[50px]">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-            <Image src={ArrowLeft} alt={locale === "pl" ? "Poprzedni" : "Previous"} className="w-2 h-3" />
-            <p className="ml-2 text-sm">Wstecz</p>
+            <Image src={ArrowLeft} alt={dictionary.back} className="w-2 h-3" />
+            <p className="ml-2 text-sm">{dictionary.back}</p>
           </Link>
         </div>
 
@@ -147,12 +149,8 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
               {previous ? (
                 <Link href={`/cooperators/${previous.slug?.current}}`} className="flex items-center hover:text-gray-300 transition-colors">
                   <div>
-                    <Image
-                      src={ArrowLeft}
-                      alt={locale === "pl" ? "Poprzedni" : "Previous"}
-                      className="inline-block mr-4 w-2 h-2 md:w-4 md:h-4"
-                    />
-                    <span>{locale === "pl" ? "Poprzedni" : "Previous"}</span>
+                    <Image src={ArrowLeft} alt={dictionary.previous} className="inline-block mr-4 w-2 h-2 md:w-4 md:h-4" />
+                    <span>{dictionary.previous}</span>
                   </div>
                 </Link>
               ) : (
@@ -168,12 +166,8 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                   className="flex items-center justify-end gap-2 hover:text-gray-300 transition-colors"
                 >
                   <div>
-                    <span>{locale === "pl" ? "Następny" : "Next"}</span>
-                    <Image
-                      src={ArrowRight}
-                      alt={locale === "pl" ? "Następny" : "Next"}
-                      className="inline-block ml-4 w-2 h-2 md:w-4 md:h-4"
-                    />
+                    <span>{dictionary.next}</span>
+                    <Image src={ArrowRight} alt={dictionary.next} className="inline-block ml-4 w-2 h-2 md:w-4 md:h-4" />
                   </div>
                 </Link>
               ) : (
@@ -275,12 +269,8 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                       className="flex items-center hover:text-gray-300 transition-colors"
                     >
                       <div>
-                        <Image
-                          src={ArrowLeft}
-                          alt={locale === "pl" ? "Poprzedni" : "Previous"}
-                          className="inline-block mr-4 w-5 h-6 xl:w-3 xl:h-4 "
-                        />
-                        <span>{locale === "pl" ? "Poprzedni" : "Previous"}</span>
+                        <Image src={ArrowLeft} alt={dictionary.previous} className="inline-block mr-4 w-5 h-6 xl:w-3 xl:h-4 " />
+                        <span>{dictionary.previous}</span>
                       </div>
                     </Link>
                   ) : (
@@ -296,12 +286,8 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                       className="flex items-center justify-end gap-2 hover:text-gray-300 transition-colors"
                     >
                       <div>
-                        <span>{locale === "pl" ? "Następny" : "Next"}</span>
-                        <Image
-                          src={ArrowRight}
-                          alt={locale === "pl" ? "Następny" : "Next"}
-                          className="inline-block ml-4 w-5 h-5 xl:w-3 xl:h-4"
-                        />
+                        <span>{dictionary.next}</span>
+                        <Image src={ArrowRight} alt={dictionary.next} className="inline-block ml-4 w-5 h-5 xl:w-3 xl:h-4" />
                       </div>
                     </Link>
                   ) : (
@@ -313,8 +299,6 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 }
