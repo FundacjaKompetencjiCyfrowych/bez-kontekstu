@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { NavItem } from "@/app/lib/types";
-import Image from "next/image";
 import { useRoutePath } from "@/app/lib/intl/hooks";
 import { useIntl } from "@/app/lib/intl/context";
 import { Header } from "./Header";
@@ -90,7 +89,7 @@ export function Navigation() {
             {/* Toggler */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="absolute top-[-20px] left-1/2 -translate-x-1/2 flex justify-center cursor-pointer"
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center cursor-pointer"
             >
               <MenuIcon className={`w-12 h-12 top-[-28px] `} />
             </button>

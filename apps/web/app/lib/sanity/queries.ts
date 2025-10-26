@@ -201,7 +201,9 @@ export const soundsPageQuery = defineQuery(`*[_type == "sounds" && language == $
 }`);
 
 export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language == $lang][0]{
-  meta
+  meta,
+  hero,
+  sections
 }`);
 
 export const donatorsPageQuery = defineQuery(`*[_type == "donators" && language == $lang][0]{

@@ -320,20 +320,6 @@ export type Donators = {
   }>;
 };
 
-export type RichImage = {
-  _type: "richImage";
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-};
-
 export type Cooperators = {
   _id: string;
   _type: "cooperators";
@@ -373,6 +359,69 @@ export type Manifest = {
   _rev: string;
   language?: string;
   meta?: Meta;
+  hero?: {
+    quote?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+  };
+  sections?: Array<{
+    style?: {
+      desktop?: "left" | "right" | "center";
+      tablet?:
+        | "left"
+        | "right"
+        | "center"
+        | "fusion"
+        | "narrowLeft"
+        | "narrowRight";
+      mobile?: "left" | "right" | "center" | "fusion";
+    };
+    title?: string;
+    body?: BlockContent;
+    feature?: {
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "richImage";
+      };
+      altTitle?: string;
+    };
+    _type: "section";
+    _key: string;
+  }>;
+};
+
+export type RichImage = {
+  _type: "richImage";
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
 };
 
 export type Home = {
@@ -568,11 +617,11 @@ export type AllSanitySchemaTypes =
   | Project
   | Sounds
   | Donators
-  | RichImage
   | Cooperators
   | Contact
   | Projects
   | Manifest
+  | RichImage
   | Home
   | Link
   | Meta
@@ -937,9 +986,58 @@ export type SoundsPageQueryResult = {
   meta: Meta | null;
 } | null;
 // Variable: manifestPageQuery
-// Query: *[_type == "manifest" && language == $lang][0]{  meta}
+// Query: *[_type == "manifest" && language == $lang][0]{  meta,  hero,  sections}
 export type ManifestPageQueryResult = {
   meta: Meta | null;
+  hero: {
+    quote?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+  } | null;
+  sections: Array<{
+    style?: {
+      desktop?: "center" | "left" | "right";
+      tablet?:
+        | "center"
+        | "fusion"
+        | "left"
+        | "narrowLeft"
+        | "narrowRight"
+        | "right";
+      mobile?: "center" | "fusion" | "left" | "right";
+    };
+    title?: string;
+    body?: BlockContent;
+    feature?: {
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "richImage";
+      };
+      altTitle?: string;
+    };
+    _type: "section";
+    _key: string;
+  }> | null;
 } | null;
 // Variable: donatorsPageQuery
 // Query: *[_type == "donators" && language == $lang][0]{  meta,  sections}
@@ -1014,7 +1112,7 @@ declare module "@sanity/client" {
     '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  slug,\n  description,\n  image {\n    asset->{\n      _id,\n      url,\n      metadata{\n        lqip,\n        dimensions,\n      }\n    },\n    alt,\n    hotspot,\n    crop\n  },\n  socials[],\n  projects[],\n\n  "next": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current > ^.slug.current ||\n      (slug.current == ^.slug.current && _id > ^._id)\n    )\n  ] | order(slug.current asc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current < ^.slug.current ||\n      (slug.current == ^.slug.current && _id < ^._id)\n    )\n  ] | order(slug.current desc, _id desc)[0]{\n    name,\n    slug\n  },\n}': CooperatorPageQueryResult;
     '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      cover{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n\n  },\n  cooperators{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      name,\n      image{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n  },\n  support,\n}': HomePageQueryResult;
     '*[_type == "sounds" && language == $lang][0]{\n  meta\n}': SoundsPageQueryResult;
-    '*[_type == "manifest" && language == $lang][0]{\n  meta\n}': ManifestPageQueryResult;
+    '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
     '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections\n}': DonatorsPageQueryResult;
     '*[_type == "privacy" && language == $lang][0]{\n  meta\n}': PrivacyPageQueryResult;
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
