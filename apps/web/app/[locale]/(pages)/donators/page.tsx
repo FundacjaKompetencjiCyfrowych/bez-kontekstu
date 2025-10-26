@@ -1,6 +1,3 @@
-import Image from "next/image";
-import DonatorsLeftImage from "@/app/assets/images/donators_left.png";
-import DonatorsRightImage from "@/app/assets/images/donators_right.png";
 import titleCutWord from "@/app/lib/titleCutWord";
 import CopyField from "@/app/components/CopyField";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
@@ -9,6 +6,7 @@ import { cache } from "react";
 import { donatorsPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
+import { ContentImage } from "@/app/components/cms/ContentImage";
 
 const getDonatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: donatorsPageQuery, params: { lang: locale } });
@@ -23,19 +21,26 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function DonorsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dictionary = await getDictionary(locale);
+  const { data } = await getDonatorsPage(locale);
+
   const buttonClasses =
     "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
-  const containerClasses = "border border-violet-300 rounded-3xl p-3 mb-4 bg-neutral-600/70";
 
   return (
     <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
       <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
         {/*Title desktop */}
         <div className="hidden xl:block absolute right-0 top-0 text-right">
-          {titleCutWord("DL A", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
+          {titleCutWord(
+            dictionary.split2.support[0],
+            "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3"
+          )}
         </div>
         <div className="xl:block hidden absolute left-0 bottom-0">
-          {titleCutWord("DAR CZYŃCÓW", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
+          {titleCutWord(
+            dictionary.split2.support[1],
+            "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3"
+          )}
         </div>
 
         {/* Two column layout for desktop */}
@@ -67,139 +72,86 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
 
         {/* Info - Desktop 2-column layout */}
         <div className="relative mb-8 text-sm z-50 xl:grid xl:grid-cols-2 xl:gap-16 xl:max-w-7xl xl:mx-auto xl:py-20">
-          {/* Left Column - Image */}
-          <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
-            <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-              <Image src={DonatorsLeftImage} alt="Wsparcie dla fundacji" fill sizes="auto" className="object-cover" />
-            </div>
-          </div>
-
-          {/* Right Column - Payment details */}
-          <div className="xl:col-span-1">
-            <div className="mx-5 mb-4 md:text-2xl xl:text-3xl xl:mx-0">
-              <h3 className="mb-6">
-                <strong>Przelew jednorazowy</strong>
-              </h3>
-              <p className="leading-6 xl:leading-10">Przekaż dowolną bezpośrednio na konto fundacji</p>
-            </div>
-
-            {/* Transfer details */}
-            <div className="space-y-4 mt-10 mx-5 md:text-xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
-              {/* Recipient */}
-              <CopyField
-                className={buttonClasses}
-                label="Odbiorca:"
-                value="Fundacja Bez Kontekstu"
-                elementId="foundation"
-                copiedText={dictionary.copied + " ✓"}
-                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
-                ariaLabel="Skopiuj nazwę fundacji: Fundacja Bez Kontekstu"
-              />
-
-              {/* Account number */}
-              <CopyField
-                className={buttonClasses}
-                label="Numer konta:"
-                value="00 1140 2004 0000 3502 9481 8053"
-                elementId="account"
-                copiedText={dictionary.copied + " ✓"}
-                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
-                ariaLabel="Skopiuj numer konta: 00 1140 2004 0000 3502 9481 8053"
-              />
-
-              {/* Title */}
-              <CopyField
-                className={buttonClasses}
-                label="Tytuł:"
-                value="Wsparcie dla fundacji"
-                elementId="title"
-                copiedText={dictionary.copied + " ✓"}
-                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
-                ariaLabel="Skopiuj tytuł przelewu: Wsparcie dla fundacji"
-              />
-
-              {/* Address */}
-              <CopyField
-                className={buttonClasses}
-                label="Adres:"
-                value="ul. Smulikowskiego 2 500-389 Warszawa"
-                elementId="address"
-                copiedText={dictionary.copied + " ✓"}
-                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
-                valueClassName="w-[160px] md:w-auto"
-                ariaLabel="Skopiuj adres fundacji: ul. Smulikowskiego 2 500-389 Warszawa"
-              />
-
-              {/* Foundation data */}
-              <CopyField
-                className={buttonClasses}
-                label="REGON:"
-                value="528434787"
-                elementId="regon"
-                copiedText={dictionary.copied + " ✓"}
-                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
-                valueClassName="w-[160px] md:w-[250px]"
-                ariaLabel="Skopiuj REGON: 528434787"
-              />
-
-              {/* NIP */}
-              <CopyField
-                className={buttonClasses}
-                label="NIP:"
-                value="5253000932"
-                elementId="nip"
-                copiedText={dictionary.copied + " ✓"}
-                ariaLiveCopiedMessage={dictionary.copiedToClipboard}
-                valueClassName="w-[160px] md:w-[250px]"
-                ariaLabel="Skopiuj NIP: 5253000932"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* 1% PIT - Desktop 2-column layout */}
-        <div className="mb-8 mx-5 relative md:text-xl xl:grid xl:grid-cols-2 xl:gap-16 xl:max-w-7xl xl:mx-auto xl:py-20">
-          {/* Left Column - 1% PIT content */}
-          <div className="xl:col-span-1">
-            <h3 className="mb-4 mx-2 md:text-3xl xl:text-4xl xl:mx-0">
-              <strong>1% PIT</strong>
-            </h3>
-            <p className="mb-10 mx-2 leading-6 md:leading-10 xl:text-xl xl:leading-8 xl:mx-0">
-              Przekaż darowiznę bezpośrednio na konto fundacji. W zeznaniu podatkowym wpisz nasz numer KRS.
-            </p>
-
-            <CopyField
-              className={buttonClasses}
-              label="KRS:"
-              value="0001102013"
-              elementId="krs"
-              copiedText="Skopiowano ✓"
-              ariaLiveCopiedMessage={dictionary.copiedToClipboard}
-              ariaLabel="Skopiuj numer KRS: 0001102013"
-            />
-
-            {/* Patronite */}
-            <div className="relative md:text-xl md:leading-10 xl:py-20">
-              <h3 className="mb-4 mx-2 md:text-3xl">
-                <strong>Patronite</strong>
-              </h3>
-              <p className="mb-10 mx-2">Wspieraj nas regularnie przez platformę Patronite</p>
-
-              <div className={containerClasses}>
-                <button className="w-full text-left space-y-3 py-2 mx-2">
-                  <p>Profil na Patronite</p>
-                  <p>będzie dostępny wkrótce</p>
-                </button>
+          {data?.sections &&
+            data.sections.map((section, index) => (
+              <div key={section._key} className="contents">
+                {index % 2 === 0 ? (
+                  <>
+                    {/* Left Column - Image */}
+                    <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
+                      <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
+                        {section.image && <ContentImage image={section.image} fill shimmer className="object-cover" />}
+                      </div>
+                    </div>
+                    {/* Right Column - Payment details */}
+                    <div className="xl:col-span-1">
+                      {section.body &&
+                        section.body.map((body) => (
+                          <div key={body._key}>
+                            <div className="mx-5 mb-4 md:text-2xl xl:text-3xl xl:mx-0">
+                              <h3 className="mb-6">
+                                <strong>{body.heading?.title}</strong>
+                              </h3>
+                              <p className="leading-6 xl:leading-10">{body.heading?.subtitle}</p>
+                            </div>
+                            <div className="space-y-4 mt-10 mx-5 md:text-xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
+                              {body.fields &&
+                                body.fields.map((field) => (
+                                  <CopyField
+                                    key={field._key}
+                                    className={buttonClasses}
+                                    label={field.title || ""}
+                                    value={field.text || ""}
+                                    elementId={field._key}
+                                    ariaLabel={dictionary.copyToClipboard}
+                                    ariaLiveCopiedMessage={dictionary.copied}
+                                    copiedText={dictionary.copied + " ✓"}
+                                  />
+                                ))}
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Left Column - 1% PIT / Patronite */}
+                    <div className="xl:col-span-1">
+                      {section.body &&
+                        section.body.map((body) => (
+                          <div key={body._key}>
+                            <h3 className="mb-4 mx-2 md:text-3xl xl:text-4xl xl:mx-0">
+                              <strong>{body.heading?.title}</strong>
+                            </h3>
+                            <p className="mb-10 mx-2 leading-6 md:leading-10 xl:text-xl xl:leading-8 xl:mx-0">{body.heading?.subtitle}</p>
+                            <div className="space-y-4 mt-10 mx-5 md:text-xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
+                              {body.fields &&
+                                body.fields.map((field) => (
+                                  <CopyField
+                                    key={field._key}
+                                    className={buttonClasses}
+                                    label={field.title || ""}
+                                    value={field.text || ""}
+                                    elementId={field._key}
+                                    copiedText={dictionary.copied + " ✓"}
+                                    ariaLiveCopiedMessage={dictionary.copied}
+                                    ariaLabel={dictionary.copyToClipboard}
+                                  />
+                                ))}
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                    {/* Right Column - Image */}
+                    <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
+                      <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
+                        {section.image && <ContentImage image={section.image} fill shimmer className="object-cover" />}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
-            </div>
-          </div>
-
-          {/* Right Column - Image */}
-          <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
-            <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-              <Image src={DonatorsRightImage} alt="1% PIT dla fundacji" fill sizes="auto" className="object-cover" />
-            </div>
-          </div>
+            ))}
         </div>
       </div>
     </div>

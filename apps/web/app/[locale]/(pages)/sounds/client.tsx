@@ -4,23 +4,16 @@
 import { useState } from "react";
 import { TrackItem } from "@/app/components/TrackItem";
 import LogoViolet from "@/app/components/LogoViolet";
-import { Metadata } from "next";
 import { useIntl } from "@/app/lib/intl/context";
-
-const metadata: Metadata = {
-  title: "Beats'n'Pieces - Fundacja Bez Kontekstu",
-  description: "Posłuchaj utworów muzycznych Fundacji Bez Kontekstu. Kolekcja dźwięków i kompozycji.",
-  keywords: ["muzyka", "beats", "pieces", "fundacja", "bez kontekstu", "dźwięki", "kompozycje"],
-};
 
 interface Track {
   id: number;
   title: string;
 }
 
-interface SoundsPageState {
-  currentTrack: number | null;
-}
+// interface SoundsPageState {
+//   currentTrack: number | null;
+// }
 
 export function SoundsClient() {
   const [currentTrack, setCurrentTrack] = useState<number | null>(null);

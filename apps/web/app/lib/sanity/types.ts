@@ -269,20 +269,6 @@ export type Project = {
   multimedia?: ImgOrVideo;
 };
 
-export type RichImage = {
-  _type: "richImage";
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-};
-
 export type Sounds = {
   _id: string;
   _type: "sounds";
@@ -301,6 +287,51 @@ export type Donators = {
   _rev: string;
   language?: string;
   meta?: Meta;
+  sections?: Array<{
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+    body?: Array<{
+      heading?: {
+        title?: string;
+        subtitle?: string;
+      };
+      fields?: Array<{
+        title?: string;
+        text?: string;
+        _type: "field";
+        _key: string;
+      }>;
+      _type: "subsection";
+      _key: string;
+    }>;
+    _type: "section";
+    _key: string;
+  }>;
+};
+
+export type RichImage = {
+  _type: "richImage";
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
 };
 
 export type Cooperators = {
@@ -535,9 +566,9 @@ export type AllSanitySchemaTypes =
   | Privacy
   | Cooperator
   | Project
-  | RichImage
   | Sounds
   | Donators
+  | RichImage
   | Cooperators
   | Contact
   | Projects
@@ -911,9 +942,40 @@ export type ManifestPageQueryResult = {
   meta: Meta | null;
 } | null;
 // Variable: donatorsPageQuery
-// Query: *[_type == "donators" && language == $lang][0]{  meta}
+// Query: *[_type == "donators" && language == $lang][0]{  meta,  sections}
 export type DonatorsPageQueryResult = {
   meta: Meta | null;
+  sections: Array<{
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+    body?: Array<{
+      heading?: {
+        title?: string;
+        subtitle?: string;
+      };
+      fields?: Array<{
+        title?: string;
+        text?: string;
+        _type: "field";
+        _key: string;
+      }>;
+      _type: "subsection";
+      _key: string;
+    }>;
+    _type: "section";
+    _key: string;
+  }> | null;
 } | null;
 // Variable: privacyPageQuery
 // Query: *[_type == "privacy" && language == $lang][0]{  meta}
@@ -953,7 +1015,7 @@ declare module "@sanity/client" {
     '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      cover{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n\n  },\n  cooperators{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      name,\n      image{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n  },\n  support,\n}': HomePageQueryResult;
     '*[_type == "sounds" && language == $lang][0]{\n  meta\n}': SoundsPageQueryResult;
     '*[_type == "manifest" && language == $lang][0]{\n  meta\n}': ManifestPageQueryResult;
-    '*[_type == "donators" && language == $lang][0]{\n  meta\n}': DonatorsPageQueryResult;
+    '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections\n}': DonatorsPageQueryResult;
     '*[_type == "privacy" && language == $lang][0]{\n  meta\n}': PrivacyPageQueryResult;
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
