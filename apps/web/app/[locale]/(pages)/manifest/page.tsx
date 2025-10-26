@@ -6,12 +6,20 @@ import LogoViolet from "@/app/components/LogoViolet";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { cache } from "react";
+import { sanityFetch } from "@/app/lib/sanity/live";
+import { manifestPageQuery } from "@/app/lib/sanity/queries";
+import { mapMetadata } from "@/app/lib/sanity/mappers";
 
-export const metadata: Metadata = {
-  title: "Manifest - Fundacja Bez Kontekstu",
-  description: "Poznaj manifest Fundacji Bez Kontekstu. Nasza wizja, cele i współpraca w dziedzinie sztuki i nowoczesnych technologii.",
-  keywords: ["manifest", "fundacja", "bez kontekstu", "sztuka", "technologia", "teatr", "wizja", "cele"],
-};
+const getProjectsPage = cache(async (locale: string) => {
+  return await sanityFetch({ query: manifestPageQuery, params: { lang: locale } });
+});
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const { data } = await getProjectsPage(locale);
+  return mapMetadata(data?.meta);
+}
 
 export default async function ManifestPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

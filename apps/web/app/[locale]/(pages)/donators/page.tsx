@@ -4,6 +4,21 @@ import DonatorsRightImage from "@/app/assets/images/donators_right.png";
 import titleCutWord from "@/app/lib/titleCutWord";
 import CopyField from "@/app/components/CopyField";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { sanityFetch } from "@/app/lib/sanity/live";
+import { cache } from "react";
+import { supportPageQuery } from "@/app/lib/sanity/queries";
+import { mapMetadata } from "@/app/lib/sanity/mappers";
+import { Metadata } from "next";
+
+const getProjectsPage = cache(async (locale: string) => {
+  return await sanityFetch({ query: supportPageQuery, params: { lang: locale } });
+});
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const { data } = await getProjectsPage(locale);
+  return mapMetadata(data?.meta);
+}
 
 export default async function DonorsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

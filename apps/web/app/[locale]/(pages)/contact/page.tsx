@@ -10,12 +10,20 @@ import LogoViolet from "@/app/components/LogoViolet";
 import { ContactIcon } from "@/app/components/ContactIcon";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { sanityFetch } from "@/app/lib/sanity/live";
+import { cache } from "react";
+import { contactPageQuery } from "@/app/lib/sanity/queries";
+import { mapMetadata } from "@/app/lib/sanity/mappers";
 
-export const metadata: Metadata = {
-  title: "Kontakt - Fundacja Bez Kontekstu",
-  description: "Skontaktuj się z Fundacją Bez Kontekstu. Adres, telefon, email i media społecznościowe.",
-  keywords: ["kontakt", "fundacja", "bez kontekstu", "warszawa", "email", "telefon"],
-};
+const getProjectsPage = cache(async (locale: string) => {
+  return await sanityFetch({ query: contactPageQuery, params: { lang: locale } });
+});
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const { data } = await getProjectsPage(locale);
+  return mapMetadata(data?.meta);
+}
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

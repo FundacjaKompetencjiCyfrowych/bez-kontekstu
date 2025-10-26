@@ -78,7 +78,7 @@ export const projectPageQuery = defineQuery(`*[slug.current == $slug && language
   description
 }`);
 
-export const cooperatorsPageQuery = defineQuery(`*[_type == "cooperator" && language == $lang][0]{
+export const cooperatorsPageQuery = defineQuery(`*[_type == "cooperators" && language == $lang][0]{
   "cooperators": *[_type == "cooperator" && language == $lang]
     | order(slug.current asc, _id asc){
       _id,
@@ -146,4 +146,72 @@ export const cooperatorPageQuery = defineQuery(`*[slug.current == $slug && langu
     name,
     slug
   },
+}`);
+
+export const homePageQuery = defineQuery(`*[_type == "home" && language == $lang][0]{
+  meta,
+  manifest,
+  projects{
+    ...,
+    featured[]->{
+      _id,
+      slug,
+      cover{
+        asset->{
+          _id,
+          url,
+          metadata{
+            lqip,
+            dimensions,
+          }
+        },
+        alt,
+        hotspot,
+        crop
+      }
+    },
+
+  },
+  cooperators{
+    ...,
+    featured[]->{
+      _id,
+      slug,
+      name,
+      image{
+        asset->{
+          _id,
+          url,
+          metadata{
+            lqip,
+            dimensions,
+          }
+        },
+        alt,
+        hotspot,
+        crop
+      }
+    },
+  },
+  support,
+}`);
+
+export const soundsPageQuery = defineQuery(`*[_type == "sounds" && language == $lang][0]{
+  meta
+}`);
+
+export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language == $lang][0]{
+  meta
+}`);
+
+export const supportPageQuery = defineQuery(`*[_type == "support" && language == $lang][0]{
+  meta
+}`);
+
+export const privacyPolicyPageQuery = defineQuery(`*[_type == "privacyPolicy" && language == $lang][0]{
+  meta
+}`);
+
+export const contactPageQuery = defineQuery(`*[_type == "contact" && language == $lang][0]{
+  meta
 }`);

@@ -13,7 +13,7 @@ export async function Footer({ dictionary }: { dictionary: Dictionary }) {
         <div className="border-t border-[#f5f5f5] mt-4 pt-2 text-center text-[#f5f5f5]">
           <span className="hidden xl:inline"> {dictionary.noContextFoundation} | </span>
           <Link href={"/contact"}>{dictionary.contact} |</Link>
-          <Link href={"/privacy-policy"} className=" ml-2">
+          <Link href={"/privacy"} className=" ml-2">
             {dictionary.privacy}
           </Link>
 

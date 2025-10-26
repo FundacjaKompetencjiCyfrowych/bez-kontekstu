@@ -36,6 +36,6 @@ const components: PortableTextComponents = {
   },
 };
 
-export function ContentTextBlock({ value }: { value: BlockContent }) {
+export function ContentText({ value }: { value: BlockContent }) {
   return <PortableText value={value} components={components} />;
 }

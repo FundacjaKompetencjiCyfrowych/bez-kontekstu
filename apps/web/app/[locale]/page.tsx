@@ -3,25 +3,34 @@ import { Button } from "@/app/components/ui/Button";
 import Logo from "@/app/assets/images/logo.png";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
-import { cooperators } from "@/app/lib/placeholders/cooperators";
 import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
 import { getDictionary } from "../lib/intl/dictionaries/dynamic";
+import { cache } from "react";
+import { sanityFetch } from "../lib/sanity/live";
+import { homePageQuery } from "../lib/sanity/queries";
+import { mapMetadata } from "../lib/sanity/mappers";
+import { ContentImage } from "../components/cms/ContentImage";
+import { ContentText } from "../components/cms/ContentText";
 
-export const metadata: Metadata = {
-  title: "Fundacja Bez Kontekstu - Sztuka i Technologia",
-  description:
-    "Fundacja Bez Kontekstu to przestrzeń, w której fuzja sztuki i nowoczesnych technologii wyznacza nowe horyzonty. Projekty, współpraca i innowacyjne doświadczenia artystyczne.",
-  keywords: ["fundacja", "bez kontekstu", "sztuka", "technologia", "teatr", "projekty", "współpraca", "innowacje"],
-};
+const getHomepage = cache(async (locale: string) => {
+  return await sanityFetch({ query: homePageQuery, params: { lang: locale } });
+});
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const { data } = await getHomepage(locale);
+  return mapMetadata(data?.meta);
+}
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const dictionary = await getDictionary(locale);
+  const { data } = await getHomepage(locale);
 
   // Get first 4 team members from cooperators data
-  const teamMembers = cooperators.slice(0, 4);
+  const teamMembers = (data?.cooperators?.featured ?? []).slice(0, 4);
 
   // Function to render responsive titles - different layouts for mobile and desktop
   const renderResponsiveTitle = (
@@ -91,25 +100,21 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
 
           <div className="z-10 mx-auto w-[75vw] text-center text-md font-mono leading-6 lg:w-[65vw] lg:text-xl lg:leading-10 xl:w-[60vw] xl:text-xl xl:leading-10">
-            <p className="mb-4">
-              Fundacja Bez Kontekstu to przestrzeń, w której FUZJA sztuki i nowoczesnych technologii wyznacza nowe horyzonty.
-            </p>
-            <p className="mb-4">
-              Działamy z myślą o tworzeniu innowacyjnych doświadczeń artystycznych, które przełamują granice tradycyjnych form wyrazu.
-            </p>
-            <p className="mb-8">
-              Poprzez łączenie immersyjnego dźwięku, eksperymentów teatralnych oraz interdyscyplinarnych projektów edukacyjnychwprowadzamy
-              odbiorców w świat, gdzie teatr spotyka się z cyfrową rzeczywistością.
-            </p>
+            {data?.manifest?.body && <ContentText value={data.manifest.body} />}
 
             <div className="z-10 flex transform items-center justify-center">
-              <Link href={"/manifest"} className="w-full md:w-full lg:w-auto">
+              {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
+              <Link
+                href={data?.manifest?.button?.url || "/manifest"}
+                className="w-full md:w-full lg:w-auto"
+                target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
+              >
                 <Button
                   variant="dark"
                   size="sm"
                   className="w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500"
                 >
-                  Poznaj nas lepiej
+                  {data?.manifest?.button?.label}
                 </Button>
               </Link>
             </div>
@@ -126,12 +131,21 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             {renderResponsiveTitle(dictionary.split.projects, dictionary.split2.projects[0], "right")}
           </div>
 
-          <RandomRectangles />
+          <RandomRectangles
+            images={
+              data?.projects?.featured?.map((project) => project?.cover).filter((image) => image !== null && image !== undefined) ?? []
+            }
+          />
 
           <div className="relative flex justify-center items-center transform z-10">
-            <Link href={"/projects"} className="w-full md:w-full lg:w-auto">
+            {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
+            <Link
+              href={data?.projects?.button?.url || "/projects"}
+              className="w-full md:w-full lg:w-auto"
+              target={data?.projects?.button?.newTab ? "_blank" : "_self"}
+            >
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
-                Sprawdź projekty
+                {data?.projects?.button?.label}
               </Button>
             </Link>
           </div>
@@ -150,14 +164,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
             {teamMembers.map((member) => (
               <div
-                key={member.id}
+                key={member._id}
                 className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-square xl:w-[400px] xl:h-[300px] flex flex-col items-start justify-end p-3 overflow-hidden"
               >
                 {/* Cooperator image */}
                 {member.image && (
-                  <Image
-                    src={member.image}
-                    alt={`${member.name} ${member.surname}`}
+                  <ContentImage
+                    image={member.image}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 50vw, (max-width: 1280px) 50vw, 400px"
@@ -166,17 +179,20 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 {/* Gradient overlay */}
                 <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent"></div>
                 {/* Name */}
-                <h3 className="relative z-10 text-sm md:text-base text-white">
-                  {member.name} {member.surname}
-                </h3>
+                <h3 className="relative z-10 text-sm md:text-base text-white">{member.name}</h3>
               </div>
             ))}
           </div>
 
           <div className="relative mt-[50px] xl:mt-[0px] flex justify-center items-center transform z-10">
-            <Link href={"/cooperators"} className="w-full md:w-full lg:w-auto">
+            {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
+            <Link
+              href={data?.cooperators?.button?.url || "/cooperators"}
+              className="w-full md:w-full lg:w-auto"
+              target={data?.cooperators?.button?.newTab ? "_blank" : "_self"}
+            >
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
-                Poznaj nasz zespół
+                {data?.cooperators?.button?.label}
               </Button>
             </Link>
           </div>
@@ -192,14 +208,17 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             <div>{renderResponsiveTitle(dictionary.split.support, dictionary.split2.support[0], "right")}</div>
           </div>
           <div className="mx-auto flex flex-col items-center text-center text-base sm:text-2xl font-mono">
-            <p className="leading-10">Twoje wsparcie</p>
-            <p className="leading-10">=</p>
-            <p className="leading-10">nowe przestrzenie sztuki</p>
+            {data?.support?.body && <ContentText value={data.support.body} />}
           </div>
           <div className="relative flex justify-center items-center transform z-10">
-            <Link href={"/donators"} className="w-full md:w-full lg:w-auto">
+            {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
+            <Link
+              href={(data?.support?.button?.url as string) || "/donators"}
+              className="w-full md:w-full lg:w-auto"
+              target={data?.support?.button?.newTab ? "_blank" : "_self"}
+            >
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
-                Wesprzyj nas
+                {data?.support?.button?.label}
               </Button>
             </Link>
           </div>

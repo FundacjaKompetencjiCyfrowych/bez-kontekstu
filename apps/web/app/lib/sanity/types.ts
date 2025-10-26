@@ -686,7 +686,7 @@ export type ProjectPageQueryResult =
     }
   | null;
 // Variable: cooperatorsPageQuery
-// Query: *[_type == "cooperator" && language == $lang][0]{  "cooperators": *[_type == "cooperator" && language == $lang]    | order(slug.current asc, _id asc){      _id,      image {        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      },      name,      slug,    },  meta}
+// Query: *[_type == "cooperators" && language == $lang][0]{  "cooperators": *[_type == "cooperator" && language == $lang]    | order(slug.current asc, _id asc){      _id,      image {        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      },      name,      slug,    },  meta}
 export type CooperatorsPageQueryResult = {
   cooperators: Array<{
     _id: string;
@@ -818,6 +818,81 @@ export type CooperatorPageQueryResult =
       } | null;
     }
   | null;
+// Variable: homePageQuery
+// Query: *[_type == "home" && language == $lang][0]{  meta,  manifest,  projects{    ...,    featured[]->{      _id,      slug,      cover{        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      }    },  },  cooperators{    ...,    featured[]->{      _id,      slug,      name,      image{        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      }    },  },  support,}
+export type HomePageQueryResult = {
+  meta: Meta | null;
+  manifest: {
+    body?: BlockContent;
+    button?: Link;
+  } | null;
+  projects: {
+    featured: Array<{
+      _id: string;
+      slug: Slug | null;
+      cover: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: SanityImageDimensions | null;
+          } | null;
+        } | null;
+        alt: string | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+    }> | null;
+    button?: Link;
+  } | null;
+  cooperators: {
+    featured: Array<{
+      _id: string;
+      slug: Slug | null;
+      name: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: SanityImageDimensions | null;
+          } | null;
+        } | null;
+        alt: string | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+    }> | null;
+    button?: Link;
+  } | null;
+  support: {
+    body?: BlockContent;
+    button?: Link;
+  } | null;
+} | null;
+// Variable: soundsPageQuery
+// Query: *[_type == "sounds" && language == $lang][0]{  meta}
+export type SoundsPageQueryResult = {
+  meta: Meta | null;
+} | null;
+// Variable: manifestPageQuery
+// Query: *[_type == "manifest" && language == $lang][0]{  meta}
+export type ManifestPageQueryResult = {
+  meta: Meta | null;
+} | null;
+// Variable: supportPageQuery
+// Query: *[_type == "support" && language == $lang][0]{  meta}
+export type SupportPageQueryResult = null;
+// Variable: privacyPolicyPageQuery
+// Query: *[_type == "privacyPolicy" && language == $lang][0]{  meta}
+export type PrivacyPolicyPageQueryResult = null;
+// Variable: contactPageQuery
+// Query: *[_type == "contact" && language == $lang][0]{  meta}
+export type ContactPageQueryResult = {
+  meta: Meta | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -825,7 +900,13 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "projects" && language == $lang][0]{\n  "projects": *[_type == "project" && language == $lang]\n    | order(timestamp desc, _id asc){\n      _id,\n      cover {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n      timestamp\n    },\n  meta\n}': ProjectsPageQueryResult;
     '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  timestamp,\n  slug,\n\n  "next": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n\n  contributors,\n  featured,\n  multimedia[]{\n    _type == "richImage" => {\n      asset->{\n        _id,\n        url,\n        metadata{\n          lqip,\n          dimensions,\n        }\n      },\n      alt,\n      hotspot,\n      crop\n    },\n    _type != "richImage" => @,\n  },\n  description\n}': ProjectPageQueryResult;
-    '*[_type == "cooperator" && language == $lang][0]{\n  "cooperators": *[_type == "cooperator" && language == $lang]\n    | order(slug.current asc, _id asc){\n      _id,\n      image {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n    },\n  meta\n}': CooperatorsPageQueryResult;
+    '*[_type == "cooperators" && language == $lang][0]{\n  "cooperators": *[_type == "cooperator" && language == $lang]\n    | order(slug.current asc, _id asc){\n      _id,\n      image {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n    },\n  meta\n}': CooperatorsPageQueryResult;
     '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  slug,\n  description,\n  image {\n    asset->{\n      _id,\n      url,\n      metadata{\n        lqip,\n        dimensions,\n      }\n    },\n    alt,\n    hotspot,\n    crop\n  },\n  socials[],\n  projects[],\n\n  "next": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current > ^.slug.current ||\n      (slug.current == ^.slug.current && _id > ^._id)\n    )\n  ] | order(slug.current asc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current < ^.slug.current ||\n      (slug.current == ^.slug.current && _id < ^._id)\n    )\n  ] | order(slug.current desc, _id desc)[0]{\n    name,\n    slug\n  },\n}': CooperatorPageQueryResult;
+    '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      cover{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n\n  },\n  cooperators{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      name,\n      image{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n  },\n  support,\n}': HomePageQueryResult;
+    '*[_type == "sounds" && language == $lang][0]{\n  meta\n}': SoundsPageQueryResult;
+    '*[_type == "manifest" && language == $lang][0]{\n  meta\n}': ManifestPageQueryResult;
+    '*[_type == "support" && language == $lang][0]{\n  meta\n}': SupportPageQueryResult;
+    '*[_type == "privacyPolicy" && language == $lang][0]{\n  meta\n}': PrivacyPolicyPageQueryResult;
+    '*[_type == "contact" && language == $lang][0]{\n  meta\n}': ContactPageQueryResult;
   }
 }
