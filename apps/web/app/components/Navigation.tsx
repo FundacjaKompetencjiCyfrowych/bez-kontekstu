@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { NavItem } from "@/app/lib/types";
-import MobileMenuIcon from "@/app/assets/icons/menu_mobile-icon.png";
 import Image from "next/image";
 import { useRoutePath } from "@/app/lib/intl/hooks";
 import { useIntl } from "@/app/lib/intl/context";
@@ -10,6 +9,7 @@ import { Header } from "./Header";
 import { cn } from "@/app/lib/utils";
 import { SoundToggler } from "./SoundToggler";
 import { LanguageToggler } from "./LanguageToggler";
+import { MenuIcon } from "./MenuIcon";
 
 const navigationItems: NavItem[] = [
   { key: "home", href: "/" },
@@ -92,7 +92,7 @@ export function Navigation() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="absolute top-[-20px] left-1/2 -translate-x-1/2 flex justify-center cursor-pointer"
             >
-              <Image src={MobileMenuIcon} alt="Bez Kontekstu" className={`w-12 h-12 top-[-28px] `} />
+              <MenuIcon className={`w-12 h-12 top-[-28px] `} />
             </button>
           </div>
         </div>

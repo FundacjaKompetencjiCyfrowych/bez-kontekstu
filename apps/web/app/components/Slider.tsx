@@ -3,8 +3,7 @@
 import { useRef, useEffect, useState, ReactNode } from "react";
 import { useStep } from "usehooks-ts";
 import Image from "next/image";
-import prevIcon from "@/app/assets/icons/prev.png";
-import nextIcon from "@/app/assets/icons/next.png";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { cn } from "../lib/utils";
 import { useIntl } from "../lib/intl/context";
 
@@ -95,7 +94,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
             )}
             aria-label={dictionary.previousSlide}
           >
-            <Image src={prevIcon} alt="" width={25} height={25} />
+            <FiChevronLeft width={25} height={25} />
           </button>
 
           <div className="flex items-center space-x-2 text-white font-mono text-sm">
@@ -113,7 +112,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
             )}
             aria-label={dictionary.nextSlide}
           >
-            <Image src={nextIcon} alt="" width={25} height={25} />
+            <FiChevronRight width={25} height={25} />
           </button>
         </div>
       )}

@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import LogoViolet from "@/app/components/LogoViolet";
-import ArrowRight from "@/app/assets/icons/next.png";
-import ArrowLeft from "@/app/assets/icons/prev.png";
+import { FiArrowRight } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 import { cache } from "react";
 import { sanityFetch } from "@/app/lib/sanity/live";
 import { cooperatorPageQuery } from "@/app/lib/sanity/queries";
@@ -50,7 +49,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
       <div className="hidden xl:block px-8">
         <div className="relative py-6 md:py-12 xl:py-0 xl:mt-25 xl:ml-8">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-            <Image src={ArrowLeft} alt={dictionary.back} className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
+            <FiArrowLeft className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
             <p className="ml-4 md:text-xl">{dictionary.back}</p>
           </Link>
         </div>
@@ -61,7 +60,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         {/* Back button */}
         <div className="relative xl:hidden w-fit px-4 my-[50px]">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-            <Image src={ArrowLeft} alt={dictionary.back} className="w-2 h-3" />
+            <FiArrowLeft className="w-2 h-3" />
             <p className="ml-2 text-sm">{dictionary.back}</p>
           </Link>
         </div>
@@ -148,7 +147,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
               {previous ? (
                 <Link href={`/cooperators/${previous.slug?.current}}`} className="flex items-center hover:text-gray-300 transition-colors">
                   <div>
-                    <Image src={ArrowLeft} alt={dictionary.previous} className="inline-block mr-4 w-2 h-2 md:w-4 md:h-4" />
+                    <FiArrowLeft className="inline-block mr-4 w-2 h-2 md:w-4 md:h-4" />
                     <span>{dictionary.previous}</span>
                   </div>
                 </Link>
@@ -166,7 +165,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                 >
                   <div>
                     <span>{dictionary.next}</span>
-                    <Image src={ArrowRight} alt={dictionary.next} className="inline-block ml-4 w-2 h-2 md:w-4 md:h-4" />
+                    <FiArrowRight className="inline-block ml-4 w-2 h-2 md:w-4 md:h-4" />
                   </div>
                 </Link>
               ) : (
@@ -268,7 +267,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                       className="flex items-center hover:text-gray-300 transition-colors"
                     >
                       <div>
-                        <Image src={ArrowLeft} alt={dictionary.previous} className="inline-block mr-4 w-5 h-6 xl:w-3 xl:h-4 " />
+                        <FiArrowLeft className="inline-block mr-4 w-5 h-6 xl:w-3 xl:h-4 " />
                         <span>{dictionary.previous}</span>
                       </div>
                     </Link>
@@ -286,7 +285,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                     >
                       <div>
                         <span>{dictionary.next}</span>
-                        <Image src={ArrowRight} alt={dictionary.next} className="inline-block ml-4 w-5 h-5 xl:w-3 xl:h-4" />
+                        <FiArrowRight className="inline-block ml-4 w-5 h-5 xl:w-3 xl:h-4" />
                       </div>
                     </Link>
                   ) : (
