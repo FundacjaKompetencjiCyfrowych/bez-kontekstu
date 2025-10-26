@@ -53,6 +53,7 @@ export const SingleLanguage = (
     .child(
       S.documentTypeList(type)
         .title(title || capitalize(type))
+        .apiVersion(apiVersion)
         .filter(`_type == $type && ${languageFieldName} == $lang`)
         .params({type, lang})
         .initialValueTemplates([S.initialValueTemplateItem(`${type}_${lang}`).parameters({lang})]),
@@ -79,6 +80,7 @@ export const LanguageList = (
             .child(
               S.documentTypeList(type)
                 .title(`All ${plural || ''}`)
+                .apiVersion(apiVersion)
                 .filter(`_type == "${type}"`),
             ),
           ...supportedLanguages.map(({id, title}) =>

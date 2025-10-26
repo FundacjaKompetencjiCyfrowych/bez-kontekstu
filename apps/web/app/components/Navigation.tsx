@@ -7,9 +7,9 @@ import Image from "next/image";
 import SoundIcon from "@/app/assets/icons/sound_button.png";
 import { useRoutePath, useSwitchLocale } from "@/app/lib/intl/hooks";
 import { useIntl } from "@/app/lib/intl/context";
-import LanguageIcon from "@/app/assets/icons/lang_glob.png";
 import { Header } from "./Header";
 import { cn } from "../lib/utils";
+import { FiGlobe } from "react-icons/fi";
 
 const navigationItems: NavItem[] = [
   { key: "home", href: "/" },
@@ -91,6 +91,7 @@ export function Navigation() {
                       href={item.href}
                       className="text-gray-200 hover:text-blue-600 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
                       onClick={() => setIsMenuOpen(false)}
+                      rel="noopener noreferrer"
                     >
                       {dictionary[item.key].toLocaleUpperCase()}
                     </Link>
@@ -153,25 +154,19 @@ export function Navigation() {
               key={item.href}
               href={item.href}
               className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
+              rel="noopener noreferrer"
             >
               {dictionary[item.key].toLocaleUpperCase()}
             </Link>
           ))}
 
-          {/* Language */}
-          <div className="w-[85px] flex items-center justify-center gap-3">
-            {/* Toggle Switch */}
-            <button onClick={toggleLanguage} aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`} className="cursor-pointer">
-              <Image
-                src={LanguageIcon}
-                alt="Language button"
-                width={20}
-                height={20}
-                className="brightness-20 hover:brightness-100 transition-all duration-300"
-              />
-            </button>
-            <span className={`text-sm xl:text-lg font-defectica leading-0 text-[#3f3f41]`}>{locale === "en" ? "EN" : "PL"}</span>
-          </div>
+          {/* Language Switch */}
+          <button onClick={toggleLanguage} aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`} className="cursor-pointer">
+            <div className="text-[#3f3f41] w-[85px] flex items-center justify-center gap-3 hover:text-white transition-colors duration-300">
+              <FiGlobe size={20} />
+              <span className={`text-sm xl:text-lg font-defectica leading-0`}>{locale === "en" ? "EN" : "PL"}</span>
+            </div>
+          </button>
         </div>
       </div>
     </nav>

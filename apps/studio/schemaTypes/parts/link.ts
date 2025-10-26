@@ -8,14 +8,15 @@ export default defineType({
   icon: Link,
   fields: [
     defineField({
+      name: 'label',
+      title: 'Tekst',
+      type: 'text',
+      rows: 1,
+    }),
+    defineField({
       name: 'url',
       title: 'Adres URL',
       type: 'urlOrPath',
-    }),
-    defineField({
-      name: 'label',
-      title: 'Tekst',
-      type: 'string',
     }),
     defineField({
       name: 'newTab',
@@ -24,4 +25,16 @@ export default defineType({
       initialValue: false,
     }),
   ],
+  preview: {
+    select: {
+      url: 'url',
+      label: 'label',
+    },
+    prepare({url, label}) {
+      return {
+        title: label || url,
+        subtitle: url,
+      }
+    },
+  },
 })

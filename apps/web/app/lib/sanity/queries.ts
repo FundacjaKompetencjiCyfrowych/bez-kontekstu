@@ -213,5 +213,8 @@ export const privacyPolicyPageQuery = defineQuery(`*[_type == "privacyPolicy" &&
 }`);
 
 export const contactPageQuery = defineQuery(`*[_type == "contact" && language == $lang][0]{
-  meta
+  meta,
+  fields
 }`);
+
+export const settingsQuery = defineQuery(`*[_type == "settings" && language == $lang][0]`);

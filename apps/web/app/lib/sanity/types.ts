@@ -13,6 +13,24 @@
  */
 
 // Source: schema.json
+export type LinkIconList = Array<
+  {
+    _key: string;
+  } & LinkIcon
+>;
+
+export type LinkIcon = {
+  _type: "linkIcon";
+  icon?: Icon;
+  link?: Link;
+};
+
+export type Icon = {
+  _type: "icon";
+  asset?: IconPicker;
+  alt?: string;
+};
+
 export type ImgOrVideo = Array<
   | {
       asset?: {
@@ -61,6 +79,13 @@ export type BlockContent = Array<{
   _type: "block";
   _key: string;
 }>;
+
+export type IconPicker = {
+  _type: "iconPicker";
+  provider?: string;
+  name?: string;
+  svg?: string;
+};
 
 export type TranslationMetadata = {
   _id: string;
@@ -153,13 +178,11 @@ export type Settings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
+  meta?: Meta;
   footer?: {
     links?: LinkList;
-    socials?: Array<
-      {
-        _key: string;
-      } & Link
-    >;
+    socials?: LinkIconList;
   };
 };
 
@@ -298,6 +321,7 @@ export type Contact = {
   _rev: string;
   language?: string;
   meta?: Meta;
+  fields?: LinkIconList;
 };
 
 export type Projects = {
@@ -360,8 +384,8 @@ export type Home = {
 
 export type Link = {
   _type: "link";
-  url?: UrlOrPath;
   label?: string;
+  url?: UrlOrPath;
   newTab?: boolean;
 };
 
@@ -497,10 +521,14 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
+  | LinkIconList
+  | LinkIcon
+  | Icon
   | ImgOrVideo
   | LinkList
   | UrlOrPath
   | BlockContent
+  | IconPicker
   | TranslationMetadata
   | InternationalizedArrayReferenceValue
   | Settings
@@ -889,9 +917,25 @@ export type SupportPageQueryResult = null;
 // Query: *[_type == "privacyPolicy" && language == $lang][0]{  meta}
 export type PrivacyPolicyPageQueryResult = null;
 // Variable: contactPageQuery
-// Query: *[_type == "contact" && language == $lang][0]{  meta}
+// Query: *[_type == "contact" && language == $lang][0]{  meta,  fields}
 export type ContactPageQueryResult = {
   meta: Meta | null;
+  fields: LinkIconList | null;
+} | null;
+// Variable: settingsQuery
+// Query: *[_type == "settings" && language == $lang][0]
+export type SettingsQueryResult = {
+  _id: string;
+  _type: "settings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+  footer?: {
+    links?: LinkList;
+    socials?: LinkIconList;
+  };
 } | null;
 
 // Query TypeMap
@@ -907,6 +951,7 @@ declare module "@sanity/client" {
     '*[_type == "manifest" && language == $lang][0]{\n  meta\n}': ManifestPageQueryResult;
     '*[_type == "support" && language == $lang][0]{\n  meta\n}': SupportPageQueryResult;
     '*[_type == "privacyPolicy" && language == $lang][0]{\n  meta\n}': PrivacyPolicyPageQueryResult;
-    '*[_type == "contact" && language == $lang][0]{\n  meta\n}': ContactPageQueryResult;
+    '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
+    '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
   }
 }

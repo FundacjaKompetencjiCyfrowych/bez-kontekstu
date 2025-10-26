@@ -108,6 +108,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 href={data?.manifest?.button?.url || "/manifest"}
                 className="w-full md:w-full lg:w-auto"
                 target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
+                rel="noopener noreferrer"
               >
                 <Button
                   variant="dark"
@@ -143,6 +144,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               href={data?.projects?.button?.url || "/projects"}
               className="w-full md:w-full lg:w-auto"
               target={data?.projects?.button?.newTab ? "_blank" : "_self"}
+              rel="noopener noreferrer"
             >
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 {data?.projects?.button?.label}
@@ -190,6 +192,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               href={data?.cooperators?.button?.url || "/cooperators"}
               className="w-full md:w-full lg:w-auto"
               target={data?.cooperators?.button?.newTab ? "_blank" : "_self"}
+              rel="noopener noreferrer"
             >
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 {data?.cooperators?.button?.label}
@@ -216,6 +219,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               href={(data?.support?.button?.url as string) || "/donators"}
               className="w-full md:w-full lg:w-auto"
               target={data?.support?.button?.newTab ? "_blank" : "_self"}
+              rel="noopener noreferrer"
             >
               <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
                 {data?.support?.button?.label}

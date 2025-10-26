@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Footer } from "@/app/components/Footer";
 import LogoViolet from "@/app/components/LogoViolet";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";

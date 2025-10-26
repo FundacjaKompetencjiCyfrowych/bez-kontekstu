@@ -5,6 +5,9 @@ import urlOrPath from './parts/urlOrPath'
 import link from './parts/link'
 import linklist from './parts/linkList'
 import imgOrVideo from './parts/imgOrVideo'
+import linkIcon from './parts/linkIcon'
+import linkIconList from './parts/linkIconList'
+import icon from './parts/icon'
 
 import home from './singletons/home'
 import manifest from './singletons/manifest'
@@ -38,6 +41,9 @@ export const schemaTypes = [
   link,
   linklist,
   imgOrVideo,
+  linkIcon,
+  linkIconList,
+  icon,
 ]
 
 // Singleton and translatable documents must be added to `lib/singleton` and/or `lib/intl`

@@ -42,8 +42,8 @@ const getLqip = (image: Image): string => {
  * @property alt - custom field with alternative text from CMS
  */
 export type Image = {
-  asset: {
-    _ref?: string;
+  asset?: {
+    _ref?: string | null;
     url?: string | null;
     metadata?: { lqip?: string | null; dimensions?: SanityImageDimensions | null } | null;
     [key: string]: unknown;

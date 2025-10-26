@@ -18,7 +18,7 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
   const isMobile = variant === "mobile";
 
   return (
-    <Link href={href} className="block transition-transform duration-200 hover:scale-105">
+    <Link href={href} className="block transition-transform duration-200 hover:scale-105" rel="noopener noreferrer">
       <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "h-[250px] md:h-[350px] mb-5" : "h-[400px]")}>
         {image ? (
           <ContentImage
