@@ -8,7 +8,7 @@ import SoundIcon from "@/app/assets/icons/sound_button.png";
 import { useRoutePath, useSwitchLocale } from "@/app/lib/intl/hooks";
 import { useIntl } from "@/app/lib/intl/context";
 import { Header } from "./Header";
-import { cn } from "../lib/utils";
+import { cn } from "@/app/lib/utils";
 import { FiGlobe } from "react-icons/fi";
 
 const navigationItems: NavItem[] = [

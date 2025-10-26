@@ -1,15 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
-
-import LocationIcon from "@/app/assets/icons/location.png";
-import InstagramIcon from "@/app/assets/icons/instagram.png";
-import FacebookIcon from "@/app/assets/icons/facebook.png";
-import EmailIcon from "@/app/assets/icons/email.png";
-import PhoneIcon from "@/app/assets/icons/phone.png";
 import LogoViolet from "@/app/components/LogoViolet";
-import { ContactIcon } from "@/app/components/ContactIcon";
 import titleCutWord from "@/app/lib/titleCutWord";
-import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { sanityFetch } from "@/app/lib/sanity/live";
 import { cache } from "react";
 import { contactPageQuery } from "@/app/lib/sanity/queries";

@@ -11,13 +11,13 @@ import { sanityFetch } from "@/app/lib/sanity/live";
 import { manifestPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 
-const getProjectsPage = cache(async (locale: string) => {
+const getManifestPage = cache(async (locale: string) => {
   return await sanityFetch({ query: manifestPageQuery, params: { lang: locale } });
 });
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const { data } = await getProjectsPage(locale);
+  const { data } = await getManifestPage(locale);
   return mapMetadata(data?.meta);
 }
 

@@ -8,7 +8,6 @@ import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Footer } from "@/app/components/Footer";
 import ArrowRight from "@/app/assets/icons/next.png";
 import ArrowLeft from "@/app/assets/icons/prev.png";
 
@@ -17,19 +16,19 @@ import { cn } from "@/app/lib/utils";
 import { MultimediaGallery } from "./gallery";
 import { Fragment } from "react";
 
-const getProjectsPage = cache(async (locale: string, slug: string) => {
+const getProjectPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: projectPageQuery, params: { lang: locale, slug } });
 });
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
   const { slug, locale } = await params;
-  const { data } = await getProjectsPage(locale, slug);
+  const { data } = await getProjectPage(locale, slug);
   return mapMetadata(data?.meta);
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params;
-  const { data } = await getProjectsPage(locale, slug);
+  const { data } = await getProjectPage(locale, slug);
 
   if (!data) notFound();
 

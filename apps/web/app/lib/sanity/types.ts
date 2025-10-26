@@ -910,12 +910,16 @@ export type SoundsPageQueryResult = {
 export type ManifestPageQueryResult = {
   meta: Meta | null;
 } | null;
-// Variable: supportPageQuery
-// Query: *[_type == "support" && language == $lang][0]{  meta}
-export type SupportPageQueryResult = null;
-// Variable: privacyPolicyPageQuery
-// Query: *[_type == "privacyPolicy" && language == $lang][0]{  meta}
-export type PrivacyPolicyPageQueryResult = null;
+// Variable: donatorsPageQuery
+// Query: *[_type == "donators" && language == $lang][0]{  meta}
+export type DonatorsPageQueryResult = {
+  meta: Meta | null;
+} | null;
+// Variable: privacyPageQuery
+// Query: *[_type == "privacy" && language == $lang][0]{  meta}
+export type PrivacyPageQueryResult = {
+  meta: Meta | null;
+} | null;
 // Variable: contactPageQuery
 // Query: *[_type == "contact" && language == $lang][0]{  meta,  fields}
 export type ContactPageQueryResult = {
@@ -949,8 +953,8 @@ declare module "@sanity/client" {
     '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      cover{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n\n  },\n  cooperators{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      name,\n      image{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n  },\n  support,\n}': HomePageQueryResult;
     '*[_type == "sounds" && language == $lang][0]{\n  meta\n}': SoundsPageQueryResult;
     '*[_type == "manifest" && language == $lang][0]{\n  meta\n}': ManifestPageQueryResult;
-    '*[_type == "support" && language == $lang][0]{\n  meta\n}': SupportPageQueryResult;
-    '*[_type == "privacyPolicy" && language == $lang][0]{\n  meta\n}': PrivacyPolicyPageQueryResult;
+    '*[_type == "donators" && language == $lang][0]{\n  meta\n}': DonatorsPageQueryResult;
+    '*[_type == "privacy" && language == $lang][0]{\n  meta\n}': PrivacyPageQueryResult;
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
   }

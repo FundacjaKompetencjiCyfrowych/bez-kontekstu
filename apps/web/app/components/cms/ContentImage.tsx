@@ -5,7 +5,7 @@ import { urlFor } from "@/app/lib/sanity/image";
 import Image, { ImageLoaderProps, ImageProps } from "next/image";
 import { SANITY_CONFIG } from "config";
 import { getShimmer } from "@/app/lib/shimmer";
-import { RichImage, SanityImageAsset, SanityImageDimensions, SanityImageHotspot, SanityImageCrop } from "@/app/lib/sanity/types";
+import { SanityImageAsset, SanityImageDimensions, SanityImageHotspot, SanityImageCrop } from "@/app/lib/sanity/types";
 const { imageQuality } = SANITY_CONFIG;
 
 const getSrc = (asset: Image["asset"]): string => {

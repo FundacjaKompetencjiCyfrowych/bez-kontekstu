@@ -204,11 +204,11 @@ export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language 
   meta
 }`);
 
-export const supportPageQuery = defineQuery(`*[_type == "support" && language == $lang][0]{
+export const donatorsPageQuery = defineQuery(`*[_type == "donators" && language == $lang][0]{
   meta
 }`);
 
-export const privacyPolicyPageQuery = defineQuery(`*[_type == "privacyPolicy" && language == $lang][0]{
+export const privacyPageQuery = defineQuery(`*[_type == "privacy" && language == $lang][0]{
   meta
 }`);
 
