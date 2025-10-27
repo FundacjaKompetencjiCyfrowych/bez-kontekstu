@@ -57,6 +57,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     );
   };
 
+  const buttonClasses = "h-10 px-7 py-6 w-[80vw] md:w-[30vw] xl:w-[250px] mx-auto inline-flex items-center justify-center transition-all duration-300 rounded-2xl text-white border-1 border-violet-400 hover:bg-violet-900/30 hover:border-violet-300 shadow-lg hover:cursor-pointer"
+
   return (
     <div className="px-3 flex flex-col gap-[50px]">
       <h1 className="sr-only">{dictionary.noContext}</h1>
@@ -103,20 +105,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {data?.manifest?.body && <ContentText value={data.manifest.body} />}
 
           <div className="z-10 flex transform items-center justify-center">
-            {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
             <Link
               href={data?.manifest?.button?.url || "/manifest"}
-              className="w-full md:w-full lg:w-auto"
+              className={`w-full md:w-full lg:w-auto ${buttonClasses} w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500`}
               target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
               rel="noopener noreferrer"
-            >
-              <Button
-                variant="dark"
-                size="sm"
-                className="w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500"
-              >
-                {data?.manifest?.button?.label}
-              </Button>
+            >{data?.manifest?.button?.label}
             </Link>
           </div>
         </div>
@@ -139,16 +133,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         />
 
         <div className="relative flex justify-center items-center transform z-10">
-          {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
           <Link
             href={data?.projects?.button?.url || "/projects"}
-            className="w-full md:w-full lg:w-auto"
+            className={`w-full md:w-full lg:w-auto ${buttonClasses}`}
             target={data?.projects?.button?.newTab ? "_blank" : "_self"}
             rel="noopener noreferrer"
-          >
-            <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
-              {data?.projects?.button?.label}
-            </Button>
+          >{data?.projects?.button?.label}
           </Link>
         </div>
         {renderResponsiveTitle("", dictionary.split2.projects[1], "left")}
@@ -187,16 +177,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
 
         <div className="relative mt-[50px] xl:mt-[0px] flex justify-center items-center transform z-10">
-          {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
           <Link
             href={data?.cooperators?.button?.url || "/cooperators"}
-            className="w-full md:w-full lg:w-auto"
+            className={`w-full md:w-full lg:w-auto ${buttonClasses}`}
             target={data?.cooperators?.button?.newTab ? "_blank" : "_self"}
             rel="noopener noreferrer"
-          >
-            <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
-              {data?.cooperators?.button?.label}
-            </Button>
+          >{data?.cooperators?.button?.label}
           </Link>
         </div>
         {renderResponsiveTitle("", dictionary.split2.collaborators[1], "left")}
@@ -214,16 +200,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {data?.support?.body && <ContentText value={data.support.body} />}
         </div>
         <div className="relative flex justify-center items-center transform z-10">
-          {/* //! TODO FIX BUTTON NESTED IN ANCHOR - INVALID HTML  */}
           <Link
             href={(data?.support?.button?.url as string) || "/donators"}
-            className="w-full md:w-full lg:w-auto"
+            className={`w-full md:w-full lg:w-auto ${buttonClasses}`}
             target={data?.support?.button?.newTab ? "_blank" : "_self"}
             rel="noopener noreferrer"
-          >
-            <Button variant="dark" size="sm" className="w-full md:w-full lg:w-auto">
-              {data?.support?.button?.label}
-            </Button>
+          >{data?.support?.button?.label}
           </Link>
         </div>
         {renderResponsiveTitle("", dictionary.split2.support[1], "left")}

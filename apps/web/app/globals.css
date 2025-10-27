@@ -12,12 +12,16 @@
 }
 
 @layer base {
+
   html,
   body {
     background-color: #0d0b0e;
     margin: 0;
     padding: 0;
+    height: 100%;
+    min-height: 100vh;
   }
+
   section {
     border: 2px solid #ffffff;
   }
@@ -46,18 +50,21 @@
     font-family: var(--font-defectica);
     font-size: 32px;
   }
+
   button {
     font-family: var(--font-space-mono);
   }
 }
 
 @layer utilities {
+
   /* Image slider animations */
   @keyframes fadeIn {
     0% {
       opacity: 0;
       transform: scale(0.95) translateY(10px);
     }
+
     100% {
       opacity: 1;
       transform: scale(1) translateY(0);
@@ -69,6 +76,7 @@
       opacity: 0;
       transform: translateX(-30px);
     }
+
     100% {
       opacity: 1;
       transform: translateX(0);
@@ -80,6 +88,7 @@
       opacity: 0;
       transform: translateX(30px);
     }
+
     100% {
       opacity: 1;
       transform: translateX(0);
@@ -88,6 +97,7 @@
 
   /* Neon glow effects for sounds page */
   @keyframes neonGlow {
+
     0%,
     100% {
       box-shadow:
@@ -95,6 +105,7 @@
         0 0 10px rgba(139, 92, 246, 0.2),
         0 0 15px rgba(139, 92, 246, 0.1);
     }
+
     50% {
       box-shadow:
         0 0 10px rgba(139, 92, 246, 0.5),
@@ -121,11 +132,14 @@
 
   /* Hide scrollbar for cooperators slider (only desktop) */
   .scrollbar-hide {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
   }
 
   .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+    display: none;
+    /* Safari and Chrome */
   }
 }
