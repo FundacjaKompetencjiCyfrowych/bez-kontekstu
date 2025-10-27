@@ -255,7 +255,7 @@ export function RandomRectangles() {
   }, [containerWidth]);
 
   return (
-    <div className="relative w-full h-full sm:top-[-100px]">
+    <div className="w-full min-h-[400px] max-h-full grow-1 md:top-[-100px] relative py-4 z-10">
       {rectangles.map((rect) => (
         <div
           key={rect.id}
@@ -276,14 +276,6 @@ export function RandomRectangles() {
           />
         </div>
       ))}
-
-      {/* Button to regenerate rectangles */}
-      {/* <button
-        onClick={regenerate}
-        className="absolute bottom-4 right-4 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded text-sm transition-colors"
-      >
-        Nowe ułożenie
-      </button> */}
     </div>
   );
 }
