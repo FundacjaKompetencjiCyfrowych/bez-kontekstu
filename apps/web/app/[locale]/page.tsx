@@ -229,6 +229,5 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         {renderResponsiveTitle("", dictionary.split2.support[1], "left")}
       </section>
     </div>
-    </div >
   );
 }
