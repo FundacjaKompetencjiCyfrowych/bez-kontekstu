@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Dictionary } from "../lib/intl/dictionaries/type";
 import { LinkIconList, LinkList } from "../lib/sanity/types";
 import { ContentIcon } from "./cms/ContentIcon";
 import { FiHeart } from "react-icons/fi";
@@ -9,7 +8,7 @@ type FooterData = {
   socials?: LinkIconList;
 };
 
-export async function Footer({ dictionary, data }: { dictionary: Dictionary; data: FooterData }) {
+export async function Footer({ data }: { data: FooterData }) {
   const { links, socials } = data;
   return (
     <footer className="py-6 w-[90%] mx-auto md:w-full font-mono text-xs">
