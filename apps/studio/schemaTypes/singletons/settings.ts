@@ -1,14 +1,14 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
-import {Link} from 'lucide-react'
+import {defineField} from 'sanity'
+import {definePage} from '../helpers'
 
-export default defineType({
+export default definePage({
   name: 'settings',
   title: 'Ustawienia',
-  type: 'document',
   fields: [
     {
       name: 'footer',
       title: 'Stopka',
+      group: 'content',
       type: 'object',
       fields: [
         defineField({
@@ -19,14 +19,7 @@ export default defineType({
         defineField({
           name: 'socials',
           title: 'Social media',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              name: 'link',
-              title: 'Link',
-              type: 'link',
-            }),
-          ],
+          type: 'linkIconList',
         }),
       ],
     },

@@ -8,6 +8,7 @@ import {documentInternationalization} from '@sanity/document-internationalizatio
 import {intlConfig, addLanguageTemplates} from './lib/intl'
 import {structure} from './lib/structure'
 import {combineTemplates} from './lib/utils'
+import {iconPicker} from 'sanity-plugin-icon-picker'
 
 const {projectId, dataset} = SANITY_CONFIG
 
@@ -18,7 +19,12 @@ export default defineConfig({
   projectId,
   dataset,
 
-  plugins: [structureTool(structure), visionTool(), documentInternationalization(intlConfig)],
+  plugins: [
+    structureTool(structure),
+    visionTool(),
+    documentInternationalization(intlConfig),
+    iconPicker(),
+  ],
 
   schema: {
     types: schemaTypes,

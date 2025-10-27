@@ -1,25 +1,26 @@
 import Link from "next/link";
 import { Metadata } from "next";
-
-import LocationIcon from "@/app/assets/icons/location.png";
-import InstagramIcon from "@/app/assets/icons/instagram.png";
-import FacebookIcon from "@/app/assets/icons/facebook.png";
-import EmailIcon from "@/app/assets/icons/email.png";
-import PhoneIcon from "@/app/assets/icons/phone.png";
 import LogoViolet from "@/app/components/LogoViolet";
-import { ContactIcon } from "@/app/components/ContactIcon";
 import titleCutWord from "@/app/lib/titleCutWord";
-import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { sanityFetch } from "@/app/lib/sanity/live";
+import { cache } from "react";
+import { contactPageQuery } from "@/app/lib/sanity/queries";
+import { mapMetadata } from "@/app/lib/sanity/mappers";
+import { ContentIcon } from "@/app/components/cms/ContentIcon";
 
-export const metadata: Metadata = {
-  title: "Kontakt - Fundacja Bez Kontekstu",
-  description: "Skontaktuj się z Fundacją Bez Kontekstu. Adres, telefon, email i media społecznościowe.",
-  keywords: ["kontakt", "fundacja", "bez kontekstu", "warszawa", "email", "telefon"],
-};
+const getContactPage = cache(async (locale: string) => {
+  return await sanityFetch({ query: contactPageQuery, params: { lang: locale } });
+});
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const { data } = await getContactPage(locale);
+  return mapMetadata(data?.meta);
+}
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const dictionary = await getDictionary(locale);
+  const { data } = await getContactPage(locale);
   return (
     <div className="flex w-full h-screen flex-col justify-between px-2 md:px-5 xl:min-h-[1024px] xl:flex xl:flex-col">
       {/*Title mobile*/}
@@ -38,67 +39,33 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           {/* Contact Information */}
           <div className="xl:text-xl md:mx-8">
             <dl className="space-y-6 sm:landscape:space-y-3">
-              <div className="flex items-center">
-                <dt className="mr-2 flex items-center md:mr-4">
-                  <ContactIcon src={EmailIcon} alt={dictionary.email} />
-                  <span className="sr-only">{dictionary.email}:</span>
-                </dt>
-                <dd>fundacjabezkontekstu@gmail.com</dd>
-              </div>
-              <div className="flex items-center pb-3">
-                <dt className="mr-2 flex items-center md:mr-4">
-                  <ContactIcon src={PhoneIcon} alt={dictionary.phone} />
-                  <span className="sr-only">{dictionary.phone}:</span>
-                </dt>
-                <dd>608 486 769</dd>
-              </div>
-              <div className="flex items-center">
-                <dt className="mr-2 flex items-center md:mr-4">
-                  <ContactIcon src={LocationIcon} alt={dictionary.address} />
-                  <span className="sr-only">{dictionary.address}:</span>
-                </dt>
-                <dd>
-                  <div>ul.Smulikowskiego 2/5</div>
-                  <div>00-389 Warszawa</div>
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          {/* Social Media */}
-          <div className="flex xl:text-xl md:mx-8">
-            <dl className="my-6 space-y-6 sm:landscape:space-y-3">
-              <div className="flex items-center">
-                <dt className="mr-2 flex items-center md:mr-4">
-                  <ContactIcon src={InstagramIcon} alt="Instagram" />
-                  <span className="sr-only">Instagram:</span>
-                </dt>
-                <dd>
-                  <Link
-                    href="https://www.instagram.com/fundacjabezkontekstu/"
-                    className="hover:underline focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 rounded"
-                    aria-label="Odwiedź nasz profil na Instagramie"
-                  >
-                    Instagram
-                  </Link>
-                </dd>
-              </div>
-
-              <div className="flex items-center pb-3">
-                <dt className="mr-2 flex items-center md:mr-4">
-                  <ContactIcon src={FacebookIcon} alt="Facebook" />
-                  <span className="sr-only">Facebook:</span>
-                </dt>
-                <dd>
-                  <Link
-                    href="https://www.facebook.com/fundacjabezkontekstu/"
-                    className="hover:underline focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 rounded"
-                    aria-label="Odwiedź nasz profil na Facebooku"
-                  >
-                    Facebook
-                  </Link>
-                </dd>
-              </div>
+              {data?.fields &&
+                data.fields.map((field) => {
+                  if (field.link?.url)
+                    return (
+                      <div key={field._key} className="flex items-center">
+                        <dt className="mr-2 flex items-center md:mr-4">
+                          <ContentIcon name={field.icon?.asset?.name || ""} className="w-6 h-6 md:w-7 md:h-7" />
+                          <span className="sr-only">{field.link?.label}:</span>
+                        </dt>
+                        <dd>
+                          <Link href={field.link.url} target="_blank" rel="noopener noreferrer">
+                            {field.link.label}
+                          </Link>
+                        </dd>
+                      </div>
+                    );
+                  else
+                    return (
+                      <div key={field._key} className="flex items-center">
+                        <dt className="mr-2 flex items-center md:mr-4">
+                          <ContentIcon name={field.icon?.asset?.name || ""} className="w-6 h-6 md:w-7 md:h-7" />
+                          <span className="sr-only">{field.link?.label}:</span>
+                        </dt>
+                        <dd>{field.link?.label}</dd>
+                      </div>
+                    );
+                })}
             </dl>
           </div>
         </div>

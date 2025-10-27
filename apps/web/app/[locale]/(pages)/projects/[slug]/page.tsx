@@ -8,28 +8,27 @@ import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Footer } from "@/app/components/Footer";
-import ArrowRight from "@/app/assets/icons/next.png";
-import ArrowLeft from "@/app/assets/icons/prev.png";
+import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
 import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
 import { MultimediaGallery } from "./gallery";
 import { Fragment } from "react";
 
-const getProjectsPage = cache(async (locale: string, slug: string) => {
+const getProjectPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: projectPageQuery, params: { lang: locale, slug } });
 });
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }): Promise<Metadata> {
   const { slug, locale } = await params;
-  const { data } = await getProjectsPage(locale, slug);
+  const { data } = await getProjectPage(locale, slug);
   return mapMetadata(data?.meta);
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params;
-  const { data } = await getProjectsPage(locale, slug);
+  const { data } = await getProjectPage(locale, slug);
 
   if (!data) notFound();
 
@@ -45,7 +44,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       {/* Navigation Header */}
       <div className="relative px-8 py-6 md:py-12 z-10">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-          <Image src={ArrowLeft} alt="Poprzedni" className="w-2 h-2 md:w-4 md:h-4 xl:w-6 xl:h-6" />
+          <FiArrowLeft className="w-2 h-2 md:w-4 md:h-4 xl:w-6 xl:h-6" />
           <p className="ml-4 md:text-xl">Wstecz</p>
         </Link>
       </div>
@@ -144,11 +143,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 className="flex items-center md:text-xl hover:text-gray-300 transition-colors"
               >
                 <div>
-                  <Image
-                    src={ArrowLeft}
-                    alt={dictionary.previous}
-                    className="inline-block mr-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
-                  />
+                  <FiArrowLeft className="inline-block mr-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                   <span>{dictionary.previous}</span>
                 </div>
               </Link>
@@ -166,11 +161,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               >
                 <div>
                   <span>{dictionary.next}</span>
-                  <Image
-                    src={ArrowRight}
-                    alt={dictionary.next}
-                    className="inline-block ml-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6"
-                  />
+                  <FiArrowRight className="inline-block ml-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
                 </div>
               </Link>
             ) : (

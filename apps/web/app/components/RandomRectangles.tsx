@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import CopyOfCopyOfNpcPoster from "@/app/assets/images/copy_of_copy_of_npc.png";
-import PrawdyZaGroszPoster from "@/app/assets/images/prawdy_za_grosz.png";
-import GanglionyPoster from "@/app/assets/images/gangliony_gangliony.png";
-import LimboPoster from "@/app/assets/images/limbo.png";
+import { RichImage } from "../lib/sanity/types";
+import { ContentImage, Image } from "./cms/ContentImage";
 
 // Type for rectangle position and size
 interface Rectangle {
@@ -14,11 +11,8 @@ interface Rectangle {
   y: number; // position Y in percentage
   width: number; // width in percentage
   height: number; // height in percentage
-  imagePath: string; // path to project image
+  image: Image | null; // Sanity image object
 }
-
-// Array of project images for rectangles
-const projectImages = [CopyOfCopyOfNpcPoster, PrawdyZaGroszPoster, GanglionyPoster, LimboPoster];
 
 // Function to check if two rectangles overlap (including gap)
 // This ensures rectangles never touch each other
@@ -71,7 +65,7 @@ const generateRandomPosition = (
       y,
       width: rectWidth,
       height: rectHeight,
-      imagePath: "",
+      image: null,
     };
 
     // Check collision with existing rectangles
@@ -95,7 +89,7 @@ const generateRandomPosition = (
 };
 
 // Function to generate all rectangles
-const generateRectangles = () => {
+const generateRectangles = (images: Image[]) => {
   const rectanglesList: Rectangle[] = [];
 
   // Predefined fallback positions to ensure all 4 rectangles are always placed
@@ -172,7 +166,7 @@ const generateRectangles = () => {
           y: fallback.y,
           width: fallbackWidth,
           height: fallbackHeight,
-          imagePath: "",
+          image: null,
         };
 
         let hasCollision = false;
@@ -211,19 +205,19 @@ const generateRectangles = () => {
       y: position.y,
       width: rectWidth,
       height: rectHeight,
-      imagePath: projectImages[i].src,
+      image: images[i],
     });
   }
 
   return rectanglesList;
 };
 
-export function RandomRectangles() {
+export function RandomRectangles({ images }: { images: Image[] }) {
   const [rectangles, setRectangles] = useState<Rectangle[]>([]);
   const [containerWidth, setContainerWidth] = useState(1200); // Default container width
 
   const regenerate = () => {
-    setRectangles(generateRectangles());
+    setRectangles(generateRectangles(images));
   };
 
   // Update container width when component mounts and window resizes
@@ -256,26 +250,30 @@ export function RandomRectangles() {
 
   return (
     <div className="w-full min-h-[400px] max-h-full grow-1 md:top-[-100px] relative py-4 z-10">
-      {rectangles.map((rect) => (
-        <div
-          key={rect.id}
-          className="absolute shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden"
-          style={{
-            left: `${rect.x}%`,
-            top: `${rect.y}%`,
-            width: `${rect.width}%`,
-            aspectRatio: "2/1", // All rectangles are horizontal with 2:1 proportions
-          }}
-        >
-          <Image
-            src={rect.imagePath}
-            alt={`Project image ${rect.id}`}
-            fill
-            className="object-contain"
-            sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 25vw"
-          />
-        </div>
-      ))}
+      {rectangles.map((rect) => {
+        if (!rect.image) {
+          return null;
+        }
+        return (
+          <div
+            key={rect.id}
+            className="absolute shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden"
+            style={{
+              left: `${rect.x}%`,
+              top: `${rect.y}%`,
+              width: `${rect.width}%`,
+              aspectRatio: "2/1", // All rectangles are horizontal with 2:1 proportions
+            }}
+          >
+            <ContentImage
+              image={rect.image}
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 25vw"
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

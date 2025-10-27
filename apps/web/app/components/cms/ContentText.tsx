@@ -14,7 +14,7 @@ const components: PortableTextComponents = {
     h2: ({ children }) => <h2 className="">{children}</h2>,
     h3: ({ children }) => <h3 className="">{children}</h3>,
     h4: ({ children }) => <h4 className="">{children}</h4>,
-    blockquote: ({ children }) => <blockquote className="border-l-4 border-primary pl-4 italic text-gray-700 mb-4">{children}</blockquote>,
+    blockquote: ({ children }) => <blockquote className="text-lg md:text-2xl">{children}</blockquote>,
   },
   marks: {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
@@ -22,7 +22,7 @@ const components: PortableTextComponents = {
     link: ({ children, value }) => {
       const target = value.href.startsWith("http") ? "_blank" : undefined;
       return (
-        <Link href={value.href} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined} className="underline">
+        <Link href={value.href} target={target} rel="noopener noreferrer" className="underline">
           {children}
         </Link>
       );
@@ -36,6 +36,6 @@ const components: PortableTextComponents = {
   },
 };
 
-export function ContentTextBlock({ value }: { value: BlockContent }) {
+export function ContentText({ value }: { value: BlockContent }) {
   return <PortableText value={value} components={components} />;
 }

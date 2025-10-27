@@ -8,11 +8,14 @@ export default defineType({
   type: 'string',
   validation: (Rule) =>
     Rule.custom((value) => {
-      if (!value) return true // allow empty
+      if (!value) return true
+      if (value === '/') return true
       const isRelative = value.startsWith('/')
+      const isMailto = value.startsWith('mailto:')
+      const isTel = value.startsWith('tel:')
       const isAbsolute = /^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(value)
-      if (!isRelative && !isAbsolute) {
-        return 'Adres musi zaczynać się od "/" lub "http(s)://"'
+      if (!isRelative && !isAbsolute && !isMailto && !isTel) {
+        return 'Adres musi zaczynać się od "/", "http(s)://", "mailto:" lub "tel:"'
       }
       if (/\s/.test(value)) return 'Adres nie może zawierać spacji'
       return true
