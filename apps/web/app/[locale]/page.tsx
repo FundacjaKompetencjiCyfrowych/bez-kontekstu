@@ -148,7 +148,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {renderResponsiveTitle(dictionary.split.collaborators, dictionary.split2.collaborators[0], "right")}
         </div>
 
-        <div className="w-[90%] max-w-[800px] py-4 mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
+        <div className="w-[90%] max-w-[800px] pb-4 mx-auto grid grid-cols-2 gap-5 xl:gap-8 xl:h-[650px] aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
           {teamMembers.map((member) => (
             <div
               key={member.id}
@@ -186,7 +186,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* DONATORS Section */}
       <section
-        className="md:landscape:h-[150vh] lg:landscape:h-[65vh] min-h-auto md:h-[60vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent"
+        className="md:landscape:h-[150vh] lg:landscape:h-[65vh] min-h-auto md:h-[50vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent"
         aria-labelledby="donators-title"
       >
         <div className="text-right flex flex-col items-end">
