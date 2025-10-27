@@ -102,6 +102,9 @@ importers:
       '@formatjs/intl-localematcher':
         specifier: ^0.6.1
         version: 0.6.1
+      '@gsap/react':
+        specifier: ^2.1.2
+        version: 2.1.2(gsap@3.13.0)(react@19.1.0)
       '@sanity/image-url':
         specifier: ^1.2.0
         version: 1.2.0
@@ -111,6 +114,15 @@ importers:
       config:
         specifier: workspace:^
         version: link:../../packages/config
+<<<<<<< HEAD
+=======
+      gsap:
+        specifier: ^3.13.0
+        version: 3.13.0
+      js-cookie:
+        specifier: ^3.0.5
+        version: 3.0.5
+>>>>>>> cb1111e (wip: gsap)
       negotiator:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1143,6 +1155,12 @@ packages:
 
   '@formatjs/intl-localematcher@0.6.1':
     resolution: {integrity: sha512-ePEgLgVCqi2BBFnTMWPfIghu6FkbZnnBVhO2sSxvLfrdFw7wCHAHiDoM2h4NRgjbaY7+B7HgOLZGkK187pZTZg==}
+
+  '@gsap/react@2.1.2':
+    resolution: {integrity: sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw==}
+    peerDependencies:
+      gsap: ^3.12.5
+      react: '>=17'
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -3797,6 +3815,9 @@ packages:
   groq@4.10.1:
     resolution: {integrity: sha512-4kGV3sn308DQ6X5vxm1sMhRtnm6r2cXXf/1xOiJkkS3YZ74IXRxl6niGwhhLYRJUCHZ52dEitmlXFYxhqkbiZQ==}
     engines: {node: '>=20.19 <22 || >=22.12'}
+
+  gsap@3.13.0:
+    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
 
   gunzip-maybe@1.4.2:
     resolution: {integrity: sha512-4haO1M4mLO91PW57BMsDFf75UmwoRX0GkdD+Faw+Lr+r/OZrOCS0pIBwOL1xCKQqnQzbNFGgK2V2CpBUPeFNTw==}
@@ -7502,6 +7523,11 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
+  '@gsap/react@2.1.2(gsap@3.13.0)(react@19.1.0)':
+    dependencies:
+      gsap: 3.13.0
+      react: 19.1.0
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.7':
@@ -10635,6 +10661,8 @@ snapshots:
   groq@3.88.1-typegen-experimental.0: {}
 
   groq@4.10.1: {}
+
+  gsap@3.13.0: {}
 
   gunzip-maybe@1.4.2:
     dependencies:
