@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";

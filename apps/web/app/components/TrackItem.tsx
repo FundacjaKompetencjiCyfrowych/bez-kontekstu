@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { FiPlay } from "react-icons/fi";
 import { FaSoundcloud } from "react-icons/fa";
 

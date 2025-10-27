@@ -17,5 +17,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function PrivacyPolicyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const { data } = await getPrivacyPage(locale);
+  console.log(data && "data received");
   return <div>Privacy Policy</div>;
 }
