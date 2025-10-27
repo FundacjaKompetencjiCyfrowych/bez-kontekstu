@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { isLocale, Locale } from "./locale";
+import { setLocaleCookie } from "./actions";
 
 /** Returns new pathname with locale prefix */
 const getNewLocalePath = (pathname: string, newLocale: Locale) => {
@@ -14,7 +15,9 @@ const getNewLocalePath = (pathname: string, newLocale: Locale) => {
 export const useSwitchLocale = () => {
   const router = useRouter();
   const pathname = usePathname();
-  return (locale: Locale) => {
+
+  return async (locale: Locale) => {
+    await setLocaleCookie(locale); // server action to set cookie
     router.push(getNewLocalePath(pathname, locale));
   };
 };
