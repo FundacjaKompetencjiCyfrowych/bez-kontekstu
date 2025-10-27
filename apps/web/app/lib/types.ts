@@ -1,15 +1,15 @@
 // Podstawowe typy dla aplikacji
 
 export interface NavItem {
-  title: string;
+  key: "home" | "manifest" | "projects" | "collaborators" | "sounds" | "support" | "contact";
   href: string;
   description?: string;
 }
 
 export interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline" | "dark";
-  size?: "sm" | "md" | "lg";
+  variant?: "dark";
+  size?: "sm";
   onClick?: () => void;
   disabled?: boolean;
   className?: string;
@@ -17,3 +17,7 @@ export interface ButtonProps {
 
 // Typy dla responsywności
 export type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
+
+export type NullableOptional<T> = {
+  [K in keyof T]?: T[K] | null;
+};

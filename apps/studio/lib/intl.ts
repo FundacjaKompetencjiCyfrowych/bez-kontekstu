@@ -1,18 +1,33 @@
 import {PluginConfig} from '@sanity/document-internationalization'
 import {StructureBuilder} from 'sanity/structure'
+import {SlugValidationContext} from 'sanity'
 import {capitalize} from './utils'
 import {defineField} from 'sanity'
+import {SANITY_CONFIG} from 'config'
+const {apiVersion} = SANITY_CONFIG
 
 /**
  * List of document types that support translations **All new translatable documents must be added here**
  */
-const intlTypes = ['home', 'post', 'author']
+const intlTypes = [
+  'home',
+  'manifest',
+  'projects',
+  'contact',
+  'cooperators',
+  'donators',
+  'sounds',
+  'project',
+  'cooperator',
+  'privacy',
+  'settings',
+]
 
 const supportedLanguages = [
   {id: 'pl', title: 'Polish'},
   {id: 'en', title: 'English'},
 ]
-const languageField = 'language'
+const languageFieldName = 'language'
 
 /**
  * Config for `@sanity/document-internationalization` plugin
@@ -20,7 +35,7 @@ const languageField = 'language'
 export const intlConfig: PluginConfig = {
   supportedLanguages,
   schemaTypes: intlTypes,
-  languageField,
+  languageField: languageFieldName,
 }
 
 /**
@@ -28,31 +43,34 @@ export const intlConfig: PluginConfig = {
  */
 export const SingleLanguage = (
   S: StructureBuilder,
-  type: string,
-  title?: string,
-  lang = supportedLanguages[0].id,
-) =>
-  S.listItem()
+  options: {type: string; title?: string; lang?: string; icon?: any},
+) => {
+  const {type, title, icon} = options
+  const lang = options.lang ?? supportedLanguages[0].id
+  return S.listItem()
     .title(title || capitalize(type))
+    .icon(icon)
     .child(
       S.documentTypeList(type)
         .title(title || capitalize(type))
-        .filter(`_type == $type && ${languageField} == $lang`)
+        .apiVersion(apiVersion)
+        .filter(`_type == $type && ${languageFieldName} == $lang`)
         .params({type, lang})
         .initialValueTemplates([S.initialValueTemplateItem(`${type}_${lang}`).parameters({lang})]),
     )
+}
 
 /**
  * Structure API helper to create a list item with separate tabs for documents in each language
  */
-export const LanguageSelection = (
+export const LanguageList = (
   S: StructureBuilder,
-  type: string,
-  title?: string,
-  plural?: string,
-) =>
-  S.listItem()
+  options: {type: string; title?: string; plural?: string; icon?: any},
+) => {
+  const {type, title, plural, icon} = options
+  return S.listItem()
     .title(title || capitalize(type))
+    .icon(icon)
     .child(
       S.list()
         .title(`${title || capitalize(type)} by Language`)
@@ -62,13 +80,15 @@ export const LanguageSelection = (
             .child(
               S.documentTypeList(type)
                 .title(`All ${plural || ''}`)
+                .apiVersion(apiVersion)
                 .filter(`_type == "${type}"`),
             ),
           ...supportedLanguages.map(({id, title}) =>
-            SingleLanguage(S, type, `${title} ${plural || ''}`, id),
+            SingleLanguage(S, {type, title: `${title} ${options.plural || ''}`, lang: id}),
           ),
         ]),
     )
+}
 
 /**
  * A function that adds appropriate templates for each language filtered list
@@ -83,7 +103,7 @@ export const addLanguageTemplates = (templates: any[]) => {
         id: `${type}_${lang}`,
         title: `${title} ${capitalize(type)}`,
         schemaType: type,
-        value: {[languageField]: lang},
+        value: {[languageFieldName]: lang},
       })),
     ),
   ]
@@ -92,27 +112,44 @@ export const addLanguageTemplates = (templates: any[]) => {
 /**
  * A field that stores language id, required by the internationalization plugin
  */
-const languageSchemaField = defineField({
-  name: languageField,
+export const languageField = defineField({
+  name: languageFieldName,
   type: 'string',
   hidden: true,
   validation: (Rule) => Rule.required(), // disable saving docs without language
 })
 
 /**
- * A function that adds a language field to appropriate document types
- *
- * wrap `schemaTypes` to enable translations
+ * Slug validator that allows same unique slug in different languages
  */
-export const intl = (schemaTypes: any[]) => {
-  return schemaTypes.map((schemaType) => {
-    if (intlTypes.includes(schemaType.name)) {
-      return {
-        ...schemaType,
-        fields: [...schemaType.fields, languageSchemaField],
-      }
-    } else {
-      return schemaType
-    }
-  })
+export async function uniqueByLanguage(slug: string, context: SlugValidationContext) {
+  const {document, getClient} = context
+  if (!document) {
+    console.warn(`Couldn't validate slug: ${slug} document not found`)
+    return false
+  }
+  const langauge = document[languageFieldName]
+  if (!langauge) {
+    console.warn(`Couldn't validate slug: ${slug} locale not found`)
+    return false
+  }
+  const client = getClient({apiVersion})
+  const id = document._id.replace(/^drafts\./, '') // also check drafts
+  const query = `
+    count(*[
+      _type == $type &&
+      slug.current == $slug &&
+      ${languageFieldName} == $langauge &&
+      !(_id in [$draftId, $publishedId])
+    ])
+  `
+  const params = {
+    type: document._type,
+    slug,
+    langauge,
+    draftId: `drafts.${id}`,
+    publishedId: id,
+  }
+  const count = await client.fetch(query, params)
+  return count === 0
 }

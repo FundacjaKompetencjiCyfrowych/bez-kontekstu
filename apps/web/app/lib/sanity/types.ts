@@ -13,35 +13,25 @@
  */
 
 // Source: schema.json
-export type Category = {
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: string;
+export type LinkIconList = Array<
+  {
+    _key: string;
+  } & LinkIcon
+>;
+
+export type LinkIcon = {
+  _type: "linkIcon";
+  icon?: Icon;
+  link?: Link;
 };
 
-export type BlockContent = Array<
-  | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }
+export type Icon = {
+  _type: "icon";
+  asset?: IconPicker;
+  alt?: string;
+};
+
+export type ImgOrVideo = Array<
   | {
       asset?: {
         _ref: string;
@@ -52,10 +42,50 @@ export type BlockContent = Array<
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      alt?: string;
+      _type: "img";
+      _key: string;
+    }
+  | {
+      url?: string;
+      _type: "video";
       _key: string;
     }
 >;
+
+export type LinkList = Array<
+  {
+    _key: string;
+  } & Link
+>;
+
+export type UrlOrPath = string;
+
+export type BlockContent = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type IconPicker = {
+  _type: "iconPicker";
+  provider?: string;
+  name?: string;
+  svg?: string;
+};
 
 export type TranslationMetadata = {
   _id: string;
@@ -84,62 +114,99 @@ export type InternationalizedArrayReferenceValue = {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
+        [internalGroqTypeReferenceTo]?: "manifest";
       }
     | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "author";
+        [internalGroqTypeReferenceTo]?: "projects";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "cooperators";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "donators";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sounds";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "project";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "cooperator";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "privacy";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "settings";
       };
 };
 
-export type Post = {
+export type Settings = {
   _id: string;
-  _type: "post";
+  _type: "settings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  slug?: Slug;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
-  };
-  mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  publishedAt?: string;
-  body?: BlockContent;
   language?: string;
+  meta?: Meta;
+  footer?: {
+    links?: LinkList;
+    socials?: LinkIconList;
+  };
 };
 
-export type Author = {
+export type Privacy = {
   _id: string;
-  _type: "author";
+  _type: "privacy";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Cooperator = {
+  _id: string;
+  _type: "cooperator";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
   name?: string;
   slug?: Slug;
+  description?: string;
   image?: {
     asset?: {
       _ref: string;
@@ -150,27 +217,211 @@ export type Author = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    alt?: string;
+    _type: "richImage";
   };
-  bio?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+  socials?: Array<
+    {
+      _key: string;
+    } & Link
+  >;
+  projects?: Array<string>;
+};
+
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+  name?: string;
+  slug?: Slug;
+  timestamp?: string;
+  description?: string;
+  cover?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "richImage";
+  };
+  featured?: ImgOrVideo;
+  contributors?: Array<{
+    category?: string;
+    people?: Array<string>;
+    subcategories?: Array<{
+      subCategory?: string;
+      people?: Array<string>;
+      _type: "subcategoryGroup";
       _key: string;
     }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
+    _type: "categoryGroup";
     _key: string;
   }>;
+  multimedia?: ImgOrVideo;
+};
+
+export type Sounds = {
+  _id: string;
+  _type: "sounds";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   language?: string;
+  meta?: Meta;
+};
+
+export type Donators = {
+  _id: string;
+  _type: "donators";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+  sections?: Array<{
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+    body?: Array<{
+      heading?: {
+        title?: string;
+        subtitle?: string;
+      };
+      fields?: Array<{
+        title?: string;
+        text?: string;
+        _type: "field";
+        _key: string;
+      }>;
+      _type: "subsection";
+      _key: string;
+    }>;
+    _type: "section";
+    _key: string;
+  }>;
+};
+
+export type Cooperators = {
+  _id: string;
+  _type: "cooperators";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Contact = {
+  _id: string;
+  _type: "contact";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+  fields?: LinkIconList;
+};
+
+export type Projects = {
+  _id: string;
+  _type: "projects";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+};
+
+export type Manifest = {
+  _id: string;
+  _type: "manifest";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+  hero?: {
+    quote?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+  };
+  sections?: Array<{
+    style?: {
+      desktop?: "left" | "right" | "center";
+      tablet?:
+        | "left"
+        | "right"
+        | "center"
+        | "fusion"
+        | "narrowLeft"
+        | "narrowRight";
+      mobile?: "left" | "right" | "center" | "fusion";
+    };
+    title?: string;
+    body?: BlockContent;
+    feature?: {
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "richImage";
+      };
+      altTitle?: string;
+    };
+    _type: "section";
+    _key: string;
+  }>;
+};
+
+export type RichImage = {
+  _type: "richImage";
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
 };
 
 export type Home = {
@@ -179,8 +430,50 @@ export type Home = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
   language?: string;
+  meta?: Meta;
+  manifest?: {
+    body?: BlockContent;
+    button?: Link;
+  };
+  projects?: {
+    featured?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "project";
+    }>;
+    button?: Link;
+  };
+  cooperators?: {
+    featured?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "cooperator";
+    }>;
+    button?: Link;
+  };
+  support?: {
+    body?: BlockContent;
+    button?: Link;
+  };
+};
+
+export type Link = {
+  _type: "link";
+  label?: string;
+  url?: UrlOrPath;
+  newTab?: boolean;
+};
+
+export type Meta = {
+  _type: "meta";
+  title?: string;
+  description?: string;
+  ogImage?: RichImage;
 };
 
 export type InternationalizedArrayReference = Array<
@@ -308,13 +601,30 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
-  | Category
+  | LinkIconList
+  | LinkIcon
+  | Icon
+  | ImgOrVideo
+  | LinkList
+  | UrlOrPath
   | BlockContent
+  | IconPicker
   | TranslationMetadata
   | InternationalizedArrayReferenceValue
-  | Post
-  | Author
+  | Settings
+  | Privacy
+  | Cooperator
+  | Project
+  | Sounds
+  | Donators
+  | Cooperators
+  | Contact
+  | Projects
+  | Manifest
+  | RichImage
   | Home
+  | Link
+  | Meta
   | InternationalizedArrayReference
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -329,17 +639,387 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/app/lib/sanity/queries.ts
-// Variable: allQuery
-// Query: *
-export type AllQueryResult = Array<
+// Variable: projectsPageQuery
+// Query: *[_type == "projects" && language == $lang][0]{  "projects": *[_type == "project" && language == $lang]    | order(timestamp desc, _id asc){      _id,      cover {        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      },      name,      slug,      timestamp    },  meta}
+export type ProjectsPageQueryResult = {
+  projects: Array<{
+    _id: string;
+    cover: {
+      asset: {
+        _id: string;
+        url: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+    name: string | null;
+    slug: Slug | null;
+    timestamp: string | null;
+  }>;
+  meta: Meta | null;
+} | null;
+// Variable: projectPageQuery
+// Query: *[slug.current == $slug && language == $lang][0]{  meta,  _id,  name,  timestamp,  slug,  "next": *[    _type == "project" &&    language == $lang &&    (      timestamp < ^.timestamp ||      (timestamp == ^.timestamp && _id > ^._id)    )  ] | order(timestamp desc, _id asc)[0]{    name,    slug  },  "previous": *[    _type == "project" &&    language == $lang &&    (      timestamp > ^.timestamp ||      (timestamp == ^.timestamp && _id < ^._id)    )  ] | order(timestamp asc, _id desc)[0]{    name,    slug  },  contributors,  featured,  multimedia[]{    _type == "richImage" => {      asset->{        _id,        url,        metadata{          lqip,          dimensions,        }      },      alt,      hotspot,      crop    },    _type != "richImage" => @,  },  description}
+export type ProjectPageQueryResult =
   | {
+      meta: null;
       _id: string;
-      _type: "author";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      name?: string;
-      slug?: Slug;
+      name: null;
+      timestamp: null;
+      slug: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: null;
+      timestamp: null;
+      slug: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: null;
+    }
+  | {
+      meta: null;
+      _id: string;
+      name: null;
+      timestamp: null;
+      slug: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: string | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      timestamp: null;
+      slug: Slug | null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: string | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      timestamp: string | null;
+      slug: Slug | null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      contributors: Array<{
+        category?: string;
+        people?: Array<string>;
+        subcategories?: Array<{
+          subCategory?: string;
+          people?: Array<string>;
+          _type: "subcategoryGroup";
+          _key: string;
+        }>;
+        _type: "categoryGroup";
+        _key: string;
+      }> | null;
+      featured: ImgOrVideo | null;
+      multimedia: Array<
+        | {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "img";
+            _key: string;
+          }
+        | {
+            url?: string;
+            _type: "video";
+            _key: string;
+          }
+      > | null;
+      description: string | null;
+    }
+  | null;
+// Variable: cooperatorsPageQuery
+// Query: *[_type == "cooperators" && language == $lang][0]{  "cooperators": *[_type == "cooperator" && language == $lang]    | order(slug.current asc, _id asc){      _id,      image {        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      },      name,      slug,    },  meta}
+export type CooperatorsPageQueryResult = {
+  cooperators: Array<{
+    _id: string;
+    image: {
+      asset: {
+        _id: string;
+        url: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+    name: string | null;
+    slug: Slug | null;
+  }>;
+  meta: Meta | null;
+} | null;
+// Variable: cooperatorPageQuery
+// Query: *[slug.current == $slug && language == $lang][0]{  meta,  _id,  name,  slug,  description,  image {    asset->{      _id,      url,      metadata{        lqip,        dimensions,      }    },    alt,    hotspot,    crop  },  socials[],  projects[],  "next": *[    _type == "cooperator" &&    language == $lang &&    (      slug.current > ^.slug.current ||      (slug.current == ^.slug.current && _id > ^._id)    )  ] | order(slug.current asc, _id asc)[0]{    name,    slug  },  "previous": *[    _type == "cooperator" &&    language == $lang &&    (      slug.current < ^.slug.current ||      (slug.current == ^.slug.current && _id < ^._id)    )  ] | order(slug.current desc, _id desc)[0]{    name,    slug  },}
+export type CooperatorPageQueryResult =
+  | {
+      meta: null;
+      _id: string;
+      name: null;
+      slug: null;
+      description: null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: null;
+      slug: null;
+      description: null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+    }
+  | {
+      meta: null;
+      _id: string;
+      name: null;
+      slug: null;
+      description: string | null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      slug: Slug | null;
+      description: string | null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      slug: Slug | null;
+      description: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: SanityImageDimensions | null;
+          } | null;
+        } | null;
+        alt: string | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+      socials: Array<
+        {
+          _key: string;
+        } & Link
+      > | null;
+      projects: Array<string> | null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+    }
+  | null;
+// Variable: homePageQuery
+// Query: *[_type == "home" && language == $lang][0]{  meta,  manifest,  projects{    ...,    featured[]->{      _id,      slug,      cover{        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      }    },  },  cooperators{    ...,    featured[]->{      _id,      slug,      name,      image{        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      }    },  },  support,}
+export type HomePageQueryResult = {
+  meta: Meta | null;
+  manifest: {
+    body?: BlockContent;
+    button?: Link;
+  } | null;
+  projects: {
+    featured: Array<{
+      _id: string;
+      slug: Slug | null;
+      cover: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: SanityImageDimensions | null;
+          } | null;
+        } | null;
+        alt: string | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+    }> | null;
+    button?: Link;
+  } | null;
+  cooperators: {
+    featured: Array<{
+      _id: string;
+      slug: Slug | null;
+      name: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: SanityImageDimensions | null;
+          } | null;
+        } | null;
+        alt: string | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      } | null;
+    }> | null;
+    button?: Link;
+  } | null;
+  support: {
+    body?: BlockContent;
+    button?: Link;
+  } | null;
+} | null;
+// Variable: soundsPageQuery
+// Query: *[_type == "sounds" && language == $lang][0]{  meta}
+export type SoundsPageQueryResult = {
+  meta: Meta | null;
+} | null;
+// Variable: manifestPageQuery
+// Query: *[_type == "manifest" && language == $lang][0]{  meta,  hero,  sections}
+export type ManifestPageQueryResult = {
+  meta: Meta | null;
+  hero: {
+    quote?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+  } | null;
+  sections: Array<{
+    style?: {
+      desktop?: "center" | "left" | "right";
+      tablet?:
+        | "center"
+        | "fusion"
+        | "left"
+        | "narrowLeft"
+        | "narrowRight"
+        | "right";
+      mobile?: "center" | "fusion" | "left" | "right";
+    };
+    title?: string;
+    body?: BlockContent;
+    feature?: {
       image?: {
         asset?: {
           _ref: string;
@@ -350,145 +1030,92 @@ export type AllQueryResult = Array<
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
-        _type: "image";
+        alt?: string;
+        _type: "richImage";
       };
-      bio?: Array<{
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal";
-        listItem?: never;
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }>;
-      language?: string;
-    }
-  | {
-      _id: string;
-      _type: "category";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      description?: string;
-    }
-  | {
-      _id: string;
-      _type: "home";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      language?: string;
-    }
-  | {
-      _id: string;
-      _type: "post";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      title?: string;
-      slug?: Slug;
-      author?: {
+      altTitle?: string;
+    };
+    _type: "section";
+    _key: string;
+  }> | null;
+} | null;
+// Variable: donatorsPageQuery
+// Query: *[_type == "donators" && language == $lang][0]{  meta,  sections}
+export type DonatorsPageQueryResult = {
+  meta: Meta | null;
+  sections: Array<{
+    image?: {
+      asset?: {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "author";
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
-      mainImage?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "richImage";
+    };
+    body?: Array<{
+      heading?: {
+        title?: string;
+        subtitle?: string;
       };
-      categories?: Array<{
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
+      fields?: Array<{
+        title?: string;
+        text?: string;
+        _type: "field";
         _key: string;
-        [internalGroqTypeReferenceTo]?: "category";
       }>;
-      publishedAt?: string;
-      body?: BlockContent;
-      language?: string;
-    }
-  | {
-      _id: string;
-      _type: "sanity.fileAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      source?: SanityAssetSourceData;
-    }
-  | {
-      _id: string;
-      _type: "sanity.imageAsset";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      originalFilename?: string;
-      label?: string;
-      title?: string;
-      description?: string;
-      altText?: string;
-      sha1hash?: string;
-      extension?: string;
-      mimeType?: string;
-      size?: number;
-      assetId?: string;
-      uploadId?: string;
-      path?: string;
-      url?: string;
-      metadata?: SanityImageMetadata;
-      source?: SanityAssetSourceData;
-    }
-  | {
-      _id: string;
-      _type: "translation.metadata";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      translations?: Array<
-        {
-          _key: string;
-        } & InternationalizedArrayReferenceValue
-      >;
-      schemaTypes?: Array<string>;
-    }
->;
+      _type: "subsection";
+      _key: string;
+    }>;
+    _type: "section";
+    _key: string;
+  }> | null;
+} | null;
+// Variable: privacyPageQuery
+// Query: *[_type == "privacy" && language == $lang][0]{  meta}
+export type PrivacyPageQueryResult = {
+  meta: Meta | null;
+} | null;
+// Variable: contactPageQuery
+// Query: *[_type == "contact" && language == $lang][0]{  meta,  fields}
+export type ContactPageQueryResult = {
+  meta: Meta | null;
+  fields: LinkIconList | null;
+} | null;
+// Variable: settingsQuery
+// Query: *[_type == "settings" && language == $lang][0]
+export type SettingsQueryResult = {
+  _id: string;
+  _type: "settings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  meta?: Meta;
+  footer?: {
+    links?: LinkList;
+    socials?: LinkIconList;
+  };
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*": AllQueryResult;
+    '*[_type == "projects" && language == $lang][0]{\n  "projects": *[_type == "project" && language == $lang]\n    | order(timestamp desc, _id asc){\n      _id,\n      cover {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n      timestamp\n    },\n  meta\n}': ProjectsPageQueryResult;
+    '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  timestamp,\n  slug,\n\n  "next": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n\n  contributors,\n  featured,\n  multimedia[]{\n    _type == "richImage" => {\n      asset->{\n        _id,\n        url,\n        metadata{\n          lqip,\n          dimensions,\n        }\n      },\n      alt,\n      hotspot,\n      crop\n    },\n    _type != "richImage" => @,\n  },\n  description\n}': ProjectPageQueryResult;
+    '*[_type == "cooperators" && language == $lang][0]{\n  "cooperators": *[_type == "cooperator" && language == $lang]\n    | order(slug.current asc, _id asc){\n      _id,\n      image {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n    },\n  meta\n}': CooperatorsPageQueryResult;
+    '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  slug,\n  description,\n  image {\n    asset->{\n      _id,\n      url,\n      metadata{\n        lqip,\n        dimensions,\n      }\n    },\n    alt,\n    hotspot,\n    crop\n  },\n  socials[],\n  projects[],\n\n  "next": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current > ^.slug.current ||\n      (slug.current == ^.slug.current && _id > ^._id)\n    )\n  ] | order(slug.current asc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current < ^.slug.current ||\n      (slug.current == ^.slug.current && _id < ^._id)\n    )\n  ] | order(slug.current desc, _id desc)[0]{\n    name,\n    slug\n  },\n}': CooperatorPageQueryResult;
+    '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      cover{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n\n  },\n  cooperators{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      name,\n      image{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n  },\n  support,\n}': HomePageQueryResult;
+    '*[_type == "sounds" && language == $lang][0]{\n  meta\n}': SoundsPageQueryResult;
+    '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
+    '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections\n}': DonatorsPageQueryResult;
+    '*[_type == "privacy" && language == $lang][0]{\n  meta\n}': PrivacyPageQueryResult;
+    '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
+    '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
   }
 }

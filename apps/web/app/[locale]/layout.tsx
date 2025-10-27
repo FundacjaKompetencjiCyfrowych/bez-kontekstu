@@ -3,7 +3,13 @@ import localFont from "next/font/local";
 import { Space_Mono } from "next/font/google";
 import "../globals.css";
 import { Navigation } from "../components/Navigation";
-import { SanityLive } from "../lib/sanity/live";
+import { sanityFetch, SanityLive } from "../lib/sanity/live";
+import { IntlProvider } from "../lib/intl/context";
+import { getDictionary } from "../lib/intl/dictionaries/dynamic";
+import { Footer } from "../components/Footer";
+import { cache } from "react";
+import { settingsQuery } from "../lib/sanity/queries";
+import { mapMetadata } from "../lib/sanity/mappers";
 
 const defectica = localFont({
   src: [
@@ -28,10 +34,15 @@ const spaceMono = Space_Mono({
   adjustFontFallback: false,
 });
 
-export const metadata: Metadata = {
-  title: "FundacjaBez Kontekstu",
-  description: "Profesjonalna strona internetowa zbudowana przez Fundację Kompetencji Cyfrowych",
-};
+const getSettings = cache(async (locale: string) => {
+  return await sanityFetch({ query: settingsQuery, params: { lang: locale } });
+});
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const { data } = await getSettings(locale);
+  return mapMetadata(data?.meta);
+}
 
 export default async function RootLayout({
   children,
@@ -41,12 +52,19 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const dict = await getDictionary(locale);
+  const { data } = await getSettings(locale);
   return (
     <html lang={locale}>
-      <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
-        <Navigation />
-        <main className="bg-[#0d0b0e] max-w-7xl mx-auto">{children}</main>
-      </body>
+      <IntlProvider locale={locale} dictionary={dict}>
+        <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
+          <Navigation />
+          <div className="bg-[#0d0b0e] max-w-7xl mx-auto">
+            <main>{children}</main>
+            <Footer dictionary={dict} data={data?.footer || {}} />
+          </div>
+        </body>
+      </IntlProvider>
       <SanityLive />
     </html>
   );

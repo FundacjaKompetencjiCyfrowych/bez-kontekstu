@@ -1,12 +1,48 @@
 import Image from "next/image";
 import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 
-export default function LogoViolet() {
+interface LogoVioletProps {
+  pageType?: 'home' | 'sounds' | 'contact' | 'default';
+  isHidden?: boolean;
+}
+
+export default function LogoViolet({ pageType = 'default', isHidden = false }: LogoVioletProps) {
+  // Get positioning classes based on page type
+  const getMobilePositioning = () => {
+    switch (pageType) {
+      case 'home':
+        return 'top-[200px] md:top-[300px] md:landscape:top-[340px] lg:landscape:top-[42vh]';
+      case 'sounds':
+        return 'top-[10vh] sm:landscape:top-0 md:landscape:top-0 md:landscape:max-h-screen lg:landscape:top-0 sm:landscape:max-h-screen';
+      case 'contact':
+        return 'top-[25vh] sm:landscape:top-0 md:landscape:top-[80vh] lg:landscape:top-[40vh] md:landscape:max-h-screen lg:landscape:max-h-screen sm:landscape:max-h-screen';
+      default:
+        return 'top-[30vh]  sm:landscape:top-[300px] lg:landscape:top-[42vh] md:landscape:max-h-[450px] lg:landscape:max-h-screen';
+    }
+  };
+
   return (
+    <>
+      {/* Mobile Logo - positioned under menu icon */}
       <Image
         src={LogoVioletImage}
         alt="Bez Kontekstu"
-        className="absolute blur-[6px] md:blur-[8px] md:opacity-25 xl:opacity-50 xl:blur-[6px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain w-80 h-80 sm:w-128 sm:h-128 md:w-190 md:h-190 opacity-50"
+        className={`absolute left-1/2 transform -translate-x-1/2 w-80 h-80 sm:w-128 sm:h-128 md:w-190 md:h-190 object-contain blur-[6px] opacity-50 xl:hidden ${getMobilePositioning()}`}
       />
-  );
+
+      {/* Desktop Logo */}
+      <Image
+        src={LogoVioletImage}
+        alt="Bez Kontekstu"
+        className="hidden xl:block absolute left-1/2 top-[50vh] xl:top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-160 h-160 object-contain blur-[4px] opacity-50"
+      />
+
+      {/* Desktop Second Logo */}
+      <Image
+        src={LogoVioletImage}
+        alt="Bez Kontekstu"
+        className={`hidden xl:block absolute left-1/2 top-[100vh] xl:top-[50vh] transform -translate-x-1/2 w-250 h-250 object-contain blur-[8px] opacity-25 ${isHidden ? 'xl:hidden' : ''}`}
+      />
+    </>
+  )
 }

@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { localeMiddleware } from "./app/lib/locales";
+import { localeMiddleware } from "./app/lib/intl/middleware";
 
 const middlewares = [localeMiddleware];
 
@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip internal paths
-    "/((?!_next).*)",
+    // Skip internal paths and API routes
+    "/((?!_next|api).*)",
   ],
 };
