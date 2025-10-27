@@ -61,7 +61,7 @@ export default async function RootLayout({
           <Navigation />
           <div className="bg-[#0d0b0e] max-w-7xl mx-auto flex-1 flex flex-col w-full">
             <main className="flex-1">{children}</main>
-            <Footer dictionary={dict} data={data?.footer || {}} />
+            <Footer data={data?.footer || {}} />
           </div>
         </body>
       </IntlProvider>
