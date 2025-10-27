@@ -2,14 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { isLocale, Locale } from "./locale";
-import Cookies from "js-cookie";
-
-/** Sets NEXT_LOCALE cookie on the client with the locale selected by the user.*/
-const setLocaleCookie = (locale: Locale) => {
-  if (document.cookie) {
-    Cookies.set("NEXT_LOCALE", locale, { expires: 365, secure: true });
-  }
-};
+import { setLocaleCookie } from "./actions";
 
 /** Returns new pathname with locale prefix */
 const getNewLocalePath = (pathname: string, newLocale: Locale) => {
@@ -18,13 +11,13 @@ const getNewLocalePath = (pathname: string, newLocale: Locale) => {
   return "/" + segments.join("/");
 };
 
-/** Returns a locale switcher function which sets locale cookie and updates pathname */
+/** Returns a locale switcher function which triggers a router.push with new pathname */
 export const useSwitchLocale = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  return (locale: Locale) => {
-    setLocaleCookie(locale);
+  return async (locale: Locale) => {
+    await setLocaleCookie(locale); // server action to set cookie
     router.push(getNewLocalePath(pathname, locale));
   };
 };

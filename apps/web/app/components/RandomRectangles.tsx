@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { RichImage } from "../lib/sanity/types";
 import { ContentImage, Image } from "./cms/ContentImage";
 
 // Type for rectangle position and size

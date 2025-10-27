@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState, ReactNode } from "react";
 import { useStep } from "usehooks-ts";
-import Image from "next/image";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { cn } from "../lib/utils";
 import { useIntl } from "../lib/intl/context";
