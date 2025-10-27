@@ -1,4 +1,3 @@
-import LogoViolet from "@/app/components/LogoViolet";
 import ManifestSection from "@/app/components/ManifestSection";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
@@ -25,8 +24,6 @@ export default async function ManifestPage({ params }: { params: Promise<{ local
   const { data } = await getManifestPage(locale);
   return (
     <div className="flex w-full min-h-screen flex-col justify-between px-2 md:px-5 xl:flex xl:flex-col">
-      <LogoViolet />
-
       {/* Main content */}
       <main className="relative mx-auto xl:max-w-7xl">
         {data?.hero && (

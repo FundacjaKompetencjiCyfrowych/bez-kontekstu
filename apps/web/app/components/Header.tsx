@@ -1,16 +1,13 @@
 "use client";
 
-import LogoViolet from "@/app/components/LogoViolet";
-
 interface HeaderProps {
   title?: string;
-  showLogo?: boolean;
   showTitle?: boolean;
   className?: string;
   hideTitleOnMobile?: boolean;
 }
 
-export function Header({ title = "", showLogo = true, showTitle = true, className, hideTitleOnMobile = false }: HeaderProps) {
+export function Header({ title = "", showTitle = true, className, hideTitleOnMobile = false }: HeaderProps) {
   // Split title into words for vertical display
   const titleWords = title.split(" ");
 
@@ -26,13 +23,6 @@ export function Header({ title = "", showLogo = true, showTitle = true, classNam
               </h2>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Violet logo - background */}
-      {showLogo && (
-        <div className={`sticky top-1/2 h-0 z-0 ${className}`}>
-          <LogoViolet />
         </div>
       )}
     </>

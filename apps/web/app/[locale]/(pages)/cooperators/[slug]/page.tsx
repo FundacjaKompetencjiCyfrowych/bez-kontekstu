@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LogoViolet from "@/app/components/LogoViolet";
 import { FiArrowRight } from "react-icons/fi";
 import { FiArrowLeft } from "react-icons/fi";
 import { cache } from "react";
@@ -43,8 +42,6 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
 
   return (
     <div className="bg-[#0d0b0e] px-5 xl:min-h-full max-w-7xl mx-auto font-mono flex flex-col justify-center w-full">
-      <LogoViolet isHidden={true} />
-
       {/* Desktop Back Button - Top */}
       <div className="hidden xl:block xl:mb-15 px-8">
         <div className="relative py-6 md:py-12 xl:py-0 xl:ml-2">
