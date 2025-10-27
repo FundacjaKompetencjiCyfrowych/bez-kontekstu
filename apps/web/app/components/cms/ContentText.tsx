@@ -14,7 +14,7 @@ const components: PortableTextComponents = {
     h2: ({ children }) => <h2 className="">{children}</h2>,
     h3: ({ children }) => <h3 className="">{children}</h3>,
     h4: ({ children }) => <h4 className="">{children}</h4>,
-    blockquote: ({ children }) => <blockquote className="border-l-4 border-primary pl-4 italic text-gray-700 mb-4">{children}</blockquote>,
+    blockquote: ({ children }) => <blockquote className="text-lg md:text-2xl">{children}</blockquote>,
   },
   marks: {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,

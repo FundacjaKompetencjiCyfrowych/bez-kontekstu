@@ -1,106 +1,77 @@
 import { ManifestPageQueryResult } from "@/app/lib/sanity/types";
 import { ContentText } from "@/app/components/cms/ContentText";
-import { urlFor } from "@/app/lib/sanity/image";
-import titleCutWord from "@/app/lib/titleCutWord";
-import { cn } from "@/app/lib/utils";
 import { ContentImage } from "./cms/ContentImage";
+import { cn } from "@/app/lib/utils";
 
 type ManifestSectionProps = {
   section: NonNullable<NonNullable<ManifestPageQueryResult>["sections"]>[number];
   locale: string;
 };
 
-const getSectionClasses = (style: ManifestSectionProps["section"]["style"]) => {
-  if (!style) return "py-10 md:py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-center xl:mx-0";
-  return cn("py-10 md:py-20 xl:py-40 mx-5 xl:grid xl:grid-cols-2 xl:gap-8 xl:items-center xl:mx-0", {
-    "xl:text-left": style.desktop === "left",
-    "xl:text-right": style.desktop === "right",
-    "xl:text-center": style.desktop === "center",
-    "md:text-left": style.tablet === "left",
-    "md:text-right": style.tablet === "right",
-    "md:text-center": style.tablet === "center",
-    "text-left": style.mobile === "left",
-    "text-right": style.mobile === "right",
-    "text-center": style.mobile === "center",
-  });
-};
-
-const getTitleClasses = (style: ManifestSectionProps["section"]["style"]) => {
-  if (!style) return "mb-12 xl:text-6xl";
-  return cn("mb-12 xl:text-6xl", {
-    "xl:ml-auto": style.desktop === "right",
-    "xl:mr-auto": style.desktop === "left",
-    "xl:mx-auto": style.desktop === "center",
-  });
-};
-
-const getBodyClasses = (style: ManifestSectionProps["section"]["style"]) => {
-  if (!style) return "font-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10";
-  return cn("font-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10", {
-    "xl:text-right": style.desktop === "right",
-    "xl:text-left": style.desktop === "left",
-    "xl:text-center": style.desktop === "center",
-  });
-};
-
-const getFeatureImageClasses = (style: ManifestSectionProps["section"]["style"]) => {
-  if (!style) return "relative w-full h-96 xl:h-[600px] xl:w-[500px] mt-8 xl:mt-0";
-  return cn("relative w-full h-96 xl:h-[600px] xl:w-[500px] mt-8 xl:mt-0", {
-    "xl:justify-self-start": style.desktop === "left",
-    "xl:justify-self-end": style.desktop === "right",
-    "xl:justify-self-center": style.desktop === "center",
-  });
-};
-
 export default function ManifestSection({ section }: ManifestSectionProps) {
   const { style, title, body, feature } = section;
 
-  const sectionClasses = getSectionClasses(style);
-  const titleClasses = getTitleClasses(style);
-  const bodyClasses = getBodyClasses(style);
-  const featureImageClasses = getFeatureImageClasses(style);
+  const alignment = style?.desktop || "left";
+  const isContentRight = alignment === "right";
 
+  // Render image or text on one side (featured element)
   const renderFeature = () => {
     if (!feature) return null;
 
     if (feature.image) {
       return (
-        <div className={`hidden xl:block ${featureImageClasses}`}>
+        <div className="relative w-full min-h-96 xl:min-h-[600px] xl:w-[500px]">
           <ContentImage image={feature.image} fill className="object-cover" sizes="(max-width: 1280px) 0px, 500px" />
         </div>
       );
     }
 
     if (feature.altTitle) {
-      return (
-        <div className="hidden xl:col-span-1 xl:flex xl:items-center xl:justify-center">
-          {titleCutWord(feature.altTitle, "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl ml-2 sm:ml-3 mt-2 xl:ml-0 xl:mt-0 sm:mt-3")}
-        </div>
-      );
+      return <h2 className="text-4xl font-space-mono font-bold whitespace-pre-line">{feature.altTitle}</h2>;
     }
 
     return null;
   };
 
-  const isImageLeft = style?.desktop === "right" && feature?.image;
-  const isImageRight = style?.desktop === "left" && feature?.image;
-  const isAltTitleLeft = style?.desktop === "right" && feature?.altTitle;
-  const isAltTitleRight = style?.desktop === "left" && feature?.altTitle;
-
   return (
-    <section className={sectionClasses}>
-      {(isImageLeft || isAltTitleLeft) && <div className="xl:col-span-1 xl:flex xl:justify-center">{renderFeature()}</div>}
+    <section className="py-10 md:py-20 xl:py-40 px-5 xl:px-0">
+      <div className={cn("xl:flex xl:gap-8 xl:items-center", !isContentRight && "xl:flex-row-reverse")}>
+        {/* Feature column */}
+        <div className="hidden xl:flex xl:flex-1 xl:justify-center">{renderFeature()}</div>
 
-      <div className="xl:col-span-1 xl:flex xl:flex-col xl:justify-center">
-        {title && <h2 className={titleClasses}>{title}</h2>}
-        {body && (
-          <div className={bodyClasses}>
-            <ContentText value={body} />
-          </div>
-        )}
+        {/* Content column */}
+        <div
+          className={cn(
+            "xl:flex-1",
+            style?.mobile === "center" && "text-center",
+            style?.mobile === "right" && "text-right",
+            style?.mobile === "left" && "text-left",
+            !style?.mobile && "text-left",
+            isContentRight ? "xl:text-left" : "xl:text-right"
+          )}
+        >
+          {/* Title */}
+          {title && (
+            <h2 className={cn("mb-12 text-6xl", feature?.altTitle && "text-5xl whitespace-pre-line text-center xl:hidden")}>
+              {feature?.altTitle || title}
+            </h2>
+          )}
+          {/* Body */}
+          {body && (
+            <div
+              className={cn(
+                `font-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10`,
+                style?.mobile === "fusion" &&
+                  "[&>*]:w-full sm:[&>*:nth-child(even)]:w-1/2 sm:[&>*:nth-child(even)]:ml-auto sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
+                style?.tablet === "fusion" &&
+                  "md:[&>*]:w-full md:[&>*:nth-child(even)]:w-1/2 md:[&>*:nth-child(even)]:ml-auto md:[&>*:nth-child(even)]:mr-0 md:[&>*:nth-child(4n+2)]:ml-0 md:[&>*:nth-child(4n+2)]:mr-auto"
+              )}
+            >
+              <ContentText value={body} />
+            </div>
+          )}
+        </div>
       </div>
-
-      {(isImageRight || isAltTitleRight) && <div className="xl:col-span-1 xl:flex xl:justify-center">{renderFeature()}</div>}
     </section>
   );
 }
