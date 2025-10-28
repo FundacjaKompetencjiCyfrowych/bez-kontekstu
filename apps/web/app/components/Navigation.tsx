@@ -73,7 +73,7 @@ export function Navigation() {
                   <div key={item.href} className="mx-6">
                     <Link
                       href={item.href}
-                      className="text-gray-200 hover:text-blue-600 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
+                      className="text-gray-200 hover:text-violet-400 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
                       onClick={() => setIsMenuOpen(false)}
                       rel="noopener noreferrer"
                     >
@@ -103,7 +103,7 @@ export function Navigation() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
+              className="text-[#3f3f41] hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
               rel="noopener noreferrer"
             >
               {dictionary[item.key].toLocaleUpperCase()}

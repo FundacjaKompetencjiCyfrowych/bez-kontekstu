@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "@/app/components/ui/Button";
 import Logo from "@/app/assets/images/logo.png";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
