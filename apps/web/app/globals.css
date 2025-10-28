@@ -14,6 +14,7 @@
 @layer base {
   body {
     background-color: #0d0b0e;
+    mih-height: 100vh;
   }
 
   section {
