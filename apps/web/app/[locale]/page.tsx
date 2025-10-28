@@ -60,7 +60,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const buttonClasses = "h-10 px-7 py-6 w-[80vw] md:w-[30vw] xl:w-[250px] mx-auto inline-flex items-center justify-center transition-all duration-300 rounded-2xl text-white border-1 border-violet-400 hover:bg-violet-900/30 hover:border-violet-300 shadow-lg hover:cursor-pointer"
 
   return (
-    <div className="px-3 flex flex-col gap-[50px]">
+    <div className="px-5 xl:px-0 flex flex-col gap-[50px]">
       <h1 className="sr-only">{dictionary.noContext}</h1>
 
       {/* Hero Section */}
