@@ -25,7 +25,7 @@ type CollectionShowcaseProps = {
 export function CollectionShowcase({ collection = [], lang, directory, title }: CollectionShowcaseProps) {
   return (
     <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px] xl:min-h-[900px]">
-      <LogoViolet />
+      <LogoViolet isHidden={true} />
       <div className="hidden xl:block absolute right-0 top-0 text-right">
         {titleCutWord(title?.[0] || "", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
       </div>
