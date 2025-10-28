@@ -5,6 +5,7 @@ import { sanityFetch } from "@/app/lib/sanity/live";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { Logo } from "@/app/components/Logo";
 
 const getCooperatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: cooperatorsPageQuery, params: { lang: locale } });

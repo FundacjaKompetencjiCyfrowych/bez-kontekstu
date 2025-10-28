@@ -1,15 +1,15 @@
-import { Button } from "@/app/components/ui/Button";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
-import { getDictionary } from "../lib/intl/dictionaries/dynamic";
+import { getDictionary } from "@/app//lib/intl/dictionaries/dynamic";
 import { cache } from "react";
-import { sanityFetch } from "../lib/sanity/live";
-import { homePageQuery } from "../lib/sanity/queries";
-import { mapMetadata } from "../lib/sanity/mappers";
-import { ContentImage } from "../components/cms/ContentImage";
-import { ContentText } from "../components/cms/ContentText";
+import { sanityFetch } from "@/app//lib/sanity/live";
+import { homePageQuery } from "@/app//lib/sanity/queries";
+import { mapMetadata } from "@/app//lib/sanity/mappers";
+import { ContentImage } from "@/app//components/cms/ContentImage";
+import { ContentText } from "@/app//components/cms/ContentText";
+import { Logo } from "../components/Logo";
 
 const getHomepage = cache(async (locale: string) => {
   return await sanityFetch({ query: homePageQuery, params: { lang: locale } });
@@ -66,6 +66,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         className="relative flex flex-col min-h-[400px] sm:min-h-[70vh] md:landscape:min-h-[150vh] lg:landscape:min-h-[1000px] xl:min-h-[1000px] items-center justify-center"
         aria-labelledby="hero-title"
       >
+        <Logo morph />
+
         {/*Title */}
         <h2 className="sr-only" id="hero-title">
           Bez Kontekstu

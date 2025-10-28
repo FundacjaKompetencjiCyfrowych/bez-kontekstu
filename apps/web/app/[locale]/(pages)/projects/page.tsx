@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { CollectionShowcase } from "@/app/components/CollectionShowcase";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { Logo } from "@/app/components/Logo";
 
 const getProjectsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: projectsPageQuery, params: { lang: locale } });
@@ -27,7 +28,10 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projects = data?.projects || [];
 
   return (
-    <div className="min-h-screen xl:min-h-[1000px] px-5 xl:overflow-hidden flex flex-col">
+    <div className="h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
+      <div className="absolute right-0 left-0 top-0 h-[90vh]">
+        <Logo offset className="w-8/10" />
+      </div>
       <CollectionShowcase collection={projects} lang={locale} directory="projects" title={dictionary.split2.projects} />
     </div>
   );
