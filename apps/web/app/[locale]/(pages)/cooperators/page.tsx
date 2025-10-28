@@ -23,7 +23,7 @@ export default async function CooperatorsPage({ params }: { params: Promise<{ lo
   const dictionary = await getDictionary(locale);
 
   return (
-    <div className="h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
+    <div className="min-h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
       <CollectionShowcase collection={cooperators} lang={locale} directory="cooperators" title={dictionary.split2.collaborators} />
     </div>
   );
