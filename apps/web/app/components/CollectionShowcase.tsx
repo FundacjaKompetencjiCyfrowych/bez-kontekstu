@@ -23,7 +23,6 @@ type CollectionShowcaseProps = {
 
 /* CollectionShowcase: displays a collection of items as a vertical stack on mobile/tablet and a horizontal slider on desktop */
 export function CollectionShowcase({ collection = [], lang, directory, title }: CollectionShowcaseProps) {
-  console.log("collection", collection);
   return (
     <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px] xl:min-h-[900px]">
       <LogoViolet />
@@ -55,22 +54,24 @@ export function CollectionShowcase({ collection = [], lang, directory, title }: 
 
           {/* Desktop layout - horizontal slider */}
           <div className="hidden xl:block">
-            <Slider itemsPerSlide={4} gap={24}>
-              {collection.map((item, index) => {
-                return (
-                  <ImageCard
-                    key={item._id}
-                    title={item.name?.toUpperCase() || ""}
-                    tag={item.timestamp?.slice(0, 4)}
-                    href={`/${directory}/${item.slug?.current}`}
-                    image={item.cover || item.image}
-                    priority={index <= 3}
-                    variant="slider"
-                    lang={lang}
-                  />
-                );
-              })}
-            </Slider>
+            <div className="w-[80%] mx-auto">
+              <Slider itemsPerSlide={4} gap={4}>
+                {collection.map((item, index) => {
+                  return (
+                    <ImageCard
+                      key={item._id}
+                      title={item.name?.toUpperCase() || ""}
+                      tag={item.timestamp?.slice(0, 4)}
+                      href={`/${directory}/${item.slug?.current}`}
+                      image={item.cover || item.image}
+                      priority={index <= 3}
+                      variant="slider"
+                      lang={lang}
+                    />
+                  );
+                })}
+              </Slider>
+            </div>
           </div>
         </div>
       </section>
