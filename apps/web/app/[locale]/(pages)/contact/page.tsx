@@ -22,9 +22,11 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   const { data } = await getContactPage(locale);
   return (
-    <div className="flex w-full min-h-full flex-col justify-between px-2 md:px-5">
+    <div className="flex w-full min-h-full md:landscape:h-full flex-col justify-between px-2 md:px-5">
       {/*Title mobile*/}
-      <LogoViolet pageType="contact" isHidden={true} />
+      <div className="md:landscape:[&_img]:h-[40vh] md:landscape:[&_img]:w-[40vh] xl:[&_img]:!h-160 xl:[&_img]:!w-160">
+        <LogoViolet pageType="contact" isHidden={true} />
+      </div>
 
       <div className="w-full flex flex-1 flex-col px-5 md:px-0 xl:self-center z-10">
         {/*Title desktop*/}

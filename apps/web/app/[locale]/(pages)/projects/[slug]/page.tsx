@@ -39,7 +39,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const images = multimedia?.filter((item) => item._type === "img") || [];
 
   return (
-    <div className="w-full bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl xl:absolute xl:top-[50px]">
+    <div className="w-full bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl">
       {/* Navigation Header */}
       <div className="relative px-8 py-6 md:py-12 z-10">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">

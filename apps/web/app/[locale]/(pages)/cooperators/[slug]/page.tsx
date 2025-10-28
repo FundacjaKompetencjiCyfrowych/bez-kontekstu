@@ -42,12 +42,12 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
   const { name, description, projects, socials, image, next, previous } = data || {};
 
   return (
-    <div className="bg-[#0d0b0e] px-5 xl:min-h-screen max-w-7xl mx-auto font-mono flex flex-col xl:justify-between justify-center w-full">
+    <div className="bg-[#0d0b0e] px-5 xl:min-h-full max-w-7xl mx-auto font-mono flex flex-col justify-center w-full">
       <LogoViolet isHidden={true} />
 
       {/* Desktop Back Button - Top */}
-      <div className="hidden xl:block px-8">
-        <div className="relative py-6 md:py-12 xl:py-0 xl:mt-25 xl:ml-8">
+      <div className="hidden xl:block xl:mb-15 px-8">
+        <div className="relative py-6 md:py-12 xl:py-0 xl:ml-2">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
             <FiArrowLeft className="w-2 h-2  md:w-4 md:h-4 xl:w-6 xl:h-6" />
             <p className="ml-4 md:text-xl">{dictionary.back}</p>
@@ -178,7 +178,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         {/* ---------------------------------------------------------- */}
 
         {/* Desktop Layout (2 columns) */}
-        <div className="px-8 hidden xl:flex xl:gap-12 xl:max-w-7xl xl:mx-auto">
+        <div className="px-8 xl:px-0 hidden xl:flex xl:gap-12 xl:max-w-7xl xl:mx-auto">
           {/* Left Column - Biography */}
           <div className="w-1/2 flex flex-col justify-center">
             {/* Name Section */}

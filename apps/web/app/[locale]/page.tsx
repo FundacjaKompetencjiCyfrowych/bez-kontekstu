@@ -60,11 +60,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const buttonClasses = "h-10 px-7 py-6 w-[80vw] md:w-[30vw] xl:w-[250px] mx-auto inline-flex items-center justify-center transition-all duration-300 rounded-2xl text-white border-1 border-violet-400 hover:bg-violet-900/30 hover:border-violet-300 shadow-lg hover:cursor-pointer"
 
   return (
-    <div className="px-3 flex flex-col gap-[50px]">
+    <div className="px-5 xl:px-0 flex flex-col gap-[50px]">
       <h1 className="sr-only">{dictionary.noContext}</h1>
 
       {/* Hero Section */}
-      <section className="relative flex flex-col min-h-[400px] sm:min-h-[70vh] xl:min-h-[1000px] items-center justify-center" aria-labelledby="hero-title">
+      <section className="relative flex flex-col min-h-[400px] sm:min-h-[70vh] md:landscape:min-h-[150vh] lg:landscape:min-h-[1000px] xl:min-h-[1000px] items-center justify-center" aria-labelledby="hero-title">
         {/*Title */}
         <h2 className="sr-only" id="hero-title">
           Bez Kontekstu
@@ -103,17 +103,18 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
         <div className="z-10 mx-auto w-[75vw] text-center text-md font-mono leading-6 lg:w-[65vw] lg:text-xl lg:leading-10 xl:w-[60vw] xl:text-xl xl:leading-10">
           {data?.manifest?.body && <ContentText value={data.manifest.body} />}
-
-          <div className="z-10 flex transform items-center justify-center">
-            <Link
-              href={data?.manifest?.button?.url || "/manifest"}
-              className={`w-full md:w-full lg:w-auto ${buttonClasses} w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500`}
-              target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
-              rel="noopener noreferrer"
-            >{data?.manifest?.button?.label}
-            </Link>
-          </div>
         </div>
+
+        <div className="z-10 flex transform items-center justify-center">
+          <Link
+            href={data?.manifest?.button?.url || "/manifest"}
+            className={`w-full md:w-full lg:w-auto ${buttonClasses} w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500`}
+            target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
+            rel="noopener noreferrer"
+          >{data?.manifest?.button?.label}
+          </Link>
+        </div>
+
         {renderResponsiveTitle("", dictionary.split2.manifest[1], "left")}
       </section>
 
@@ -146,14 +147,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* PEOPLE Section */}
       <section
-        className="min-h-auto md:landscape:h-[300vh] lg:landscape:h-[1200px] lg:h-[1200px] xl:min-h-[1000px] flex flex-col justify-between bg-transparent"
+        className="min-h-auto md:landscape:h-[300vh] lg:landscape:h-[1200px] lg:h-[1200px] xl:min-h-[1000px] flex flex-col justify-between sm:landscape:mt-10 lg:landscape:mt-0 bg-transparent"
         aria-labelledby="people-title"
       >
         <div className="flex flex-col z-10">
           {renderResponsiveTitle(dictionary.split.collaborators, dictionary.split2.collaborators[0], "right")}
         </div>
 
-        <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
+        <div className="w-[90%] max-w-[800px] my-4 mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
           {teamMembers.map((member) => (
             <div
               key={member._id}
