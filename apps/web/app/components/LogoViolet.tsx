@@ -41,7 +41,7 @@ export default function LogoViolet({ pageType = 'default', isHidden = false }: L
       <Image
         src={LogoVioletImage}
         alt="Bez Kontekstu"
-        className={`hidden xl:block absolute left-1/2 top-[100vh] xl:top-[50vh] transform -translate-x-1/2 w-250 h-250 object-contain blur-[8px] opacity-25 ${isHidden ? 'xl:hidden' : ''}`}
+        className={`hidden xl:block absolute left-1/2 top-[100vh] xl:top-[100vh] transform -translate-x-1/2 w-250 h-250 object-contain blur-[8px] opacity-25 ${isHidden ? 'xl:hidden' : ''}`}
       />
     </>
   )
