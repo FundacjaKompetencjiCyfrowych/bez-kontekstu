@@ -27,7 +27,7 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
     }
 
     if (feature.altTitle) {
-      return <h2 className="text-4xl font-space-mono font-bold whitespace-pre-line">{feature.altTitle}</h2>;
+      return <h2 className="text-4xl font-space-mono font-bold whitespace-pre-line xl:text-right">{feature.altTitle}</h2>;
     }
 
     return null;
@@ -37,7 +37,7 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
     <section className="py-10 md:py-20 xl:py-40 px-5 xl:px-0">
       <div className={cn("xl:flex xl:gap-8 xl:items-center", !isContentRight && "xl:flex-row-reverse")}>
         {/* Feature column */}
-        <div className="hidden xl:flex xl:flex-1 xl:justify-center">{renderFeature()}</div>
+        <div className="hidden xl:flex xl:flex-1 xl:justify-end">{renderFeature()}</div>
 
         {/* Content column */}
         <div
@@ -62,9 +62,9 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
               className={cn(
                 `font-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10`,
                 style?.mobile === "fusion" &&
-                  "[&>*]:w-full sm:[&>*:nth-child(even)]:w-1/2 sm:[&>*:nth-child(even)]:ml-auto sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
+                "[&>*]:w-full sm:[&>*:nth-child(even)]:w-1/2 sm:[&>*:nth-child(even)]:ml-auto sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
                 style?.tablet === "fusion" &&
-                  "md:[&>*]:w-full md:[&>*:nth-child(even)]:w-1/2 md:[&>*:nth-child(even)]:ml-auto md:[&>*:nth-child(even)]:mr-0 md:[&>*:nth-child(4n+2)]:ml-0 md:[&>*:nth-child(4n+2)]:mr-auto"
+                "md:[&>*]:w-full md:[&>*:nth-child(even)]:w-1/2 md:[&>*:nth-child(even)]:ml-auto md:[&>*:nth-child(even)]:mr-0 md:[&>*:nth-child(4n+2)]:ml-0 md:[&>*:nth-child(4n+2)]:mr-auto"
               )}
             >
               <ContentText value={body} />

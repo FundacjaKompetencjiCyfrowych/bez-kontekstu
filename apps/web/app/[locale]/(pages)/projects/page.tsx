@@ -27,7 +27,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projects = data?.projects || [];
 
   return (
-    <div className="min-h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
+    <div className="min-h-screen xl:min-h-[1000px] px-5 xl:overflow-hidden flex flex-col">
       <CollectionShowcase collection={projects} lang={locale} directory="projects" title={dictionary.split2.projects} />
     </div>
   );

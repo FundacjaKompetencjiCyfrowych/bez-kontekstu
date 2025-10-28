@@ -19,7 +19,7 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
 
   return (
     <Link href={href} className={cn("group block transition-all duration-300", variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105")} rel="noopener noreferrer">
-      <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "h-[250px] md:h-[350px] mb-5" : "h-[400px]")}>
+      <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "h-[250px] md:h-[350px] mb-5" : "h-[500px]")}>
         {image ? (
           <ContentImage
             lqip

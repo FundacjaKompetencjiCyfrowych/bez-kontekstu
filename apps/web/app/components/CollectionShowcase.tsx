@@ -24,7 +24,7 @@ type CollectionShowcaseProps = {
 /* CollectionShowcase: displays a collection of items as a vertical stack on mobile/tablet and a horizontal slider on desktop */
 export function CollectionShowcase({ collection = [], lang, directory, title }: CollectionShowcaseProps) {
   return (
-    <div className="relative flex xl:justify-center xl:items-center flex-1 xl:mt-[90px] xl:min-h-[900px]">
+    <div className="relative flex xl:justify-center xl:items-center flex-1 xl:min-h-[900px]">
       <LogoViolet isHidden={true} />
       <div className="hidden xl:block absolute right-0 top-0 text-right">
         {titleCutWord(title?.[0] || "", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
@@ -55,7 +55,7 @@ export function CollectionShowcase({ collection = [], lang, directory, title }: 
           {/* Desktop layout - horizontal slider */}
           <div className="hidden xl:block">
             <div className="w-[80%] mx-auto">
-              <Slider itemsPerSlide={4} gap={4}>
+              <Slider itemsPerSlide={4} gap={10}>
                 {collection.map((item, index) => {
                   return (
                     <ImageCard
