@@ -64,7 +64,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <h1 className="sr-only">{dictionary.noContext}</h1>
 
       {/* Hero Section */}
-      <section className="relative flex flex-col min-h-[400px] sm:min-h-[70vh] xl:min-h-[1000px] items-center justify-center" aria-labelledby="hero-title">
+      <section className="relative flex flex-col min-h-[400px] sm:min-h-[70vh] md:landscape:min-h-[150vh] lg:landscape:min-h-[1000px] xl:min-h-[1000px] items-center justify-center" aria-labelledby="hero-title">
         {/*Title */}
         <h2 className="sr-only" id="hero-title">
           Bez Kontekstu
@@ -147,7 +147,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* PEOPLE Section */}
       <section
-        className="min-h-auto md:landscape:h-[300vh] lg:landscape:h-[1200px] lg:h-[1200px] xl:min-h-[1000px] flex flex-col justify-between bg-transparent"
+        className="min-h-auto md:landscape:h-[300vh] lg:landscape:h-[1200px] lg:h-[1200px] xl:min-h-[1000px] flex flex-col justify-between sm:landscape:mt-10 lg:landscape:mt-0 bg-transparent"
         aria-labelledby="people-title"
       >
         <div className="flex flex-col z-10">
