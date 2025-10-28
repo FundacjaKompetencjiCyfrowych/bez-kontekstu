@@ -39,7 +39,6 @@ export function Navigation() {
   };
 
   const mobileTitle = getMobilePageTitle(routePath);
-
   const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";
   const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
   const isMobileMenuEnabled = !isProjectDetailPage && !isCooperatorDetailPage;
@@ -56,7 +55,7 @@ export function Navigation() {
           {/* Menu */}
           <div
             className={cn("absolute -bottom-0 left-0 right-0 border-b-1 border-gray-700 transition-all duration-300 z-30", {
-              "translate-y-[200px] md:translate-y-[170px] lg:translate-y-[130px]": isMenuOpen,
+              "translate-y-[260px] md:translate-y-[150px] lg:translate-y-[130px]": isMenuOpen,
             })}
           >
             {/* Collapsible */}

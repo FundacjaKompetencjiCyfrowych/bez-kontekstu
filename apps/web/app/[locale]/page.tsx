@@ -103,17 +103,18 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
         <div className="z-10 mx-auto w-[75vw] text-center text-md font-mono leading-6 lg:w-[65vw] lg:text-xl lg:leading-10 xl:w-[60vw] xl:text-xl xl:leading-10">
           {data?.manifest?.body && <ContentText value={data.manifest.body} />}
-
-          <div className="z-10 flex transform items-center justify-center">
-            <Link
-              href={data?.manifest?.button?.url || "/manifest"}
-              className={`w-full md:w-full lg:w-auto ${buttonClasses} w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500`}
-              target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
-              rel="noopener noreferrer"
-            >{data?.manifest?.button?.label}
-            </Link>
-          </div>
         </div>
+
+        <div className="z-10 flex transform items-center justify-center">
+          <Link
+            href={data?.manifest?.button?.url || "/manifest"}
+            className={`w-full md:w-full lg:w-auto ${buttonClasses} w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500`}
+            target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
+            rel="noopener noreferrer"
+          >{data?.manifest?.button?.label}
+          </Link>
+        </div>
+
         {renderResponsiveTitle("", dictionary.split2.manifest[1], "left")}
       </section>
 
@@ -153,7 +154,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {renderResponsiveTitle(dictionary.split.collaborators, dictionary.split2.collaborators[0], "right")}
         </div>
 
-        <div className="w-[90%] max-w-[800px] mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
+        <div className="w-[90%] max-w-[800px] my-4 mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
           {teamMembers.map((member) => (
             <div
               key={member._id}
