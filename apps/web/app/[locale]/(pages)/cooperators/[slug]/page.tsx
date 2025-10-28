@@ -9,6 +9,7 @@ import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { ContentImage } from "@/app/components/cms/ContentImage";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { LogoContainer } from "@/app/components/Logo";
 
 const getCooperatorPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: cooperatorPageQuery, params: { lang: locale, slug } });
@@ -54,6 +55,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
 
       {/* Main Content */}
       <div className="relative px-4">
+        <LogoContainer variant="centered" />
         {/* Back button */}
         <div className="relative xl:hidden w-fit px-4 my-[50px]">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">

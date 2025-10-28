@@ -7,7 +7,7 @@ import { sanityFetch } from "@/app/lib/sanity/live";
 import { manifestPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { ContentImage } from "@/app/components/cms/ContentImage";
-import { Logo } from "@/app/components/Logo";
+import { LogoContainer } from "@/app/components/Logo";
 
 const getManifestPage = cache(async (locale: string) => {
   return await sanityFetch({ query: manifestPageQuery, params: { lang: locale } });
@@ -27,9 +27,7 @@ export default async function ManifestPage({ params }: { params: Promise<{ local
     <div className="flex w-full min-h-screen flex-col justify-between px-2 md:px-5 xl:flex xl:flex-col">
       {/* Main content */}
       <main className="relative mx-auto xl:max-w-7xl">
-        <div className="absolute right-0 left-0 top-0 h-[90vh]">
-          <Logo semiMorph offset className="w-8/10" />
-        </div>
+        <LogoContainer variant="mobileOffset" semiMorph />
         {data?.hero && (
           <div className="relative flex md:landscape:justify-center xl:min-h-[90vh] xl:items-center xl:justify-center">
             {/*Title desktop*/}

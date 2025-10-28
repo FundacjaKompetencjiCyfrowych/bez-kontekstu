@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { TrackItem } from "@/app/components/TrackItem";
 import { useIntl } from "@/app/lib/intl/context";
+import { LogoContainer } from "@/app/components/Logo";
 
 interface Track {
   id: number;
@@ -35,6 +36,7 @@ export function SoundsClient() {
       <main className="relative flex flex-col xl:flex-row xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:w-[90%] xl:h-3/4 xl:justify-center">
         {/* Left column - Title */}
         <section className="xl:w-1/3 xl:flex xl:items-start xl:justify-start" aria-labelledby="page-title">
+          <LogoContainer variant="centered" />
           {/* Title only for XL screens */}
           <div className="hidden text-7xl xl:flex xl:flex-col">
             <h2>BEATS&apos;N&apos;</h2>

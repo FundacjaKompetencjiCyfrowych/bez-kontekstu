@@ -7,7 +7,7 @@ import { donatorsPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { ContentImage } from "@/app/components/cms/ContentImage";
-import LogoViolet from "@/app/components/LogoViolet";
+import { LogoContainer } from "@/app/components/Logo";
 
 const getDonatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: donatorsPageQuery, params: { lang: locale } });
@@ -29,8 +29,8 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
 
   return (
     <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
-      <LogoViolet isHidden={true} />
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:min-h-[1024px]">
+      <LogoContainer variant="mobileOffset" />
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
         {/*Title desktop */}
         <div className="hidden xl:block absolute right-0 top-0 text-right">
           {titleCutWord(
