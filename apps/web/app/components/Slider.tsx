@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef, useEffect, useState, ReactNode } from "react";
+import { useRef, useEffect, useState, useMemo, ReactNode } from "react";
 import { useStep } from "usehooks-ts";
-import Image from "next/image";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { cn } from "../lib/utils";
 import { useIntl } from "../lib/intl/context";
@@ -27,6 +26,19 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
   const totalSlides = Math.ceil(children.length / itemsPerSlide);
   const [currentSlide, { goToNextStep, goToPrevStep }] = useStep(totalSlides);
   const { dictionary } = useIntl();
+
+  // Accordion hover state (desktop use in parent)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  // Precompute pixel widths for equal / hovered / others
+  const sizes = useMemo(() => {
+    const totalGapPx = (itemsPerSlide - 1) * gap;
+    const available = Math.max(0, containerWidth - totalGapPx);
+    const equalPx = itemsPerSlide > 0 ? available / itemsPerSlide : 0;
+    const hoveredPx = available * 0.55; // emphasis
+    const othersPx = itemsPerSlide > 1 ? (available - hoveredPx) / (itemsPerSlide - 1) : 0;
+    return { equalPx, hoveredPx, othersPx };
+  }, [containerWidth, itemsPerSlide, gap]);
 
   // Watch for resize to recalc widths
   useEffect(() => {
@@ -56,11 +68,12 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
   const isLastSlide = currentSlide === totalSlides;
 
   return (
-    <div className={cn("w-full", className)}>
+    <>
       {/* Outer container */}
       <div
         ref={sliderRef}
         className="flex overflow-x-auto scrollbar-hide pb-4 justify-start snap-x snap-mandatory"
+        onMouseLeave={() => setHoveredIndex(null)}
         style={{
           scrollBehavior: "smooth",
           scrollbarWidth: "none",
@@ -68,18 +81,25 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
           gap: `${gap}px`,
         }}
       >
-        {children.map((child, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 snap-start"
-            style={{
-              // Each item takes exactly 1/itemsPerSlide of the container width, minus gaps
-              flex: `0 0 calc((100% - ${(itemsPerSlide - 1) * gap}px) / ${itemsPerSlide})`,
-            }}
-          >
-            {child}
-          </div>
-        ))}
+        {children.map((child, index) => {
+          const basisPx =
+            hoveredIndex === null
+              ? sizes.equalPx
+              : hoveredIndex === index
+                ? sizes.hoveredPx
+                : sizes.othersPx;
+
+          return (
+            <div
+              key={index}
+              className="snap-start transition-[flex-basis] duration-500 ease-in-out"
+              style={{ flex: "0 0 auto", flexBasis: `${basisPx}px` }}
+              onMouseEnter={() => setHoveredIndex(index)}
+            >
+              {child}
+            </div>
+          );
+        })}
       </div>
 
       {/* Navigation */}
@@ -116,6 +136,6 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
           </button>
         </div>
       )}
-    </div>
+    </>
   );
 }

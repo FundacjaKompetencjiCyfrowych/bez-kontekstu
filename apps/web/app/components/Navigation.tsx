@@ -39,7 +39,6 @@ export function Navigation() {
   };
 
   const mobileTitle = getMobilePageTitle(routePath);
-
   const isProjectDetailPage = routePath.startsWith("/projects/") && routePath !== "/projects";
   const isCooperatorDetailPage = routePath.startsWith("/cooperators/") && routePath !== "/cooperators";
   const isMobileMenuEnabled = !isProjectDetailPage && !isCooperatorDetailPage;
@@ -50,13 +49,13 @@ export function Navigation() {
       {isMobileMenuEnabled && (
         <div className="xl:hidden flex justify-between items-center px-5 overflow-hidden">
           {/* Header */}
-          <Header title={mobileTitle} className="xl:hidden" showLogo={false} />
+          <Header title={mobileTitle} className="xl:hidden" />
           <SoundToggler />
 
           {/* Menu */}
           <div
             className={cn("absolute -bottom-0 left-0 right-0 border-b-1 border-gray-700 transition-all duration-300 z-30", {
-              "translate-y-[200px] md:translate-y-[170px] lg:translate-y-[130px]": isMenuOpen,
+              "translate-y-[260px] sm:landscape:translate-y-[30px] lg:landscape:translate-y-[120px] md:translate-y-[150px]": isMenuOpen,
             })}
           >
             {/* Collapsible */}
@@ -74,7 +73,7 @@ export function Navigation() {
                   <div key={item.href} className="mx-6">
                     <Link
                       href={item.href}
-                      className="text-gray-200 hover:text-blue-600 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
+                      className="text-gray-200 hover:text-violet-400 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
                       onClick={() => setIsMenuOpen(false)}
                       rel="noopener noreferrer"
                     >
@@ -104,7 +103,7 @@ export function Navigation() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-[#3f3f41] hover:text-blue-600 text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
+              className="text-[#3f3f41] hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
               rel="noopener noreferrer"
             >
               {dictionary[item.key].toLocaleUpperCase()}

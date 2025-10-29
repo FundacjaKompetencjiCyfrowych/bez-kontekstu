@@ -2,6 +2,7 @@ import { ManifestPageQueryResult } from "@/app/lib/sanity/types";
 import { ContentText } from "@/app/components/cms/ContentText";
 import { ContentImage } from "./cms/ContentImage";
 import { cn } from "@/app/lib/utils";
+import { twSizes } from "../lib/twSizes";
 
 type ManifestSectionProps = {
   section: NonNullable<NonNullable<ManifestPageQueryResult>["sections"]>[number];
@@ -20,14 +21,14 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
 
     if (feature.image) {
       return (
-        <div className="relative w-full min-h-96 xl:min-h-[600px] xl:w-[500px]">
-          <ContentImage image={feature.image} fill className="object-cover" sizes="(max-width: 1280px) 0px, 500px" />
+        <div className="relative w-full xl:w-[500px] aspect-[3/4]">
+          <ContentImage image={feature.image} fill className="object-cover" sizes={twSizes("50vw max:500px")} />
         </div>
       );
     }
 
     if (feature.altTitle) {
-      return <h2 className="text-4xl font-space-mono font-bold whitespace-pre-line">{feature.altTitle}</h2>;
+      return <h2 className="text-4xl font-space-mono font-bold whitespace-pre-line xl:text-right">{feature.altTitle}</h2>;
     }
 
     return null;
@@ -37,7 +38,7 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
     <section className="py-10 md:py-20 xl:py-40 px-5 xl:px-0">
       <div className={cn("xl:flex xl:gap-8 xl:items-center", !isContentRight && "xl:flex-row-reverse")}>
         {/* Feature column */}
-        <div className="hidden xl:flex xl:flex-1 xl:justify-center">{renderFeature()}</div>
+        <div className="hidden xl:flex xl:flex-1 xl:justify-end">{renderFeature()}</div>
 
         {/* Content column */}
         <div

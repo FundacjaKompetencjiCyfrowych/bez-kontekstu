@@ -7,6 +7,8 @@ import { donatorsPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { ContentImage } from "@/app/components/cms/ContentImage";
+import { LogoContainer } from "@/app/components/Logo";
+import { twSizes } from "@/app/lib/twSizes";
 
 const getDonatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: donatorsPageQuery, params: { lang: locale } });
@@ -24,11 +26,12 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
   const { data } = await getDonatorsPage(locale);
 
   const buttonClasses =
-    "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
+    "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10 ";
 
   return (
-    <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
+    <div className="font-mono">
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[80vh] xl:min-h-[1024px]">
+        <LogoContainer variant="mobileOffset" />
         {/*Title desktop */}
         <div className="hidden xl:block absolute right-0 top-0 text-right">
           {titleCutWord(
@@ -79,8 +82,10 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                   <>
                     {/* Left Column - Image */}
                     <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
-                      <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-                        {section.image && <ContentImage image={section.image} fill shimmer className="object-cover" />}
+                      <div className="relative w-full aspect-[5/8]">
+                        {section.image && (
+                          <ContentImage image={section.image} fill shimmer aspect={5 / 8} sizes={twSizes("0px xl:500px")} />
+                        )}
                       </div>
                     </div>
                     {/* Right Column - Payment details */}
@@ -88,7 +93,7 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                       {section.body &&
                         section.body.map((body) => (
                           <div key={body._key}>
-                            <div className="mx-5 mb-4 md:text-2xl xl:text-3xl xl:mx-0">
+                            <div className="px-5 mb-4 md:text-2xl xl:text-3xl xl:mx-0">
                               <h3 className="mb-6">
                                 <strong>{body.heading?.title}</strong>
                               </h3>
@@ -120,10 +125,12 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                       {section.body &&
                         section.body.map((body) => (
                           <div key={body._key}>
-                            <h3 className="mb-4 mx-2 md:text-3xl xl:text-4xl xl:mx-0">
+                            <h3 className="px-2 mb-4 mx-2 md:text-3xl xl:text-4xl xl:mx-0">
                               <strong>{body.heading?.title}</strong>
                             </h3>
-                            <p className="mb-10 mx-2 leading-6 md:leading-10 xl:text-xl xl:leading-8 xl:mx-0">{body.heading?.subtitle}</p>
+                            <p className="px-2 mb-10 mx-2 leading-6 md:leading-10 xl:text-xl xl:leading-8 xl:mx-0">
+                              {body.heading?.subtitle}
+                            </p>
                             <div className="space-y-4 mt-10 mx-5 md:text-xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
                               {body.fields &&
                                 body.fields.map((field) => (
@@ -144,8 +151,10 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                     </div>
                     {/* Right Column - Image */}
                     <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
-                      <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-                        {section.image && <ContentImage image={section.image} fill shimmer className="object-cover" />}
+                      <div className="relative w-full aspect-[5/8]">
+                        {section.image && (
+                          <ContentImage image={section.image} aspect={5 / 8} fill shimmer sizes={twSizes("0px xl:500px")} />
+                        )}
                       </div>
                     </div>
                   </>

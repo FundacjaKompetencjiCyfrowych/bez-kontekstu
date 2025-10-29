@@ -3,8 +3,8 @@
 
 import { useState } from "react";
 import { TrackItem } from "@/app/components/TrackItem";
-import LogoViolet from "@/app/components/LogoViolet";
 import { useIntl } from "@/app/lib/intl/context";
+import { LogoContainer } from "@/app/components/Logo";
 
 interface Track {
   id: number;
@@ -32,23 +32,24 @@ export function SoundsClient() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#0d0b0e] px-5 mx-auto">
-      <main className="relative flex max-w-7xl flex-1 flex-col xl:mt-24 xl:flex-row">
-        <LogoViolet pageType="sounds" isHidden={true} />
+    <div className="flex flex-col bg-[#0d0b0e] px-5">
+      <LogoContainer variant="centered" />
+      <div className="relative flex flex-col xl:flex-row xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:w-[90%] xl:h-3/4 xl:justify-center">
         {/* Left column - Title */}
-        <section className="xl:w-1/2 xl:flex xl:items-start xl:justify-center xl:pt-20" aria-labelledby="page-title">
+        <section className="xl:w-1/3 xl:flex xl:items-start xl:justify-start" aria-labelledby="page-title">
           {/* Title only for XL screens */}
-          <div className="hidden text-7xl  xl:flex xl:flex-col">
+          <div className="hidden text-7xl xl:flex xl:flex-col">
             <h2>BEATS&apos;N&apos;</h2>
             <h2>PIECES</h2>
           </div>
         </section>
+
         {/* Right column - Tracklist */}
         <section
-          className="flex w-full flex-1 items-end justify-center lg:mt-20 md:items-center md:px-5 xl:w-1/2 xl:mt-20 xl:pt-40 xl:self-center xl:justify-start xl:px-0"
+          className="flex w-full items-end justify-center lg:mt-20 md:items-center md:px-5 xl:w-1/3 xl:self-center xl:justify-start xl:px-0"
           aria-labelledby="tracklist-title"
         >
-          <div className="w-full max-w-4xl xl:w-[85%]">
+          <div className="w-full">
             <h2 id="tracklist-title" className="sr-only">
               {dictionary.tracklist}
             </h2>
@@ -65,7 +66,7 @@ export function SoundsClient() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

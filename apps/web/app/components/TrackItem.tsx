@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { FiPlay } from "react-icons/fi";
 import { FaSoundcloud } from "react-icons/fa";
 
@@ -27,7 +26,7 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
           isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 hover:border-purple-400/60"
         }`}
       >
-        <FiPlay width={30} height={30} className="md:w-10 md:h-10" />
+        <FiPlay width={30} height={30} className="md:w-10 md:h-10 ml-1" />
       </button>
 
       {/* Song Name Field */}
@@ -48,7 +47,7 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
                   : "bg-white/10 border-white/30 hover:bg-white/15"
               }`}
             >
-              <FaSoundcloud width={30} height={30} />
+              <FaSoundcloud className="w-6 h-6 md:w-9 md:h-9 py-2" />
             </div>
           </div>
         </div>

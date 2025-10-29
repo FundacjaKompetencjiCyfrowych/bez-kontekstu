@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
@@ -15,6 +14,7 @@ import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
 import { MultimediaGallery } from "./gallery";
 import { Fragment } from "react";
+import { LogoContainer } from "@/app/components/Logo";
 
 const getProjectPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: projectPageQuery, params: { lang: locale, slug } });
@@ -40,7 +40,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const images = multimedia?.filter((item) => item._type === "img") || [];
 
   return (
-    <div className="w-full bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl xl:absolute xl:top-[50px]">
+    <div className="w-full bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl">
       {/* Navigation Header */}
       <div className="relative px-8 py-6 md:py-12 z-10">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
@@ -51,6 +51,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
       {/* Main Content */}
       <div className="relative pb-16">
+        <LogoContainer variant="justified" semiMorph />
         {/* Title and Year */}
         <div className="mb-8">
           <h2 className="mt-4 mb-16">{name?.toUpperCase()}</h2>
