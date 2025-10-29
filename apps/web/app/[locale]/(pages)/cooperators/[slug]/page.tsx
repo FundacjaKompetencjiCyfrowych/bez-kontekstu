@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FiArrowRight } from "react-icons/fi";
 import { FiArrowLeft } from "react-icons/fi";
 import { cache } from "react";
 import { sanityFetch } from "@/app/lib/sanity/live";
@@ -11,6 +10,7 @@ import { ContentImage } from "@/app/components/cms/ContentImage";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { twSizes } from "@/app/lib/twSizes";
 import { LogoContainer } from "@/app/components/Logo";
+import { PaginationNav } from "@/app/components/PaginationNav";
 
 const getCooperatorPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: cooperatorPageQuery, params: { lang: locale, slug } });
@@ -121,40 +121,13 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         </div>
 
         {/* Mobile and Tablet Navigation */}
-        <div className="lg:hidden relative text-sm z-10 pb-8 lg:pb-0">
-          <div className="flex justify-between lg:justify-around items-center">
-            {/* Previous Cooperator */}
-            <div>
-              {previous ? (
-                <Link href={`/cooperators/${previous.slug?.current}}`} className="flex items-center hover:text-gray-300 transition-colors">
-                  <div>
-                    <FiArrowLeft className="inline-block mr-4 w-2 h-2 md:w-4 md:h-4" />
-                    <span>{dictionary.previous}</span>
-                  </div>
-                </Link>
-              ) : (
-                <div></div>
-              )}
-            </div>
-
-            {/* Next Cooperator */}
-            <div className="text-right">
-              {next ? (
-                <Link
-                  href={`/cooperators/${next.slug?.current}}`}
-                  className="flex items-center justify-end gap-2 hover:text-gray-300 transition-colors"
-                >
-                  <div>
-                    <span>{dictionary.next}</span>
-                    <FiArrowRight className="inline-block ml-4 w-2 h-2 md:w-4 md:h-4" />
-                  </div>
-                </Link>
-              ) : (
-                <div></div>
-              )}
-            </div>
-          </div>
-        </div>
+        <PaginationNav
+          previous={previous}
+          next={next}
+          basePath="cooperators"
+          dictionary={dictionary}
+          variant="compact"
+        />
 
         {/* ---------------------------------------------------------- */}
         {/* DESKTOP Layout (2 columns) */}
@@ -235,41 +208,14 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
               </div>
             </div>
 
-            <div className="text-base">
-              <div className="flex justify-evenly items-center">
-                <div>
-                  {previous ? (
-                    <Link
-                      href={`/cooperators/${previous.slug?.current}`}
-                      className="flex items-center hover:text-gray-300 transition-colors"
-                    >
-                      <div>
-                        <FiArrowLeft className="inline-block mr-4 w-5 h-6 lg:w-3 lg:h-4" />
-                        <span>{dictionary.previous}</span>
-                      </div>
-                    </Link>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <div className="text-right">
-                  {next ? (
-                    <Link
-                      href={`/cooperators/${next.slug?.current}`}
-                      className="flex items-center justify-end gap-2 hover:text-gray-300 transition-colors"
-                    >
-                      <div>
-                        <span>{dictionary.next}</span>
-                        <FiArrowRight className="inline-block ml-4 w-5 h-5 lg:w-3 lg:h-4" />
-                      </div>
-                    </Link>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-              </div>
-            </div>
+            <PaginationNav
+              previous={previous}
+              next={next}
+              basePath="cooperators"
+              dictionary={dictionary}
+              variant="desktop"
+              containerClassName="pb-0"
+            />
           </div>
         </div>
       </div>
