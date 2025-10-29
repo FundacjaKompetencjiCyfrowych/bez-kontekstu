@@ -148,7 +148,7 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
 export function LogoContainer({ variant, semiMorph }: { variant: "mobileOffset" | "justified" | "centered"; semiMorph?: boolean }) {
   return (
     <div
-      className={cn({
+      className={cn("pointer-events-none", {
         "-top-0 absolute w-full h-[90vh] grid place-items-center": variant === "mobileOffset",
         "w-full h-full absolute flex flex-col items-center": variant === "justified",
         "w-full h-full absolute grid place-items-center": variant === "centered",
