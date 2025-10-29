@@ -17,8 +17,8 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
   const runnerRef = useRef<HTMLDivElement>(null);
   const xl = useMediaQuery("(min-width: 1280px)");
 
-  // Refs to store ScrollTriggers so we can kill them before recreating
-  const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
+  // Ref to store ScrollTrigger so we can kill it before recreating
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   useGSAP(
     () => {
@@ -26,9 +26,10 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
       const runner = runnerRef.current;
       if (!svg || !runner) return;
 
-      // Kill existing ScrollTriggers to prevent duplicates
-      scrollTriggersRef.current.forEach((st) => st.kill());
-      scrollTriggersRef.current = [];
+      // Kill existing ScrollTrigger to prevent duplicates
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill();
+      }
 
       // Set initial state
       if (morph) {
@@ -54,19 +55,22 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
         });
       }
 
+      const runnerRect = runner.getBoundingClientRect();
+      const totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+
       // 1. Calculate viewport center offset
       const centerOffset = (window.innerHeight - runner.offsetHeight) / 2;
-      // 2. Calculate element’s distance from top of the document
-      const distanceFromTop = runner.getBoundingClientRect().top + window.scrollY;
+      // 2. Calculate element's distance from top of the document
+      const distanceFromTop = runnerRect.top + window.scrollY;
       // 3. Choose whichever is smaller
       const offset = centerOffset > distanceFromTop ? distanceFromTop : centerOffset;
 
-      // Pin on scroll
-      const pinTl = gsap.timeline({
+      // Create single timeline with pin and optional morph/semiMorph
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: runner,
           start: () => `top ${offset}px`,
-          end: () => "+=" + document.body.scrollHeight,
+          end: () => `${totalScrollableHeight}px`,
           pin: runner,
           pinSpacing: false,
           scrub: true,
@@ -75,53 +79,24 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
         },
       });
 
-      scrollTriggersRef.current.push(pinTl.scrollTrigger!);
+      scrollTriggerRef.current = tl.scrollTrigger!;
 
-      // Animate morph
       if (morph) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: runner,
-            start: `top ${xl ? centerOffset - 90 : centerOffset}px`,
-            end: `bottom ${centerOffset}px`,
-            scrub: true,
-            invalidateOnRefresh: true,
-            // markers: true,
-          },
-        });
-
         tl.to(svg, {
           scale: 1,
           fill: "#6852f5",
           filter: "blur(8px)",
           ease: "power2.out",
           opacity: 0.3,
-        });
-
-        scrollTriggersRef.current.push(tl.scrollTrigger!);
-      }
-
-      // Animate semimorph
-      if (semiMorph) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: runner,
-            start: `top ${xl ? centerOffset - 90 : centerOffset}px`,
-            end: `bottom ${centerOffset}px`,
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        });
-
+        }).to(svg, {}, `+=${runnerRect.top / totalScrollableHeight}`);
+      } else if (semiMorph) {
         tl.to(svg, {
           scale: 1,
           fill: "#6852f5",
           filter: "blur(8px)",
           ease: "power2.out",
           opacity: 0.3,
-        });
-
-        scrollTriggersRef.current.push(tl.scrollTrigger!);
+        }).to(svg, {}, `+=${runnerRect.top / totalScrollableHeight}`);
       }
 
       // Refresh ScrollTrigger after DOM updates
@@ -148,7 +123,7 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
 export function LogoContainer({ variant, semiMorph }: { variant: "mobileOffset" | "justified" | "centered"; semiMorph?: boolean }) {
   return (
     <div
-      className={cn("pointer-events-none", {
+      className={cn({
         "-top-0 absolute w-full h-[90vh] grid place-items-center": variant === "mobileOffset",
         "w-full h-full absolute flex flex-col items-center": variant === "justified",
         "w-full h-full absolute grid place-items-center": variant === "centered",
