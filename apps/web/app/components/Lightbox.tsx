@@ -5,6 +5,7 @@ import { useSliderNavigation } from "./hooks/useSliderNavigation";
 import { useKeyboardNavigation } from "./hooks/useKeyboardNavigation";
 import { useBodyScrollLock } from "./hooks/useBodyScrollLock";
 import { ContentImage, Image } from "./cms/ContentImage";
+import { twSizes } from "../lib/twSizes";
 
 interface LightboxProps {
   images: Image[];
@@ -83,6 +84,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
               image={images[currentIndex]}
               width={800}
               height={600}
+              sizes={twSizes("100vw max:800px")}
               className={`max-w-full max-h-full sm:landscape:h-screen object-contain transition-all duration-500 ease-in-out transform ${
                 animationDirection === "left"
                   ? "animate-slideInLeft"
@@ -126,7 +128,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
               aria-label={`Go to image ${index + 1} of ${images.length}`}
               aria-controls={mainImageId}
             >
-              <ContentImage image={image} fill className="object-cover" sizes="64px" />
+              <ContentImage image={image} fill className="object-contain" sizes={twSizes("60px")} />
             </button>
           ))}
         </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ContentImage, Image } from "@/app/components/cms/ContentImage";
 import { cn } from "@/app/lib/utils";
 import { getDictionary } from "../lib/intl/dictionaries/dynamic";
+import { twSizes } from "../lib/twSizes";
 
 type ImageCardProps = {
   title: string;
@@ -18,18 +19,20 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
   const isMobile = variant === "mobile";
 
   return (
-    <Link href={href} className={cn("group block transition-all duration-300", variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105")} rel="noopener noreferrer">
-      <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "h-[250px] md:h-[350px] mb-5" : "h-[500px]")}>
+    <Link
+      href={href}
+      className={cn("group block transition-all duration-300", variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105")}
+      rel="noopener noreferrer"
+    >
+      <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "aspect-[5/3] mb-5" : "h-[500px]")}>
         {image ? (
           <ContentImage
             lqip
             image={image}
-            className={cn(
-              "w-full h-full object-cover",
-              isMobile ? "object-top md:object-center" : "object-center grayscale group-hover:grayscale-0"
-            )}
-            sizes={isMobile ? "(max-width: 768px) 100vw, 85vw" : "25vw"}
+            className={cn(isMobile ? "object-center" : "object-center grayscale group-hover:grayscale-0")}
+            sizes={twSizes("85vw md:70vw xl:42vw max:530px")}
             priority={priority}
+            aspect={5 / 3}
             fill
           />
         ) : (
@@ -46,7 +49,9 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
         <div
           className={cn(
             "absolute font-defectica bottom-0 left-0 z-10 text-left",
-            isMobile ? "p-3 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl" : "p-4 mb-4 ml-4 text-3xl xl:opacity-0 xl:group-hover:opacity-100 xl:translate-y-2 xl:group-hover:translate-y-0 xl:transition-all xl:duration-500"
+            isMobile
+              ? "p-3 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl"
+              : "p-4 mb-4 ml-4 text-3xl xl:opacity-0 xl:group-hover:opacity-100 xl:translate-y-2 xl:group-hover:translate-y-0 xl:transition-all xl:duration-500"
           )}
         >
           {tag && <p className={cn("font-mono mb-2", isMobile ? "text-md" : "text-lg")}>{tag}</p>}

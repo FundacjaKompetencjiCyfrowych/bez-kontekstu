@@ -38,6 +38,19 @@ const getLqip = (image: Image): string => {
 };
 
 /**
+ * Convert Sanity hotspot coordinates to CSS object-position
+ */
+const getObjectPosition = (hotspot?: SanityImageHotspot | null): string => {
+  if (!hotspot || typeof hotspot.x !== "number" || typeof hotspot.y !== "number") {
+    return "center";
+  }
+  console.log(hotspot);
+  const xPercent = (hotspot.x * 100).toFixed(1);
+  const yPercent = (hotspot.y * 100).toFixed(1);
+  return `${xPercent}% ${yPercent}%`;
+};
+
+/**
  * Loose type for Sanity image object that can be extended with custom fields
  * @property alt - custom field with alternative text from CMS
  */
@@ -149,6 +162,7 @@ export function ContentImage(props: ContentImageProps) {
   const aspectRatio = getAspectRatio(props);
   const placeholderProps = getPlaceholderProps(props, aspectRatio);
   const fit = fill ? "max" : "crop";
+  const objectPosition = getObjectPosition(image.hotspot);
 
   const loader = (p: ImageLoaderProps) => {
     return urlFor(image)
@@ -170,6 +184,10 @@ export function ContentImage(props: ContentImageProps) {
       fill={fill}
       loader={loader}
       className={cn("object-cover", props.className)}
+      style={{
+        ...defaultProps.style,
+        objectPosition,
+      }}
     />
   );
 }

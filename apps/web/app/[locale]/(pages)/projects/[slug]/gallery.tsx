@@ -2,6 +2,7 @@
 
 import { ContentImage, type Image } from "@/app/components/cms/ContentImage";
 import { Lightbox } from "@/app/components/Lightbox";
+import { twSizes } from "@/app/lib/twSizes";
 import { useState } from "react";
 
 export function MultimediaGallery({ images }: { images: Image[] }) {
@@ -25,7 +26,7 @@ export function MultimediaGallery({ images }: { images: Image[] }) {
               className="aspect-square bg-gray-800 relative overflow-hidden hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
               aria-label={`View image ${index + 1} in full screen`}
             >
-              <ContentImage image={image} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+              <ContentImage image={image} fill aspect={1} className="object-cover" sizes={twSizes("50vw max:630px")} />
             </button>
           ))}
         </div>
