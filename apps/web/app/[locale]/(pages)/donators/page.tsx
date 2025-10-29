@@ -25,12 +25,12 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
   const { data } = await getDonatorsPage(locale);
 
   const buttonClasses =
-    "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10";
+    "border border-violet-300 rounded-3xl p-3 mb-10 md:mb-16 bg-neutral-600/50 cursor-pointer w-full text-left relative z-10 ";
 
   return (
-    <div className="px-2 flex flex-col justify-between font-mono w-full min-h-screen md:px-5 xl:flex xl:flex-col xl:min-h-[1024px]">
-      <LogoContainer variant="mobileOffset" />
-      <div className="relative flex xl:justify-center xl:items-center xl:h-[90vh] xl:mt-[90px] xl:min-h-[1024px]">
+    <div className="font-mono">
+      <div className="relative flex xl:justify-center xl:items-center xl:h-[80vh] xl:min-h-[1024px]">
+        <LogoContainer variant="mobileOffset" />
         {/*Title desktop */}
         <div className="hidden xl:block absolute right-0 top-0 text-right">
           {titleCutWord(

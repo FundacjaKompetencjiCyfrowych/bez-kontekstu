@@ -82,7 +82,7 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: runner,
-            start: `top ${centerOffset}px`,
+            start: `top ${xl ? centerOffset - 90 : centerOffset}px`,
             end: `bottom ${centerOffset}px`,
             scrub: true,
             invalidateOnRefresh: true,
@@ -106,7 +106,7 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: runner,
-            start: `top ${centerOffset}px`,
+            start: `top ${xl ? centerOffset - 90 : centerOffset}px`,
             end: `bottom ${centerOffset}px`,
             scrub: true,
             invalidateOnRefresh: true,

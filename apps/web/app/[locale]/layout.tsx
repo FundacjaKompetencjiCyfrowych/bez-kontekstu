@@ -59,8 +59,8 @@ export default async function RootLayout({
       <IntlProvider locale={locale} dictionary={dict}>
         <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable} min-h-screen flex flex-col`}>
           <Navigation />
-          <div className="bg-[#0d0b0e] max-w-7xl mx-auto flex-1 flex flex-col w-full ">
-            <main className="flex-1 relative">{children}</main>
+          <div className="bg-[#0d0b0e] max-w-7xl mx-auto flex-1 flex flex-col w-full">
+            <main className="flex-1 flex flex-col relative">{children}</main>
             <Footer data={data?.footer || {}} />
           </div>
         </body>

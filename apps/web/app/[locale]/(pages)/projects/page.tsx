@@ -28,7 +28,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projects = data?.projects || [];
 
   return (
-    <div className="h-screen xl:min-h-[1024px] px-5 xl:overflow-hidden flex flex-col">
+    <div className="flex-1 px-5 xl:overflow-hidden flex flex-col">
       <div className="absolute right-0 left-0 top-0 h-[90vh]">
         <LogoContainer variant="mobileOffset" />
       </div>
