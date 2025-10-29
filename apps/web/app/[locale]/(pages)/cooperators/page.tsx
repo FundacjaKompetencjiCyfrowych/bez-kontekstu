@@ -24,7 +24,7 @@ export default async function CooperatorsPage({ params }: { params: Promise<{ lo
   const dictionary = await getDictionary(locale);
 
   return (
-    <div className="flex-1 h-full px-5 xl:overflow-hidden flex flex-col">
+    <div className="flex-1 h-full px-5 pb-14 lg:pb-0 xl:overflow-hidden flex flex-col">
       <LogoContainer variant="mobileOffset" />
       <CollectionShowcase collection={cooperators} lang={locale} directory="cooperators" title={dictionary.split2.collaborators} />
     </div>

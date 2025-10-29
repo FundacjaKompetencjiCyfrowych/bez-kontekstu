@@ -36,7 +36,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <LogoContainer variant="centered" />
           {/* Contact Information */}
           <div className="xl:text-xl md:mx-8">
-            <dl className="space-y-6 sm:landscape:space-y-3 xl:leading-12">
+            <dl className="space-y-10 sm:landscape:space-y-3 xl:leading-12">
               {data?.fields &&
                 data.fields.map((field) => {
                   if (field.link?.url)

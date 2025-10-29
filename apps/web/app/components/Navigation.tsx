@@ -98,7 +98,7 @@ export function Navigation() {
 
       {/* Desktop */}
       <div className="hidden xl:flex justify-center py-8 sticky top-0">
-        <div className="flex space-x-8 ">
+        <div className="flex space-x-8 items-center">
           {navigationItems.map((item) => (
             <Link
               key={item.href}
@@ -112,6 +112,7 @@ export function Navigation() {
 
           {/* Language Switch */}
           <LanguageToggler variant="desktop" />
+          <SoundToggler />
         </div>
       </div>
     </nav>
