@@ -14,7 +14,7 @@ const bp = {
 type Breakpoint = keyof typeof bp;
 
 /**
- * Converts a Tailwind-style sizes string to a valid HTML sizes attribute, supports `px` values and extra `max:` prefix for a max-width container layout
+ * Converts a Tailwind-style sizes string to a valid HTML sizes attribute, supports css values and extra `max:` prefix for a max-width container layout
  * e.g. `sm:100px md:200px max:300px` => `(min-width: 40rem) 100px, (min-width: 48rem) 200px, (min-width: 1280px) 300px`
  */
 export const twSizes = (sizesString: string): string => {

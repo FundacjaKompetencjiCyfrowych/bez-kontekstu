@@ -44,7 +44,6 @@ const getObjectPosition = (hotspot?: SanityImageHotspot | null): string => {
   if (!hotspot || typeof hotspot.x !== "number" || typeof hotspot.y !== "number") {
     return "center";
   }
-  console.log(hotspot);
   const xPercent = (hotspot.x * 100).toFixed(1);
   const yPercent = (hotspot.y * 100).toFixed(1);
   return `${xPercent}% ${yPercent}%`;
