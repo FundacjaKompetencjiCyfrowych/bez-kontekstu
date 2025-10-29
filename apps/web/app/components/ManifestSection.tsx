@@ -2,6 +2,7 @@ import { ManifestPageQueryResult } from "@/app/lib/sanity/types";
 import { ContentText } from "@/app/components/cms/ContentText";
 import { ContentImage } from "./cms/ContentImage";
 import { cn } from "@/app/lib/utils";
+import { twSizes } from "../lib/twSizes";
 
 type ManifestSectionProps = {
   section: NonNullable<NonNullable<ManifestPageQueryResult>["sections"]>[number];
@@ -20,8 +21,8 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
 
     if (feature.image) {
       return (
-        <div className="relative w-full min-h-96 xl:min-h-[600px] xl:w-[500px]">
-          <ContentImage image={feature.image} fill className="object-cover" sizes="(max-width: 1280px) 0px, 500px" />
+        <div className="relative w-full xl:w-[500px] aspect-[3/4]">
+          <ContentImage image={feature.image} fill className="object-cover" sizes={twSizes("50vw max:500px")} />
         </div>
       );
     }
@@ -62,9 +63,9 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
               className={cn(
                 `font-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10`,
                 style?.mobile === "fusion" &&
-                "[&>*]:w-full sm:[&>*:nth-child(even)]:w-1/2 sm:[&>*:nth-child(even)]:ml-auto sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
+                  "[&>*]:w-full sm:[&>*:nth-child(even)]:w-1/2 sm:[&>*:nth-child(even)]:ml-auto sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
                 style?.tablet === "fusion" &&
-                "md:[&>*]:w-full md:[&>*:nth-child(even)]:w-1/2 md:[&>*:nth-child(even)]:ml-auto md:[&>*:nth-child(even)]:mr-0 md:[&>*:nth-child(4n+2)]:ml-0 md:[&>*:nth-child(4n+2)]:mr-auto"
+                  "md:[&>*]:w-full md:[&>*:nth-child(even)]:w-1/2 md:[&>*:nth-child(even)]:ml-auto md:[&>*:nth-child(even)]:mr-0 md:[&>*:nth-child(4n+2)]:ml-0 md:[&>*:nth-child(4n+2)]:mr-auto"
               )}
             >
               <ContentText value={body} />

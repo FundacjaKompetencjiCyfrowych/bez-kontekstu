@@ -9,7 +9,8 @@ import { homePageQuery } from "@/app//lib/sanity/queries";
 import { mapMetadata } from "@/app//lib/sanity/mappers";
 import { ContentImage } from "@/app//components/cms/ContentImage";
 import { ContentText } from "@/app//components/cms/ContentText";
-import { Logo } from "../components/Logo";
+import { Logo } from "@/app/components/Logo";
+import { twSizes } from "@/app/lib/twSizes";
 
 const getHomepage = cache(async (locale: string) => {
   return await sanityFetch({ query: homePageQuery, params: { lang: locale } });
@@ -146,17 +147,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           {teamMembers.map((member) => (
             <div
               key={member._id}
-              className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-square xl:w-[400px] xl:h-[300px] flex flex-col items-start justify-end p-3 overflow-hidden"
+              className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden"
             >
               {/* Cooperator image */}
-              {member.image && (
-                <ContentImage
-                  image={member.image}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1280px) 50vw, 400px"
-                />
-              )}
+              {member.image && <ContentImage image={member.image} fill sizes={twSizes("42vw md:390px")} aspect={4 / 3} />}
               {/* Gradient overlay */}
               <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent"></div>
               {/* Name */}

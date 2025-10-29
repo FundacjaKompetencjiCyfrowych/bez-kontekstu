@@ -7,6 +7,7 @@ import { sanityFetch } from "@/app/lib/sanity/live";
 import { manifestPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { ContentImage } from "@/app/components/cms/ContentImage";
+import { twSizes } from "@/app/lib/twSizes";
 import { LogoContainer } from "@/app/components/Logo";
 
 const getManifestPage = cache(async (locale: string) => {
@@ -58,7 +59,9 @@ export default async function ManifestPage({ params }: { params: Promise<{ local
             {/* Man Image */}
             <div className="hidden xl:block absolute bottom-0 left-1/2">
               <div className="relative w-[400px] min-h-[500px]">
-                {data.hero.image && <ContentImage image={data.hero.image} fill sizes="400px" className="object-cover" priority />}
+                {data.hero.image && (
+                  <ContentImage image={data.hero.image} fill sizes={twSizes("0px xl:400px")} className="object-cover" priority />
+                )}
               </div>
             </div>
           </div>

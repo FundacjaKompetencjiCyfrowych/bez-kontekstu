@@ -8,6 +8,7 @@ import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { ContentImage } from "@/app/components/cms/ContentImage";
 import { LogoContainer } from "@/app/components/Logo";
+import { twSizes } from "@/app/lib/twSizes";
 
 const getDonatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: donatorsPageQuery, params: { lang: locale } });
@@ -81,8 +82,10 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                   <>
                     {/* Left Column - Image */}
                     <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
-                      <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-                        {section.image && <ContentImage image={section.image} fill shimmer className="object-cover" />}
+                      <div className="relative w-full aspect-[5/8]">
+                        {section.image && (
+                          <ContentImage image={section.image} fill shimmer aspect={5 / 8} sizes={twSizes("0px xl:500px")} />
+                        )}
                       </div>
                     </div>
                     {/* Right Column - Payment details */}
@@ -148,8 +151,10 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                     </div>
                     {/* Right Column - Image */}
                     <div className="hidden xl:flex xl:col-span-1 xl:items-center xl:justify-center">
-                      <div className="relative w-full h-96 xl:h-[800px] xl:w-[500px]">
-                        {section.image && <ContentImage image={section.image} fill shimmer className="object-cover" />}
+                      <div className="relative w-full aspect-[5/8]">
+                        {section.image && (
+                          <ContentImage image={section.image} aspect={5 / 8} fill shimmer sizes={twSizes("0px xl:500px")} />
+                        )}
                       </div>
                     </div>
                   </>
