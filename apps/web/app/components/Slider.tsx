@@ -20,7 +20,7 @@ type SliderProps = {
  * - No clipping or empty gaps
  * - Fully responsive
  */
-export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSlideChange }: SliderProps) {
+export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }: SliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const totalSlides = Math.ceil(children.length / itemsPerSlide);
@@ -82,12 +82,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, className, onSli
         }}
       >
         {children.map((child, index) => {
-          const basisPx =
-            hoveredIndex === null
-              ? sizes.equalPx
-              : hoveredIndex === index
-                ? sizes.hoveredPx
-                : sizes.othersPx;
+          const basisPx = hoveredIndex === null ? sizes.equalPx : hoveredIndex === index ? sizes.hoveredPx : sizes.othersPx;
 
           return (
             <div
