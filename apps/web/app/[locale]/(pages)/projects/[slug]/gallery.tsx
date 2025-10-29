@@ -3,7 +3,9 @@
 import { ContentImage, type Image } from "@/app/components/cms/ContentImage";
 import { Lightbox } from "@/app/components/Lightbox";
 import { twSizes } from "@/app/lib/twSizes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 export function MultimediaGallery({ images }: { images: Image[] }) {
   const [sliderOpen, setSliderOpen] = useState(false);
@@ -14,9 +16,17 @@ export function MultimediaGallery({ images }: { images: Image[] }) {
     setSliderOpen(true);
   };
 
+  // 🧩 Pause ScrollSmoother when Lightbox is open
+  useEffect(() => {
+    const smoother = ScrollSmoother.get();
+    if (smoother) {
+      smoother.paused(sliderOpen);
+    }
+  }, [sliderOpen]);
+
   return (
     <>
-      <h2 className="mb-6 md:text-6xl ">MULTIMEDIA</h2>
+      <h2 className="mb-6 md:text-6xl">MULTIMEDIA</h2>
       <div className="grid grid-cols-2 gap-4">
         {images.map((image, index) => (
           <button
@@ -30,9 +40,12 @@ export function MultimediaGallery({ images }: { images: Image[] }) {
         ))}
       </div>
 
-      {images.length > 0 && (
-        <Lightbox images={images} isOpen={sliderOpen} onClose={() => setSliderOpen(false)} initialIndex={sliderIndex} />
-      )}
+      {images.length > 0 &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <Lightbox images={images} isOpen={sliderOpen} onClose={() => setSliderOpen(false)} initialIndex={sliderIndex} />,
+          document.body
+        )}
     </>
   );
 }
