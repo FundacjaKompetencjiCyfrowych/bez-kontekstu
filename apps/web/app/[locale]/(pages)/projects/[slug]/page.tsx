@@ -8,13 +8,13 @@ import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
-import { FiArrowRight } from "react-icons/fi";
 
 import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
 import { MultimediaGallery } from "./gallery";
 import { Fragment } from "react";
 import { LogoContainer } from "@/app/components/Logo";
+import { PaginationNav } from "@/app/components/PaginationNav";
 
 const getProjectPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: projectPageQuery, params: { lang: locale, slug } });
@@ -40,7 +40,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const images = multimedia?.filter((item) => item._type === "img") || [];
 
   return (
-    <div className="w-full bg-[#0d0b0e] px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl">
+    <div className="w-full px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl">
       {/* Navigation Header */}
       <div className="relative px-8 py-6 md:py-12 z-10">
         <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
@@ -50,7 +50,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Main Content */}
-      <div className="relative pb-16">
+      <div className="relative pb-8">
         <LogoContainer variant="justified" semiMorph />
         {/* Title and Year */}
         <div className="mb-8">
@@ -134,43 +134,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Project Navigation */}
-      <div className="px-8 text-sm">
-        <div className="flex justify-around items-center">
-          {/* Previous Project */}
-          <div>
-            {previous ? (
-              <Link
-                href={`/projects/${previous.slug?.current}`}
-                className="flex items-center md:text-xl hover:text-gray-300 transition-colors"
-              >
-                <div>
-                  <FiArrowLeft className="inline-block mr-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
-                  <span>{dictionary.previous}</span>
-                </div>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-          </div>
-
-          {/* Next Project */}
-          <div className="text-right">
-            {next ? (
-              <Link
-                href={`/projects/${next.slug?.current}`}
-                className="flex items-center justify-end gap-2 md:text-xl hover:text-gray-300 transition-colors"
-              >
-                <div>
-                  <span>{dictionary.next}</span>
-                  <FiArrowRight className="inline-block ml-4 w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6" />
-                </div>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-          </div>
-        </div>
-      </div>
+      <PaginationNav previous={previous} next={next} basePath="projects" dictionary={dictionary} variant="default" />
     </div>
   );
 }

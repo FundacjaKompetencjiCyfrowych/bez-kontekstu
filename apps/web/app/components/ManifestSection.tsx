@@ -35,7 +35,7 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
   };
 
   return (
-    <section className="py-10 md:py-20 xl:py-40 px-5 xl:px-0">
+    <section className="relative py-10 xl:py-20 px-5 xl:px-0">
       <div className={cn("xl:flex xl:gap-8 xl:items-center", !isContentRight && "xl:flex-row-reverse")}>
         {/* Feature column */}
         <div className="hidden xl:flex xl:flex-1 xl:justify-end">{renderFeature()}</div>
@@ -53,7 +53,7 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
         >
           {/* Title */}
           {title && (
-            <h2 className={cn("mb-12 text-6xl", feature?.altTitle && "text-5xl whitespace-pre-line text-center xl:hidden")}>
+            <h2 className={cn("my-12 text-5xl md:text-6xl", feature?.altTitle && "text-4xl leading-16 md:leading-22 whitespace-pre-line text-center xl:hidden")}>
               {feature?.altTitle || title}
             </h2>
           )}
@@ -63,9 +63,9 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
               className={cn(
                 `font-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10`,
                 style?.mobile === "fusion" &&
-                  "[&>*]:w-full sm:[&>*:nth-child(even)]:w-1/2 sm:[&>*:nth-child(even)]:ml-auto sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
+                "[&>*]:w-full [&>*:nth-child(3)]:w-1/2 [&>*:nth-child(3)]:my-10 lg:[&>*:nth-child(3)]:w-full [&>*:last-child]:text-center [&>*:nth-child(3)]:ml-30 lg:[&>*:nth-child(3)]:ml-0 sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
                 style?.tablet === "fusion" &&
-                  "md:[&>*]:w-full md:[&>*:nth-child(even)]:w-1/2 md:[&>*:nth-child(even)]:ml-auto md:[&>*:nth-child(even)]:mr-0 md:[&>*:nth-child(4n+2)]:ml-0 md:[&>*:nth-child(4n+2)]:mr-auto"
+                "md:[&>*]:w-full md:[&>*:last-child]:text-center lg:[&>*:last-child]:text-left md:[&>*:nth-child(even)]:w-1/2 md:[&>*:nth-child(even)]:ml-auto md:[&>*:nth-child(even)]:mr-0 md:[&>*:nth-child(4n+2)]:ml-0 md:[&>*:nth-child(4n+2)]:mr-auto"
               )}
             >
               <ContentText value={body} />

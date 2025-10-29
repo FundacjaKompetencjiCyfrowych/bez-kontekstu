@@ -40,7 +40,7 @@ export default async function ManifestPage({ params }: { params: Promise<{ local
             </div>
 
             {/* Two column layout for desktop */}
-            <div className="relative xl:mx-auto xl:grid xl:w-full xl:max-w-7xl xl:grid-cols-2">
+            <div className="relative mt-10 lg:mt-0 xl:mx-auto xl:grid xl:w-full xl:max-w-7xl xl:grid-cols-2">
               {/* Left Column - Quote */}
               <div className="flex w-3/4 flex-col font-mono mx-auto md:w-[60%] md:mx-auto md:text-xl md:leading-16 xl:col-span-1 xl:w-[80%]">
                 <div className="md:mx-4">

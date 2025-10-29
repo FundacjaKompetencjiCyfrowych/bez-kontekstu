@@ -48,9 +48,9 @@ export function LanguageToggler({ variant }: { variant: "mobile" | "desktop" }) 
 
   return (
     <button onClick={toggleLanguage} aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`} className="cursor-pointer">
-      <div className="text-[#3f3f41] w-[85px] flex items-center justify-center gap-3 hover:text-white transition-colors duration-300">
+      <div className="text-[#3f3f41] flex items-center justify-center gap-3 hover:text-white transition-colors duration-300">
         <FiGlobe size={20} />
-        <span className={`text-sm xl:text-lg font-defectica leading-0`}>{locale === "en" ? "EN" : "PL"}</span>
+        <span className={`text-sm xl:text-lg font-defectica leading-0 pt-1`}>{locale === "en" ? "EN" : "PL"}</span>
       </div>
     </button>
   );

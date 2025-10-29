@@ -60,12 +60,9 @@ export function Navigation() {
           >
             {/* Collapsible */}
             <div
-              className={cn(
-                "bg-[#0d0b0e] h-screen absolute bottom-0 left-0 right-0 opacity-0 transition-all duration-300 pointer-events-none",
-                {
-                  "opacity-100 pointer-events-auto": isMenuOpen,
-                }
-              )}
+              className={cn("h-screen absolute bottom-0 left-0 right-0 opacity-0 transition-all duration-300 pointer-events-none", {
+                "opacity-100 pointer-events-auto": isMenuOpen,
+              })}
             >
               {/* Menu items */}
               <div className="overflow-hidden pb-5 absolute bottom-0 left-0 right-0">
@@ -98,7 +95,7 @@ export function Navigation() {
 
       {/* Desktop */}
       <div className="hidden xl:flex justify-center py-8 sticky top-0">
-        <div className="flex space-x-8 ">
+        <div className="flex space-x-8 items-center">
           {navigationItems.map((item) => (
             <Link
               key={item.href}
@@ -112,6 +109,7 @@ export function Navigation() {
 
           {/* Language Switch */}
           <LanguageToggler variant="desktop" />
+          <SoundToggler />
         </div>
       </div>
     </nav>
