@@ -12,7 +12,7 @@ export async function Footer({ data }: { data: FooterData }) {
   const { links, socials } = data;
   return (
     <footer className="pb-6 font-mono text-xs">
-      <div className="md:w-[90%] mx-auto border-t border-[#f5f5f5] pt-2 text-center text-[#f5f5f5]">
+      <div className="w-[90%] mx-auto border-t border-[#f5f5f5] pt-2 text-center text-[#f5f5f5]">
         {/* Links */}
         {links?.map((link) => (
           <Link

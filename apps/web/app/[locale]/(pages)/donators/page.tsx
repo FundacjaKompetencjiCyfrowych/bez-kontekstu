@@ -90,7 +90,7 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                       {section.body &&
                         section.body.map((body) => (
                           <div key={body._key}>
-                            <div className="mx-5 mb-4 md:text-2xl xl:text-3xl xl:mx-0">
+                            <div className="px-5 mb-4 md:text-2xl xl:text-3xl xl:mx-0">
                               <h3 className="mb-6">
                                 <strong>{body.heading?.title}</strong>
                               </h3>
@@ -122,10 +122,12 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
                       {section.body &&
                         section.body.map((body) => (
                           <div key={body._key}>
-                            <h3 className="mb-4 mx-2 md:text-3xl xl:text-4xl xl:mx-0">
+                            <h3 className="px-2 mb-4 mx-2 md:text-3xl xl:text-4xl xl:mx-0">
                               <strong>{body.heading?.title}</strong>
                             </h3>
-                            <p className="mb-10 mx-2 leading-6 md:leading-10 xl:text-xl xl:leading-8 xl:mx-0">{body.heading?.subtitle}</p>
+                            <p className="px-2 mb-10 mx-2 leading-6 md:leading-10 xl:text-xl xl:leading-8 xl:mx-0">
+                              {body.heading?.subtitle}
+                            </p>
                             <div className="space-y-4 mt-10 mx-5 md:text-xl md:leading-10 xl:mx-0 xl:text-xl xl:leading-8">
                               {body.fields &&
                                 body.fields.map((field) => (
