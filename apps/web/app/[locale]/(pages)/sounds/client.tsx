@@ -32,7 +32,7 @@ export function SoundsClient() {
   };
 
   return (
-    <div className="flex flex-col bg-[#0d0b0e] px-5">
+    <div className="flex flex-col px-5">
       <LogoContainer variant="centered" />
       <div className="relative flex flex-col xl:flex-row xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:w-[90%] xl:h-3/4 xl:justify-center">
         {/* Left column - Title */}

@@ -42,7 +42,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
   const { name, description, projects, socials, image, next, previous } = data || {};
 
   return (
-    <div className="bg-[#0d0b0e] px-5 xl:min-h-full max-w-7xl mx-auto font-mono flex flex-col justify-center w-full">
+    <div className="px-5 xl:min-h-full max-w-7xl mx-auto font-mono flex flex-col justify-center w-full">
       <div className="relative px-4">
         <LogoContainer variant="centered" />
 
@@ -121,13 +121,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         </div>
 
         {/* Mobile and Tablet Navigation */}
-        <PaginationNav
-          previous={previous}
-          next={next}
-          basePath="cooperators"
-          dictionary={dictionary}
-          variant="compact"
-        />
+        <PaginationNav previous={previous} next={next} basePath="cooperators" dictionary={dictionary} variant="compact" />
 
         {/* ---------------------------------------------------------- */}
         {/* DESKTOP Layout (2 columns) */}
