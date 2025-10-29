@@ -49,7 +49,7 @@ export function Navigation() {
       {isMobileMenuEnabled && (
         <div className="xl:hidden flex justify-between items-center px-5 overflow-hidden">
           {/* Header */}
-          <Header title={mobileTitle} className="xl:hidden" showLogo={false} />
+          <Header title={mobileTitle} className="xl:hidden" />
           <SoundToggler />
 
           {/* Menu */}

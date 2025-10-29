@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import LogoViolet from "@/app/components/LogoViolet";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { sanityFetch } from "@/app/lib/sanity/live";
 import { cache } from "react";
 import { contactPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { ContentIcon } from "@/app/components/cms/ContentIcon";
+import { LogoContainer } from "@/app/components/Logo";
 
 const getContactPage = cache(async (locale: string) => {
   return await sanityFetch({ query: contactPageQuery, params: { lang: locale } });
@@ -22,17 +22,18 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   const { data } = await getContactPage(locale);
   return (
-    <div className="flex w-full min-h-full md:landscape:h-full flex-col justify-between px-2 md:px-5">
+    <div className="flex flex-1 w-full min-h-full md:landscape:h-full flex-col justify-between px-2 md:px-5">
       {/*Title mobile*/}
-      <div className="md:landscape:[&_img]:h-[40vh] md:landscape:[&_img]:w-[40vh] xl:[&_img]:!h-160 xl:[&_img]:!w-160">
-        <LogoViolet pageType="contact" isHidden={true} />
-      </div>
 
       <div className="w-full flex flex-1 flex-col px-5 md:px-0 xl:self-center z-10">
         {/*Title desktop*/}
-        {titleCutWord("KO N", "hidden xl:block xl:self-end sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
+        {titleCutWord(
+          "KO N",
+          "hidden xl:block xl:self-end sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3"
+        )}
 
         <div className="flex flex-1 flex-col pt-10 xl:pt-0 font-mono sm:landscape:pt-10 xl:landscape:pt-0 md:text-xl xl:flex xl:justify-center xl:items-center xl:text-base">
+          <LogoContainer variant="centered" />
           {/* Contact Information */}
           <div className="xl:text-xl md:mx-8">
             <dl className="space-y-6 sm:landscape:space-y-3 xl:leading-12">
@@ -67,7 +68,10 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           </div>
         </div>
 
-        {titleCutWord("T AKT", "hidden xl:block sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 xl:self-start ml-2 sm:ml-3 mt-2 sm:mt-3")}
+        {titleCutWord(
+          "T AKT",
+          "hidden xl:block sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 xl:self-start ml-2 sm:ml-3 mt-2 sm:mt-3"
+        )}
       </div>
     </div>
   );

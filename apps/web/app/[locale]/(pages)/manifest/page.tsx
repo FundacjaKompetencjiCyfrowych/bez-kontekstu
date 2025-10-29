@@ -1,4 +1,3 @@
-import LogoViolet from "@/app/components/LogoViolet";
 import ManifestSection from "@/app/components/ManifestSection";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
@@ -8,6 +7,7 @@ import { sanityFetch } from "@/app/lib/sanity/live";
 import { manifestPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { ContentImage } from "@/app/components/cms/ContentImage";
+import { LogoContainer } from "@/app/components/Logo";
 
 const getManifestPage = cache(async (locale: string) => {
   return await sanityFetch({ query: manifestPageQuery, params: { lang: locale } });
@@ -25,10 +25,9 @@ export default async function ManifestPage({ params }: { params: Promise<{ local
   const { data } = await getManifestPage(locale);
   return (
     <div className="flex w-full min-h-screen flex-col justify-between px-2 md:px-5 xl:flex xl:flex-col">
-      <LogoViolet />
-
       {/* Main content */}
       <main className="relative mx-auto xl:max-w-7xl">
+        <LogoContainer variant="mobileOffset" semiMorph />
         {data?.hero && (
           <div className="relative flex md:landscape:justify-center xl:min-h-[90vh] xl:items-center xl:justify-center">
             {/*Title desktop*/}

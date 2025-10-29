@@ -14,6 +14,7 @@ import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
 import { MultimediaGallery } from "./gallery";
 import { Fragment } from "react";
+import { LogoContainer } from "@/app/components/Logo";
 
 const getProjectPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: projectPageQuery, params: { lang: locale, slug } });
@@ -50,6 +51,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
       {/* Main Content */}
       <div className="relative pb-16">
+        <LogoContainer variant="justified" semiMorph />
         {/* Title and Year */}
         <div className="mb-8">
           <h2 className="mt-4 mb-16">{name?.toUpperCase()}</h2>

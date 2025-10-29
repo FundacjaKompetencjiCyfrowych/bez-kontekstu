@@ -1,17 +1,15 @@
-import Image from "next/image";
-import Logo from "@/app/assets/images/logo.png";
 import { RandomRectangles } from "@/app/components/RandomRectangles";
 import Link from "next/link";
-import LogoVioletImage from "@/app/assets/images/logo_violet.png";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
-import { getDictionary } from "../lib/intl/dictionaries/dynamic";
+import { getDictionary } from "@/app//lib/intl/dictionaries/dynamic";
 import { cache } from "react";
-import { sanityFetch } from "../lib/sanity/live";
-import { homePageQuery } from "../lib/sanity/queries";
-import { mapMetadata } from "../lib/sanity/mappers";
-import { ContentImage } from "../components/cms/ContentImage";
-import { ContentText } from "../components/cms/ContentText";
+import { sanityFetch } from "@/app//lib/sanity/live";
+import { homePageQuery } from "@/app//lib/sanity/queries";
+import { mapMetadata } from "@/app//lib/sanity/mappers";
+import { ContentImage } from "@/app//components/cms/ContentImage";
+import { ContentText } from "@/app//components/cms/ContentText";
+import { Logo } from "../components/Logo";
 
 const getHomepage = cache(async (locale: string) => {
   return await sanityFetch({ query: homePageQuery, params: { lang: locale } });
@@ -56,14 +54,20 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     );
   };
 
-  const buttonClasses = "h-10 px-7 py-6 w-[80vw] md:w-[30vw] xl:w-[250px] mx-auto inline-flex items-center justify-center transition-all duration-300 rounded-2xl text-white border-1 border-violet-400 hover:bg-violet-900/30 hover:border-violet-300 shadow-lg hover:cursor-pointer"
+  const buttonClasses =
+    "h-10 px-7 py-6 w-[80vw] md:w-[30vw] xl:w-[250px] mx-auto inline-flex items-center justify-center transition-all duration-300 rounded-2xl text-white border-1 border-violet-400 hover:bg-violet-900/30 hover:border-violet-300 shadow-lg hover:cursor-pointer";
 
   return (
     <div className="px-5 xl:px-0 flex flex-col gap-[50px]">
       <h1 className="sr-only">{dictionary.noContext}</h1>
 
       {/* Hero Section */}
-      <section className="relative flex flex-col min-h-[400px] sm:min-h-[70vh] md:landscape:min-h-[150vh] lg:landscape:min-h-[1000px] xl:min-h-[1000px] items-center justify-center" aria-labelledby="hero-title">
+      <section
+        className="relative flex flex-col min-h-[400px] sm:min-h-[70vh] md:landscape:min-h-[150vh] lg:landscape:min-h-[1000px] xl:min-h-[1000px] items-center justify-center"
+        aria-labelledby="hero-title"
+      >
+        <Logo morph />
+
         {/*Title */}
         <h2 className="sr-only" id="hero-title">
           Bez Kontekstu
@@ -74,14 +78,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <div className="absolute left-0 bottom-0 block" aria-hidden="true">
           {titleCutWord(dictionary.split2.noContext[1], "xl:mt-0 xl:ml-0")}
         </div>
-        {/* Logo - white */}
-        <Image
-          src={Logo}
-          priority
-          alt={dictionary.noContextFoundation + " logo"}
-          className="absolute left-1/2 top-1/2 h-[40vw] w-[40vw] min-h-48 min-w-48 max-h-192 max-w-192 -translate-x-1/2 -translate-y-1/2 transform object-contain"
-          sizes="(max-width: 768px) 40vw, (max-width: 1280px) 40vw, 192px"
-        />
       </section>
 
       {/* MANIFEST Section*/}
@@ -89,13 +85,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         className="flex min-h-[90vh] flex-col justify-between md:landscape:h-[150vh] lg:landscape:h-[800px] md:min-h-[60vh] xl:min-h-[1000px]"
         aria-labelledby="manifest-title"
       >
-        {/* Violet logo */}
-        <Image
-          src={LogoVioletImage}
-          alt="Bez Kontekstu"
-          className="absolute left-1/2 hidden -translate-x-1/2 transform blur-[8px] opacity-25 md:block md:h-160 md:w-160 xl:h-200 xl:w-200"
-          sizes="(max-width: 1280px) 160px, 200px"
-        />
         <div className="relative flex flex-col items-start xl:items-end justify-start z-10">
           {renderResponsiveTitle(dictionary.split.manifest, dictionary.split2.manifest[0], "right")}
         </div>
@@ -110,7 +99,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             className={`w-full md:w-full lg:w-auto ${buttonClasses} w-full md:w-full lg:w-auto xl:w-[250px] xl:text-base xl:rounded-2xl xl:text-white xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30 xl:hover:!border-violet-500`}
             target={data?.manifest?.button?.newTab ? "_blank" : "_self"}
             rel="noopener noreferrer"
-          >{data?.manifest?.button?.label}
+          >
+            {data?.manifest?.button?.label}
           </Link>
         </div>
 
@@ -127,9 +117,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
 
         <RandomRectangles
-          images={
-            data?.projects?.featured?.map((project) => project?.cover).filter((image) => image !== null && image !== undefined) ?? []
-          }
+          images={data?.projects?.featured?.map((project) => project?.cover).filter((image) => image !== null && image !== undefined) ?? []}
         />
 
         <div className="relative flex justify-center items-center transform z-10">
@@ -138,7 +126,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             className={`w-full md:w-full lg:w-auto ${buttonClasses}`}
             target={data?.projects?.button?.newTab ? "_blank" : "_self"}
             rel="noopener noreferrer"
-          >{data?.projects?.button?.label}
+          >
+            {data?.projects?.button?.label}
           </Link>
         </div>
         {renderResponsiveTitle("", dictionary.split2.projects[1], "left")}
@@ -182,7 +171,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             className={`w-full md:w-full lg:w-auto ${buttonClasses}`}
             target={data?.cooperators?.button?.newTab ? "_blank" : "_self"}
             rel="noopener noreferrer"
-          >{data?.cooperators?.button?.label}
+          >
+            {data?.cooperators?.button?.label}
           </Link>
         </div>
         {renderResponsiveTitle("", dictionary.split2.collaborators[1], "left")}
@@ -205,7 +195,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             className={`w-full md:w-full lg:w-auto ${buttonClasses}`}
             target={data?.support?.button?.newTab ? "_blank" : "_self"}
             rel="noopener noreferrer"
-          >{data?.support?.button?.label}
+          >
+            {data?.support?.button?.label}
           </Link>
         </div>
         {renderResponsiveTitle("", dictionary.split2.support[1], "left")}

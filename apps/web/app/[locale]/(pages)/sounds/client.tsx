@@ -3,8 +3,8 @@
 
 import { useState } from "react";
 import { TrackItem } from "@/app/components/TrackItem";
-import LogoViolet from "@/app/components/LogoViolet";
 import { useIntl } from "@/app/lib/intl/context";
+import { LogoContainer } from "@/app/components/Logo";
 
 interface Track {
   id: number;
@@ -32,11 +32,9 @@ export function SoundsClient() {
   };
 
   return (
-    <div className="flex min-h-auto flex-col bg-[#0d0b0e] px-5 mx-auto">
-      <LogoViolet pageType="contact" isHidden={true} />
-
-      <main className="relative flex flex-col xl:flex-row xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:w-[90%] xl:h-3/4 xl:justify-center">
-
+    <div className="flex flex-col bg-[#0d0b0e] px-5">
+      <LogoContainer variant="centered" />
+      <div className="relative flex flex-col xl:flex-row xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:w-[90%] xl:h-3/4 xl:justify-center">
         {/* Left column - Title */}
         <section className="xl:w-1/3 xl:flex xl:items-start xl:justify-start" aria-labelledby="page-title">
           {/* Title only for XL screens */}
@@ -68,7 +66,7 @@ export function SoundsClient() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }
