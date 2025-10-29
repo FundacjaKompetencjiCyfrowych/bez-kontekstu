@@ -50,7 +50,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Main Content */}
-      <div className="relative pb-16">
+      <div className="relative pb-8">
         <LogoContainer variant="justified" semiMorph />
         {/* Title and Year */}
         <div className="mb-8">
@@ -134,7 +134,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       {/* Project Navigation */}
-      <div className="px-8 text-sm">
+      <div className="px-8 pb-10 text-sm">
         <div className="flex justify-around items-center">
           {/* Previous Project */}
           <div>

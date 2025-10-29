@@ -43,19 +43,10 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
 
   return (
     <div className="bg-[#0d0b0e] px-5 xl:min-h-full max-w-7xl mx-auto font-mono flex flex-col justify-center w-full">
-      {/* Desktop Back Button - Top */}
-      <div className="hidden lg:block lg:mb-15 px-8">
-        <div className="relative py-6 md:py-12 lg:py-0 lg:ml-2">
-          <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-            <FiArrowLeft className="w-2 h-2 md:w-4 md:h-4 lg:w-6 lg:h-6" />
-            <p className="ml-4 md:text-xl">{dictionary.back}</p>
-          </Link>
-        </div>
-      </div>
-
-      {/* Main Content */}
       <div className="relative px-4">
         <LogoContainer variant="centered" />
+
+        {/* MOBILE AND TABLET Layout */}
         {/* Back button */}
         <div className="relative lg:hidden w-fit px-4 my-[50px]">
           <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
@@ -130,7 +121,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         </div>
 
         {/* Mobile and Tablet Navigation */}
-        <div className="lg:hidden relative text-sm z-10">
+        <div className="lg:hidden relative text-sm z-10 pb-8 lg:pb-0">
           <div className="flex justify-between lg:justify-around items-center">
             {/* Previous Cooperator */}
             <div>
@@ -166,11 +157,20 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
         </div>
 
         {/* ---------------------------------------------------------- */}
+        {/* DESKTOP Layout (2 columns) */}
+        {/* Back Button - Top */}
+        <div className="hidden lg:block lg:mb-15 px-8">
+          <div className="relative py-6 md:py-12 lg:py-0 lg:ml-2">
+            <Link href="/cooperators" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
+              <FiArrowLeft className="w-2 h-2 md:w-4 md:h-4 lg:w-6 lg:h-6" />
+              <p className="ml-4 md:text-xl">{dictionary.back}</p>
+            </Link>
+          </div>
+        </div>
 
-        {/* Desktop Layout (2 columns) */}
         <div className="px-8 lg:px-0 hidden lg:flex lg:gap-12 lg:max-w-7xl lg:mx-auto">
           {/* Left Column - Biography */}
-          <div className="w-1/2 flex flex-col justify-center">
+          <div className="relative w-1/2 flex flex-col justify-center">
             <div className="mb-8">
               <h2 className="text-4xl lg:text-6xl mb-8">
                 {name?.split(" ").map((word, index) => (

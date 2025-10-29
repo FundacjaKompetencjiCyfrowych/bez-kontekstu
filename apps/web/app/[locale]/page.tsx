@@ -177,7 +177,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         className="relative md:landscape:h-[150vh] min-h-auto lg:landscape:h-[65vh] xl:mb-20 h-[50vh] md:h-[50vh] xl:h-[700px] flex flex-col md:justify-between justify-evenly bg-transparent"
         aria-labelledby="donators-title"
       >
-        <div className=" flex flex-col items-end ">
+        <div className="flex flex-col items-end text-right">
           {renderResponsiveTitle(dictionary.split.support, dictionary.split2.support[0], "right")}
         </div>
         <div className="mx-auto flex flex-col items-center text-center text-base sm:text-2xl font-mono">
