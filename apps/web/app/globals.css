@@ -3,22 +3,14 @@
 @theme {
   --font-defectica: var(--font-defectica), sans-serif;
   --font-space-mono: var(--font-space-mono), monospace;
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  color: white;
+  --color-background: #0d0b0e;
+  --color-foreground: #fff;
 }
 
 @layer base {
   html,
   body {
     background-color: #0d0b0e;
-  }
-
-  section {
-    /* border: 2px solid #ffffff; */
   }
 
   h2 {
