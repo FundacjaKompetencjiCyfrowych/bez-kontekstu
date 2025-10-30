@@ -10,7 +10,7 @@ import { Footer } from "../components/Footer";
 import { cache } from "react";
 import { settingsQuery } from "../lib/sanity/queries";
 import { mapMetadata } from "../lib/sanity/mappers";
-import { SmoothScroll } from "../lib/smoothScroll";
+import { LenisScrollProvider } from "../lib/lenis";
 
 const defectica = localFont({
   src: [
@@ -59,13 +59,13 @@ export default async function RootLayout({
     <html lang={locale}>
       <IntlProvider locale={locale} dictionary={dict}>
         <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
-          <SmoothScroll>
+          <LenisScrollProvider>
             <div className="min-h-screen max-w-7xl mx-auto flex flex-col w-full">
               <Navigation />
               <main className="flex flex-col flex-1 relative">{children}</main>
               <Footer data={data?.footer || {}} />
             </div>
-          </SmoothScroll>
+          </LenisScrollProvider>
         </body>
       </IntlProvider>
       <SanityLive />
