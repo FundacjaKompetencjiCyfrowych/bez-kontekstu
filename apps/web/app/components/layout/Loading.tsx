@@ -1,6 +1,6 @@
 "use client";
 
-import { useIntl } from "../lib/intl/context";
+import { useIntl } from "@/app/lib/intl/context";
 
 export function Loading() {
   const { dictionary } = useIntl();

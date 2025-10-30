@@ -1,4 +1,4 @@
-import ManifestSection from "@/app/components/ManifestSection";
+import ManifestSection from "@/app/components/manifest/ManifestSection";
 import titleCutWord from "@/app/lib/titleCutWord";
 import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";

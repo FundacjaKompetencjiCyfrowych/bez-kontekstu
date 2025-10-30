@@ -5,6 +5,7 @@
   --font-space-mono: var(--font-space-mono), monospace;
   --color-background: #0d0b0e;
   --color-foreground: #fff;
+  --color-muted: #505053;
 }
 
 @layer base {

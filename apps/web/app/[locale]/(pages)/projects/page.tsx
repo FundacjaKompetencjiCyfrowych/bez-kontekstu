@@ -28,8 +28,8 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projects = data?.projects || [];
 
   return (
-    <div className="flex-1 px-5 xl:overflow-hidden flex flex-col">
-      <div className="absolute right-0 left-0 top-0 h-[90vh]">
+    <div className="flex-1 px-5 xl:overflow-hidden flex flex-col relative">
+      <div className="absolute inset-0">
         <LogoContainer variant="mobileOffset" />
       </div>
       <CollectionShowcase collection={projects} lang={locale} directory="projects" title={dictionary.split2.projects} />

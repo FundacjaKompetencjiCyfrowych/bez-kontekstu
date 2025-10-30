@@ -76,7 +76,7 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
         scrollTrigger: {
           trigger: runner,
           start: () => `top ${offset}px`,
-          end: () => `${totalScrollableHeight}px`,
+          end: () => ScrollTrigger.maxScroll(window),
           pin: runner,
           pinSpacing: false,
           scrub: true,
@@ -126,16 +126,24 @@ export function Logo({ morph = false, semiMorph = false, className }: { morph?: 
   );
 }
 
-export function LogoContainer({ variant, semiMorph }: { variant: "mobileOffset" | "justified" | "centered"; semiMorph?: boolean }) {
+export function LogoContainer({
+  variant,
+  semiMorph,
+  morph,
+}: {
+  variant: "mobileOffset" | "justified" | "centered";
+  semiMorph?: boolean;
+  morph?: boolean;
+}) {
   return (
     <div
       className={cn("pointer-events-none", {
-        "-top-0 absolute w-full h-[90vh] grid place-items-center": variant === "mobileOffset",
+        "w-full absolute grid place-items-center -top-0 h-[90vh] xl:h-full xl:top-auto": variant === "mobileOffset",
         "w-full h-full absolute flex flex-col items-center": variant === "justified",
         "w-full h-full absolute grid place-items-center": variant === "centered",
       })}
     >
-      <Logo semiMorph={semiMorph} className={cn("w-8/10", { "-top-50 xl:top-0": variant === "mobileOffset" })} />
+      <Logo semiMorph={semiMorph} morph={morph} className={cn("w-8/10", { "-top-50 xl:top-0": variant === "mobileOffset" })} />
     </div>
   );
 }

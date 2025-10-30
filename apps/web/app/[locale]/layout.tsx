@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Space_Mono } from "next/font/google";
 import "../globals.css";
-import { Navigation } from "../components/Navigation";
+import { Navigation } from "@/app/components/layout/Navigation";
 import { sanityFetch, SanityLive } from "../lib/sanity/live";
 import { IntlProvider } from "../lib/intl/context";
 import { getDictionary } from "../lib/intl/dictionaries/dynamic";
-import { Footer } from "../components/Footer";
+import { Footer } from "@/app/components/layout/Footer";
 import { cache } from "react";
 import { settingsQuery } from "../lib/sanity/queries";
 import { mapMetadata } from "../lib/sanity/mappers";
@@ -60,7 +60,7 @@ export default async function RootLayout({
       <IntlProvider locale={locale} dictionary={dict}>
         <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
           <LenisScrollProvider>
-            <div className="min-h-screen max-w-7xl mx-auto flex flex-col w-full">
+            <div className="min-h-screen max-w-6xl mx-auto flex flex-col w-full">
               <Navigation />
               <main className="flex flex-col flex-1 relative">{children}</main>
               <Footer data={data?.footer || {}} />

@@ -1,7 +1,7 @@
 "use client";
 
 import { ContentImage, type Image } from "@/app/components/cms/ContentImage";
-import { Lightbox } from "@/app/components/Lightbox";
+import { Lightbox } from "@/app/components/projects/Lightbox";
 import { twSizes } from "@/app/lib/twSizes";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";

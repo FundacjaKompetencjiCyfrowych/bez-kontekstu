@@ -4,11 +4,11 @@ import Link from "next/link";
 import { NavItem } from "@/app/lib/types";
 import { useRoutePath } from "@/app/lib/intl/hooks";
 import { useIntl } from "@/app/lib/intl/context";
-import { Header } from "./Header";
+import { Header } from "@/app/components/layout/Header";
 import { cn } from "@/app/lib/utils";
-import { SoundToggler } from "./SoundToggler";
-import { LanguageToggler } from "./LanguageToggler";
-import { MenuIcon } from "./MenuIcon";
+import { SoundToggler } from "@/app/components/layout/SoundToggler";
+import { LanguageToggler } from "@/app/components/layout/LanguageToggler";
+import { MenuIcon } from "@/app/components/layout/MenuIcon";
 
 const navigationItems: NavItem[] = [
   { key: "home", href: "/" },
@@ -97,23 +97,21 @@ export function Navigation() {
       )}
 
       {/* Desktop */}
-      <div className="hidden xl:flex justify-center py-8 sticky top-0">
-        <div className="flex space-x-8 items-center">
-          {navigationItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-[#3f3f41] hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
-              rel="noopener noreferrer"
-            >
-              {dictionary[item.key].toLocaleUpperCase()}
-            </Link>
-          ))}
+      <div className="hidden xl:flex justify-between py-5 items-center">
+        {navigationItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="text-muted hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
+            rel="noopener noreferrer"
+          >
+            {dictionary[item.key].toLocaleUpperCase()}
+          </Link>
+        ))}
 
-          {/* Language Switch */}
-          <LanguageToggler variant="desktop" />
-          <SoundToggler />
-        </div>
+        {/* Language Switch */}
+        <LanguageToggler variant="desktop" />
+        <SoundToggler />
       </div>
     </nav>
   );
