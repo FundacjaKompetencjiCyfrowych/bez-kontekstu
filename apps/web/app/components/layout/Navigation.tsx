@@ -97,23 +97,21 @@ export function Navigation() {
       )}
 
       {/* Desktop */}
-      <div className="hidden xl:flex justify-center py-8 sticky top-0">
-        <div className="flex space-x-8 items-center">
-          {navigationItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-[#3f3f41] hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
-              rel="noopener noreferrer"
-            >
-              {dictionary[item.key].toLocaleUpperCase()}
-            </Link>
-          ))}
+      <div className="hidden xl:flex justify-between py-5 items-center">
+        {navigationItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="text-muted hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
+            rel="noopener noreferrer"
+          >
+            {dictionary[item.key].toLocaleUpperCase()}
+          </Link>
+        ))}
 
-          {/* Language Switch */}
-          <LanguageToggler variant="desktop" />
-          <SoundToggler />
-        </div>
+        {/* Language Switch */}
+        <LanguageToggler variant="desktop" />
+        <SoundToggler />
       </div>
     </nav>
   );

@@ -37,7 +37,7 @@ export default async function SoundsPage({ params }: { params: Promise<{ locale:
     <section className="flex flex-1 justify-center xl:justify-start w-full items-center flex-col px-5 mb-15">
       <LogoContainer variant="centered" />
 
-      <h2 className="hidden xl:block w-full self-start text-7xl leading-tight p-10 pl-20">
+      <h2 className="hidden xl:block w-full self-start text-8xl leading-tight p-10 pl-20">
         BEATS&apos;N&apos;
         <br />
         PIECES

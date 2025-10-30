@@ -71,7 +71,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         </div>
 
         {titleCutWord(
-          dictionary.split2.contact[0],
+          dictionary.split2.contact[1],
           "hidden xl:block sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 xl:self-start ml-2 sm:ml-3 mt-2 sm:mt-3"
         )}
       </div>

@@ -15,12 +15,12 @@ interface TeamGridProps {
 
 export function TeamGrid({ members }: TeamGridProps) {
   return (
-    <div className="w-[90%] max-w-3xl my-8 mx-auto grid grid-cols-2 gap-4 xl:gap-8 z-10">
+    <div className="w-full max-w-3xl my-8 mx-auto grid grid-cols-2 gap-4 xl:gap-8 z-10">
       {members.map((member) => (
         <Link
           href={`/cooperators/${member?.slug?.current || ""}`}
           key={member._id}
-          className="relative w-full aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden hover:scale-105 transition-all duration-300 ease-in-out rounded-lg"
+          className="relative w-full aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden hover:scale-105 transition-all duration-300 ease-in-out rounded-sm"
         >
           {member.image && <ContentImage image={member.image} fill sizes={twSizes("42vw md:390px")} aspect={4 / 3} />}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

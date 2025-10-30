@@ -60,7 +60,7 @@ export default async function RootLayout({
       <IntlProvider locale={locale} dictionary={dict}>
         <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
           <LenisScrollProvider>
-            <div className="min-h-screen max-w-7xl mx-auto flex flex-col w-full">
+            <div className="min-h-screen max-w-6xl mx-auto flex flex-col w-full">
               <Navigation />
               <main className="flex flex-col flex-1 relative">{children}</main>
               <Footer data={data?.footer || {}} />

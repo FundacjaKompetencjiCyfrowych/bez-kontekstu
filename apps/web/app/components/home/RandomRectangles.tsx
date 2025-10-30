@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ContentImage, Image } from "../cms/ContentImage";
 import Link from "next/link";
+import { cn } from "@/app/lib/utils";
 
 // Type for rectangle position and size
 interface Rectangle {
@@ -16,9 +17,7 @@ interface Rectangle {
 }
 
 // Function to check if two rectangles overlap (including gap)
-// This ensures rectangles never touch each other
 const checkCollision = (rect1: Rectangle, rect2: Rectangle, gap: number = 4): boolean => {
-  // Calculate actual boundaries of rectangles with required gap
   const rect1Left = rect1.x;
   const rect1Right = rect1.x + rect1.width;
   const rect1Top = rect1.y;
@@ -30,13 +29,17 @@ const checkCollision = (rect1: Rectangle, rect2: Rectangle, gap: number = 4): bo
   const rect2Bottom = rect2.y + rect2.height;
 
   // Check if rectangles are too close (within gap distance)
-  // Rectangles collide if the distance between them is less than the gap
   return !(
-    rect1Right + gap <= rect2Left || // rect1 is far enough to the left of rect2
-    rect2Right + gap <= rect1Left || // rect2 is far enough to the left of rect1
-    rect1Bottom + gap <= rect2Top || // rect1 is far enough above rect2
-    rect2Bottom + gap <= rect1Top // rect2 is far enough above rect1
+    rect1Right + gap <= rect2Left ||
+    rect2Right + gap <= rect1Left ||
+    rect1Bottom + gap <= rect2Top ||
+    rect2Bottom + gap <= rect1Top
   );
+};
+
+// Function to check if rectangle is within container bounds
+const isWithinBounds = (rect: Rectangle): boolean => {
+  return rect.x >= 0 && rect.y >= 0 && rect.x + rect.width <= 100 && rect.y + rect.height <= 100;
 };
 
 // Function to generate random position for rectangle
@@ -47,14 +50,15 @@ const generateRandomPosition = (
   maxAttempts: number = 100
 ): { x: number; y: number } | null => {
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
-    // Generate random position (with smaller margin from edges for larger rectangles)
-    const margin = 2; // 2% margin from edges
+    const margin = 2;
+
+    // Calculate max positions ensuring rectangle stays within bounds
     const maxX = 100 - rectWidth - margin;
     const maxY = 100 - rectHeight - margin;
 
-    // Ensure we don't go below minimum values
+    // Skip if rectangle can't fit
     if (maxX <= margin || maxY <= margin) {
-      continue; // Skip this attempt if rectangle is too big for container
+      return null;
     }
 
     const x = Math.random() * (maxX - margin) + margin;
@@ -66,27 +70,29 @@ const generateRandomPosition = (
       y,
       width: rectWidth,
       height: rectHeight,
-      image: {} as Image, // Placeholder, will be replaced
-      slug: "", // Placeholder, will be replaced
+      image: {} as Image,
+      slug: "",
     };
+
+    // Verify rectangle is within bounds
+    if (!isWithinBounds(newRect)) {
+      continue;
+    }
 
     // Check collision with existing rectangles
     let hasCollision = false;
     for (const existingRect of existingRectangles) {
-      if (checkCollision(newRect, existingRect, 3)) {
-        // 3% gap between rectangles to ensure they never touch
+      if (checkCollision(newRect, existingRect, 4)) {
         hasCollision = true;
         break;
       }
     }
 
-    // If no collision, return position
     if (!hasCollision) {
       return { x, y };
     }
   }
 
-  // If couldn't find position after max attempts, return null
   return null;
 };
 
@@ -94,141 +100,111 @@ const generateRandomPosition = (
 const generateRectangles = (images: { image: Image; slug: string }[]) => {
   const rectanglesList: Rectangle[] = [];
 
-  // Predefined fallback positions to ensure all 4 rectangles are always placed
+  // Predefined positions with guaranteed no overlap
   const fallbackPositions = [
-    { x: 5, y: 5 }, // top-left
-    { x: 50, y: 5 }, // top-right
-    { x: 5, y: 50 }, // bottom-left
-    { x: 50, y: 50 }, // bottom-right
+    { x: 5, y: 5, width: 35, height: 17.5 },
+    { x: 60, y: 5, width: 35, height: 17.5 },
+    { x: 5, y: 50, width: 35, height: 17.5 },
+    { x: 60, y: 50, width: 35, height: 17.5 },
   ];
 
-  // Generate rectangles for available images, up to a maximum of 4
-  for (let i = 0; i < Math.min(4, images.length); i++) {
-    let rectWidth, rectHeight;
+  const maxRectangles = Math.min(4, images.length);
 
-    // Define base width size as percentage of parent width
-    const baseWidthPercent = 40; // Base width in percentage of parent width
+  for (let i = 0; i < maxRectangles; i++) {
+    const rectWidth = 40;
+    const rectHeight = 20; // 2:1 aspect ratio
 
-    // All rectangles have consistent proportions based on parent width
-    // Calculate height based on width and aspect ratio for collision detection
-    // All rectangles are horizontal with aspect ratio 2:1
-    rectWidth = baseWidthPercent; // width as percentage of parent width
-    rectHeight = baseWidthPercent / 2; // height = width/2 for 2:1 ratio
+    // Try progressively smaller sizes
+    const sizeAttempts = [
+      { scale: 1.0, attempts: 50 },
+      { scale: 0.8, attempts: 50 },
+      { scale: 0.6, attempts: 30 },
+      { scale: 0.5, attempts: 20 },
+    ];
 
-    // Try to find random position first
-    let position = generateRandomPosition(rectanglesList, rectWidth, rectHeight, 50);
+    let position = null;
+    let finalWidth = rectWidth;
+    let finalHeight = rectHeight;
 
-    if (!position) {
-      // If random position failed, try with smaller size while maintaining exact proportions
-      const scaleFactor = 0.8;
+    for (const { scale, attempts } of sizeAttempts) {
+      const scaledWidth = rectWidth * scale;
+      const scaledHeight = rectHeight * scale;
 
-      // Scale both dimensions by the same factor to maintain exact proportions
-      const smallerWidth = rectWidth * scaleFactor;
-      const smallerHeight = rectHeight * scaleFactor;
-
-      position = generateRandomPosition(rectanglesList, smallerWidth, smallerHeight, 50);
+      position = generateRandomPosition(rectanglesList, scaledWidth, scaledHeight, attempts);
 
       if (position) {
-        rectWidth = smallerWidth;
-        rectHeight = smallerHeight;
+        finalWidth = scaledWidth;
+        finalHeight = scaledHeight;
+        break;
       }
     }
 
-    if (!position) {
-      // If still no position, try even smaller size while maintaining exact proportions
-      const scaleFactor = 0.6;
+    // Use fallback position if random positioning failed
+    if (!position && fallbackPositions[i]) {
+      const fallback = fallbackPositions[i];
+      position = { x: fallback.x, y: fallback.y };
+      finalWidth = fallback.width;
+      finalHeight = fallback.height;
 
-      // Scale both dimensions by the same factor to maintain exact proportions
-      const evenSmallerWidth = rectWidth * scaleFactor;
-      const evenSmallerHeight = rectHeight * scaleFactor;
+      // Verify fallback doesn't collide with existing rectangles
+      const testRect: Rectangle = {
+        id: 0,
+        x: position.x,
+        y: position.y,
+        width: finalWidth,
+        height: finalHeight,
+        image: {} as Image,
+        slug: "",
+      };
 
-      position = generateRandomPosition(rectanglesList, evenSmallerWidth, evenSmallerHeight, 30);
-
-      if (position) {
-        rectWidth = evenSmallerWidth;
-        rectHeight = evenSmallerHeight;
-      }
-    }
-
-    // If still no position found, use fallback position
-    if (!position) {
-      // Use smaller size for fallback while maintaining exact proportions
-      const scaleFactor = 0.4;
-
-      // Scale both dimensions by the same factor to maintain exact proportions
-      let fallbackWidth = rectWidth * scaleFactor;
-      let fallbackHeight = rectHeight * scaleFactor;
-
-      // Try each fallback position until we find one that doesn't collide
-      let fallbackPosition = null;
-      for (const fallback of fallbackPositions) {
-        const testRect: Rectangle = {
-          id: 0,
-          x: fallback.x,
-          y: fallback.y,
-          width: fallbackWidth,
-          height: fallbackHeight,
-          image: {} as Image, // Placeholder, will be replaced
-          slug: "", // Placeholder, will be replaced
-        };
-
-        let hasCollision = false;
-        for (const existingRect of rectanglesList) {
-          if (checkCollision(testRect, existingRect, 3)) {
-            hasCollision = true;
-            break;
-          }
-        }
-
-        if (!hasCollision) {
-          fallbackPosition = fallback;
+      let hasCollision = false;
+      for (const existingRect of rectanglesList) {
+        if (checkCollision(testRect, existingRect, 4)) {
+          hasCollision = true;
           break;
         }
       }
 
-      // If even fallback positions collide, use the assigned fallback position with even smaller size
-      if (!fallbackPosition) {
-        fallbackPosition = fallbackPositions[i];
-        const finalScaleFactor = 0.25;
-
-        // Scale both dimensions by the same factor to maintain exact proportions
-        fallbackWidth = rectWidth * finalScaleFactor;
-        fallbackHeight = rectHeight * finalScaleFactor;
+      // If fallback collides, make it smaller
+      if (hasCollision) {
+        finalWidth = fallback.width * 0.7;
+        finalHeight = fallback.height * 0.7;
       }
-
-      position = fallbackPosition;
-      rectWidth = fallbackWidth;
-      rectHeight = fallbackHeight;
     }
 
-    // Always add the rectangle (guaranteed position)
-    rectanglesList.push({
-      id: i + 1,
-      x: position.x,
-      y: position.y,
-      width: rectWidth,
-      height: rectHeight,
-      image: images[i].image,
-      slug: images[i].slug,
-    });
+    // Only add rectangle if we have a valid position
+    if (position) {
+      const newRect: Rectangle = {
+        id: i + 1,
+        x: position.x,
+        y: position.y,
+        width: finalWidth,
+        height: finalHeight,
+        image: images[i].image,
+        slug: images[i].slug,
+      };
+
+      // Final bounds check before adding
+      if (isWithinBounds(newRect)) {
+        rectanglesList.push(newRect);
+      }
+    }
   }
 
   return rectanglesList;
 };
 
-export function RandomRectangles({ images }: { images: { image: Image; slug: string }[] }) {
+export function RandomRectangles({ images, className }: { images: { image: Image; slug: string }[]; className?: string }) {
   const [rectangles, setRectangles] = useState<Rectangle[]>([]);
-  const [containerWidth, setContainerWidth] = useState(1200); // Default container width
+  const [containerWidth, setContainerWidth] = useState(1200);
 
   const regenerate = useCallback(() => {
     setRectangles(generateRectangles(images));
   }, [images]);
 
-  // Update container width when component mounts and window resizes
   useEffect(() => {
     const updateContainerWidth = () => {
       if (typeof window !== "undefined") {
-        // Assuming the container is 90vw (from the parent div)
         setContainerWidth(window.innerWidth * 0.9);
       }
     };
@@ -245,7 +221,6 @@ export function RandomRectangles({ images }: { images: { image: Image; slug: str
     }
   }, []);
 
-  // Generate rectangles when component mounts or container width changes
   useEffect(() => {
     if (containerWidth > 0) {
       regenerate();
@@ -253,7 +228,7 @@ export function RandomRectangles({ images }: { images: { image: Image; slug: str
   }, [containerWidth, regenerate]);
 
   return (
-    <div className="w-full min-h-[400px] max-h-full grow-1 md:top-[-100px] relative py-4 z-10">
+    <div className={cn("w-full aspect-[4/3] max-h-full grow-1 relative z-10 overflow-hidden", className)}>
       {rectangles.map((rect) => {
         return (
           <Link
@@ -264,13 +239,13 @@ export function RandomRectangles({ images }: { images: { image: Image; slug: str
               left: `${rect.x}%`,
               top: `${rect.y}%`,
               width: `${rect.width}%`,
-              aspectRatio: "2/1", // All rectangles are horizontal with 2:1 proportions
+              aspectRatio: "2/1",
             }}
           >
             <ContentImage
               image={rect.image}
               fill
-              className="object-contain"
+              className="object-cover"
               sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 25vw"
             />
           </Link>

@@ -1,3 +1,4 @@
+import { cn } from "@/app/lib/utils";
 import { ReactNode } from "react";
 
 interface SectionContainerProps {
@@ -8,7 +9,10 @@ interface SectionContainerProps {
 
 export function SectionContainer({ children, ariaLabelledby, className = "" }: SectionContainerProps) {
   return (
-    <section className={`flex flex-col justify-between ${className}`} aria-labelledby={ariaLabelledby}>
+    <section
+      className={cn("min-h-[45rem] md:pb-30 md:pt-25 md:px-20 flex flex-col gap-4 items-center justify-center relative", className)}
+      aria-labelledby={ariaLabelledby}
+    >
       {children}
     </section>
   );
