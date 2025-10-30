@@ -1,25 +1,33 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { ComponentPropsWithRef, FC } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { useGSAP } from "@gsap/react";
+import { usePathname } from "next/navigation";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+}
 
-export const SmoothScroll: FC<ComponentPropsWithRef<"div">> = ({ children, ...props }) => {
+export const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+
   useGSAP(() => {
-    ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1,
-      effects: true,
-    });
-  });
+    let smoother = ScrollSmoother.get();
+    if (!smoother) {
+      smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        smooth: 1,
+        effects: true,
+      });
+    }
+    smoother.scrollTo(0, false);
+  }, [pathname]);
 
   return (
-    <div id="smooth-wrapper" {...props}>
+    <div id="smooth-wrapper">
       <div id="smooth-content">{children}</div>
     </div>
   );

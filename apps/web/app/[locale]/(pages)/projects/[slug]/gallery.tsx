@@ -32,10 +32,16 @@ export function MultimediaGallery({ images }: { images: Image[] }) {
           <button
             key={index}
             onClick={() => handleImageClick(index)}
-            className="aspect-square bg-gray-800 relative overflow-hidden hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            className="aspect-square bg-gray-800 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
             aria-label={`View image ${index + 1} in full screen`}
           >
-            <ContentImage image={image} fill aspect={1} className="object-cover" sizes={twSizes("50vw max:630px")} />
+            <ContentImage
+              image={image}
+              fill
+              aspect={1}
+              className="hover:scale-105 transition-transform duration-300 ease-in-out"
+              sizes={twSizes("50vw max:630px")}
+            />
           </button>
         ))}
       </div>
