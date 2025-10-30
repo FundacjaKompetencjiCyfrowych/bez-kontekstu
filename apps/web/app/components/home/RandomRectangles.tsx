@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ContentImage, Image } from "./cms/ContentImage";
+import { ContentImage, Image } from "../cms/ContentImage";
 import Link from "next/link";
 
 // Type for rectangle position and size

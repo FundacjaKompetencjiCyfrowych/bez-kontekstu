@@ -11,7 +11,7 @@ import { FiArrowLeft } from "react-icons/fi";
 
 import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
-import { MultimediaGallery } from "./gallery";
+import { MultimediaGallery } from "../../../../components/projects/MultimediaGallery";
 import { Fragment } from "react";
 import { LogoContainer } from "@/app/components/Logo";
 import { PaginationNav } from "@/app/components/PaginationNav";

@@ -4,11 +4,11 @@ import Link from "next/link";
 import { NavItem } from "@/app/lib/types";
 import { useRoutePath } from "@/app/lib/intl/hooks";
 import { useIntl } from "@/app/lib/intl/context";
-import { Header } from "./Header";
+import { Header } from "@/app/components/layout/Header";
 import { cn } from "@/app/lib/utils";
-import { SoundToggler } from "./SoundToggler";
-import { LanguageToggler } from "./LanguageToggler";
-import { MenuIcon } from "./MenuIcon";
+import { SoundToggler } from "@/app/components/layout/SoundToggler";
+import { LanguageToggler } from "@/app/components/layout/LanguageToggler";
+import { MenuIcon } from "@/app/components/layout/MenuIcon";
 
 const navigationItems: NavItem[] = [
   { key: "home", href: "/" },

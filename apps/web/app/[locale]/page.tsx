@@ -1,4 +1,4 @@
-import { RandomRectangles } from "@/app/components/RandomRectangles";
+import { RandomRectangles } from "@/app/components/home/RandomRectangles";
 import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { cache } from "react";
@@ -38,7 +38,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <SectionContainer ariaLabelledby="hero-title" className="relative min-h-[50vh] lg:min-h-[90vh] items-center justify-center">
         <Logo morph />
         <h2 className="sr-only" id="hero-title">
-          Bez Kontekstu
+          {dictionary.noContext}
         </h2>
 
         <div className="absolute right-0 top-0" aria-hidden="true">

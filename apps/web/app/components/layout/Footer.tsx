@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { LinkIconList, LinkList } from "../lib/sanity/types";
-import { ContentIcon } from "./cms/ContentIcon";
+import { LinkIconList, LinkList } from "@/app/lib/sanity/types";
+import { ContentIcon } from "@/app/components/cms/ContentIcon";
 import { FiHeart } from "react-icons/fi";
 
 type FooterData = {

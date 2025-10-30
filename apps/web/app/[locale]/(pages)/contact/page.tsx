@@ -7,6 +7,7 @@ import { contactPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { ContentIcon } from "@/app/components/cms/ContentIcon";
 import { LogoContainer } from "@/app/components/Logo";
+import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
 const getContactPage = cache(async (locale: string) => {
   return await sanityFetch({ query: contactPageQuery, params: { lang: locale } });
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const { data } = await getContactPage(locale);
+  const dictionary = await getDictionary(locale);
   return (
     <div className="flex flex-1 w-full min-h-full md:landscape:h-full flex-col justify-between px-2 md:px-5">
       {/*Title mobile*/}
@@ -28,7 +30,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       <div className="w-full flex flex-1 flex-col px-5 md:px-0 xl:self-center z-10">
         {/*Title desktop*/}
         {titleCutWord(
-          "KO N",
+          dictionary.split2.contact[0],
           "hidden xl:block xl:self-end sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3"
         )}
 
@@ -69,7 +71,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         </div>
 
         {titleCutWord(
-          "T AKT",
+          dictionary.split2.contact[0],
           "hidden xl:block sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 xl:self-start ml-2 sm:ml-3 mt-2 sm:mt-3"
         )}
       </div>

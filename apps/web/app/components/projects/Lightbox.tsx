@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useId } from "react";
-import { useSliderNavigation } from "./hooks/useSliderNavigation";
-import { useKeyboardNavigation } from "./hooks/useKeyboardNavigation";
-import { useBodyScrollLock } from "./hooks/useBodyScrollLock";
-import { ContentImage, Image } from "./cms/ContentImage";
-import { twSizes } from "../lib/twSizes";
+import { useSliderNavigation } from "@/app/components/hooks/useSliderNavigation";
+import { useKeyboardNavigation } from "@/app/components/hooks/useKeyboardNavigation";
+import { useBodyScrollLock } from "@/app/components/hooks/useBodyScrollLock";
+import { ContentImage, Image } from "@/app/components/cms/ContentImage";
+import { twSizes } from "@/app/lib/twSizes";
 
 interface LightboxProps {
   images: Image[];

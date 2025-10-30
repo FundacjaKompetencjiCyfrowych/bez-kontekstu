@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { TrackItem } from "@/app/components/TrackItem";
+import { TrackItem } from "@/app/components/sounds/TrackItem";
 import { useIntl } from "@/app/lib/intl/context";
 import { LogoContainer } from "@/app/components/Logo";
 
