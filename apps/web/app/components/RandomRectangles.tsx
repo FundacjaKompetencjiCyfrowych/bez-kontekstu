@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ContentImage, Image } from "./cms/ContentImage";
+import Link from "next/link";
 
 // Type for rectangle position and size
 interface Rectangle {
@@ -10,7 +11,8 @@ interface Rectangle {
   y: number; // position Y in percentage
   width: number; // width in percentage
   height: number; // height in percentage
-  image: Image | null; // Sanity image object
+  image: Image; // Sanity image object
+  slug: string; // Slug for the project link
 }
 
 // Function to check if two rectangles overlap (including gap)
@@ -64,7 +66,8 @@ const generateRandomPosition = (
       y,
       width: rectWidth,
       height: rectHeight,
-      image: null,
+      image: {} as Image, // Placeholder, will be replaced
+      slug: "", // Placeholder, will be replaced
     };
 
     // Check collision with existing rectangles
@@ -88,7 +91,7 @@ const generateRandomPosition = (
 };
 
 // Function to generate all rectangles
-const generateRectangles = (images: Image[]) => {
+const generateRectangles = (images: { image: Image; slug: string }[]) => {
   const rectanglesList: Rectangle[] = [];
 
   // Predefined fallback positions to ensure all 4 rectangles are always placed
@@ -99,8 +102,8 @@ const generateRectangles = (images: Image[]) => {
     { x: 50, y: 50 }, // bottom-right
   ];
 
-  // Generate 4 horizontal rectangles with 2:1 proportions
-  for (let i = 0; i < 4; i++) {
+  // Generate rectangles for available images, up to a maximum of 4
+  for (let i = 0; i < Math.min(4, images.length); i++) {
     let rectWidth, rectHeight;
 
     // Define base width size as percentage of parent width
@@ -165,7 +168,8 @@ const generateRectangles = (images: Image[]) => {
           y: fallback.y,
           width: fallbackWidth,
           height: fallbackHeight,
-          image: null,
+          image: {} as Image, // Placeholder, will be replaced
+          slug: "", // Placeholder, will be replaced
         };
 
         let hasCollision = false;
@@ -204,20 +208,21 @@ const generateRectangles = (images: Image[]) => {
       y: position.y,
       width: rectWidth,
       height: rectHeight,
-      image: images[i],
+      image: images[i].image,
+      slug: images[i].slug,
     });
   }
 
   return rectanglesList;
 };
 
-export function RandomRectangles({ images }: { images: Image[] }) {
+export function RandomRectangles({ images }: { images: { image: Image; slug: string }[] }) {
   const [rectangles, setRectangles] = useState<Rectangle[]>([]);
   const [containerWidth, setContainerWidth] = useState(1200); // Default container width
 
-  const regenerate = () => {
+  const regenerate = useCallback(() => {
     setRectangles(generateRectangles(images));
-  };
+  }, [images]);
 
   // Update container width when component mounts and window resizes
   useEffect(() => {
@@ -245,18 +250,16 @@ export function RandomRectangles({ images }: { images: Image[] }) {
     if (containerWidth > 0) {
       regenerate();
     }
-  }, [containerWidth]);
+  }, [containerWidth, regenerate]);
 
   return (
     <div className="w-full min-h-[400px] max-h-full grow-1 md:top-[-100px] relative py-4 z-10">
       {rectangles.map((rect) => {
-        if (!rect.image) {
-          return null;
-        }
         return (
-          <div
+          <Link
             key={rect.id}
-            className="absolute shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden"
+            href={`/projects/${rect.slug}`}
+            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden"
             style={{
               left: `${rect.x}%`,
               top: `${rect.y}%`,
@@ -270,7 +273,7 @@ export function RandomRectangles({ images }: { images: Image[] }) {
               className="object-contain"
               sizes="(max-width: 768px) 40vw, (max-width: 1200px) 30vw, 25vw"
             />
-          </div>
+          </Link>
         );
       })}
     </div>

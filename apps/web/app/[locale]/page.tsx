@@ -118,7 +118,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
 
         <RandomRectangles
-          images={data?.projects?.featured?.map((project) => project?.cover).filter((image) => image !== null && image !== undefined) ?? []}
+          images={
+            data?.projects?.featured
+              ?.filter((project) => project?.cover && project.slug?.current)
+              .map((project) => ({
+                image: project.cover!,
+                slug: project.slug!.current!,
+              })) ?? []
+          }
         />
 
         <div className="relative flex justify-center items-center transform z-10">
@@ -145,9 +152,10 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
         <div className="w-[90%] max-w-[800px] my-4 mx-auto grid grid-cols-2 gap-5 xl:gap-8 aspect-square xl:aspect-[2 / 1] z-10 place-items-center content-center">
           {teamMembers.map((member) => (
-            <div
+            <Link
+              href={`/cooperators/${member?.slug?.current || ""}`}
               key={member._id}
-              className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden"
+              className="relative w-full md:h-70 sm:top-10 md:top-10 xl:top-0 aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden hover:scale-105 transition-all duration-300 ease-in-out"
             >
               {/* Cooperator image */}
               {member.image && <ContentImage image={member.image} fill sizes={twSizes("42vw md:390px")} aspect={4 / 3} />}
@@ -155,7 +163,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               <div className="absolute bottom-0 left-0 right-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent"></div>
               {/* Name */}
               <h3 className="relative z-10 text-sm md:text-base text-white">{member.name}</h3>
-            </div>
+            </Link>
           ))}
         </div>
 
