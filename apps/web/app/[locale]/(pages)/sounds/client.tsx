@@ -4,6 +4,63 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { TrackItem } from "@/app/components/sounds/TrackItem";
 import { cn } from "@/app/lib/utils";
 
+// YouTube IFrame API types
+interface YouTubePlayerVars {
+  autoplay?: 0 | 1;
+  controls?: 0 | 1;
+  disablekb?: 0 | 1;
+  fs?: 0 | 1;
+  iv_load_policy?: 1 | 3;
+  modestbranding?: 0 | 1;
+  playsinline?: 0 | 1;
+  rel?: 0 | 1;
+  mute?: 0 | 1;
+}
+
+interface YouTubePlayerEvent {
+  target: YouTubePlayer;
+  data: number;
+}
+
+interface YouTubeVideoData {
+  video_id: string;
+  title: string;
+  author: string;
+  video_quality: string;
+}
+
+interface YouTubePlayer {
+  loadVideoById(videoId: string): void;
+  playVideo(): void;
+  stopVideo(): void;
+  pauseVideo(): void;
+  destroy(): void;
+  getVideoData(): YouTubeVideoData;
+}
+
+interface YouTubePlayerConstructor {
+  new(element: HTMLElement | string, config: {
+    videoId?: string;
+    playerVars?: YouTubePlayerVars;
+    events?: {
+      onReady?: (event: YouTubePlayerEvent) => void;
+      onError?: (event: YouTubePlayerEvent) => void;
+    };
+  }): YouTubePlayer;
+}
+
+interface YouTubeNamespace {
+  Player: YouTubePlayerConstructor;
+}
+
+// Extend Window interface to include YouTube API
+declare global {
+  interface Window {
+    YT?: YouTubeNamespace;
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
 interface Track {
   id: number;
   title: string;
@@ -19,60 +76,10 @@ interface SoundsClientProps {
   className?: string;
 }
 
-// YouTube API types
-interface YouTubePlayer {
-  playVideo: () => void;
-  stopVideo: () => void;
-  loadVideoById: (videoId: string) => void;
-  getVideoData: () => { title: string };
-  destroy: () => void;
-}
-
-interface YouTubePlayerEvent {
-  target: YouTubePlayer;
-  data?: number;
-}
-
-// Constants
-const YOUTUBE_API_URL = "https://www.youtube.com/iframe_api";
-const IFRAME_STYLE = {
-  position: "absolute" as const,
-  left: "-9999px",
-  top: "-9999px",
-  width: "1px",
-  height: "1px",
-};
-const PLAYER_VARS = {
-  autoplay: 0,
-  controls: 0,
-  disablekb: 1,
-  fs: 0,
-  iv_load_policy: 3,
-  modestbranding: 1,
-  playsinline: 1,
-  rel: 0,
-  mute: 0,
-};
-
 // Extract YouTube video ID from URL
 const getYouTubeVideoId = (url: string): string | null => {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
   return match ? match[1] : null;
-};
-
-// Get video title from player with retry
-const getVideoTitle = (player: YouTubePlayer, retryDelay: number = 500): Promise<string | null> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      try {
-        const videoData = player.getVideoData();
-        resolve(videoData.title);
-      } catch (error) {
-        console.error("Error getting video title:", error);
-        resolve(null);
-      }
-    }, retryDelay);
-  });
 };
 
 export function SoundsClient({ tracks, dictionary, className }: SoundsClientProps) {
@@ -82,59 +89,8 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   const playerRef = useRef<YouTubePlayer | null>(null);
   const shouldAutoPlayRef = useRef<boolean>(false);
 
-  // Handle player ready event
-  const handlePlayerReady = useCallback((event: YouTubePlayerEvent, autoPlay: boolean) => {
-    const player = event.target;
-
-    // Get video title
-    getVideoTitle(player).then((title) => {
-      if (title) setVideoTitle(title);
-    });
-
-    // Auto play if requested
-    if (autoPlay && typeof player.playVideo === "function") {
-      try {
-        player.playVideo();
-      } catch (error) {
-        console.error("Error playing video:", error);
-      }
-    }
-  }, []);
-
-  // Create new YouTube player instance
-  const createPlayer = useCallback((videoId: string, autoPlay: boolean) => {
-    if (!iframeRef.current) return;
-
-    // Destroy existing player
-    if (playerRef.current) {
-      try {
-        playerRef.current.destroy();
-      } catch (error) {
-        console.error("Error destroying player:", error);
-      }
-    }
-
-    // Update iframe src
-    iframeRef.current.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1`;
-
-    // Create new player
-    playerRef.current = new (window as any).YT.Player(iframeRef.current, {
-      videoId,
-      playerVars: {
-        ...PLAYER_VARS,
-        autoplay: autoPlay ? 1 : 0,
-      },
-      events: {
-        onReady: (event: YouTubePlayerEvent) => handlePlayerReady(event, autoPlay),
-        onError: (event: YouTubePlayerEvent) => {
-          console.error("YouTube player error:", event.data);
-        },
-      },
-    });
-  }, [handlePlayerReady]);
-
-  // Load video into existing player or create new one
-  const loadVideo = useCallback(async (trackIndex: number, autoPlay: boolean = false) => {
+  // Initialize YouTube player for specific track index
+  const initializePlayer = useCallback((trackIndex: number, autoPlay: boolean = false) => {
     const trackUrl = dictionary.tracklist[trackIndex];
     if (!trackUrl) return;
 
@@ -143,128 +99,202 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
 
     shouldAutoPlayRef.current = autoPlay;
 
-    // If player exists, load new video
+    // If player already exists, just load new video
     if (playerRef.current && typeof playerRef.current.loadVideoById === "function") {
       try {
         playerRef.current.loadVideoById(videoId);
-
-        // Get title after loading
-        const title = await getVideoTitle(playerRef.current);
-        if (title) setVideoTitle(title);
-
-        // Play if requested
-        if (autoPlay) {
-          setTimeout(() => {
-            if (playerRef.current && typeof playerRef.current.playVideo === "function") {
-              playerRef.current.playVideo();
+        // Get title
+        setTimeout(() => {
+          try {
+            if (playerRef.current) {
+              const videoData = playerRef.current.getVideoData();
+              setVideoTitle(videoData.title);
             }
-          }, 600);
-        }
+          } catch (error) {
+            console.error("Error getting video title:", error);
+          }
+        }, 500);
       } catch (error) {
         console.error("Error loading video:", error);
-        createPlayer(videoId, autoPlay);
-      }
-    } else {
-      // Create new player
-      createPlayer(videoId, autoPlay);
-    }
-  }, [dictionary.tracklist, createPlayer]);
-
-  // Load YouTube IFrame API script
-  useEffect(() => {
-    const scriptId = "youtube-iframe-api";
-
-    // Check if script already exists
-    if (document.getElementById(scriptId)) {
-      if ((window as any).YT?.Player && !playerRef.current) {
-        loadVideo(0);
       }
       return;
     }
 
-    // Create and load script
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = YOUTUBE_API_URL;
-    const firstScript = document.getElementsByTagName("script")[0];
-    firstScript.parentNode?.insertBefore(script, firstScript);
+    // Destroy existing player if it exists (but doesn't have loadVideoById)
+    if (playerRef.current) {
+      try {
+        playerRef.current.destroy();
+      } catch (error) {
+        console.error("Error destroying player:", error);
+      }
+      playerRef.current = null;
+    }
+
+    // Update iframe src first
+    if (iframeRef.current) {
+      iframeRef.current.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1`;
+    }
+
+    // Create new player with selected video
+    if (!window.YT?.Player || !iframeRef.current) return;
+
+    playerRef.current = new window.YT.Player(iframeRef.current, {
+      videoId: videoId,
+      playerVars: {
+        autoplay: shouldAutoPlayRef.current ? 1 : 0,
+        controls: 0,
+        disablekb: 1,
+        fs: 0,
+        iv_load_policy: 3,
+        modestbranding: 1,
+        playsinline: 1,
+        rel: 0,
+        mute: 0,
+      },
+      events: {
+        onReady: (event: YouTubePlayerEvent) => {
+          try {
+            const videoData = event.target.getVideoData();
+            setVideoTitle(videoData.title);
+          } catch (error) {
+            console.error("Error getting video title:", error);
+          }
+
+          // Auto play if requested
+          if (shouldAutoPlayRef.current && event.target && typeof event.target.playVideo === "function") {
+            try {
+              event.target.playVideo();
+            } catch (error) {
+              console.error("Error playing video:", error);
+            }
+          }
+        },
+        onError: (event: YouTubePlayerEvent) => {
+          console.error("YouTube player error:", event.data);
+        },
+      },
+    });
+  }, [dictionary.tracklist]);
+
+  // Load YouTube IFrame API
+  useEffect(() => {
+    // Check if script already exists
+    if (document.getElementById("youtube-iframe-api")) {
+      // If script exists but player not initialized, wait for API to be ready
+      if (window.YT?.Player && !playerRef.current) {
+        initializePlayer(0);
+      }
+      return;
+    }
+
+    // Load YouTube IFrame API script
+    const tag = document.createElement("script");
+    tag.id = "youtube-iframe-api";
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 
     // Initialize player when API is ready
-    (window as any).onYouTubeIframeAPIReady = () => {
+    window.onYouTubeIframeAPIReady = () => {
       if (!playerRef.current) {
-        loadVideo(0);
+        initializePlayer(0);
       }
     };
-  }, [loadVideo]);
+  }, [initializePlayer]);
 
-  // Control player methods
-  const playAudio = useCallback(() => {
-    if (playerRef.current?.playVideo) {
+  const playAudio = () => {
+    if (playerRef.current && typeof playerRef.current.playVideo === "function") {
       try {
         playerRef.current.playVideo();
       } catch (error) {
         console.error("Error playing video:", error);
       }
     }
-  }, []);
+  };
 
-  const stopAudio = useCallback(() => {
-    if (playerRef.current?.stopVideo) {
+  const stopAudio = () => {
+    if (playerRef.current && typeof playerRef.current.stopVideo === "function") {
       try {
         playerRef.current.stopVideo();
       } catch (error) {
         console.error("Error stopping video:", error);
       }
     }
-  }, []);
+  };
 
-  // Toggle track playback
-  const toggleTrack = useCallback(
-    (index: number) => {
-      if (currentTrack === index) {
-        // Stop if clicking same track
-        stopAudio();
-        setCurrentTrack(null);
-        setVideoTitle(null);
-      } else {
-        // Load and play new track
-        stopAudio();
-        setCurrentTrack(index);
-        setVideoTitle(null);
+  const toggleTrack = (index: number) => {
+    if (currentTrack === index) {
+      // Stop current track
+      stopAudio();
+      setCurrentTrack(null);
+      setVideoTitle(null);
+    } else {
+      // Stop current and switch to new track
+      stopAudio();
+      setCurrentTrack(index);
+      setVideoTitle(null);
 
-        if ((window as any).YT?.Player) {
-          loadVideo(index, true);
+      // Initialize or load player with new track
+      if (window.YT?.Player) {
+        // If player exists, try to load video directly
+        if (playerRef.current && typeof playerRef.current.loadVideoById === "function") {
+          const trackUrl = dictionary.tracklist[index];
+          const videoId = getYouTubeVideoId(trackUrl);
+          if (videoId) {
+            try {
+              playerRef.current.loadVideoById(videoId);
+              // Get title
+              setTimeout(() => {
+                try {
+                  if (playerRef.current) {
+                    const videoData = playerRef.current.getVideoData();
+                    setVideoTitle(videoData.title);
+                  }
+                } catch (error) {
+                  console.error("Error getting video title:", error);
+                }
+              }, 500);
+              // Play after loading
+              setTimeout(() => {
+                playAudio();
+              }, 600);
+            } catch (error) {
+              console.error("Error loading video:", error);
+              initializePlayer(index, true);
+            }
+          }
+        } else {
+          // Initialize new player
+          initializePlayer(index, true);
         }
       }
-    },
-    [currentTrack, stopAudio, loadVideo]
-  );
+    }
+  };
 
   // Get current video ID for iframe src
-  const getCurrentVideoId = () => {
-    const trackUrl =
-      currentTrack !== null
-        ? dictionary.tracklist[currentTrack]
-        : dictionary.tracklist[0];
-    return getYouTubeVideoId(trackUrl || "") || "";
-  };
+  const currentVideoId =
+    currentTrack !== null && dictionary.tracklist[currentTrack]
+      ? getYouTubeVideoId(dictionary.tracklist[currentTrack])
+      : getYouTubeVideoId(dictionary.tracklist[0] || "");
 
   return (
     <div role="list" aria-label="Tracklist" className={cn("space-y-3", className)}>
-      {/* Hidden YouTube iframe - positioned off-screen to allow playback */}
+      {/* Hidden YouTube iframe - positioned off-screen instead of display:none to allow playback */}
       <iframe
         ref={iframeRef}
-        style={IFRAME_STYLE}
+        style={{ position: "absolute", left: "-9999px", top: "-9999px", width: "1px", height: "1px" }}
         width="1"
         height="1"
-        src={`https://www.youtube.com/embed/${getCurrentVideoId()}?enablejsapi=1`}
+        src={`https://www.youtube.com/embed/${currentVideoId}?enablejsapi=1`}
         allow="autoplay; encrypted-media"
         title="YouTube audio player"
       />
 
-      {/* Display current video title */}
+      {/* Display video title if available */}
       {videoTitle && currentTrack !== null && (
-        <div className="mb-5 ml-5 text-sm text-gray-400">Now playing: {videoTitle}</div>
+        <div className="mb-5 ml-5 text-sm text-gray-400">
+          Now playing: {videoTitle}
+        </div>
       )}
 
       {tracks.map((track, index) => {
@@ -278,8 +308,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
             title={track.title}
             isPlaying={currentTrack === index}
             onPlay={() => toggleTrack(index)}
-            aria-label={`${track.title} - ${currentTrack === index ? dictionary.playing : dictionary.play
-              }`}
+            aria-label={`${track.title} - ${currentTrack === index ? dictionary.playing : dictionary.play}`}
           />
         );
       })}
