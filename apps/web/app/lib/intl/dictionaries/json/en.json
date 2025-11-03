@@ -16,7 +16,7 @@
   "copied": "Copied!",
   "copiedToClipboard": "Copied to clipboard",
   "track": "Track Name",
-  "tracklist": "Tracklist",
+  "tracklist": ["https://www.youtube.com/watch?v=E0ozmU9cJDg", "https://www.youtube.com/watch?v=hTWKbfoikeg"],
   "playing": "Playing",
   "play": "Click to Play",
   "loading": "Loading...",
