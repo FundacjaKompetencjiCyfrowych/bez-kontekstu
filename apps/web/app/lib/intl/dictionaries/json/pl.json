@@ -33,7 +33,8 @@
     "collaborators": "WSPÓ ŁPR ACE",
     "support": "DLA DARCZYŃ CÓW",
     "sounds": "BEATS'N' PIECES",
-    "contact": "KON TA KT"
+    "contact": "KON TA KT",
+    "privacy": "POLI TYK A PRY WAT NOŚCI"
   },
   "split2": {
     "noContext": ["BEZ", "K O N TEKSTU"],
@@ -41,6 +42,7 @@
     "projects": ["PR O", "J EKTY"],
     "collaborators": ["WSP Ó Ł", "P RACE"],
     "support": ["DL A", "DAR CZYŃCÓW"],
-    "contact": ["KON T", "A CT"]
+    "contact": ["KON T", "A CT"],
+    "privacy": ["POLIT YK A", "PR YWA TNOŚCI"]
   }
 }
