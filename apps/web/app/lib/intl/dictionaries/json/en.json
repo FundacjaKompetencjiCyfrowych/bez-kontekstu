@@ -1,6 +1,8 @@
 {
   "next": "Next",
   "previous": "Previous",
+  "nextMasc": "Next",
+  "previousMasc": "Previous",
   "back": "Back",
   "home": "Home",
   "projects": "Projects",

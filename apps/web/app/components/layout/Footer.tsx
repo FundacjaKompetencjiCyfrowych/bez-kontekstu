@@ -11,8 +11,8 @@ type FooterData = {
 export async function Footer({ data }: { data: FooterData }) {
   const { links, socials } = data;
   return (
-    <footer className="pb-6 font-mono text-xs">
-      <div className="w-[90%] mx-auto border-t border-[#f5f5f5] pt-2 text-center text-[#f5f5f5]">
+    <footer className="pb-6 px-container font-space-mono text-xs">
+      <div className="w-full mx-auto border-t border-light-200 pt-2 text-center text-light-200">
         {/* Links */}
         {links?.map((link) => (
           <Link
@@ -39,7 +39,7 @@ export async function Footer({ data }: { data: FooterData }) {
               </Link>
             ))}
         </div>
-        <div className="text-[#3f3f42]">
+        <div className="text-muted">
           <span className="block lg:inline">
             Page made with <FiHeart size={15} className="inline-block text-white" aria-hidden="true" /> by{" "}
           </span>

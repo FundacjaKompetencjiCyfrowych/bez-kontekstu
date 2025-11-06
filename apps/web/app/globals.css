@@ -4,18 +4,34 @@
   --font-defectica: var(--font-defectica), sans-serif;
   --font-space-mono: var(--font-space-mono), monospace;
   --color-background: #0d0b0e;
-  --color-foreground: #fff;
+  --color-foreground: #f5f5f5;
   --color-muted: #a4a4a4;
+
+  --color-brand-500: #412bcc;
+  --color-brand-400: #523cdf;
+  --color-brand-300: #6852f5;
+  --color-brand-200: #7f6bfe;
+  --color-brand-100: #9584ff;
+
+  --color-light-500: #eaeaea;
+  --color-light-400: #f0f0f0;
+  --color-light-300: #f5f5f5;
+  --color-light-200: #f8f8f8;
+  --color-light-100: #ffffff;
+
+  --color-dark-500: #000000;
+  --color-dark-400: #0d0b0d;
+  --color-dark-300: #161416;
+  --color-dark-200: #252626;
+  --color-dark-100: #3f3f42;
 }
 
 @layer base {
-
   html,
   body {
     background-color: #0d0b0e;
   }
 
-  /* Accessibility: Focus styles for keyboard navigation */
   *:focus-visible {
     outline: 2px solid rgba(139, 92, 246, 0.5);
     outline-offset: 2px;
@@ -65,7 +81,6 @@
 }
 
 @layer utilities {
-
   /* Image slider animations */
   @keyframes fadeIn {
     0% {
@@ -105,7 +120,6 @@
 
   /* Neon glow effects for sounds page */
   @keyframes neonGlow {
-
     0%,
     100% {
       box-shadow:
@@ -149,5 +163,18 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
     /* Safari and Chrome */
+  }
+  /* Scrolling text in truncated tracklist */
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-scroll-text {
+    animation: scroll-text 8s linear infinite;
   }
 }

@@ -9,7 +9,7 @@ import { BlockContent } from "@/app/lib/sanity/types";
  */
 const components: PortableTextComponents = {
   block: {
-    normal: ({ children }) => <p className="mb-4">{children}</p>,
+    normal: ({ children }) => <p className="text-body mb-4 xl:mb-7">{children}</p>,
     h1: ({ children }) => <h1 className="">{children}</h1>,
     h2: ({ children }) => <h2 className="">{children}</h2>,
     h3: ({ children }) => <h3 className="">{children}</h3>,

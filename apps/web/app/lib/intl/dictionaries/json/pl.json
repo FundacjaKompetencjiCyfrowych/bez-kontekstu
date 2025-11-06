@@ -1,6 +1,8 @@
 {
-  "next": "Następny",
-  "previous": "Poprzedni",
+  "next": "Następna",
+  "previous": "Poprzednia",
+  "nextMasc": "Następny",
+  "previousMasc": "Poprzedni",
   "back": "Wstecz",
   "home": "Strona Główna",
   "projects": "Projekty",
@@ -37,7 +39,7 @@
     "privacy": "POLI TYK A PRY WAT NOŚCI"
   },
   "split2": {
-    "noContext": ["BEZ", "K O N TEKSTU"],
+    "noContext": ["BE Z", "K O N TEKSTU"],
     "manifest": ["MA N I", "F EST"],
     "projects": ["PR O", "J EKTY"],
     "collaborators": ["WSP Ó Ł", "P RACE"],
@@ -45,8 +47,8 @@
     "contact": ["KON T", "A CT"],
     "privacy": ["POLI TYK A", "PRY WAT NOŚCI"]
   },
-"donators": {
-  "yourSupport": "Twoje wsparcie",
-  "newArtSpaces": "nowe przestrzenie sztuki"
-}
+  "donators": {
+    "yourSupport": "Twoje wsparcie",
+    "newArtSpaces": "nowe przestrzenie sztuki"
+  }
 }

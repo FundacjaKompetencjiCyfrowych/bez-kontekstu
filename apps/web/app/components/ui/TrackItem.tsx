@@ -46,8 +46,9 @@ export function TrackItem({ title, isPlaying = false, duration, progress = 0, tr
         onClick={onPlay}
         aria-label={isPlaying ? `Pause ${title}` : `Play ${title}`}
         aria-pressed={isPlaying}
-        className={`relative hover:cursor-pointer md:bg-neutral-600/30 xl:bg-neutral-600/0 w-10 h-10 md:w-14 md:h-14 xl:align-middle rounded-full border-2 flex items-center justify-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50 ${isActive ? activeBorderStyle : inactiveBorderStyle
-          }`}
+        className={`relative hover:cursor-pointer md:bg-neutral-600/30 xl:bg-neutral-600/0 w-10 h-10 md:w-14 md:h-14 xl:align-middle rounded-full border-2 flex items-center justify-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50 ${
+          isActive ? activeBorderStyle : inactiveBorderStyle
+        }`}
       >
         {isPlaying ? (
           <FiPause width={30} height={30} className="md:w-10 md:h-10" />
@@ -59,8 +60,9 @@ export function TrackItem({ title, isPlaying = false, duration, progress = 0, tr
       {/* Song Name Field */}
       <div className="flex-1 relative">
         <div
-          className={`bg-black/30 flex items-center h-[40px] md:h-[50px] md:bg-neutral-600/30 xl:bg-neutral-600/0 border rounded-2xl px-4 py-2 transition-all duration-300 overflow-hidden relative ${isActive ? activeFieldStyle : inactiveFieldStyle
-            }`}
+          className={`bg-black/30 flex items-center h-[40px] md:h-[50px] md:bg-neutral-600/30 xl:bg-neutral-600/0 border rounded-2xl px-4 py-2 transition-all duration-300 overflow-hidden relative ${
+            isActive ? activeFieldStyle : inactiveFieldStyle
+          }`}
         >
           {/* Progress fill background */}
           {progress > 0 && (
@@ -75,9 +77,7 @@ export function TrackItem({ title, isPlaying = false, duration, progress = 0, tr
 
           {/* Duration */}
           {duration && (
-            <span className="relative z-10 text-white/60 font-mono text-xs md:text-sm tracking-wider ml-3 mr-3">
-              {duration}
-            </span>
+            <span className="relative z-10 text-white/60 font-mono text-xs md:text-sm tracking-wider ml-3 mr-3">{duration}</span>
           )}
 
           {/* Cloud Icon */}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { TrackItem } from "@/app/components/sounds/TrackItem";
+import { TrackItem } from "@/app/components/ui/TrackItem";
 import { cn } from "@/app/lib/utils";
 
 // SoundCloud Widget API types
@@ -20,17 +20,14 @@ interface SoundCloudWidget {
   pause(): void;
   toggle(): void;
   load(url: string, options?: { auto_play?: boolean }): void;
-  bind<T extends SoundCloudWidgetEvent>(
-    event: T,
-    callback: (data?: SoundCloudWidgetEventData[T]) => void
-  ): void;
+  bind<T extends SoundCloudWidgetEvent>(event: T, callback: (data?: SoundCloudWidgetEventData[T]) => void): void;
   unbind(event: string): void;
   getDuration(callback: (duration: number) => void): void;
   getPosition(callback: (position: number) => void): void;
 }
 
 interface SoundCloudWidgetConstructor {
-  new(iframe: HTMLIFrameElement): SoundCloudWidget;
+  new (iframe: HTMLIFrameElement): SoundCloudWidget;
 }
 
 interface SoundCloudNamespace {
@@ -224,28 +221,31 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   }, [stopProgressTracking]);
 
   // Try to play track with retry logic
-  const tryPlayTrack = useCallback((attempt: number = 0) => {
-    if (attempt > MAX_RETRY_ATTEMPTS) {
-      console.error("Failed to play track after multiple attempts");
-      return;
-    }
-
-    if (!widgetRef.current) return;
-
-    try {
-      widgetRef.current.play();
-      setIsPlaying(true);
-      // Start progress tracking when playing starts (in case play event doesn't fire)
-      setTimeout(() => {
-        startProgressTracking();
-      }, TIMEOUTS.PROGRESS_START_DELAY);
-    } catch (error) {
-      console.error(`Error playing track (attempt ${attempt + 1}):`, error);
-      if (attempt < MAX_RETRY_ATTEMPTS) {
-        setTimeout(() => tryPlayTrack(attempt + 1), TIMEOUTS.RETRY_DELAY * (attempt + 1));
+  const tryPlayTrack = useCallback(
+    (attempt: number = 0) => {
+      if (attempt > MAX_RETRY_ATTEMPTS) {
+        console.error("Failed to play track after multiple attempts");
+        return;
       }
-    }
-  }, [startProgressTracking]);
+
+      if (!widgetRef.current) return;
+
+      try {
+        widgetRef.current.play();
+        setIsPlaying(true);
+        // Start progress tracking when playing starts (in case play event doesn't fire)
+        setTimeout(() => {
+          startProgressTracking();
+        }, TIMEOUTS.PROGRESS_START_DELAY);
+      } catch (error) {
+        console.error(`Error playing track (attempt ${attempt + 1}):`, error);
+        if (attempt < MAX_RETRY_ATTEMPTS) {
+          setTimeout(() => tryPlayTrack(attempt + 1), TIMEOUTS.RETRY_DELAY * (attempt + 1));
+        }
+      }
+    },
+    [startProgressTracking]
+  );
 
   // Update track duration in state
   const updateTrackDuration = useCallback((trackIndex: number, duration: number) => {
@@ -256,50 +256,53 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   }, []);
 
   // Bind widget events
-  const bindWidgetEvents = useCallback((trackUrl: string, autoPlay: boolean) => {
-    if (!widgetRef.current) return;
+  const bindWidgetEvents = useCallback(
+    (trackUrl: string, autoPlay: boolean) => {
+      if (!widgetRef.current) return;
 
-    const trackIndex = SOUNDCLOUD_TRACKS.findIndex((url) => url === trackUrl);
+      const trackIndex = SOUNDCLOUD_TRACKS.findIndex((url) => url === trackUrl);
 
-    widgetRef.current.bind("ready", () => {
-      // Get track duration
-      if (widgetRef.current) {
+      widgetRef.current.bind("ready", () => {
+        // Get track duration
+        if (widgetRef.current) {
+          setTimeout(() => {
+            widgetRef.current?.getDuration((duration: number) => {
+              updateTrackDuration(trackIndex, duration);
+            });
+          }, TIMEOUTS.DURATION_FETCH);
+        }
+
+        // Auto-play if requested
+        if (autoPlay && widgetRef.current) {
+          setTimeout(() => {
+            widgetRef.current && tryPlayTrack();
+          }, TIMEOUTS.AUTO_PLAY);
+        }
+      });
+
+      widgetRef.current.bind("play", () => {
+        setIsPlaying(true);
+        // Start tracking after a small delay to ensure widget is ready
         setTimeout(() => {
-          widgetRef.current?.getDuration((duration: number) => {
-            updateTrackDuration(trackIndex, duration);
-          });
-        }, TIMEOUTS.DURATION_FETCH);
-      }
+          startProgressTracking();
+        }, TIMEOUTS.PLAY_EVENT_DELAY);
+      });
 
-      // Auto-play if requested
-      if (autoPlay && widgetRef.current) {
-        setTimeout(() => {
-          widgetRef.current && tryPlayTrack();
-        }, TIMEOUTS.AUTO_PLAY);
-      }
-    });
+      widgetRef.current.bind("pause", () => {
+        setIsPlaying(false);
+        stopProgressTracking();
+      });
 
-    widgetRef.current.bind("play", () => {
-      setIsPlaying(true);
-      // Start tracking after a small delay to ensure widget is ready
-      setTimeout(() => {
-        startProgressTracking();
-      }, TIMEOUTS.PLAY_EVENT_DELAY);
-    });
-
-    widgetRef.current.bind("pause", () => {
-      setIsPlaying(false);
-      stopProgressTracking();
-    });
-
-    widgetRef.current.bind("finish", () => {
-      setCurrentTrack(null);
-      resetTrackState();
-    });
-    widgetRef.current.bind("error", (error: unknown) => {
-      console.error("SoundCloud widget error:", error);
-    });
-  }, [tryPlayTrack, startProgressTracking, stopProgressTracking, updateTrackDuration, resetTrackState]);
+      widgetRef.current.bind("finish", () => {
+        setCurrentTrack(null);
+        resetTrackState();
+      });
+      widgetRef.current.bind("error", (error: unknown) => {
+        console.error("SoundCloud widget error:", error);
+      });
+    },
+    [tryPlayTrack, startProgressTracking, stopProgressTracking, updateTrackDuration, resetTrackState]
+  );
 
   // Cleanup on unmount
   useEffect(() => {
@@ -323,33 +326,36 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   }, []);
 
   // Initialize widget when API is ready or when track changes
-  const initializeWidget = useCallback((trackUrl: string, autoPlay: boolean = false) => {
-    if (!isApiReady || !iframeRef.current || !window.SC?.Widget) {
-      return;
-    }
-
-    destroyWidget();
-
-    // Update iframe src
-    if (iframeRef.current) {
-      iframeRef.current.src = getSoundCloudEmbedUrl(trackUrl);
-    }
-
-    // Wait for iframe to update, then create new widget
-    setTimeout(() => {
-      if (!iframeRef.current || !window.SC?.Widget) {
-        console.warn("Cannot create widget: iframe or API not available");
+  const initializeWidget = useCallback(
+    (trackUrl: string, autoPlay: boolean = false) => {
+      if (!isApiReady || !iframeRef.current || !window.SC?.Widget) {
         return;
       }
 
-      try {
-        widgetRef.current = new window.SC.Widget(iframeRef.current);
-        bindWidgetEvents(trackUrl, autoPlay);
-      } catch (error) {
-        console.error("Error creating SoundCloud widget:", error);
+      destroyWidget();
+
+      // Update iframe src
+      if (iframeRef.current) {
+        iframeRef.current.src = getSoundCloudEmbedUrl(trackUrl);
       }
-    }, TIMEOUTS.IFRAME_LOAD);
-  }, [isApiReady, bindWidgetEvents, destroyWidget]);
+
+      // Wait for iframe to update, then create new widget
+      setTimeout(() => {
+        if (!iframeRef.current || !window.SC?.Widget) {
+          console.warn("Cannot create widget: iframe or API not available");
+          return;
+        }
+
+        try {
+          widgetRef.current = new window.SC.Widget(iframeRef.current);
+          bindWidgetEvents(trackUrl, autoPlay);
+        } catch (error) {
+          console.error("Error creating SoundCloud widget:", error);
+        }
+      }, TIMEOUTS.IFRAME_LOAD);
+    },
+    [isApiReady, bindWidgetEvents, destroyWidget]
+  );
 
   // Load titles and durations for all tracks when API is ready
   useEffect(() => {
@@ -441,28 +447,31 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
     }
   }, [isApiReady, initializeWidget]);
 
-  const handleTrackToggle = useCallback((index: number) => {
-    const trackUrl = SOUNDCLOUD_TRACKS[index];
-    if (!trackUrl) return;
+  const handleTrackToggle = useCallback(
+    (index: number) => {
+      const trackUrl = SOUNDCLOUD_TRACKS[index];
+      if (!trackUrl) return;
 
-    if (currentTrack === index) {
-      // Same track - toggle play/pause
-      if (widgetRef.current) {
-        if (isPlaying) {
-          widgetRef.current.pause();
-          setIsPlaying(false);
-        } else {
-          widgetRef.current.play();
-          setIsPlaying(true);
+      if (currentTrack === index) {
+        // Same track - toggle play/pause
+        if (widgetRef.current) {
+          if (isPlaying) {
+            widgetRef.current.pause();
+            setIsPlaying(false);
+          } else {
+            widgetRef.current.play();
+            setIsPlaying(true);
+          }
         }
+      } else {
+        // Different track - create new widget with this track
+        setCurrentTrack(index);
+        resetTrackState();
+        initializeWidget(trackUrl, true);
       }
-    } else {
-      // Different track - create new widget with this track
-      setCurrentTrack(index);
-      resetTrackState();
-      initializeWidget(trackUrl, true);
-    }
-  }, [currentTrack, isPlaying, initializeWidget, resetTrackState]);
+    },
+    [currentTrack, isPlaying, initializeWidget, resetTrackState]
+  );
 
   return (
     <div role="list" aria-label="Tracklist" className={cn("space-y-3", className)}>

@@ -1,7 +1,9 @@
-import { Image } from "./cms/ContentImage";
-import { ImageCard } from "./ImageCard";
-import { Slider } from "./Slider";
-import titleCutWord from "@/app/lib/titleCutWord";
+import { Image } from "@/app/components/cms/ContentImage";
+import { ImageCard } from "@/app/components/image/ImageCard";
+import { Slider } from "@/app/components/image/Slider";
+import { SectionContainer } from "../layout/SectionContainer";
+import { SplitTitle } from "../ui/SplitTitle";
+import { Logo } from "./Logo";
 
 type CollectionItem = {
   name?: string | null;
@@ -18,18 +20,16 @@ type CollectionShowcaseProps = {
   collection: CollectionItem[];
   directory: string;
   title?: string[];
+  srTitle: string;
 };
 
 /* CollectionShowcase: displays a collection of items as a vertical stack on mobile/tablet and a horizontal slider on desktop */
-export function CollectionShowcase({ collection = [], lang, directory, title }: CollectionShowcaseProps) {
+export function CollectionShowcase({ collection = [], lang, directory, title, srTitle }: CollectionShowcaseProps) {
   return (
-    <div className="relative flex xl:justify-center xl:items-center flex-1 xl:min-h-[900px]">
-      <div className="hidden xl:block absolute right-0 top-0 text-right">
-        {titleCutWord(title?.[0] || "", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
-      </div>
-      <div className="hidden xl:block absolute left-0 bottom-0 text-left">
-        {titleCutWord(title?.[1] || "", "sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:ml-0 xl:mt-0 ml-2 sm:ml-3 mt-2 sm:mt-3")}
-      </div>
+    <SectionContainer variant="heroBoxedOnDesktop">
+      <Logo container="mobileOffset" />
+      <SplitTitle variant="hero" desktop="topRight" desktopText={title ? title[0] : ""} srText={srTitle} srId="collection-title" />
+      <SplitTitle variant="hero" desktop="bottomLeft" desktopText={title ? title[1] : ""} srText={null} />
 
       <section className="xl:overflow-hidden h-auto mx-auto flex flex-col items-center mt-[50px] xl:mt-0 w-full max-w-[1600px]">
         <div className="w-[85vw] md:w-[70vw] xl:w-full text-center text-md sm:text-3xl md:text-4xl lg:text-5xl">
@@ -73,6 +73,6 @@ export function CollectionShowcase({ collection = [], lang, directory, title }: 
           </div>
         </div>
       </section>
-    </div>
+    </SectionContainer>
   );
 }
