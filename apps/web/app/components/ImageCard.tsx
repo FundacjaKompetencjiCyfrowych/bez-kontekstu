@@ -21,8 +21,12 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
   return (
     <Link
       href={href}
-      className={cn("group block transition-all duration-300", variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105")}
+      className={cn(
+        "group block transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded",
+        variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105"
+      )}
       rel="noopener noreferrer"
+      aria-label={`View ${title}${tag ? ` (${tag})` : ""}`}
     >
       <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "aspect-[5/3] mb-5" : "h-[500px]")}>
         {image ? (
@@ -45,6 +49,7 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
             "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none",
             isMobile ? "h-20" : "h-24 xl:opacity-0 xl:group-hover:opacity-100 xl:transition-opacity xl:duration-300"
           )}
+          aria-hidden="true"
         />
         <div
           className={cn(

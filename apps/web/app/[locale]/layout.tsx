@@ -60,9 +60,18 @@ export default async function RootLayout({
       <IntlProvider locale={locale} dictionary={dict}>
         <body className={`antialiased text-foreground ${defectica.variable} ${spaceMono.variable}`}>
           <LenisScrollProvider>
+            {/* Skip to main content link for screen readers */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-violet-400 focus:text-white focus:rounded focus:ring-2 focus:ring-violet-600"
+            >
+              Skip to main content
+            </a>
             <div className="min-h-screen max-w-6xl mx-auto flex flex-col w-full">
               <Navigation />
-              <main className="flex flex-col flex-1 relative">{children}</main>
+              <main id="main-content" className="flex flex-col flex-1 relative" tabIndex={-1}>
+                {children}
+              </main>
               <Footer data={data?.footer || {}} />
             </div>
           </LenisScrollProvider>

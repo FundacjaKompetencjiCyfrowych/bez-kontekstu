@@ -22,7 +22,12 @@ export function SectionButton({ href, label, newTab, className = "" }: SectionBu
 
   return (
     <div className="relative flex justify-center items-center z-10">
-      <Link href={href} className={baseClasses} target={newTab ? "_blank" : "_self"} rel="noopener noreferrer">
+      <Link
+        href={href}
+        className={`${baseClasses} focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50`}
+        target={newTab ? "_blank" : "_self"}
+        rel="noopener noreferrer"
+      >
         {label}
       </Link>
     </div>
