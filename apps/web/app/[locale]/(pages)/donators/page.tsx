@@ -46,17 +46,19 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
           )}
         </div>
 
-        {/* Two column layout for desktop */}
-        <div className="relative xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">
-          {/* Left Column - Empty space */}
-          <div className="xl:col-span-1"></div>
+        {/* Support message - Desktop and Mobile in one place */}
+        <div className="relative mt-[100px] xl:mt-[100px] xl:grid xl:grid-cols-2 xl:gap-16 xl:w-full xl:max-w-7xl xl:mx-auto">
+          {/* Left Column - Empty space (desktop only) */}
+          <div className="hidden xl:block xl:col-span-1"></div>
 
           {/* Right Column - Support message */}
-          <div className="xl:col-span-1 xl:flex xl:items-center">
-            <div className="hidden xl:flex flex-col text-left font-mono xl:text-4xl xl:leading-12">
-              <p>Twoje wsparcie</p>
-              <p>=</p>
-              <p>nowe przestrzenie sztuki</p>
+          <div className="xl:col-span-1 xl:flex xl:items-center md:landscape:ml-50 xl:landscape:ml-0">
+            <div className="relative text-sm my-12 mx-3 py-10 pl-3 md:text-2xl  xl:my-0 xl:mx-0 xl:py-0 xl:pl-0">
+              <div className={`flex flex-col text-left font-mono sm:text-2xl lg:text-5xl leading-8 md:leading-14 xl:text-4xl xl:leading-12`}>
+                <p>{dictionary.donators.yourSupport}</p>
+                <p>=</p>
+                <p>{dictionary.donators.newArtSpaces}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -64,14 +66,6 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
 
       {/* Rest of content */}
       <div className="max-w-4xl xl:max-w-7xl mx-auto relative">
-        {/* Support section - Mobile/Tablet */}
-        <section className="relative text-sm my-12 mx-3 mt-[100px] py-10 text-left xl:hidden">
-          <div className="pl-3 mx-auto flex flex-col sm:text-2xl md:text-2xl lg:text-5xl font-mono">
-            <p className="leading-8  md:leading-14 ">Twoje wsparcie</p>
-            <p className="leading-8  md:leading-14">=</p>
-            <p className="leading-8  md:leading-14">nowe przestrzenie sztuki</p>
-          </div>
-        </section>
 
         {/* Info - Desktop 2-column layout */}
         <div className="relative mb-8 text-sm z-50 xl:grid xl:grid-cols-2 xl:gap-16 xl:max-w-7xl xl:mx-auto xl:py-20">
