@@ -234,13 +234,14 @@ export function RandomRectangles({ images, className }: { images: { image: Image
           <Link
             key={rect.id}
             href={`/projects/${rect.slug}`}
-            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden"
+            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded"
             style={{
               left: `${rect.x}%`,
               top: `${rect.y}%`,
               width: `${rect.width}%`,
               aspectRatio: "2/1",
             }}
+            aria-label={`View project: ${rect.slug}`}
           >
             <ContentImage
               image={rect.image}

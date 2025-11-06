@@ -20,10 +20,11 @@ export function TeamGrid({ members }: TeamGridProps) {
         <Link
           href={`/cooperators/${member?.slug?.current || ""}`}
           key={member._id}
-          className="relative w-full aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden hover:scale-105 transition-all duration-300 ease-in-out rounded-sm"
+          className="relative w-full aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden hover:scale-105 transition-all duration-300 ease-in-out rounded-sm focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50"
+          aria-label={`View collaborator: ${member.name || "Unknown"}`}
         >
           {member.image && <ContentImage image={member.image} fill sizes={twSizes("42vw md:390px")} aspect={4 / 3} />}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" aria-hidden="true" />
           <h3 className="relative z-10 text-sm md:text-base text-white font-medium">{member.name}</h3>
         </Link>
       ))}
