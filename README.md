@@ -2,6 +2,9 @@
 
 A showcase website presenting the foundation's activities, its mission, projects, and collaborators.
 
+This website was created by the Digital Competence Foundation as part of the "Strona Od Nowa 2.0" project.
+The team was formed remotely and included Project Managers, Designers, and Developers.
+
 ## Stack
 
 - TypeScript
@@ -43,6 +46,7 @@ apps/
 - **Content Management** - Sanity CMS for managing content
 - **Modern UI** - Custom animations, smooth scrolling, and interactive components
 - **SEO Optimized** - Server-side rendering with Next.js App Router
+- **Accessibility**
 - **Scroll-triggered Animations**
 
 ## Unique Features
