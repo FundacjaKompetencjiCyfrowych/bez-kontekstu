@@ -5,12 +5,25 @@ import { TrackItem } from "@/app/components/sounds/TrackItem";
 import { cn } from "@/app/lib/utils";
 
 // SoundCloud Widget API types
+type SoundCloudWidgetEvent = "ready" | "play" | "pause" | "finish" | "error";
+
+type SoundCloudWidgetEventData = {
+  ready: undefined;
+  play: undefined;
+  pause: undefined;
+  finish: undefined;
+  error: unknown;
+};
+
 interface SoundCloudWidget {
   play(): void;
   pause(): void;
   toggle(): void;
   load(url: string, options?: { auto_play?: boolean }): void;
-  bind(event: string, callback: (data?: any) => void): void;
+  bind<T extends SoundCloudWidgetEvent>(
+    event: T,
+    callback: (data?: SoundCloudWidgetEventData[T]) => void
+  ): void;
   unbind(event: string): void;
   getDuration(callback: (duration: number) => void): void;
   getPosition(callback: (position: number) => void): void;
@@ -283,7 +296,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
       setCurrentTrack(null);
       resetTrackState();
     });
-    widgetRef.current.bind("error", (error: any) => {
+    widgetRef.current.bind("error", (error: unknown) => {
       console.error("SoundCloud widget error:", error);
     });
   }, [tryPlayTrack, startProgressTracking, stopProgressTracking, updateTrackDuration, resetTrackState]);
