@@ -76,8 +76,6 @@ interface SoundsClientProps {
   className?: string;
 }
 
-const TEST_SOUND_URL = "https://www.youtube.com/watch?v=hTWKbfoikeg";
-
 // Extract YouTube video ID from URL
 const getYouTubeVideoId = (url: string): string | null => {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
@@ -90,6 +88,8 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<YouTubePlayer | null>(null);
   const shouldAutoPlayRef = useRef<boolean>(false);
+
+  const TEST_SOUND_URL = "https://www.youtube.com/watch?v=hTWKbfoikeg";
 
   // Initialize YouTube player for specific track index
   const initializePlayer = useCallback((trackIndex: number, autoPlay: boolean = false) => {

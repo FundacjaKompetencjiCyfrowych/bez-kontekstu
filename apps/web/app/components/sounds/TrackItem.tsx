@@ -35,8 +35,6 @@ export function TrackItem({ title, isPlaying = false, onPlay }: TrackItemProps) 
         <div
           className={`bg-black/30 flex items-center h-[40px] md:h-[50px] md:bg-neutral-600/30 xl:bg-neutral-600/0 border rounded-2xl px-4 py-2 transition-all duration-300 ${isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 "
             }`}
-          className={`bg-black/30 flex items-center h-[40px] md:h-[50px] md:bg-neutral-600/30 xl:bg-neutral-600/0 border rounded-2xl px-4 py-2 transition-all duration-300 ${isHovered || isPlaying ? "border-purple-400 shadow-lg shadow-purple-400/30" : "border-purple-400/40 "
-            }`}
         >
           <span className="text-white font-mono text-sm md:text-xl tracking-wider">{title}</span>
 
