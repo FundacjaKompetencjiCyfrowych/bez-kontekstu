@@ -68,14 +68,15 @@ export function Navigation() {
               )}
             >
               {/* Menu items */}
-              <div className="overflow-hidden pb-5 absolute bottom-0 left-0 right-0">
+              <div id="mobile-menu" className="overflow-hidden pb-5 absolute bottom-0 left-0 right-0" role="menu">
                 {navigationItems.map((item) => (
                   <div key={item.href} className="mx-6">
                     <Link
                       href={item.href}
-                      className="text-gray-200 hover:text-violet-400 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica"
+                      className="text-gray-200 hover:text-violet-400 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50"
                       onClick={() => setIsMenuOpen(false)}
                       rel="noopener noreferrer"
+                      role="menuitem"
                     >
                       {dictionary[item.key].toLocaleUpperCase()}
                     </Link>
@@ -88,22 +89,26 @@ export function Navigation() {
             {/* Toggler */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center cursor-pointer"
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
-              <MenuIcon className={`w-12 h-12 top-[-28px] `} />
+              <MenuIcon className={`w-12 h-12 top-[-28px] `} aria-hidden="true" />
             </button>
           </div>
         </div>
       )}
 
       {/* Desktop */}
-      <div className="hidden xl:flex justify-between py-5 items-center">
+      <div className="hidden xl:flex justify-between py-5 items-center" role="menubar">
         {navigationItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="text-muted hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica"
+            className="text-muted hover:text-white text-center text-sm xl:text-xl font-medium transition-colors font-defectica focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded"
             rel="noopener noreferrer"
+            role="menuitem"
           >
             {dictionary[item.key].toLocaleUpperCase()}
           </Link>

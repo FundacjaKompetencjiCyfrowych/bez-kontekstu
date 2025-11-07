@@ -104,12 +104,12 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
             onClick={goToPrevStep}
             disabled={isFirstSlide}
             className={cn(
-              "transition-all duration-200 flex-shrink-0",
+              "transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded",
               isFirstSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
             )}
             aria-label={dictionary.previousSlide}
           >
-            <FiChevronLeft width={25} height={25} />
+            <FiChevronLeft width={25} height={25} aria-hidden="true" />
           </button>
 
           <div className="flex items-center space-x-2 text-white font-mono text-sm">
@@ -122,12 +122,12 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
             onClick={goToNextStep}
             disabled={isLastSlide}
             className={cn(
-              "transition-all duration-200 flex-shrink-0",
+              "transition-all duration-200 flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded",
               isLastSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
             )}
             aria-label={dictionary.nextSlide}
           >
-            <FiChevronRight width={25} height={25} />
+            <FiChevronRight width={25} height={25} aria-hidden="true" />
           </button>
         </div>
       )}

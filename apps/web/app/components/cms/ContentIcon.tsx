@@ -59,5 +59,6 @@ type IconName = keyof typeof iconMap;
 export function ContentIcon({ name, ...props }: IconBaseProps) {
   if (!name || name in iconMap === false) return null;
   const IconComponent = iconMap[name as IconName];
-  return <IconComponent {...props} />;
+  // Icons are decorative by default - parent should provide aria-label if needed
+  return <IconComponent {...props} aria-hidden="true" />;
 }
