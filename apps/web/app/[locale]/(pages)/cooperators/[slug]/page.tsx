@@ -60,7 +60,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                 {description && <p>{description}</p>}
                 {socials && socials?.length > 0 && (
                   <div className="flex gap-8 justify-between">
-                    <h2>Social media:</h2>
+                    <div>Social media:</div>
                     <div className="flex flex-col gap-6">
                       {socials.map((social) => (
                         <a
@@ -79,7 +79,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                 )}
                 {projects && projects?.length > 0 && (
                   <div className="md:flex space-y-6 gap-8 justify-between">
-                    <h2 className="font-bold xl:font-normal">{dictionary.projects}:</h2>
+                    <div className="font-bold xl:font-normal">{dictionary.projects}:</div>
                     <div className="flex flex-col gap-2 xl:gap-6 text-right">
                       {projects.map((project: string) => (
                         <span key={project}>{project}</span>

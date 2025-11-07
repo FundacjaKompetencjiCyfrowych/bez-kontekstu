@@ -66,7 +66,7 @@ export default async function RootLayout({
             >
               Skip to main content
             </a>
-            <div className="min-h-screen max-w-6xl mx-auto flex flex-col w-full">
+            <div className="min-h-screen mx-auto flex flex-col w-full max-w-[1330px]">
               <Navigation />
               <main id="main-content" className="flex flex-col flex-1 relative">
                 {children}

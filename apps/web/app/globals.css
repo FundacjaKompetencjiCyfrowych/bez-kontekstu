@@ -26,6 +26,21 @@
   --color-dark-100: #3f3f42;
 }
 
+@utility glass {
+  @apply bg-white/5 backdrop-blur-md backdrop-sepia-[0.1] backdrop-brightness-150 backdrop-saturate-[1.8] border shadow-xl;
+}
+@utility px-container {
+  @apply px-8 lg:px-[5rem];
+}
+@utility text-body {
+  @apply text-[1rem] leading-[1.5rem] xl:text-[1.6rem] xl:leading-[2.4rem];
+}
+@utility text-emphasis {
+  @apply text-[1.25rem] leading-[2rem] xl:text-[2rem] xl:leading-[3rem];
+}
+@custom-variant xl-tall (@media (min-width: 80rem) and (min-height: 56rem));
+@custom-variant tall (@media (min-height: 56rem));
+
 @layer base {
   html,
   body {
@@ -48,35 +63,6 @@
     overflow: visible;
     clip: auto;
     white-space: normal;
-  }
-
-  h2 {
-    font-family: var(--font-defectica);
-    font-size: 42px;
-    color: white;
-    line-height: 1;
-  }
-
-  /* Responsive h1 sizes for tablets and desktop */
-  @media (min-width: 768px) {
-    h2 {
-      font-size: 72px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h2 {
-      font-size: 84px;
-    }
-  }
-
-  h3 {
-    font-family: var(--font-defectica);
-    font-size: 32px;
-  }
-
-  button {
-    font-family: var(--font-space-mono);
   }
 }
 
