@@ -43,5 +43,9 @@
     "collaborators": ["WSP Ó Ł", "P RACE"],
     "support": ["DL A", "DAR CZYŃCÓW"],
     "contact": ["KON T", "A CT"]
-  }
+  },
+"donators": {
+  "yourSupport": "Twoje wsparcie",
+  "newArtSpaces": "nowe przestrzenie sztuki"
+}
 }
