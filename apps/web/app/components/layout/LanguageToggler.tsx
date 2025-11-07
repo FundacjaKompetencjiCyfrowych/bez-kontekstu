@@ -30,9 +30,10 @@ export function LanguageToggler({ variant }: { variant: "mobile" | "desktop" }) 
                 className="sr-only peer"
                 aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
               />
-              <div className="relative w-13 h-7 bg-neutral-600 peer-focus:outline-none rounded-full peer flex items-center">
+              <div className="relative w-13 h-7 bg-neutral-600 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-violet-400 peer-focus:ring-opacity-50 rounded-full peer flex items-center">
                 <div
                   className={`w-5 h-5 bg-white border border-gray-300 rounded-full transition-all duration-300 transform ${locale === "en" ? "translate-x-7" : "translate-x-1"}`}
+                  aria-hidden="true"
                 ></div>
               </div>
             </label>
@@ -47,9 +48,13 @@ export function LanguageToggler({ variant }: { variant: "mobile" | "desktop" }) 
   }
 
   return (
-    <button onClick={toggleLanguage} aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`} className="cursor-pointer">
+    <button
+      onClick={toggleLanguage}
+      aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
+      className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded"
+    >
       <div className="text-muted flex items-center justify-center gap-3 hover:text-white transition-colors duration-300">
-        <FiGlobe size={20} />
+        <FiGlobe size={20} aria-hidden="true" />
         <span className={`text-sm xl:text-lg font-defectica leading-0 pt-1`}>{locale === "en" ? "EN" : "PL"}</span>
       </div>
     </button>

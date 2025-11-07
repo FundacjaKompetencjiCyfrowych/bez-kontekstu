@@ -69,12 +69,14 @@ interface Track {
 interface SoundsClientProps {
   tracks: Track[];
   dictionary: {
-    tracklist: string[];
+    tracklist: string;
     playing: string;
     play: string;
   };
   className?: string;
 }
+
+const TEST_SOUND_URL = "https://www.youtube.com/watch?v=hTWKbfoikeg";
 
 // Extract YouTube video ID from URL
 const getYouTubeVideoId = (url: string): string | null => {
@@ -91,7 +93,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
 
   // Initialize YouTube player for specific track index
   const initializePlayer = useCallback((trackIndex: number, autoPlay: boolean = false) => {
-    const trackUrl = dictionary.tracklist[trackIndex];
+    const trackUrl = TEST_SOUND_URL;
     if (!trackUrl) return;
 
     const videoId = getYouTubeVideoId(trackUrl);
@@ -174,7 +176,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
         },
       },
     });
-  }, [dictionary.tracklist]);
+  }, [TEST_SOUND_URL]);
 
   // Load YouTube IFrame API
   useEffect(() => {
@@ -238,7 +240,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
       if (window.YT?.Player) {
         // If player exists, try to load video directly
         if (playerRef.current && typeof playerRef.current.loadVideoById === "function") {
-          const trackUrl = dictionary.tracklist[index];
+          const trackUrl = TEST_SOUND_URL;
           const videoId = getYouTubeVideoId(trackUrl);
           if (videoId) {
             try {
@@ -273,9 +275,9 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
 
   // Get current video ID for iframe src
   const currentVideoId =
-    currentTrack !== null && dictionary.tracklist[currentTrack]
-      ? getYouTubeVideoId(dictionary.tracklist[currentTrack])
-      : getYouTubeVideoId(dictionary.tracklist[0] || "");
+    currentTrack !== null && TEST_SOUND_URL
+      ? getYouTubeVideoId(TEST_SOUND_URL)
+      : getYouTubeVideoId(TEST_SOUND_URL || "");
 
   return (
     <div role="list" aria-label="Tracklist" className={cn("space-y-3", className)}>
@@ -299,7 +301,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
 
       {tracks.map((track, index) => {
         // Only show tracks that have URLs in tracklist
-        const trackUrl = dictionary.tracklist[index];
+        const trackUrl = TEST_SOUND_URL;
         if (!trackUrl) return null;
 
         return (

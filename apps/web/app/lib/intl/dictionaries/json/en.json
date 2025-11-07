@@ -16,7 +16,7 @@
   "copied": "Copied!",
   "copiedToClipboard": "Copied to clipboard",
   "track": "Track Name",
-  "tracklist": ["https://www.youtube.com/watch?v=E0ozmU9cJDg", "https://www.youtube.com/watch?v=hTWKbfoikeg"],
+  "tracklist": "Tracklist",
   "playing": "Playing",
   "play": "Click to Play",
   "loading": "Loading...",
@@ -33,14 +33,18 @@
     "collaborators": "COL LABO RATORS",
     "support": "SU PPO RT",
     "sounds": "BEATS'N' PIECES",
-    "contact": "KON TA CT"
+    "contact": "CON TA CT"
   },
   "split2": {
     "noContext": ["NO", "C O N TEXT"],
     "manifest": ["MA N I", "F EST"],
     "projects": ["PR O", "J ECTS"],
-    "collaborators": ["COL LA B", "O RE TORS"],
-    "support": ["SU P", "P P ORT"],
+    "collaborators": ["COL LA B", "O RA TORS"],
+    "support": ["SU P", "P ORT"],
     "contact": ["CON T", "A CT"]
+  },
+  "donators": {
+    "yourSupport": "Your support",
+    "newArtSpaces": "new art spaces"
   }
 }

@@ -152,7 +152,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
 
             <div className="mb-8 flex flex-row gap-2 justify-between">
               <div className="flex flex-col gap-2">
-                <h3 className="text-xl lg:text-base mb-4">social media:</h3>
+                <h3 className="text-xl lg:text-base mb-4">{socials ? "Social media:" : ""}</h3>
               </div>
 
               <div className="flex flex-col gap-2">
@@ -175,7 +175,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
 
             <div className="mb-12 flex flex-row gap-2 justify-between">
               <div className="flex flex-row gap-2 ">
-                <h3 className="text-xl lg:text-base mb-4 font-bold">projekty:</h3>
+                < h3 className="text-xl lg:text-base mb-4 font-bold">{projects ? dictionary.projects : ""}</h3>
               </div>
 
               <div className="flex flex-col gap-2">

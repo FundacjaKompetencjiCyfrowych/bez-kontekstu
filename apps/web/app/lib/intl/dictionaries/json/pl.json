@@ -16,7 +16,7 @@
   "copied": "Skopiowano!",
   "copiedToClipboard": "Text został skopiowany do schowka",
   "track": "Nazwa utworu",
-  "tracklist": ["https://www.youtube.com/watch?v=E0ozmU9cJDg","https://www.youtube.com/watch?v=hTWKbfoikeg","https://www.youtube.com/watch?v=YEEBCSComdM"],
+  "tracklist": "Lista utworów",
   "playing": "Odtwarzanie",
   "play": "Kliknij, aby odtworzyć",
   "loading": "Ładowanie...",
@@ -42,5 +42,9 @@
     "collaborators": ["WSP Ó Ł", "P RACE"],
     "support": ["DL A", "DAR CZYŃCÓW"],
     "contact": ["KON T", "A CT"]
+  },
+  "donators": {
+    "yourSupport": "Twoje wsparcie",
+    "newArtSpaces": "nowe przestrzenie sztuki"
   }
 }
