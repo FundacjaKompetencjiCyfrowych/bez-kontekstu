@@ -33,18 +33,20 @@
     "collaborators": "COL LABO RATORS",
     "support": "SU PPO RT",
     "sounds": "BEATS'N' PIECES",
-    "contact": "CON TA CT"
+    "contact": "CON TA CT",
+    "privacy": "PRI VACY POL ICY"
   },
   "split2": {
     "noContext": ["NO", "C O N TEXT"],
     "manifest": ["MA N I", "F EST"],
     "projects": ["PR O", "J ECTS"],
-    "collaborators": ["COL LA B", "O RA TORS"],
-    "support": ["SU P", "P ORT"],
-    "contact": ["CON T", "A CT"]
+    "collaborators": ["COL LA B", "O RE TORS"],
+    "support": ["SU P", "P P ORT"],
+    "contact": ["CON T", "A CT"],
+    "privacy": ["PRIV AC Y", "PO LICY"]
   },
-  "donators": {
-    "yourSupport": "Your support",
-    "newArtSpaces": "new art spaces"
-  }
+"donators": {
+  "yourSupport": "Your support",
+  "newArtSpaces": "new art spaces"
+}
 }
