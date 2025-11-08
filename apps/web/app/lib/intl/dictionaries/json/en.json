@@ -17,7 +17,7 @@
   "copyToClipboard": "Copy to clipboard",
   "copied": "Copied!",
   "copiedToClipboard": "Copied to clipboard",
-  "track": "Track Name",
+  "track": "",
   "tracklist": "Tracklist",
   "playing": "Playing",
   "play": "Click to Play",
@@ -47,8 +47,8 @@
     "contact": ["CON T", "A CT"],
     "privacy": ["PRIV AC Y", "PO LICY"]
   },
-"donators": {
-  "yourSupport": "Your support",
-  "newArtSpaces": "new art spaces"
-}
+  "donators": {
+    "yourSupport": "Your support",
+    "newArtSpaces": "new art spaces"
+  }
 }

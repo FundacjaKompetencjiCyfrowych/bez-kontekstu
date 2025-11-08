@@ -24,6 +24,7 @@ interface SoundCloudWidget {
   unbind(event: string): void;
   getDuration(callback: (duration: number) => void): void;
   getPosition(callback: (position: number) => void): void;
+  seekTo(position: number): void;
 }
 
 interface SoundCloudWidgetConstructor {
@@ -87,13 +88,6 @@ const getSoundCloudEmbedUrl = (trackUrl: string): string => {
   return `https://w.soundcloud.com/player/?url=${encodedUrl}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false`;
 };
 
-const formatDuration = (milliseconds: number): string => {
-  const totalSeconds = Math.floor(milliseconds / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-};
-
 const updateMap = <K, V>(map: Map<K, V>, key: K, value: V): Map<K, V> => {
   const newMap = new Map(map);
   newMap.set(key, value);
@@ -122,7 +116,7 @@ const fetchTrackTitle = async (trackUrl: string): Promise<string | null> => {
 export function SoundsClient({ tracks, dictionary, className }: SoundsClientProps) {
   const [currentTrack, setCurrentTrack] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [trackDurations, setTrackDurations] = useState<Map<number, string>>(new Map());
+  const [trackDurations, setTrackDurations] = useState<Map<number, number>>(new Map());
   const [trackTitles, setTrackTitles] = useState<Map<number, string>>(new Map());
   const [playbackProgress, setPlaybackProgress] = useState<number>(0); // 0-100
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -250,8 +244,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   // Update track duration in state
   const updateTrackDuration = useCallback((trackIndex: number, duration: number) => {
     if (trackIndex !== -1 && duration > 0) {
-      const formattedDuration = formatDuration(duration);
-      setTrackDurations((prev) => updateMap(prev, trackIndex, formattedDuration));
+      setTrackDurations((prev) => updateMap(prev, trackIndex, duration));
     }
   }, []);
 
@@ -452,25 +445,65 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
       const trackUrl = SOUNDCLOUD_TRACKS[index];
       if (!trackUrl) return;
 
-      if (currentTrack === index) {
-        // Same track - toggle play/pause
-        if (widgetRef.current) {
-          if (isPlaying) {
-            widgetRef.current.pause();
-            setIsPlaying(false);
-          } else {
-            widgetRef.current.play();
-            setIsPlaying(true);
-          }
+      // --- Optimistic UI update ---
+      if (currentTrack !== index) {
+        // Switch track: immediately mark as playing
+        setCurrentTrack(index);
+        setIsPlaying(true);
+        setPlaybackProgress(0);
+
+        // Load new widget (actual playback happens shortly after)
+        initializeWidget(trackUrl, true);
+        return;
+      }
+
+      // --- Same track toggling ---
+      if (!widgetRef.current) return;
+
+      if (isPlaying) {
+        // Optimistically pause
+        setIsPlaying(false);
+        try {
+          widgetRef.current.pause();
+        } catch (error) {
+          console.error("Pause failed:", error);
+          setIsPlaying(true); // revert if needed
         }
       } else {
-        // Different track - create new widget with this track
-        setCurrentTrack(index);
-        resetTrackState();
-        initializeWidget(trackUrl, true);
+        // Optimistically play
+        setIsPlaying(true);
+        try {
+          widgetRef.current.play();
+        } catch (error) {
+          console.error("Play failed:", error);
+          setIsPlaying(false); // revert if needed
+        }
       }
     },
-    [currentTrack, isPlaying, initializeWidget, resetTrackState]
+    [currentTrack, isPlaying, initializeWidget]
+  );
+
+  // Seek within the current track
+  const handleSeek = useCallback(
+    (newProgress: number) => {
+      if (!widgetRef.current || currentTrack === null) return;
+
+      widgetRef.current.getDuration((duration: number) => {
+        if (duration <= 0) return;
+
+        const newPosition = (newProgress / 100) * duration;
+
+        try {
+          widgetRef.current!.seekTo(newPosition);
+
+          // Update local progress immediately for smoother UI feedback
+          setPlaybackProgress(newProgress);
+        } catch (error) {
+          console.error("Error seeking in track:", error);
+        }
+      });
+    },
+    [currentTrack]
   );
 
   return (
@@ -488,8 +521,6 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
         height="100"
         allow="autoplay"
         title="SoundCloud audio player"
-        scrolling="no"
-        frameBorder="no"
       />
 
       {tracks.map((track, index) => {
@@ -512,6 +543,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
             duration={duration}
             progress={progress}
             trackUrl={trackUrl}
+            onSeek={handleSeek}
             onPlay={() => handleTrackToggle(index)}
             aria-label={`${trackTitle} - ${isTrackPlaying ? dictionary.playing : dictionary.play}`}
           />
