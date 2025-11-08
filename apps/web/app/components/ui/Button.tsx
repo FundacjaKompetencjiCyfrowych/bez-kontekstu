@@ -8,7 +8,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        glass: "glass border-brand-200/50 rounded-2xl transition-all duration-300",
+        glass: "glass border-brand-200/50 rounded-2xl transition-all duration-300 hover:bg-brand-200/30",
       },
     },
     defaultVariants: {

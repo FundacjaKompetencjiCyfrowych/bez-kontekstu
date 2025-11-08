@@ -268,7 +268,9 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
         // Auto-play if requested
         if (autoPlay && widgetRef.current) {
           setTimeout(() => {
-            widgetRef.current && tryPlayTrack();
+            if (widgetRef.current) {
+              tryPlayTrack();
+            }
           }, TIMEOUTS.AUTO_PLAY);
         }
       });

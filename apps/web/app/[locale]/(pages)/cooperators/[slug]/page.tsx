@@ -108,18 +108,14 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                 )}
               </div>
             </div>
-            <div className="hidden xl:flex justify-between">
-              {previous?.slug?.current && (
-                <NavigationButton variant="previous" asChild>
-                  <Link href={`/cooperators/${previous?.slug?.current}`}>{dictionary.previous}</Link>
-                </NavigationButton>
-              )}
-              {next?.slug?.current && (
-                <NavigationButton variant="next" asChild>
-                  <Link href={`/cooperators/${next?.slug?.current}`}>{dictionary.next}</Link>
-                </NavigationButton>
-              )}
-            </div>
+            <NavigationButtonGroup
+              previousSlug={previous?.slug?.current}
+              previousLabel={dictionary.previous}
+              nextSlug={next?.slug?.current}
+              nextLabel={dictionary.next}
+              pathname="cooperators"
+              className="hidden xl:flex"
+            />
           </div>
         </div>
         <NavigationButtonGroup
