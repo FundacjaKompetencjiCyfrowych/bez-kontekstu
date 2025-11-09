@@ -1,12 +1,13 @@
 import { Logo } from "@/app/components/image/Logo";
 import { PageContainer } from "@/app/components/layout/PageContainer";
-import { SplitTitle } from "@/app/components/ui/SplitTitle";
-import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { ContentText } from "@/app/components/cms/ContentText";
 import { sanityFetch } from "@/app/lib/sanity/live";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { privacyPageQuery } from "@/app/lib/sanity/queries";
 import { Metadata } from "next";
 import { cache } from "react";
+import { SectionContainer } from "@/app/components/layout/SectionContainer";
+import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
 const getPrivacyPage = cache(async (locale: string) => {
   return await sanityFetch({ query: privacyPageQuery, params: { lang: locale } });
@@ -20,32 +21,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function PrivacyPolicyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const { data } = await getPrivacyPage(locale);
   const dictionary = await getDictionary(locale);
-  console.log(data && "data received");
+  const { data } = await getPrivacyPage(locale);
   return (
     <PageContainer>
-      <Logo container="centered" />
-      <SplitTitle
-        mobileText={dictionary.split2.privacy[0]}
-        tabletText={dictionary.split2.privacy[0]}
-        desktopText={dictionary.split2.privacy[0]}
-        srText={dictionary.split2.privacy[0]}
-        srId="privacy-title"
-        variant="hero"
-      />
-      <SplitTitle
-        mobileText={dictionary.split2.privacy[1]}
-        tabletText={dictionary.split2.privacy[1]}
-        desktopText={dictionary.split2.privacy[1]}
-        srText={dictionary.split2.privacy[1]}
-        srId="privacy-title"
-        variant="hero"
-      />
-
-      <div className="flex flex-1 flex-col pt-10 xl:pt-0 font-mono sm:landscape:pt-10 xl:landscape:pt-0 md:text-xl xl:flex xl:justify-center xl:items-center xl:text-base">
-        <div className="xl:text-xl md:mx-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</div>
-      </div>
+      <SectionContainer className="pt-10">
+        <Logo container="mobileOffset" />
+        <h1 className="hidden xl:block font-defectica uppercase text-[2.5rem] md:text-[4rem] lg:text-[5.5rem] xl-tall:text-[8rem] leading-[0.8]">
+          {dictionary.privacy}
+        </h1>
+        <ContentText value={data?.content || []} />
+      </SectionContainer>
     </PageContainer>
   );
 }

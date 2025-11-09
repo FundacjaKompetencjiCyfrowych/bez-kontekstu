@@ -12,8 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 const logoVariants = cva("pointer-events-none w-full absolute", {
   variants: {
     container: {
-      mobileOffset: "grid place-items-center -top-0 h-[90vh] xl:h-full xl:top-auto",
-      justified: "h-full flex flex-col items-center",
+      mobileOffset: "grid place-items-center top-0 h-[90vh] xl:h-full xl:top-auto",
+      justified: "grid place-items-center top-0 left-0 h-[80vh]",
       centered: "h-full grid place-items-center",
     },
   },

@@ -41,6 +41,9 @@ export function NavigationMobile({ isMobileMenuEnabled, routePath }: MobileNavig
   }, [routePath]);
 
   const getMobilePageTitle = (path: string) => {
+    if (path === "/privacy") {
+      return { split: dictionary.split.privacy, sr: dictionary.privacy };
+    }
     const foundItem = navigationItems.find((item) => {
       if (item.href === path) return true;
       if (item.href === "/projects" && path.startsWith("/projects/")) return true;

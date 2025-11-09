@@ -61,6 +61,25 @@ export type LinkList = Array<
 
 export type UrlOrPath = string;
 
+export type BlockContentWithHeadings = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h2" | "h3" | "h4" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
 export type BlockContent = Array<{
   children?: Array<{
     marks?: Array<string>;
@@ -194,6 +213,7 @@ export type Privacy = {
   _rev: string;
   language?: string;
   meta?: Meta;
+  content?: BlockContentWithHeadings;
 };
 
 export type Cooperator = {
@@ -277,6 +297,7 @@ export type Sounds = {
   _rev: string;
   language?: string;
   meta?: Meta;
+  trackUrls?: Array<string>;
 };
 
 export type Donators = {
@@ -607,6 +628,7 @@ export type AllSanitySchemaTypes =
   | ImgOrVideo
   | LinkList
   | UrlOrPath
+  | BlockContentWithHeadings
   | BlockContent
   | IconPicker
   | TranslationMetadata
@@ -981,9 +1003,10 @@ export type HomePageQueryResult = {
   } | null;
 } | null;
 // Variable: soundsPageQuery
-// Query: *[_type == "sounds" && language == $lang][0]{  meta}
+// Query: *[_type == "sounds" && language == $lang][0]{  meta,  trackUrls}
 export type SoundsPageQueryResult = {
   meta: Meta | null;
+  trackUrls: Array<string> | null;
 } | null;
 // Variable: manifestPageQuery
 // Query: *[_type == "manifest" && language == $lang][0]{  meta,  hero,  sections}
@@ -1076,9 +1099,10 @@ export type DonatorsPageQueryResult = {
   }> | null;
 } | null;
 // Variable: privacyPageQuery
-// Query: *[_type == "privacy" && language == $lang][0]{  meta}
+// Query: *[_type == "privacy" && language == $lang][0]{  meta,  content}
 export type PrivacyPageQueryResult = {
   meta: Meta | null;
+  content: BlockContentWithHeadings | null;
 } | null;
 // Variable: contactPageQuery
 // Query: *[_type == "contact" && language == $lang][0]{  meta,  fields}
@@ -1111,10 +1135,10 @@ declare module "@sanity/client" {
     '*[_type == "cooperators" && language == $lang][0]{\n  "cooperators": *[_type == "cooperator" && language == $lang]\n    | order(slug.current asc, _id asc){\n      _id,\n      image {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n    },\n  meta\n}': CooperatorsPageQueryResult;
     '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  slug,\n  description,\n  image {\n    asset->{\n      _id,\n      url,\n      metadata{\n        lqip,\n        dimensions,\n      }\n    },\n    alt,\n    hotspot,\n    crop\n  },\n  socials[],\n  projects[],\n\n  "next": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current > ^.slug.current ||\n      (slug.current == ^.slug.current && _id > ^._id)\n    )\n  ] | order(slug.current asc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current < ^.slug.current ||\n      (slug.current == ^.slug.current && _id < ^._id)\n    )\n  ] | order(slug.current desc, _id desc)[0]{\n    name,\n    slug\n  },\n}': CooperatorPageQueryResult;
     '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      cover{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n\n  },\n  cooperators{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      name,\n      image{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n  },\n  support,\n}': HomePageQueryResult;
-    '*[_type == "sounds" && language == $lang][0]{\n  meta\n}': SoundsPageQueryResult;
+    '*[_type == "sounds" && language == $lang][0]{\n  meta,\n  trackUrls\n}': SoundsPageQueryResult;
     '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
     '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections\n}': DonatorsPageQueryResult;
-    '*[_type == "privacy" && language == $lang][0]{\n  meta\n}': PrivacyPageQueryResult;
+    '*[_type == "privacy" && language == $lang][0]{\n  meta,\n  content\n}': PrivacyPageQueryResult;
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
   }

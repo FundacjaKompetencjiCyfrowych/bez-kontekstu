@@ -41,13 +41,8 @@ declare global {
   }
 }
 
-interface Track {
-  id: number;
-  title: string;
-}
-
 interface SoundsClientProps {
-  tracks: Track[];
+  tracks: string[]; // now just array of URLs
   dictionary: {
     tracklist: string;
     playing: string;
@@ -55,13 +50,6 @@ interface SoundsClientProps {
   };
   className?: string;
 }
-
-// Constants
-const SOUNDCLOUD_TRACKS = [
-  "https://soundcloud.com/bez-kontekstu/arcade-ii-1",
-  "https://soundcloud.com/bez-kontekstu/cloud-music-2",
-  "https://soundcloud.com/bez-kontekstu/graduation-3",
-] as const;
 
 const TIMEOUTS = {
   IFRAME_LOAD: 400,
@@ -79,10 +67,8 @@ const TIMEOUTS = {
 } as const;
 
 const MAX_RETRY_ATTEMPTS = 3;
-
 const WIDGET_EVENTS = ["ready", "play", "pause", "finish", "error"] as const;
 
-// Helper functions
 const getSoundCloudEmbedUrl = (trackUrl: string): string => {
   const encodedUrl = encodeURIComponent(trackUrl);
   return `https://w.soundcloud.com/player/?url=${encodedUrl}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false`;
@@ -94,7 +80,6 @@ const updateMap = <K, V>(map: Map<K, V>, key: K, value: V): Map<K, V> => {
   return newMap;
 };
 
-// Fetch track title from SoundCloud oEmbed API
 const fetchTrackTitle = async (trackUrl: string): Promise<string | null> => {
   try {
     const oembedUrl = `https://soundcloud.com/oembed?url=${encodeURIComponent(trackUrl)}&format=json`;
@@ -102,11 +87,7 @@ const fetchTrackTitle = async (trackUrl: string): Promise<string | null> => {
     if (!response.ok) return null;
 
     const data = await response.json();
-    // Extract title from HTML or use title field
-    if (data.title) {
-      return data.title;
-    }
-    return null;
+    return data.title || null;
   } catch (error) {
     console.error("Error fetching track title:", error);
     return null;
@@ -118,7 +99,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDurations, setTrackDurations] = useState<Map<number, number>>(new Map());
   const [trackTitles, setTrackTitles] = useState<Map<number, string>>(new Map());
-  const [playbackProgress, setPlaybackProgress] = useState<number>(0); // 0-100
+  const [playbackProgress, setPlaybackProgress] = useState<number>(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const widgetRef = useRef<SoundCloudWidget | null>(null);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -126,16 +107,13 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
 
   // Load SoundCloud Widget API
   useEffect(() => {
-    // Check if already loaded
     if (window.SC?.Widget) {
       setIsApiReady(true);
       return;
     }
 
-    // Check if script tag already exists
     const existingScript = document.getElementById("soundcloud-widget-api");
     if (existingScript) {
-      // Wait for API to be ready
       const checkInterval = setInterval(() => {
         if (window.SC?.Widget) {
           setIsApiReady(true);
@@ -145,24 +123,18 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
       return () => clearInterval(checkInterval);
     }
 
-    // Load SoundCloud Widget API
     const script = document.createElement("script");
     script.id = "soundcloud-widget-api";
     script.src = "https://w.soundcloud.com/player/api.js";
     script.async = true;
-
     script.onload = () => {
       setTimeout(() => {
-        if (window.SC?.Widget) {
-          setIsApiReady(true);
-        }
+        if (window.SC?.Widget) setIsApiReady(true);
       }, TIMEOUTS.API_LOAD_DELAY);
     };
-
     document.head.appendChild(script);
   }, []);
 
-  // Track playback progress
   const stopProgressTracking = useCallback(() => {
     if (progressIntervalRef.current) {
       clearInterval(progressIntervalRef.current);
@@ -170,180 +142,115 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
     }
   }, []);
 
-  // Calculate progress percentage
   const calculateProgress = useCallback((position: number, duration: number): number => {
     if (duration <= 0 || position < 0) return 0;
     return Math.min(100, Math.max(0, (position / duration) * 100));
   }, []);
 
   const startProgressTracking = useCallback(() => {
-    // Don't start if already tracking
-    if (progressIntervalRef.current) {
-      return;
-    }
+    if (progressIntervalRef.current) return;
 
     const updateProgress = () => {
-      if (!widgetRef.current) {
-        stopProgressTracking();
-        return;
-      }
+      if (!widgetRef.current) return stopProgressTracking();
 
       widgetRef.current.getPosition((position: number) => {
-        if (!widgetRef.current) return;
-
-        // Only update if position is valid (>= 0)
-        if (position < 0) return;
+        if (!widgetRef.current || position < 0) return;
 
         widgetRef.current.getDuration((duration: number) => {
           if (duration <= 0) return;
-
-          const progress = calculateProgress(position, duration);
-          setPlaybackProgress(progress);
+          setPlaybackProgress(calculateProgress(position, duration));
         });
       });
     };
 
     updateProgress();
     progressIntervalRef.current = setInterval(updateProgress, TIMEOUTS.PROGRESS_UPDATE);
-  }, [stopProgressTracking, calculateProgress]);
+  }, [calculateProgress, stopProgressTracking]);
 
-  // Reset track state
   const resetTrackState = useCallback(() => {
     setIsPlaying(false);
     setPlaybackProgress(0);
     stopProgressTracking();
   }, [stopProgressTracking]);
 
-  // Try to play track with retry logic
   const tryPlayTrack = useCallback(
     (attempt: number = 0) => {
-      if (attempt > MAX_RETRY_ATTEMPTS) {
-        console.error("Failed to play track after multiple attempts");
-        return;
-      }
+      if (attempt > MAX_RETRY_ATTEMPTS) return console.error("Failed to play track");
 
       if (!widgetRef.current) return;
 
       try {
         widgetRef.current.play();
         setIsPlaying(true);
-        // Start progress tracking when playing starts (in case play event doesn't fire)
-        setTimeout(() => {
-          startProgressTracking();
-        }, TIMEOUTS.PROGRESS_START_DELAY);
-      } catch (error) {
-        console.error(`Error playing track (attempt ${attempt + 1}):`, error);
-        if (attempt < MAX_RETRY_ATTEMPTS) {
-          setTimeout(() => tryPlayTrack(attempt + 1), TIMEOUTS.RETRY_DELAY * (attempt + 1));
-        }
+        setTimeout(() => startProgressTracking(), TIMEOUTS.PROGRESS_START_DELAY);
+      } catch {
+        setTimeout(() => tryPlayTrack(attempt + 1), TIMEOUTS.RETRY_DELAY * (attempt + 1));
       }
     },
     [startProgressTracking]
   );
 
-  // Update track duration in state
   const updateTrackDuration = useCallback((trackIndex: number, duration: number) => {
     if (trackIndex !== -1 && duration > 0) {
       setTrackDurations((prev) => updateMap(prev, trackIndex, duration));
     }
   }, []);
 
-  // Bind widget events
   const bindWidgetEvents = useCallback(
-    (trackUrl: string, autoPlay: boolean) => {
+    (trackIndex: number, autoPlay: boolean) => {
       if (!widgetRef.current) return;
 
-      const trackIndex = SOUNDCLOUD_TRACKS.findIndex((url) => url === trackUrl);
-
       widgetRef.current.bind("ready", () => {
-        // Get track duration
-        if (widgetRef.current) {
-          setTimeout(() => {
-            widgetRef.current?.getDuration((duration: number) => {
-              updateTrackDuration(trackIndex, duration);
-            });
-          }, TIMEOUTS.DURATION_FETCH);
-        }
+        setTimeout(() => {
+          widgetRef.current?.getDuration((duration: number) => updateTrackDuration(trackIndex, duration));
+        }, TIMEOUTS.DURATION_FETCH);
 
-        // Auto-play if requested
-        if (autoPlay && widgetRef.current) {
-          setTimeout(() => {
-            if (widgetRef.current) {
-              tryPlayTrack();
-            }
-          }, TIMEOUTS.AUTO_PLAY);
-        }
+        if (autoPlay) setTimeout(() => tryPlayTrack(), TIMEOUTS.AUTO_PLAY);
       });
 
       widgetRef.current.bind("play", () => {
         setIsPlaying(true);
-        // Start tracking after a small delay to ensure widget is ready
-        setTimeout(() => {
-          startProgressTracking();
-        }, TIMEOUTS.PLAY_EVENT_DELAY);
+        setTimeout(startProgressTracking, TIMEOUTS.PLAY_EVENT_DELAY);
       });
-
       widgetRef.current.bind("pause", () => {
         setIsPlaying(false);
         stopProgressTracking();
       });
-
       widgetRef.current.bind("finish", () => {
         setCurrentTrack(null);
         resetTrackState();
       });
-      widgetRef.current.bind("error", (error: unknown) => {
-        console.error("SoundCloud widget error:", error);
-      });
+      widgetRef.current.bind("error", (error) => console.error("SoundCloud widget error:", error));
     },
     [tryPlayTrack, startProgressTracking, stopProgressTracking, updateTrackDuration, resetTrackState]
   );
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      stopProgressTracking();
-    };
-  }, [stopProgressTracking]);
+  useEffect(() => stopProgressTracking, [stopProgressTracking]);
 
-  // Destroy existing widget
   const destroyWidget = useCallback(() => {
     if (!widgetRef.current) return;
 
     try {
-      WIDGET_EVENTS.forEach((event) => {
-        widgetRef.current?.unbind(event);
-      });
+      WIDGET_EVENTS.forEach((event) => widgetRef.current?.unbind(event));
     } catch (error) {
       console.error("Error unbinding widget events:", error);
     }
     widgetRef.current = null;
   }, []);
 
-  // Initialize widget when API is ready or when track changes
   const initializeWidget = useCallback(
-    (trackUrl: string, autoPlay: boolean = false) => {
-      if (!isApiReady || !iframeRef.current || !window.SC?.Widget) {
-        return;
-      }
+    (trackUrl: string, index: number, autoPlay: boolean = false) => {
+      if (!isApiReady || !iframeRef.current || !window.SC?.Widget) return;
 
       destroyWidget();
 
-      // Update iframe src
-      if (iframeRef.current) {
-        iframeRef.current.src = getSoundCloudEmbedUrl(trackUrl);
-      }
+      iframeRef.current.src = getSoundCloudEmbedUrl(trackUrl);
 
-      // Wait for iframe to update, then create new widget
       setTimeout(() => {
-        if (!iframeRef.current || !window.SC?.Widget) {
-          console.warn("Cannot create widget: iframe or API not available");
-          return;
-        }
-
+        if (!iframeRef.current || !window.SC?.Widget) return;
         try {
           widgetRef.current = new window.SC.Widget(iframeRef.current);
-          bindWidgetEvents(trackUrl, autoPlay);
+          bindWidgetEvents(index, autoPlay);
         } catch (error) {
           console.error("Error creating SoundCloud widget:", error);
         }
@@ -352,153 +259,94 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
     [isApiReady, bindWidgetEvents, destroyWidget]
   );
 
-  // Load titles and durations for all tracks when API is ready
+  // Load titles and durations for all tracks
   useEffect(() => {
     if (!isApiReady || !window.SC?.Widget) return;
 
-    // Track which durations have been loaded to avoid duplicates
-    const loadedDurations = new Set<number>();
+    tracks.forEach((trackUrl, index) => {
+      // Fetch titles
+      fetchTrackTitle(trackUrl).then((title) => {
+        if (title) setTrackTitles((prev) => updateMap(prev, index, title));
+      });
 
-    // Fetch all track titles first
-    const loadAllTitles = async () => {
-      for (let i = 0; i < SOUNDCLOUD_TRACKS.length; i++) {
-        const trackUrl = SOUNDCLOUD_TRACKS[i];
-        if (!trackUrl) continue;
-
-        const title = await fetchTrackTitle(trackUrl);
-        if (title) {
-          setTrackTitles((prev) => updateMap(prev, i, title));
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, TIMEOUTS.TRACK_DELAY));
-      }
-    };
-
-    // Create temporary iframe for loading track duration
-    const createTempIframe = (trackUrl: string): HTMLIFrameElement => {
-      const iframe = document.createElement("iframe");
-      iframe.style.position = "absolute";
-      iframe.style.left = "-9999px";
-      iframe.style.width = "100px";
-      iframe.style.height = "100px";
-      iframe.src = getSoundCloudEmbedUrl(trackUrl);
-      iframe.allow = "autoplay";
-      return iframe;
-    };
-
-    // Load duration for a single track
-    const loadTrackDuration = async (index: number, trackUrl: string): Promise<void> => {
-      const tempIframe = createTempIframe(trackUrl);
+      // Fetch durations using temporary iframe
+      const tempIframe = document.createElement("iframe");
+      tempIframe.style.position = "absolute";
+      tempIframe.style.left = "-9999px";
+      tempIframe.style.width = "100px";
+      tempIframe.style.height = "100px";
+      tempIframe.allow = "autoplay";
+      tempIframe.src = getSoundCloudEmbedUrl(trackUrl);
       document.body.appendChild(tempIframe);
 
-      return new Promise<void>((resolve) => {
-        setTimeout(() => {
-          try {
-            const tempWidget = new window.SC!.Widget(tempIframe);
-            tempWidget.bind("ready", () => {
-              setTimeout(() => {
-                tempWidget.getDuration((duration: number) => {
-                  updateTrackDuration(index, duration);
-                  document.body.removeChild(tempIframe);
-                  resolve();
-                });
-              }, TIMEOUTS.DURATION_FETCH);
-            });
-          } catch (error) {
-            console.error(`Error loading duration for track ${index}:`, error);
-            document.body.removeChild(tempIframe);
-            resolve();
-          }
-        }, TIMEOUTS.TEMP_IFRAME_LOAD);
-      });
-    };
+      setTimeout(() => {
+        try {
+          const tempWidget = new window.SC!.Widget(tempIframe);
+          tempWidget.bind("ready", () => {
+            setTimeout(() => {
+              tempWidget.getDuration((duration: number) => {
+                updateTrackDuration(index, duration);
+                document.body.removeChild(tempIframe);
+              });
+            }, TIMEOUTS.DURATION_FETCH);
+          });
+        } catch {
+          document.body.removeChild(tempIframe);
+        }
+      }, TIMEOUTS.TEMP_IFRAME_LOAD);
+    });
+  }, [isApiReady, tracks, updateTrackDuration]);
 
-    // Create temporary iframes to load all tracks and get their durations
-    const loadAllDurations = async () => {
-      for (let i = 0; i < SOUNDCLOUD_TRACKS.length; i++) {
-        if (loadedDurations.has(i)) continue;
-
-        const trackUrl = SOUNDCLOUD_TRACKS[i];
-        if (!trackUrl) continue;
-
-        loadedDurations.add(i);
-        await loadTrackDuration(i, trackUrl);
-        await new Promise((resolve) => setTimeout(resolve, TIMEOUTS.TRACK_DELAY));
-      }
-    };
-
-    // Load titles and durations in parallel
-    loadAllTitles();
-    loadAllDurations();
-  }, [isApiReady, updateTrackDuration]);
-
-  // Initialize widget when API is ready (with first track)
+  // Initialize first track
   useEffect(() => {
-    if (isApiReady && iframeRef.current && !widgetRef.current) {
-      const firstTrackUrl = SOUNDCLOUD_TRACKS[0];
-      if (firstTrackUrl) {
-        initializeWidget(firstTrackUrl, false);
-      }
+    if (isApiReady && iframeRef.current && tracks.length > 0 && !widgetRef.current) {
+      initializeWidget(tracks[0], 0, false);
     }
-  }, [isApiReady, initializeWidget]);
+  }, [isApiReady, tracks, initializeWidget]);
 
   const handleTrackToggle = useCallback(
     (index: number) => {
-      const trackUrl = SOUNDCLOUD_TRACKS[index];
+      const trackUrl = tracks[index];
       if (!trackUrl) return;
 
-      // --- Optimistic UI update ---
       if (currentTrack !== index) {
-        // Switch track: immediately mark as playing
         setCurrentTrack(index);
         setIsPlaying(true);
         setPlaybackProgress(0);
-
-        // Load new widget (actual playback happens shortly after)
-        initializeWidget(trackUrl, true);
+        initializeWidget(trackUrl, index, true);
         return;
       }
 
-      // --- Same track toggling ---
       if (!widgetRef.current) return;
 
       if (isPlaying) {
-        // Optimistically pause
         setIsPlaying(false);
         try {
           widgetRef.current.pause();
-        } catch (error) {
-          console.error("Pause failed:", error);
-          setIsPlaying(true); // revert if needed
+        } catch {
+          setIsPlaying(true);
         }
       } else {
-        // Optimistically play
         setIsPlaying(true);
         try {
           widgetRef.current.play();
-        } catch (error) {
-          console.error("Play failed:", error);
-          setIsPlaying(false); // revert if needed
+        } catch {
+          setIsPlaying(false);
         }
       }
     },
-    [currentTrack, isPlaying, initializeWidget]
+    [currentTrack, isPlaying, tracks, initializeWidget]
   );
 
-  // Seek within the current track
   const handleSeek = useCallback(
     (newProgress: number) => {
       if (!widgetRef.current || currentTrack === null) return;
 
-      widgetRef.current.getDuration((duration: number) => {
+      widgetRef.current.getDuration((duration) => {
         if (duration <= 0) return;
-
         const newPosition = (newProgress / 100) * duration;
-
         try {
           widgetRef.current!.seekTo(newPosition);
-
-          // Update local progress immediately for smoother UI feedback
           setPlaybackProgress(newProgress);
         } catch (error) {
           console.error("Error seeking in track:", error);
@@ -509,41 +357,31 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   );
 
   return (
-    <div role="list" aria-label="Tracklist" className={cn("space-y-3", className)}>
-      {/* Hidden SoundCloud iframe */}
+    <div role="list" aria-label={dictionary.tracklist} className={cn("space-y-3", className)}>
       <iframe
         ref={iframeRef}
-        style={{
-          position: "absolute",
-          left: "-9999px",
-          width: "100px",
-          height: "100px",
-        }}
-        width="100"
-        height="100"
+        style={{ position: "absolute", left: "-9999px", width: "100px", height: "100px" }}
+        width={100}
+        height={100}
         allow="autoplay"
         title="SoundCloud audio player"
       />
 
-      {tracks.map((track, index) => {
-        // Only show tracks that have URLs
-        const trackUrl = SOUNDCLOUD_TRACKS[index];
+      {tracks.map((trackUrl, index) => {
         if (!trackUrl) return null;
 
         const isCurrentTrack = currentTrack === index;
         const isTrackPlaying = isCurrentTrack && isPlaying;
-
         const duration = trackDurations.get(index);
-        const trackTitle = trackTitles.get(index) || track.title; // Use fetched title or fallback to default
-        const progress = isCurrentTrack ? playbackProgress : 0;
+        const trackTitle = trackTitles.get(index) || "";
 
         return (
           <TrackItem
-            key={track.id}
+            key={trackUrl}
             title={trackTitle}
             isPlaying={isTrackPlaying}
             duration={duration}
-            progress={progress}
+            progress={isCurrentTrack ? playbackProgress : 0}
             trackUrl={trackUrl}
             onSeek={handleSeek}
             onPlay={() => handleTrackToggle(index)}

@@ -19,21 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return mapMetadata(data?.meta);
 }
 
-interface Track {
-  id: number;
-  title: string;
-}
-
-const TRACKS_COUNT = 5;
-
 export default async function SoundsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const { data } = await getSoundsPage(locale);
+  const { trackUrls } = data || {};
   const dictionary = await getDictionary(locale);
-
-  const tracks: Track[] = Array.from({ length: TRACKS_COUNT }, (_, i) => ({
-    id: i + 1,
-    title: dictionary.track,
-  }));
 
   return (
     <PageContainer>
@@ -49,7 +39,7 @@ export default async function SoundsPage({ params }: { params: Promise<{ locale:
           <h2 id="tracklist-title" className="sr-only">
             {dictionary.tracklist}
           </h2>
-          <SoundsClient tracks={tracks} dictionary={dictionary} className="xl:w-1/2 ml-auto" />
+          <SoundsClient tracks={trackUrls ?? []} dictionary={dictionary} className="xl:w-1/2 ml-auto" />
         </div>
       </SectionContainer>
     </PageContainer>

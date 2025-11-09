@@ -26,18 +26,21 @@ export async function Footer({ data }: { data: FooterData }) {
         {/* Socials */}
         <div className="my-3">
           {socials &&
-            socials.map((social) => (
-              <Link
-                key={social.link?.url}
-                href={social.link?.url || "/"}
-                className="mr-1 inline-block focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded"
-                aria-label={social.link?.label ? `Visit ${social.link.label}` : "Visit social media"}
-              >
-                {social.icon && <ContentIcon name={social.icon.asset?.name} size={20} />}
-                <span className="sr-only">{social.link?.label}</span>
-                <span aria-hidden="true">{social.link?.label}</span>
-              </Link>
-            ))}
+            socials.map(
+              (social) =>
+                social.link?.url && (
+                  <Link
+                    key={social.link?.url}
+                    href={social.link?.url || "/"}
+                    className="mr-1 inline-block focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded"
+                    aria-label={social.link?.label ? `Visit ${social.link.label}` : "Visit social media"}
+                  >
+                    {social.icon && <ContentIcon name={social.icon.asset?.name} size={20} />}
+                    <span className="sr-only">{social.link?.label}</span>
+                    <span aria-hidden="true">{social.link?.label}</span>
+                  </Link>
+                )
+            )}
         </div>
         <div className="text-muted">
           <span className="block lg:inline">

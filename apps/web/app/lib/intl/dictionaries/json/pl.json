@@ -17,7 +17,6 @@
   "copyToClipboard": "Skopiuj do schowka",
   "copied": "Skopiowano!",
   "copiedToClipboard": "Text został skopiowany do schowka",
-  "track": "",
   "tracklist": "Lista utworów",
   "playing": "Odtwarzanie",
   "play": "Kliknij, aby odtworzyć",
@@ -36,7 +35,7 @@
     "support": "DLA DARCZYŃ CÓW",
     "sounds": "BEATS'N' PIECES",
     "contact": "KON TA KT",
-    "privacy": "POLI TYK A PRY WAT NOŚCI"
+    "privacy": "PRY WAT NOŚĆ"
   },
   "split2": {
     "noContext": ["BE Z", "K O N TEKSTU"],

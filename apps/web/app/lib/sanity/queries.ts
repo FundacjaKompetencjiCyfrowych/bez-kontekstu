@@ -197,7 +197,8 @@ export const homePageQuery = defineQuery(`*[_type == "home" && language == $lang
 }`);
 
 export const soundsPageQuery = defineQuery(`*[_type == "sounds" && language == $lang][0]{
-  meta
+  meta,
+  trackUrls
 }`);
 
 export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language == $lang][0]{
@@ -212,7 +213,8 @@ export const donatorsPageQuery = defineQuery(`*[_type == "donators" && language 
 }`);
 
 export const privacyPageQuery = defineQuery(`*[_type == "privacy" && language == $lang][0]{
-  meta
+  meta,
+  content
 }`);
 
 export const contactPageQuery = defineQuery(`*[_type == "contact" && language == $lang][0]{

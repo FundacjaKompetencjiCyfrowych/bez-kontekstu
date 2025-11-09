@@ -44,9 +44,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   return (
     <PageContainer className="space-y-15">
-      <div className="absolute top-0 left-0 w-full h-[80vh]">
-        <Logo container="centered" semiMorph />
-      </div>
+      <Logo container="justified" semiMorph />
       <SectionContainer variant="regular">
         <NavigationButton variant="previous" asChild>
           <Link href="/projects">{dictionary.back}</Link>
