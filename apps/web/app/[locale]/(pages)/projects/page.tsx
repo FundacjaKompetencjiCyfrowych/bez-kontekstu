@@ -3,9 +3,9 @@ import { projectsPageQuery } from "@/app/lib/sanity/queries";
 import { cache } from "react";
 import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
-import { CollectionShowcase } from "@/app/components/CollectionShowcase";
+import { CollectionShowcase } from "@/app/components/image/CollectionShowcase";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
-import { LogoContainer } from "@/app/components/Logo";
+import { PageContainer } from "@/app/components/layout/PageContainer";
 
 const getProjectsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: projectsPageQuery, params: { lang: locale } });
@@ -28,11 +28,14 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const projects = data?.projects || [];
 
   return (
-    <div className="flex-1 px-5 xl:overflow-hidden flex flex-col relative">
-      <div className="absolute inset-0">
-        <LogoContainer variant="mobileOffset" />
-      </div>
-      <CollectionShowcase collection={projects} lang={locale} directory="projects" title={dictionary.split2.projects} />
-    </div>
+    <PageContainer>
+      <CollectionShowcase
+        collection={projects}
+        lang={locale}
+        directory="projects"
+        title={dictionary.split2.projects}
+        srTitle={dictionary.projects}
+      />
+    </PageContainer>
   );
 }

@@ -1,7 +1,7 @@
 // Podstawowe typy dla aplikacji
 
 export interface NavItem {
-  key: "home" | "manifest" | "projects" | "collaborators" | "sounds" | "support" | "contact";
+  key: "home" | "manifest" | "projects" | "collaborators" | "sounds" | "support" | "contact" | "privacy";
   href: string;
   description?: string;
 }

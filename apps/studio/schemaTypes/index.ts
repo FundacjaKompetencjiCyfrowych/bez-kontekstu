@@ -21,9 +21,11 @@ import settings from './singletons/settings'
 
 import cooperator from './collections/cooperator'
 import project from './collections/project'
+import blockContentWithHeadings from './parts/blockContentWithHeadings'
 
 export const schemaTypes = [
   blockContent,
+  blockContentWithHeadings,
   richImage,
   meta,
   home,

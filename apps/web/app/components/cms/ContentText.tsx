@@ -1,6 +1,6 @@
 import { PortableText, type PortableTextComponents } from "next-sanity";
 import Link from "next/link";
-import { BlockContent } from "@/app/lib/sanity/types";
+import { BlockContentWithHeadings } from "@/app/lib/sanity/types";
 
 // TODO: Customize styling
 /**
@@ -9,11 +9,11 @@ import { BlockContent } from "@/app/lib/sanity/types";
  */
 const components: PortableTextComponents = {
   block: {
-    normal: ({ children }) => <p className="mb-4">{children}</p>,
-    h1: ({ children }) => <h1 className="">{children}</h1>,
-    h2: ({ children }) => <h2 className="">{children}</h2>,
-    h3: ({ children }) => <h3 className="">{children}</h3>,
-    h4: ({ children }) => <h4 className="">{children}</h4>,
+    normal: ({ children }) => <p className="text-body mb-4 xl:mb-7">{children}</p>,
+    h1: ({ children }) => <h1 className="uppercase font-defectica text-[2.5rem] md:text-[4rem] xl:text-[8rem]">{children}</h1>,
+    h2: ({ children }) => <h2 className="uppercase font-defectica text-[2.5rem] md:text-[4rem]">{children}</h2>,
+    h3: ({ children }) => <h3 className="uppercase font-defectica text-[2rem] md:text-[3rem]">{children}</h3>,
+    h4: ({ children }) => <h4 className="uppercase font-defectica text-[2rem] md:text-[3rem]">{children}</h4>,
     blockquote: ({ children }) => <blockquote className="text-lg md:text-2xl">{children}</blockquote>,
   },
   marks: {
@@ -36,6 +36,6 @@ const components: PortableTextComponents = {
   },
 };
 
-export function ContentText({ value }: { value: BlockContent }) {
+export function ContentText({ value }: { value: BlockContentWithHeadings }) {
   return <PortableText value={value} components={components} />;
 }

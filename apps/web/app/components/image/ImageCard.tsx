@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ContentImage, Image } from "@/app/components/cms/ContentImage";
 import { cn } from "@/app/lib/utils";
-import { getDictionary } from "../lib/intl/dictionaries/dynamic";
-import { twSizes } from "../lib/twSizes";
+import { getDictionary } from "../../lib/intl/dictionaries/dynamic";
+import { twSizes } from "../../lib/twSizes";
 
 type ImageCardProps = {
   title: string;
@@ -21,8 +21,12 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
   return (
     <Link
       href={href}
-      className={cn("group block transition-all duration-300", variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105")}
+      className={cn(
+        "group block transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded",
+        variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105"
+      )}
       rel="noopener noreferrer"
+      aria-label={`View ${title}${tag ? ` (${tag})` : ""}`}
     >
       <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "aspect-[5/3] mb-5" : "h-[500px]")}>
         {image ? (
@@ -45,6 +49,7 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
             "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none",
             isMobile ? "h-20" : "h-24 xl:opacity-0 xl:group-hover:opacity-100 xl:transition-opacity xl:duration-300"
           )}
+          aria-hidden="true"
         />
         <div
           className={cn(
@@ -54,8 +59,8 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
               : "p-4 mb-4 ml-4 text-3xl xl:opacity-0 xl:group-hover:opacity-100 xl:translate-y-2 xl:group-hover:translate-y-0 xl:transition-all xl:duration-500"
           )}
         >
-          {tag && <p className={cn("font-mono mb-2", isMobile ? "text-md" : "text-lg")}>{tag}</p>}
-          <h2 className={cn(isMobile ? "text-2xl md:text-3xl" : "text-2xl")}>{title}</h2>
+          {tag && <p className={cn("font-mono mb-2", isMobile ? "text-[0.75rem]" : "text-lg")}>{tag}</p>}
+          <h2 className={cn("font-defectica uppercase", isMobile ? "text-2xl md:text-3xl" : "text-2xl")}>{title}</h2>
         </div>
       </div>
     </Link>

@@ -1,4 +1,4 @@
-import { RandomRectangles } from "@/app/components/home/RandomRectangles";
+import { RandomRectangles } from "@/app/components/image/RandomRectangles";
 import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { cache } from "react";
@@ -6,12 +6,13 @@ import { sanityFetch } from "@/app/lib/sanity/live";
 import { homePageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { ContentText } from "@/app/components/cms/ContentText";
-import { LogoContainer } from "@/app/components/Logo";
-import titleCutWord from "@/app/lib/titleCutWord";
-import { SectionContainer } from "@/app/components/home/SectionContainer";
-import { ResponsiveTitle } from "@/app/components/home/ResponsiveTitle";
-import { SectionButton } from "@/app/components/home/SectionButton";
-import { TeamGrid } from "@/app/components/home/TeamGrid";
+import { SectionContainer } from "@/app/components/layout/SectionContainer";
+import { SplitTitle } from "@/app/components/ui/SplitTitle";
+import { TeamGrid } from "@/app/components/image/TeamGrid";
+import { Button } from "@/app/components/ui/Button";
+import Link from "next/link";
+import { PageContainer } from "../components/layout/PageContainer";
+import { Logo } from "../components/image/Logo";
 
 const getHomepage = cache(async (locale: string) => {
   return await sanityFetch({ query: homePageQuery, params: { lang: locale } });
@@ -31,54 +32,72 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const teamMembers = (data?.cooperators?.featured ?? []).slice(0, 4);
 
   return (
-    <div className="px-5 lg:px-0 flex flex-1 flex-col gap-12 lg:gap-16 mb-16">
-      <h1 className="sr-only">{dictionary.noContext}</h1>
-
+    <PageContainer>
       {/* Hero Section */}
-      <div aria-labelledby="hero-title" className="relative h-[60vh] xl:h-[75vh] min-h-[450px]">
-        <LogoContainer variant="centered" morph />
-        <div className="absolute right-0 top-0" aria-hidden="true">
-          {titleCutWord(dictionary.split2.noContext[0], "text-8xl")}
-        </div>
-        <div className="absolute left-0 bottom-0" aria-hidden="true">
-          {titleCutWord(dictionary.split2.noContext[1], "text-8xl")}
-        </div>
-      </div>
+      <SectionContainer aria-labelledby="hero-title" variant="heroMain">
+        <Logo container="centered" morph />
+        <SplitTitle
+          mobile="topRight"
+          mobileText={dictionary.split2.noContext[0]}
+          tablet="topRight"
+          tabletText={dictionary.split2.noContext[0]}
+          desktop="topRight"
+          desktopText={dictionary.split2.noContext[0]}
+          srText={dictionary.noContext}
+          srId="hero-title"
+          variant="hero"
+        />
+        <SplitTitle
+          mobile="bottomLeft"
+          mobileText={dictionary.split2.noContext[1]}
+          tablet="bottomLeft"
+          tabletText={dictionary.split2.noContext[1]}
+          desktop="bottomLeft"
+          desktopText={dictionary.split2.noContext[1]}
+          srText={null}
+          variant="hero"
+        />
+      </SectionContainer>
 
       {/* MANIFEST Section */}
-      <SectionContainer ariaLabelledby="manifest-title">
-        <ResponsiveTitle
+      <SectionContainer variant="boxed" aria-labelledby="manifest-title">
+        <SplitTitle
+          mobile="right"
           mobileText={dictionary.split.manifest}
+          tablet="right"
+          tabletText={dictionary.split.manifest}
+          desktop="topRight"
           desktopText={dictionary.split2.manifest[0]}
-          desktopAlign="right"
-          mobileAlign="left"
+          srText={dictionary.manifest}
+          srId="manifest-title"
         />
 
-        <div className="z-10 mx-auto max-w-3xl text-center text-sm md:text-lg lg:text-xl font-mono leading-relaxed">
-          {data?.manifest?.body && <ContentText value={data.manifest.body} />}
-        </div>
+        <div className="text-body text-center">{data?.manifest?.body && <ContentText value={data.manifest.body} />}</div>
 
-        <SectionButton
-          href={data?.manifest?.button?.url || "/manifest"}
-          label={data?.manifest?.button?.label || ""}
-          newTab={data?.manifest?.button?.newTab}
-          className="xl:!bg-violet-400/30 xl:!border-violet-400 xl:hover:!bg-violet-900/30"
-        />
+        <Button asChild>
+          <Link href={data?.manifest?.button?.url || "/manifest"} target={data?.manifest?.button?.newTab ? "_blank" : undefined}>
+            {data?.manifest?.button?.label}
+          </Link>
+        </Button>
 
-        <ResponsiveTitle mobileText="" desktopText={dictionary.split2.manifest[1]} desktopAlign="left" mobileAlign="left" />
+        <SplitTitle desktop="bottomLeft" desktopText={dictionary.split2.manifest[1]} srText={null} />
       </SectionContainer>
 
       {/* PROJECTS Section */}
-      <SectionContainer ariaLabelledby="projects-title">
-        <ResponsiveTitle
+      <SectionContainer variant="boxed" aria-labelledby="projects-title">
+        <SplitTitle
+          mobile="left"
           mobileText={dictionary.split.projects}
+          tablet="left"
+          tabletText={dictionary.split.projects}
+          desktop="topRight"
           desktopText={dictionary.split2.projects[0]}
-          desktopAlign="right"
-          mobileAlign="right"
+          srText={dictionary.projects}
+          srId="projects-title"
         />
 
         <RandomRectangles
-          className="-mt-12"
+          className="h-[30rem]"
           images={
             data?.projects?.featured
               ?.filter((project) => project?.cover && project.slug?.current)
@@ -89,56 +108,62 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           }
         />
 
-        <SectionButton
-          href={data?.projects?.button?.url || "/projects"}
-          label={data?.projects?.button?.label || ""}
-          newTab={data?.projects?.button?.newTab}
-        />
+        <Button asChild>
+          <Link href={data?.projects?.button?.url || "/projects"} target={data?.projects?.button?.newTab ? "_blank" : undefined}>
+            {data?.projects?.button?.label}
+          </Link>
+        </Button>
 
-        <ResponsiveTitle mobileText="" desktopText={dictionary.split2.projects[1]} desktopAlign="left" mobileAlign="left" />
+        <SplitTitle desktop="bottomLeft" desktopText={dictionary.split2.projects[1]} srText={null} />
       </SectionContainer>
 
       {/* PEOPLE Section */}
-      <SectionContainer ariaLabelledby="people-title">
-        <ResponsiveTitle
+      <SectionContainer variant="boxed" aria-labelledby="people-title">
+        <SplitTitle
+          mobile="right"
           mobileText={dictionary.split.collaborators}
+          tablet="right"
+          tabletText={dictionary.split.collaborators}
+          desktop="topRight"
           desktopText={dictionary.split2.collaborators[0]}
-          desktopAlign="right"
-          mobileAlign="left"
+          srText={dictionary.collaborators}
+          srId="people-title"
         />
 
         <TeamGrid members={teamMembers} />
 
-        <SectionButton
-          href={data?.cooperators?.button?.url || "/cooperators"}
-          label={data?.cooperators?.button?.label || ""}
-          newTab={data?.cooperators?.button?.newTab}
-        />
+        <Button asChild>
+          <Link href={data?.cooperators?.button?.url || "/cooperators"} target={data?.cooperators?.button?.newTab ? "_blank" : undefined}>
+            {data?.cooperators?.button?.label}
+          </Link>
+        </Button>
 
-        <ResponsiveTitle mobileText="" desktopText={dictionary.split2.collaborators[1]} desktopAlign="left" mobileAlign="left" />
+        <SplitTitle desktop="bottomLeft" desktopText={dictionary.split2.collaborators[1]} srText={null} />
       </SectionContainer>
 
       {/* SUPPORT Section */}
-      <SectionContainer ariaLabelledby="donators-title">
-        <ResponsiveTitle
+      <SectionContainer variant="boxed" aria-labelledby="donators-title" className="pb-0 xl:pb-44">
+        <SplitTitle
+          mobile="left"
           mobileText={dictionary.split.support}
+          tablet="left"
+          tabletText={dictionary.split.support}
+          desktop="topRight"
           desktopText={dictionary.split2.support[0]}
-          desktopAlign="right"
-          mobileAlign="right"
+          srText={dictionary.support}
+          srId="donators-title"
         />
 
-        <div className="mx-auto flex flex-col items-center text-center text-base md:text-xl lg:text-2xl font-mono">
-          {data?.support?.body && <ContentText value={data.support.body} />}
-        </div>
+        <div className="text-body xl:text-emphasis text-center">{data?.support?.body && <ContentText value={data.support.body} />}</div>
 
-        <SectionButton
-          href={(data?.support?.button?.url as string) || "/donators"}
-          label={data?.support?.button?.label || ""}
-          newTab={data?.support?.button?.newTab}
-        />
+        <Button asChild>
+          <Link href={(data?.support?.button?.url as string) || "/donators"} target={data?.support?.button?.newTab ? "_blank" : undefined}>
+            {data?.support?.button?.label}
+          </Link>
+        </Button>
 
-        <ResponsiveTitle mobileText="" desktopText={dictionary.split2.support[1]} desktopAlign="left" mobileAlign="left" />
+        <SplitTitle desktopText={dictionary.split2.support[1]} desktop="bottomLeft" srText={null} />
       </SectionContainer>
-    </div>
+    </PageContainer>
   );
 }

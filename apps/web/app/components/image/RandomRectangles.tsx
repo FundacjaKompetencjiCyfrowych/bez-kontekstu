@@ -228,19 +228,20 @@ export function RandomRectangles({ images, className }: { images: { image: Image
   }, [containerWidth, regenerate]);
 
   return (
-    <div className={cn("w-full aspect-[4/3] max-h-full grow-1 relative z-10 overflow-hidden", className)}>
+    <div className={cn("w-full h-full grow relative overflow-hidden", className)}>
       {rectangles.map((rect) => {
         return (
           <Link
             key={rect.id}
             href={`/projects/${rect.slug}`}
-            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden"
+            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded"
             style={{
               left: `${rect.x}%`,
               top: `${rect.y}%`,
               width: `${rect.width}%`,
               aspectRatio: "2/1",
             }}
+            aria-label={`View project: ${rect.slug}`}
           >
             <ContentImage
               image={rect.image}
