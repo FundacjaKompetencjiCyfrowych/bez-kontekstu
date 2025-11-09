@@ -1,6 +1,8 @@
 {
-  "next": "Następny",
-  "previous": "Poprzedni",
+  "next": "Następna",
+  "previous": "Poprzednia",
+  "nextMasc": "Następny",
+  "previousMasc": "Poprzedni",
   "back": "Wstecz",
   "home": "Strona Główna",
   "projects": "Projekty",
@@ -15,7 +17,6 @@
   "copyToClipboard": "Skopiuj do schowka",
   "copied": "Skopiowano!",
   "copiedToClipboard": "Text został skopiowany do schowka",
-  "track": "Nazwa utworu",
   "tracklist": "Lista utworów",
   "playing": "Odtwarzanie",
   "play": "Kliknij, aby odtworzyć",
@@ -34,19 +35,19 @@
     "support": "DLA DARCZYŃ CÓW",
     "sounds": "BEATS'N' PIECES",
     "contact": "KON TA KT",
-    "privacy": "POLI TYK A PRY WAT NOŚCI"
+    "privacy": "PRY WAT NOŚĆ"
   },
   "split2": {
-    "noContext": ["BEZ", "K O N TEKSTU"],
+    "noContext": ["BE Z", "K O N TEKSTU"],
     "manifest": ["MA N I", "F EST"],
     "projects": ["PR O", "J EKTY"],
     "collaborators": ["WSP Ó Ł", "P RACE"],
     "support": ["DL A", "DAR CZYŃCÓW"],
-    "contact": ["KON T", "A CT"],
+    "contact": ["KO N", "T ACT"],
     "privacy": ["POLI TYK A", "PRY WAT NOŚCI"]
   },
-"donators": {
-  "yourSupport": "Twoje wsparcie",
-  "newArtSpaces": "nowe przestrzenie sztuki"
-}
+  "donators": {
+    "yourSupport": "Twoje wsparcie",
+    "newArtSpaces": "nowe przestrzenie sztuki"
+  }
 }

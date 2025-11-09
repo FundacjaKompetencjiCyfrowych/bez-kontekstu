@@ -1,11 +1,11 @@
-import { CollectionShowcase } from "@/app/components/CollectionShowcase";
+import { CollectionShowcase } from "@/app/components/image/CollectionShowcase";
 import { cache } from "react";
 import { cooperatorsPageQuery } from "@/app/lib/sanity/queries";
 import { sanityFetch } from "@/app/lib/sanity/live";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
-import { LogoContainer } from "@/app/components/Logo";
+import { PageContainer } from "@/app/components/layout/PageContainer";
 
 const getCooperatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: cooperatorsPageQuery, params: { lang: locale } });
@@ -24,9 +24,14 @@ export default async function CooperatorsPage({ params }: { params: Promise<{ lo
   const dictionary = await getDictionary(locale);
 
   return (
-    <div className="flex-1 h-full px-5 pb-14 lg:pb-0 xl:overflow-hidden flex flex-col">
-      <LogoContainer variant="mobileOffset" />
-      <CollectionShowcase collection={cooperators} lang={locale} directory="cooperators" title={dictionary.split2.collaborators} />
-    </div>
+    <PageContainer>
+      <CollectionShowcase
+        collection={cooperators}
+        lang={locale}
+        directory="cooperators"
+        title={dictionary.split2.collaborators}
+        srTitle={dictionary.collaborators}
+      />
+    </PageContainer>
   );
 }

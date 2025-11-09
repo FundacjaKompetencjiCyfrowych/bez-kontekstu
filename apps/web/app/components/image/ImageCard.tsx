@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ContentImage, Image } from "@/app/components/cms/ContentImage";
 import { cn } from "@/app/lib/utils";
-import { getDictionary } from "../lib/intl/dictionaries/dynamic";
-import { twSizes } from "../lib/twSizes";
+import { getDictionary } from "../../lib/intl/dictionaries/dynamic";
+import { twSizes } from "../../lib/twSizes";
 
 type ImageCardProps = {
   title: string;
@@ -59,8 +59,8 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
               : "p-4 mb-4 ml-4 text-3xl xl:opacity-0 xl:group-hover:opacity-100 xl:translate-y-2 xl:group-hover:translate-y-0 xl:transition-all xl:duration-500"
           )}
         >
-          {tag && <p className={cn("font-mono mb-2", isMobile ? "text-md" : "text-lg")}>{tag}</p>}
-          <h2 className={cn(isMobile ? "text-2xl md:text-3xl" : "text-2xl")}>{title}</h2>
+          {tag && <p className={cn("font-mono mb-2", isMobile ? "text-[0.75rem]" : "text-lg")}>{tag}</p>}
+          <h2 className={cn("font-defectica uppercase", isMobile ? "text-2xl md:text-3xl" : "text-2xl")}>{title}</h2>
         </div>
       </div>
     </Link>

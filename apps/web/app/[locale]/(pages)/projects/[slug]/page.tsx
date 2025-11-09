@@ -7,14 +7,17 @@ import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FiArrowLeft } from "react-icons/fi";
 
 import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
-import { MultimediaGallery } from "../../../../components/projects/MultimediaGallery";
 import { Fragment } from "react";
-import { LogoContainer } from "@/app/components/Logo";
-import { PaginationNav } from "@/app/components/PaginationNav";
+import { MultimediaGallery } from "@/app/components/image/MultimediaGallery";
+import { Logo } from "@/app/components/image/Logo";
+import { PageContainer } from "@/app/components/layout/PageContainer";
+import { NavigationButton, NavigationButtonGroup } from "@/app/components/ui/NavigationButton";
+import { SectionContainer } from "@/app/components/layout/SectionContainer";
+import { ContentImage } from "@/app/components/cms/ContentImage";
+import { twSizes } from "@/app/lib/twSizes";
 
 const getProjectPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: projectPageQuery, params: { lang: locale, slug } });
@@ -40,50 +43,38 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const images = multimedia?.filter((item) => item._type === "img") || [];
 
   return (
-    <div className="w-full px-5 xl:px-0 min-h-screen font-mono xl:max-w-7xl">
-      {/* Navigation Header */}
-      <div className="relative px-8 py-6 md:py-12 z-10">
-        <Link href="/projects" className="flex items-center gap-2 hover:text-gray-300 transition-colors">
-          <FiArrowLeft className="w-2 h-2 md:w-4 md:h-4 xl:w-6 xl:h-6" />
-          <p className="ml-4 md:text-xl">Wstecz</p>
-        </Link>
-      </div>
-
-      {/* Main Content */}
-      <div className="relative pb-8">
-        <LogoContainer variant="justified" semiMorph />
-        {/* Title and Year */}
-        <div className="mb-8">
-          <h2 className="mt-4 mb-16">{name?.toUpperCase()}</h2>
-          <p className="text-xl md:text-3xl">{timestamp?.slice(0, 4)}</p>
-        </div>
-
-        {/* Description  */}
-        <div className="relative mb-12">
-          <p className="text-sm md:text-xl leading-relaxed ">{description}</p>
-        </div>
-
-        {/* Video Section */}
-        {featured?._type === "video" && (
-          <div className="mb-12">
-            <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video w-full">
-              {isYouTube(featured?.url ?? "") && (
-                <iframe
-                  src={getYouTubeEmbedUrl(featured?.url ?? "")}
-                  title={`${name} - Video`}
-                  className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  loading="lazy"
-                  // Mobile accessibility: ensure proper touch targets and viewport
-                  style={{ minHeight: "200px" }}
-                />
-              )}
-            </div>
+    <PageContainer className="space-y-15">
+      <Logo container="justified" semiMorph />
+      <SectionContainer variant="regular">
+        <NavigationButton variant="previous" asChild>
+          <Link href="/projects">{dictionary.back}</Link>
+        </NavigationButton>
+        <h1 className="font-defectica uppercase text-[2.5rem] md:text-[4rem] lg:text-[5.5rem] xl-tall:text-[8rem] leading-none">{name}</h1>
+        <p className="text-[1rem] xl:text-[2rem]">{timestamp?.slice(0, 4)}</p>
+        <p className="text-sm md:text-xl leading-relaxed ">{description}</p>
+        {featured?._type === "img" && (
+          <div className="w-full aspect-video">
+            <ContentImage image={featured} fill aspect={16 / 9} sizes={twSizes("90vw max:690px")} />
           </div>
         )}
+        {featured?._type === "video" && (
+          <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video w-full">
+            {isYouTube(featured?.url ?? "") && (
+              <iframe
+                src={getYouTubeEmbedUrl(featured?.url ?? "")}
+                title={`${name} - Video`}
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                style={{ minHeight: "200px" }}
+              />
+            )}
+          </div>
+        )}
+      </SectionContainer>
 
-        {/* Contributors */}
+      <div className="space-y-36">
         {contributors &&
           contributors.length > 0 &&
           contributors.map((item, i) => {
@@ -91,33 +82,48 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             const isEven = i % 2 === 0;
             const isOdd = !isEven;
             return (
-              <Fragment key={category}>
+              <SectionContainer variant="regular" key={category}>
                 {/* Heading */}
-                <div className={cn(`mb-4 flex`, { "flex-row-reverse": isEven })}>
+                <div className={cn(`flex`, { "flex-row-reverse": isEven })}>
                   <div className="flex-[1_1_50%]"></div>
-                  <h2 className={cn("md:text-6xl uppercase flex-[1_1_50%]", { "text-right": isEven })}>{category}</h2>
+                  <h2
+                    className={cn("xl:hidden text-[2rem] md:text-[4rem] font-defectica uppercase flex-[1_1_50%]", { "text-right": isEven })}
+                  >
+                    {category}
+                  </h2>
                 </div>
                 {/* Content */}
-                <div className="mb-12 md:mb-24 grid grid-cols-2 gap-0">
+                <div className="grid grid-cols-2">
                   <>
-                    <div className={cn({ "order-2": isOdd })}></div>
+                    <div className={cn({ "order-2": isOdd })}>
+                      <h2
+                        className={cn("hidden -mt-3 xl:block text-[2rem] md:text-[4rem] font-defectica uppercase flex-[1_1_50%]", {
+                          "pr-11 text-right": isEven,
+                          "pl-11": isOdd,
+                        })}
+                      >
+                        {category}
+                      </h2>
+                    </div>
                     <div className={cn("relative text-sm md:text-xl", { "text-right": isOdd })}>
                       {people && (
-                        <div className="space-y-3">
+                        <div className="space-y-4 xl:space-y-6">
                           {people.map((person, index) => (
-                            <div key={index}>{person}</div>
+                            <div key={index} className="xl:font-bold">
+                              {person}
+                            </div>
                           ))}
                         </div>
                       )}
                       {subcategories &&
                         subcategories.map((sub) => (
-                          <div className="mt-8" key={sub.subCategory}>
-                            <h3 className="mb-4">
-                              <strong>{sub.subCategory}:</strong>
-                            </h3>
-                            <div className="space-y-2">
-                              {sub.people?.map((voice: string, index: number) => (
-                                <div key={index}>{voice}</div>
+                          <div key={sub.subCategory} className="pb-10 space-y-4 xl:space-y-6">
+                            <h3 className="font-bold xl:font-normal">{sub.subCategory}:</h3>
+                            <div className="xl:font-bold space-y-4 xl:space-y-6">
+                              {sub.people?.map((person: string, index: number) => (
+                                <div key={index} className="">
+                                  {person}
+                                </div>
                               ))}
                             </div>
                           </div>
@@ -125,16 +131,19 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     </div>
                   </>
                 </div>
-              </Fragment>
+              </SectionContainer>
             );
           })}
-
-        {/* Multimedia Section */}
-        <MultimediaGallery images={images} />
       </div>
+      <MultimediaGallery images={images} />
 
-      {/* Project Navigation */}
-      <PaginationNav previous={previous} next={next} basePath="projects" dictionary={dictionary} variant="default" />
-    </div>
+      <NavigationButtonGroup
+        previousSlug={previous?.slug?.current}
+        nextSlug={next?.slug?.current}
+        previousLabel={dictionary.previousMasc}
+        nextLabel={dictionary.nextMasc}
+        pathname="projects"
+      />
+    </PageContainer>
   );
 }

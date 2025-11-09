@@ -1,6 +1,8 @@
 {
   "next": "Next",
   "previous": "Previous",
+  "nextMasc": "Next",
+  "previousMasc": "Previous",
   "back": "Back",
   "home": "Home",
   "projects": "Projects",
@@ -15,7 +17,6 @@
   "copyToClipboard": "Copy to clipboard",
   "copied": "Copied!",
   "copiedToClipboard": "Copied to clipboard",
-  "track": "Track Name",
   "tracklist": "Tracklist",
   "playing": "Playing",
   "play": "Click to Play",
@@ -34,7 +35,7 @@
     "support": "SU PPO RT",
     "sounds": "BEATS'N' PIECES",
     "contact": "CON TA CT",
-    "privacy": "PRI VACY POL ICY"
+    "privacy": "PRI VA CY"
   },
   "split2": {
     "noContext": ["NO", "C O N TEXT"],
@@ -45,8 +46,8 @@
     "contact": ["CON T", "A CT"],
     "privacy": ["PRIV AC Y", "PO LICY"]
   },
-"donators": {
-  "yourSupport": "Your support",
-  "newArtSpaces": "new art spaces"
-}
+  "donators": {
+    "yourSupport": "Your support",
+    "newArtSpaces": "new art spaces"
+  }
 }

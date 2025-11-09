@@ -3,8 +3,8 @@
 import { useRef, useEffect, useState, useMemo, ReactNode } from "react";
 import { useStep } from "usehooks-ts";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { cn } from "../lib/utils";
-import { useIntl } from "../lib/intl/context";
+import { cn } from "@/app/lib/utils";
+import { useIntl } from "@/app/lib/intl/context";
 
 type SliderProps = {
   itemsPerSlide?: number;
@@ -112,7 +112,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
             <FiChevronLeft width={25} height={25} aria-hidden="true" />
           </button>
 
-          <div className="flex items-center space-x-2 text-white font-mono text-sm">
+          <div className="flex items-center space-x-2 text-white font-space-mono text-[1.5rem]">
             <span>{currentSlide}</span>
             <span>/</span>
             <span>{totalSlides}</span>

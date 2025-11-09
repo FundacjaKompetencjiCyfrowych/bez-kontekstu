@@ -3,6 +3,7 @@ import { ContentText } from "@/app/components/cms/ContentText";
 import { ContentImage } from "../cms/ContentImage";
 import { cn } from "@/app/lib/utils";
 import { twSizes } from "../../lib/twSizes";
+import { SectionContainer } from "./SectionContainer";
 
 type ManifestSectionProps = {
   section: NonNullable<NonNullable<ManifestPageQueryResult>["sections"]>[number];
@@ -35,8 +36,8 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
   };
 
   return (
-    <section className="relative py-10 xl:py-20 px-5 xl:px-0">
-      <div className={cn("xl:flex xl:gap-8 xl:items-center", !isContentRight && "xl:flex-row-reverse")}>
+    <SectionContainer>
+      <div className={cn("xl:flex xl:gap-20 xl:items-center", !isContentRight && "xl:flex-row-reverse")}>
         {/* Feature column */}
         <div className="hidden xl:flex xl:flex-1 xl:justify-end">{renderFeature()}</div>
 
@@ -55,8 +56,8 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
           {title && (
             <h2
               className={cn(
-                "my-12 text-5xl md:text-6xl",
-                feature?.altTitle && "text-4xl leading-16 md:leading-22 whitespace-pre-line text-center xl:hidden"
+                "uppercase font-defectica my-12 text-[2.5rem] leading-[3rem] md:text-[4rem] md:leading-[4.75rem]",
+                feature?.altTitle && "md:text-[3rem] md:leading-[5rem] whitespace-pre-line text-center xl:hidden md:pb-10 xl:pb-0"
               )}
             >
               {feature?.altTitle || title}
@@ -66,7 +67,7 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
           {body && (
             <div
               className={cn(
-                `font-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10`,
+                `font-space-mono leading-relaxed md:text-xl md:leading-8 xl:leading-10`,
                 style?.mobile === "fusion" &&
                   "[&>*]:w-full [&>*:nth-child(3)]:w-1/2 [&>*:nth-child(3)]:my-10 lg:[&>*:nth-child(3)]:w-full [&>*:last-child]:text-center [&>*:nth-child(3)]:ml-30 lg:[&>*:nth-child(3)]:ml-0 sm:[&>*:nth-child(even)]:mr-0 sm:[&>*:nth-child(4n+2)]:ml-0 sm:[&>*:nth-child(4n+2)]:mr-auto",
                 style?.tablet === "fusion" &&
@@ -78,6 +79,6 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
           )}
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 }

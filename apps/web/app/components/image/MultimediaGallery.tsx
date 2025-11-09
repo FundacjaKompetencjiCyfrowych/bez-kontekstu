@@ -1,11 +1,10 @@
 "use client";
 
 import { ContentImage, type Image } from "@/app/components/cms/ContentImage";
-import { Lightbox } from "@/app/components/projects/Lightbox";
+import { Lightbox } from "@/app/components/image/Lightbox";
 import { twSizes } from "@/app/lib/twSizes";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 export function MultimediaGallery({ images }: { images: Image[] }) {
   const [sliderOpen, setSliderOpen] = useState(false);
@@ -16,17 +15,9 @@ export function MultimediaGallery({ images }: { images: Image[] }) {
     setSliderOpen(true);
   };
 
-  // 🧩 Pause ScrollSmoother when Lightbox is open
-  useEffect(() => {
-    const smoother = ScrollSmoother.get();
-    if (smoother) {
-      smoother.paused(sliderOpen);
-    }
-  }, [sliderOpen]);
-
   return (
     <>
-      <h2 className="mb-6 md:text-6xl">MULTIMEDIA</h2>
+      <h2 className="font-defectica uppercase mb-6 md:text-6xl">MULTIMEDIA</h2>
       <div className="grid grid-cols-2 gap-4">
         {images.map((image, index) => (
           <button

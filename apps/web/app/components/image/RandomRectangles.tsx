@@ -228,7 +228,7 @@ export function RandomRectangles({ images, className }: { images: { image: Image
   }, [containerWidth, regenerate]);
 
   return (
-    <div className={cn("w-full aspect-[4/3] max-h-full grow-1 relative z-10 overflow-hidden", className)}>
+    <div className={cn("w-full h-full grow relative overflow-hidden", className)}>
       {rectangles.map((rect) => {
         return (
           <Link
