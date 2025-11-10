@@ -30,8 +30,22 @@ export default definePage({
       group: 'content',
       fields: [
         defineField({
+          name: 'featureRandom',
+          title: 'Losowe',
+          type: 'boolean',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'randomCount',
+          title: 'Liczba losowych projektów',
+          type: 'number',
+          initialValue: 4,
+          hidden: ({parent}) => !parent?.featureRandom,
+        }),
+        defineField({
           name: 'featured',
           title: 'Wyróżnione',
+          hidden: ({parent}) => parent?.featureRandom,
           type: 'array',
           of: [
             defineArrayMember({
@@ -56,8 +70,22 @@ export default definePage({
       group: 'content',
       fields: [
         defineField({
+          name: 'featureRandom',
+          title: 'Losowe',
+          type: 'boolean',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'randomCount',
+          title: 'Liczba losowych współprac',
+          type: 'number',
+          initialValue: 4,
+          hidden: ({parent}) => !parent?.featureRandom,
+        }),
+        defineField({
           name: 'featured',
           title: 'Wyróżnione',
+          hidden: ({parent}) => parent?.featureRandom,
           type: 'array',
           of: [
             defineArrayMember({

@@ -152,46 +152,88 @@ export const homePageQuery = defineQuery(`*[_type == "home" && language == $lang
   meta,
   manifest,
   projects{
+    featureRandom,
+    randomCount,
     ...,
-    featured[]->{
-      _id,
-      slug,
-      cover{
-        asset->{
-          _id,
-          url,
-          metadata{
-            lqip,
-            dimensions,
-          }
+    "featured": select(
+      featureRandom == true => *[_type == "project" && language == $lang]{
+        _id,
+        slug,
+        cover{
+          asset->{
+            _id,
+            url,
+            metadata{
+              lqip,
+              dimensions,
+            }
+          },
+          alt,
+          hotspot,
+          crop
         },
-        alt,
-        hotspot,
-        crop
+      },
+      featured[]->{
+        _id,
+        slug,
+        cover{
+          asset->{
+            _id,
+            url,
+            metadata{
+              lqip,
+              dimensions,
+            }
+          },
+          alt,
+          hotspot,
+          crop
+        },
       }
-    },
-
+    ),
   },
   cooperators{
+    featureRandom,
+    randomCount,
     ...,
-    featured[]->{
-      _id,
-      slug,
-      name,
-      image{
-        asset->{
-          _id,
-          url,
-          metadata{
-            lqip,
-            dimensions,
-          }
-        },
-        alt,
-        hotspot,
-        crop
+    "featured": select(
+      featureRandom == true => *[_type == "cooperator" && language == $lang]{
+        _id,
+        slug,
+        name,
+        image{
+          asset->{
+            _id,
+            url,
+            metadata{
+              lqip,
+              dimensions,
+            }
+          },
+          alt,
+          hotspot,
+          crop
+        }
+      },
+      featured[]->{
+        _id,
+        slug,
+        name,
+        image{
+          asset->{
+            _id,
+            url,
+            metadata{
+              lqip,
+              dimensions,
+            }
+          },
+          alt,
+          hotspot,
+          crop
+        }
       }
-    },
+    ),
   },
   support,
 }`);
