@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { cache } from "react";
 import { sanityFetch } from "@/app/lib/sanity/live";
-import { homePageQuery } from "@/app/lib/sanity/queries";
+import { homePageQuery, cooperatorsPageQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { ContentText } from "@/app/components/cms/ContentText";
 import { SectionContainer } from "@/app/components/layout/SectionContainer";
@@ -18,6 +18,10 @@ const getHomepage = cache(async (locale: string) => {
   return await sanityFetch({ query: homePageQuery, params: { lang: locale } });
 });
 
+const getAllCooperators = cache(async (locale: string) => {
+  return await sanityFetch({ query: cooperatorsPageQuery, params: { lang: locale } });
+});
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const { data } = await getHomepage(locale);
@@ -28,8 +32,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   const dictionary = await getDictionary(locale);
   const { data } = await getHomepage(locale);
+  const { data: cooperatorsData } = await getAllCooperators(locale);
 
-  const teamMembers = (data?.cooperators?.featured ?? []).slice(0, 4);
+  // Get all cooperators and randomly select 4
+  const allCooperators = cooperatorsData?.cooperators ?? [];
+  const shuffled = [...allCooperators].sort(() => Math.random() - 0.5);
+  const teamMembers = shuffled.slice(0, 4);
 
   return (
     <PageContainer>
