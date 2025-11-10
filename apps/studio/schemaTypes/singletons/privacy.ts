@@ -7,8 +7,7 @@ export default definePage({
     {
       name: 'content',
       title: 'Treść',
-      description:
-        'Treść powinna zawierać tylko jeden nagłówek H1 i zachować hierarchię nagłówków.',
+      description: 'Treść powinna zachować hierarchię nagłówków.',
       type: 'blockContentWithHeadings',
     },
   ],
