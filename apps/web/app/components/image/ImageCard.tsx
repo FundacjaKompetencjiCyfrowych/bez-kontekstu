@@ -22,7 +22,7 @@ export async function ImageCard({ title, tag, priority = false, image, href, lan
     <Link
       href={href}
       className={cn(
-        "group block transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50 rounded",
+        "group block transition-all duration-300 focus-brand rounded",
         variant === "slider" ? "xl:w-full" : "xl:w-[70%] hover:scale-105"
       )}
       rel="noopener noreferrer"

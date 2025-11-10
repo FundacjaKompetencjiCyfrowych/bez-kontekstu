@@ -98,7 +98,7 @@ export function NavigationMobile({ isMobileMenuEnabled, routePath }: MobileNavig
             <li key={item.href} className="mx-6">
               <Link
                 href={item.href}
-                className="text-gray-200 hover:text-violet-400 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50"
+                className="text-gray-200 hover:text-violet-400 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica focus-brand"
                 onClick={() => setIsMenuOpen(false)}
                 rel="noopener noreferrer"
                 role="menuitem"
@@ -113,7 +113,7 @@ export function NavigationMobile({ isMobileMenuEnabled, routePath }: MobileNavig
         {/* Toggler */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center cursor-pointer z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center cursor-pointer z-40 focus:outline-none focus-brand rounded"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
