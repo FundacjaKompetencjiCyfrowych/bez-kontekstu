@@ -297,6 +297,22 @@ export type Sounds = {
   _rev: string;
   language?: string;
   meta?: Meta;
+  name?: string;
+  slug?: Slug;
+  timestamp?: string;
+  cover?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "richImage";
+  };
   trackUrls?: Array<string>;
 };
 
@@ -666,31 +682,54 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/app/lib/sanity/queries.ts
 // Variable: projectsPageQuery
-// Query: *[_type == "projects" && language == $lang][0]{  "projects": *[_type == "project" && language == $lang]    | order(timestamp desc, _id asc){      _id,      cover {        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      },      name,      slug,      timestamp    },  meta}
+// Query: *[_type == "projects" && language == $lang][0]{  meta,  "projects": [    ...*[_type == "project" && language == $lang]      | order(timestamp desc, _id asc){        _id,        cover {          asset->{            _id,            url,            metadata {              lqip,              dimensions,            }          },          alt,          hotspot,          crop        },        name,        slug,        timestamp,        _type      },    ...*[_type == "sounds" && language == $lang]      | order(timestamp desc, _id asc){        _id,        name,        cover {          asset->{            _id,            url,            metadata {              lqip,              dimensions,            }          },          alt,          hotspot,          crop        },        timestamp,        _type,        slug,      }  ]}
 export type ProjectsPageQueryResult = {
-  projects: Array<{
-    _id: string;
-    cover: {
-      asset: {
-        _id: string;
-        url: string | null;
-        metadata: {
-          lqip: string | null;
-          dimensions: SanityImageDimensions | null;
-        } | null;
-      } | null;
-      alt: string | null;
-      hotspot: SanityImageHotspot | null;
-      crop: SanityImageCrop | null;
-    } | null;
-    name: string | null;
-    slug: Slug | null;
-    timestamp: string | null;
-  }>;
   meta: Meta | null;
+  projects: Array<
+    | Array<{
+        _id: string;
+        cover: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+          } | null;
+          alt: string | null;
+          hotspot: SanityImageHotspot | null;
+          crop: SanityImageCrop | null;
+        } | null;
+        name: string | null;
+        slug: Slug | null;
+        timestamp: string | null;
+        _type: "project";
+      }>
+    | Array<{
+        _id: string;
+        name: string | null;
+        cover: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+          } | null;
+          alt: string | null;
+          hotspot: SanityImageHotspot | null;
+          crop: SanityImageCrop | null;
+        } | null;
+        timestamp: string | null;
+        _type: "sounds";
+        slug: Slug | null;
+      }>
+  >;
 } | null;
 // Variable: projectPageQuery
-// Query: *[slug.current == $slug && language == $lang][0]{  meta,  _id,  name,  timestamp,  slug,  "next": *[    _type == "project" &&    language == $lang &&    (      timestamp < ^.timestamp ||      (timestamp == ^.timestamp && _id > ^._id)    )  ] | order(timestamp desc, _id asc)[0]{    name,    slug  },  "previous": *[    _type == "project" &&    language == $lang &&    (      timestamp > ^.timestamp ||      (timestamp == ^.timestamp && _id < ^._id)    )  ] | order(timestamp asc, _id desc)[0]{    name,    slug  },  contributors,  featured,  multimedia[]{    _type == "richImage" => {      asset->{        _id,        url,        metadata{          lqip,          dimensions,        }      },      alt,      hotspot,      crop    },    _type != "richImage" => @,  },  description}
+// Query: *[slug.current == $slug && language == $lang][0]{  meta,  _id,  name,  timestamp,  slug,  "next": *[    _type in ["project", "sounds"] &&    language == $lang &&    (      timestamp < ^.timestamp ||      (timestamp == ^.timestamp && _id > ^._id)    )  ] | order(timestamp desc, _id asc)[0]{    name,    slug  },  "previous": *[    _type in ["project", "sounds"] &&    language == $lang &&    (      timestamp > ^.timestamp ||      (timestamp == ^.timestamp && _id < ^._id)    )  ] | order(timestamp asc, _id desc)[0]{    name,    slug  },  contributors,  featured,  multimedia[]{    _type == "richImage" => {      asset->{        _id,        url,        metadata{          lqip,          dimensions,        }      },      alt,      hotspot,      crop    },    _type != "richImage" => @,  },  description}
 export type ProjectPageQueryResult =
   | {
       meta: null;
@@ -717,6 +756,25 @@ export type ProjectPageQueryResult =
       name: null;
       timestamp: null;
       slug: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      contributors: null;
+      featured: null;
+      multimedia: null;
+      description: null;
+    }
+  | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      timestamp: string | null;
+      slug: Slug | null;
       next: {
         name: string | null;
         slug: Slug | null;
@@ -882,6 +940,24 @@ export type CooperatorPageQueryResult =
       } | null;
     }
   | {
+      meta: Meta | null;
+      _id: string;
+      name: string | null;
+      slug: Slug | null;
+      description: null;
+      image: null;
+      socials: null;
+      projects: null;
+      next: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+      previous: {
+        name: string | null;
+        slug: Slug | null;
+      } | null;
+    }
+  | {
       meta: null;
       _id: string;
       name: null;
@@ -1011,10 +1087,33 @@ export type HomePageQueryResult = {
   } | null;
 } | null;
 // Variable: soundsPageQuery
-// Query: *[_type == "sounds" && language == $lang][0]{  meta,  trackUrls}
+// Query: *[_type == "sounds" && language == $lang][0]{  meta,  trackUrls,  name,  cover,  timestamp,  "next": *[    _type == "project" &&    language == $lang &&    (      timestamp < ^.timestamp ||      (timestamp == ^.timestamp && _id > ^._id)    )  ] | order(timestamp desc, _id asc)[0]{    name,    slug  },  "previous": *[    _type == "project" &&    language == $lang &&    (      timestamp > ^.timestamp ||      (timestamp == ^.timestamp && _id < ^._id)    )  ] | order(timestamp asc, _id desc)[0]{    name,    slug  },}
 export type SoundsPageQueryResult = {
   meta: Meta | null;
   trackUrls: Array<string> | null;
+  name: string | null;
+  cover: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "richImage";
+  } | null;
+  timestamp: string | null;
+  next: {
+    name: string | null;
+    slug: Slug | null;
+  } | null;
+  previous: {
+    name: string | null;
+    slug: Slug | null;
+  } | null;
 } | null;
 // Variable: manifestPageQuery
 // Query: *[_type == "manifest" && language == $lang][0]{  meta,  hero,  sections}
@@ -1138,12 +1237,12 @@ export type SettingsQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "projects" && language == $lang][0]{\n  "projects": *[_type == "project" && language == $lang]\n    | order(timestamp desc, _id asc){\n      _id,\n      cover {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n      timestamp\n    },\n  meta\n}': ProjectsPageQueryResult;
-    '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  timestamp,\n  slug,\n\n  "next": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n\n  contributors,\n  featured,\n  multimedia[]{\n    _type == "richImage" => {\n      asset->{\n        _id,\n        url,\n        metadata{\n          lqip,\n          dimensions,\n        }\n      },\n      alt,\n      hotspot,\n      crop\n    },\n    _type != "richImage" => @,\n  },\n  description\n}': ProjectPageQueryResult;
+    '*[_type == "projects" && language == $lang][0]{\n  meta,\n  "projects": [\n    ...*[_type == "project" && language == $lang]\n      | order(timestamp desc, _id asc){\n        _id,\n        cover {\n          asset->{\n            _id,\n            url,\n            metadata {\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n        name,\n        slug,\n        timestamp,\n        _type\n      },\n    ...*[_type == "sounds" && language == $lang]\n      | order(timestamp desc, _id asc){\n        _id,\n        name,\n        cover {\n          asset->{\n            _id,\n            url,\n            metadata {\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n        timestamp,\n        _type,\n        slug,\n      }\n  ]\n}': ProjectsPageQueryResult;
+    '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  timestamp,\n  slug,\n\n  "next": *[\n    _type in ["project", "sounds"] &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type in ["project", "sounds"] &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n\n  contributors,\n  featured,\n  multimedia[]{\n    _type == "richImage" => {\n      asset->{\n        _id,\n        url,\n        metadata{\n          lqip,\n          dimensions,\n        }\n      },\n      alt,\n      hotspot,\n      crop\n    },\n    _type != "richImage" => @,\n  },\n  description\n}': ProjectPageQueryResult;
     '*[_type == "cooperators" && language == $lang][0]{\n  "cooperators": *[_type == "cooperator" && language == $lang]\n    | order(slug.current asc, _id asc){\n      _id,\n      image {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n    },\n  meta\n}': CooperatorsPageQueryResult;
     '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  slug,\n  description,\n  image {\n    asset->{\n      _id,\n      url,\n      metadata{\n        lqip,\n        dimensions,\n      }\n    },\n    alt,\n    hotspot,\n    crop\n  },\n  socials[],\n  projects[],\n\n  "next": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current > ^.slug.current ||\n      (slug.current == ^.slug.current && _id > ^._id)\n    )\n  ] | order(slug.current asc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current < ^.slug.current ||\n      (slug.current == ^.slug.current && _id < ^._id)\n    )\n  ] | order(slug.current desc, _id desc)[0]{\n    name,\n    slug\n  },\n}': CooperatorPageQueryResult;
     '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "project" && language == $lang]{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      },\n      featured[]->{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      }\n    ),\n  },\n  cooperators{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "cooperator" && language == $lang]{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      },\n      featured[]->{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      }\n    ),\n  },\n  support,\n}': HomePageQueryResult;
-    '*[_type == "sounds" && language == $lang][0]{\n  meta,\n  trackUrls\n}': SoundsPageQueryResult;
+    '*[_type == "sounds" && language == $lang][0]{\n  meta,\n  trackUrls,\n  name,\n  cover,\n  timestamp,\n  "next": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n}': SoundsPageQueryResult;
     '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
     '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections\n}': DonatorsPageQueryResult;
     '*[_type == "privacy" && language == $lang][0]{\n  meta,\n  content\n}': PrivacyPageQueryResult;

@@ -23,7 +23,7 @@ export function NavigationDesktop() {
       ))}
 
       <LanguageToggler variant="desktop" />
-      <SoundToggler />
+      {/* <SoundToggler /> */}
     </div>
   );
 }

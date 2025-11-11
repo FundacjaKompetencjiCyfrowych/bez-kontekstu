@@ -5,11 +5,11 @@ import { SectionContainer } from "../layout/SectionContainer";
 import { SplitTitle } from "../ui/SplitTitle";
 import { Logo } from "./Logo";
 
-type CollectionItem = {
+export type CollectionItem = {
   name?: string | null;
   timestamp?: string | null;
   slug: { current?: string | undefined } | null;
-  _id: string | null;
+  _id: string;
   cover?: Image | null;
   image?: Image | null;
   [key: string]: unknown;
