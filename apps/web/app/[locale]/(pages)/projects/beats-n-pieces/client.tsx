@@ -357,7 +357,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   );
 
   return (
-    <div role="list" aria-label={dictionary.tracklist} className={cn("space-y-3", className)}>
+    <div role="list" aria-label={dictionary.tracklist} className={cn("space-y-3 overflow-hidden", className)}>
       <iframe
         ref={iframeRef}
         style={{ position: "absolute", left: "-9999px", width: "100px", height: "100px" }}

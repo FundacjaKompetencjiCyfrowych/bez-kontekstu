@@ -3,27 +3,51 @@ import { defineQuery } from "next-sanity";
 // https://www.sanity.io/docs/content-lake/query-cheat-sheet
 
 export const projectsPageQuery = defineQuery(`*[_type == "projects" && language == $lang][0]{
-  "projects": *[_type == "project" && language == $lang]
-    | order(timestamp desc, _id asc){
-      _id,
-      cover {
-        asset->{
-          _id,
-          url,
-          metadata{
-            lqip,
-            dimensions,
-          }
+  meta,
+  "projects": [
+    ...*[_type == "project" && language == $lang]
+      | order(timestamp desc, _id asc){
+        _id,
+        cover {
+          asset->{
+            _id,
+            url,
+            metadata {
+              lqip,
+              dimensions,
+            }
+          },
+          alt,
+          hotspot,
+          crop
         },
-        alt,
-        hotspot,
-        crop
+        name,
+        slug,
+        timestamp,
+        _type
       },
-      name,
-      slug,
-      timestamp
-    },
-  meta
+    ...*[_type == "sounds" && language == $lang]
+      | order(timestamp desc, _id asc){
+        _id,
+        name,
+        cover {
+          asset->{
+            _id,
+            url,
+            metadata {
+              lqip,
+              dimensions,
+            }
+          },
+          alt,
+          hotspot,
+          crop
+        },
+        timestamp,
+        _type,
+        slug,
+      }
+  ]
 }`);
 
 export const projectPageQuery = defineQuery(`*[slug.current == $slug && language == $lang][0]{
@@ -34,7 +58,7 @@ export const projectPageQuery = defineQuery(`*[slug.current == $slug && language
   slug,
 
   "next": *[
-    _type == "project" &&
+    _type in ["project", "sounds"] &&
     language == $lang &&
     (
       timestamp < ^.timestamp ||
@@ -46,7 +70,7 @@ export const projectPageQuery = defineQuery(`*[slug.current == $slug && language
   },
 
   "previous": *[
-    _type == "project" &&
+    _type in ["project", "sounds"] &&
     language == $lang &&
     (
       timestamp > ^.timestamp ||
@@ -240,7 +264,33 @@ export const homePageQuery = defineQuery(`*[_type == "home" && language == $lang
 
 export const soundsPageQuery = defineQuery(`*[_type == "sounds" && language == $lang][0]{
   meta,
-  trackUrls
+  trackUrls,
+  name,
+  cover,
+  timestamp,
+  "next": *[
+    _type == "project" &&
+    language == $lang &&
+    (
+      timestamp < ^.timestamp ||
+      (timestamp == ^.timestamp && _id > ^._id)
+    )
+  ] | order(timestamp desc, _id asc)[0]{
+    name,
+    slug
+  },
+
+  "previous": *[
+    _type == "project" &&
+    language == $lang &&
+    (
+      timestamp > ^.timestamp ||
+      (timestamp == ^.timestamp && _id < ^._id)
+    )
+  ] | order(timestamp asc, _id desc)[0]{
+    name,
+    slug
+  },
 }`);
 
 export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language == $lang][0]{

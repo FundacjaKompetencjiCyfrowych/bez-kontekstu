@@ -70,9 +70,7 @@ export function NavigationMobile({ isMobileMenuEnabled, routePath }: MobileNavig
           mobile="left"
           tablet="left"
         />
-        <div className="text-2xl md:text-3xl pr-5">
-          <SoundToggler />
-        </div>
+        <div className="text-2xl md:text-3xl pr-5">{/* <SoundToggler /> */}</div>
       </div>
 
       {/* Menu */}
