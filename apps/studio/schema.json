@@ -2561,6 +2561,20 @@
         "value": {
           "type": "object",
           "attributes": {
+            "featureRandom": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            },
+            "randomCount": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "number"
+              },
+              "optional": true
+            },
             "featured": {
               "type": "objectAttribute",
               "value": {
@@ -2622,6 +2636,20 @@
         "value": {
           "type": "object",
           "attributes": {
+            "featureRandom": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            },
+            "randomCount": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "number"
+              },
+              "optional": true
+            },
             "featured": {
               "type": "objectAttribute",
               "value": {

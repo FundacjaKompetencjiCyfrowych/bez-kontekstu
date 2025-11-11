@@ -107,7 +107,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     </div>
                     <div className={cn("relative text-sm md:text-xl", { "text-right": isOdd })}>
                       {people && (
-                        <div className="space-y-4 xl:space-y-6">
+                        <div className="space-y-4 xl:space-y-6 pb-8 xl:pb-10">
                           {people.map((person, index) => (
                             <div key={index} className="xl:font-bold">
                               {person}
@@ -118,7 +118,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                       {subcategories &&
                         subcategories.map((sub) => (
                           <div key={sub.subCategory} className="pb-10 space-y-4 xl:space-y-6">
-                            <h3 className="font-bold xl:font-normal">{sub.subCategory}:</h3>
+                            <h3 className="font-bold xl:font-normal">{sub.subCategory}</h3>
                             <div className="xl:font-bold space-y-4 xl:space-y-6">
                               {sub.people?.map((person: string, index: number) => (
                                 <div key={index} className="">

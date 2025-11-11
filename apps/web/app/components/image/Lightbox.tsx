@@ -56,7 +56,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
         <button
           id={closeButtonId}
           onClick={onClose}
-          className="text-white text-2xl font-bold hover:text-gray-300 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded"
+          className="text-white text-2xl font-bold hover:text-gray-300 transition-all duration-300 transform hover:scale-110 focus:outline-none focus-brand rounded"
           aria-label="Close image slider"
         >
           ✕

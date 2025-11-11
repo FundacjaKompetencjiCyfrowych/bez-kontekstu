@@ -15,7 +15,7 @@ export function NavigationDesktop() {
           role="menuitem"
           key={item.href}
           href={item.href}
-          className="text-muted hover:text-white text-center focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50"
+          className="text-muted hover:text-white text-center"
           rel="noopener noreferrer"
         >
           {dictionary[item.key].toLocaleUpperCase()}

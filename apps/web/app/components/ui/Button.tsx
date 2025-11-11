@@ -4,7 +4,7 @@ import { cn } from "@/app/lib/utils";
 import { ReactNode } from "react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-3 font-space-mono font-bold py-6 lg:py-4 px-8 lg:px-12 text-xs leading-4 md:text-lg lg:leading-8 relative overflow-hidden w-full lg:w-auto focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-opacity-50",
+  "inline-flex items-center justify-center gap-3 font-space-mono font-bold py-6 lg:py-4 px-8 lg:px-12 text-xs leading-4 md:text-lg lg:leading-8 relative overflow-hidden w-full lg:w-auto focus-brand",
   {
     variants: {
       variant: {

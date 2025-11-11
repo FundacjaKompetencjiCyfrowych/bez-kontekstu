@@ -14,6 +14,24 @@ import Link from "next/link";
 import { PageContainer } from "../components/layout/PageContainer";
 import { Logo } from "../components/image/Logo";
 
+function getFeaturedItems<T>(
+  section:
+    | {
+        featureRandom?: boolean;
+        randomCount?: number;
+        featured?: T[] | null;
+      }
+    | null
+    | undefined,
+  defaultCount: number = 4
+): T[] {
+  if (!section?.featured) return [];
+  if (section.featureRandom) {
+    return [...section.featured].sort(() => Math.random() - 0.5).slice(0, section.randomCount ?? defaultCount);
+  }
+  return section.featured;
+}
+
 const getHomepage = cache(async (locale: string) => {
   return await sanityFetch({ query: homePageQuery, params: { lang: locale } });
 });
@@ -29,7 +47,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const dictionary = await getDictionary(locale);
   const { data } = await getHomepage(locale);
 
-  const teamMembers = (data?.cooperators?.featured ?? []).slice(0, 4);
+  const teamMembers = getFeaturedItems(data?.cooperators);
+  const projects = getFeaturedItems(data?.projects);
 
   return (
     <PageContainer>
@@ -99,7 +118,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <RandomRectangles
           className="h-[30rem]"
           images={
-            data?.projects?.featured
+            projects
               ?.filter((project) => project?.cover && project.slug?.current)
               .map((project) => ({
                 image: project.cover!,

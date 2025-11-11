@@ -458,6 +458,8 @@ export type Home = {
     button?: Link;
   };
   projects?: {
+    featureRandom?: boolean;
+    randomCount?: number;
     featured?: Array<{
       _ref: string;
       _type: "reference";
@@ -468,6 +470,8 @@ export type Home = {
     button?: Link;
   };
   cooperators?: {
+    featureRandom?: boolean;
+    randomCount?: number;
     featured?: Array<{
       _ref: string;
       _type: "reference";
@@ -949,7 +953,7 @@ export type CooperatorPageQueryResult =
     }
   | null;
 // Variable: homePageQuery
-// Query: *[_type == "home" && language == $lang][0]{  meta,  manifest,  projects{    ...,    featured[]->{      _id,      slug,      cover{        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      }    },  },  cooperators{    ...,    featured[]->{      _id,      slug,      name,      image{        asset->{          _id,          url,          metadata{            lqip,            dimensions,          }        },        alt,        hotspot,        crop      }    },  },  support,}
+// Query: *[_type == "home" && language == $lang][0]{  meta,  manifest,  projects{    featureRandom,    randomCount,    ...,    "featured": select(      featureRandom == true => *[_type == "project" && language == $lang]{        _id,        slug,        cover{          asset->{            _id,            url,            metadata{              lqip,              dimensions,            }          },          alt,          hotspot,          crop        },      },      featured[]->{        _id,        slug,        cover{          asset->{            _id,            url,            metadata{              lqip,              dimensions,            }          },          alt,          hotspot,          crop        },      }    ),  },  cooperators{    featureRandom,    randomCount,    ...,    "featured": select(      featureRandom == true => *[_type == "cooperator" && language == $lang]{        _id,        slug,        name,        image{          asset->{            _id,            url,            metadata{              lqip,              dimensions,            }          },          alt,          hotspot,          crop        }      },      featured[]->{        _id,        slug,        name,        image{          asset->{            _id,            url,            metadata{              lqip,              dimensions,            }          },          alt,          hotspot,          crop        }      }    ),  },  support,}
 export type HomePageQueryResult = {
   meta: Meta | null;
   manifest: {
@@ -957,6 +961,8 @@ export type HomePageQueryResult = {
     button?: Link;
   } | null;
   projects: {
+    featureRandom?: boolean;
+    randomCount?: number;
     featured: Array<{
       _id: string;
       slug: Slug | null;
@@ -977,6 +983,8 @@ export type HomePageQueryResult = {
     button?: Link;
   } | null;
   cooperators: {
+    featureRandom?: boolean;
+    randomCount?: number;
     featured: Array<{
       _id: string;
       slug: Slug | null;
@@ -1134,7 +1142,7 @@ declare module "@sanity/client" {
     '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  timestamp,\n  slug,\n\n  "next": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n\n  contributors,\n  featured,\n  multimedia[]{\n    _type == "richImage" => {\n      asset->{\n        _id,\n        url,\n        metadata{\n          lqip,\n          dimensions,\n        }\n      },\n      alt,\n      hotspot,\n      crop\n    },\n    _type != "richImage" => @,\n  },\n  description\n}': ProjectPageQueryResult;
     '*[_type == "cooperators" && language == $lang][0]{\n  "cooperators": *[_type == "cooperator" && language == $lang]\n    | order(slug.current asc, _id asc){\n      _id,\n      image {\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      },\n      name,\n      slug,\n    },\n  meta\n}': CooperatorsPageQueryResult;
     '*[slug.current == $slug && language == $lang][0]{\n  meta,\n  _id,\n  name,\n  slug,\n  description,\n  image {\n    asset->{\n      _id,\n      url,\n      metadata{\n        lqip,\n        dimensions,\n      }\n    },\n    alt,\n    hotspot,\n    crop\n  },\n  socials[],\n  projects[],\n\n  "next": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current > ^.slug.current ||\n      (slug.current == ^.slug.current && _id > ^._id)\n    )\n  ] | order(slug.current asc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "cooperator" &&\n    language == $lang &&\n    (\n      slug.current < ^.slug.current ||\n      (slug.current == ^.slug.current && _id < ^._id)\n    )\n  ] | order(slug.current desc, _id desc)[0]{\n    name,\n    slug\n  },\n}': CooperatorPageQueryResult;
-    '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      cover{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n\n  },\n  cooperators{\n    ...,\n    featured[]->{\n      _id,\n      slug,\n      name,\n      image{\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions,\n          }\n        },\n        alt,\n        hotspot,\n        crop\n      }\n    },\n  },\n  support,\n}': HomePageQueryResult;
+    '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "project" && language == $lang]{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      },\n      featured[]->{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      }\n    ),\n  },\n  cooperators{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "cooperator" && language == $lang]{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      },\n      featured[]->{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      }\n    ),\n  },\n  support,\n}': HomePageQueryResult;
     '*[_type == "sounds" && language == $lang][0]{\n  meta,\n  trackUrls\n}': SoundsPageQueryResult;
     '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
     '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections\n}': DonatorsPageQueryResult;
