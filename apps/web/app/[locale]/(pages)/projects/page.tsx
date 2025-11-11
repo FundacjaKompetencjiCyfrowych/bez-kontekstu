@@ -3,7 +3,7 @@ import { projectsPageQuery } from "@/app/lib/sanity/queries";
 import { cache } from "react";
 import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
-import { CollectionShowcase } from "@/app/components/image/CollectionShowcase";
+import { CollectionItem, CollectionShowcase } from "@/app/components/image/CollectionShowcase";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { PageContainer } from "@/app/components/layout/PageContainer";
 
@@ -25,7 +25,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const { locale } = await params;
   const { data } = await getProjectsPage(locale);
   const dictionary = await getDictionary(locale);
-  const projects = data?.projects || [];
+  const projects = (data?.projects || []) as unknown as CollectionItem[];
 
   return (
     <PageContainer>
