@@ -38,6 +38,9 @@
 @utility text-emphasis {
   @apply text-[1.25rem] leading-[2rem] xl:text-[2rem] xl:leading-[3rem];
 }
+@utility focus-brand {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-100;
+}
 @custom-variant xl-tall (@media (min-width: 80rem) and (min-height: 56rem));
 @custom-variant tall (@media (min-height: 56rem));
 

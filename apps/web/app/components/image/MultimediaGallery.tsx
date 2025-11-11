@@ -23,7 +23,7 @@ export function MultimediaGallery({ images }: { images: Image[] }) {
           <button
             key={index}
             onClick={() => handleImageClick(index)}
-            className="aspect-square bg-gray-800 relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+            className="aspect-square bg-gray-800 relative overflow-hidden focus:outline-none focus-brand"
             aria-label={`View image ${index + 1} in full screen`}
           >
             <ContentImage
