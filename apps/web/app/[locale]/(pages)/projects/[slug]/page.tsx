@@ -58,7 +58,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           </div>
         )}
         {featured?._type === "video" && (
-          <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video w-full">
+          <div className="relative bg-gray-900 overflow-hidden aspect-video w-full">
             {isYouTube(featured?.url ?? "") && (
               <iframe
                 src={getYouTubeEmbedUrl(featured?.url ?? "")}

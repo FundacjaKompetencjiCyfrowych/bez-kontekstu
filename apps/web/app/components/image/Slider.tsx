@@ -100,7 +100,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
             onClick={goToPrevStep}
             disabled={isFirstSlide}
             className={cn(
-              "transition-all duration-200 flex-shrink-0 focus-brand rounded",
+              "transition-all duration-200 flex-shrink-0 focus-brand",
               isFirstSlide ? "opacity-50 cursor-not-allowed" : "hover:opacity-100 hover:text-brand-300 cursor-pointer"
             )}
             aria-label={dictionary.previousSlide}
@@ -118,7 +118,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
             onClick={goToNextStep}
             disabled={isLastSlide}
             className={cn(
-              "transition-all duration-200 flex-shrink-0 focus-brand rounded",
+              "transition-all duration-200 flex-shrink-0 focus-brand",
               isLastSlide ? "opacity-50 cursor-not-allowed" : "hover:opacity-100 hover:text-brand-300 cursor-pointer"
             )}
             aria-label={dictionary.nextSlide}

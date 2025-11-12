@@ -57,7 +57,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
         <button
           id={closeButtonId}
           onClick={onClose}
-          className="text-white text-2xl font-bold hover:text-brand-300 transition-color focus-brand rounded"
+          className="text-white text-2xl font-bold hover:text-brand-300 transition-color focus-brand"
           aria-label="Close image slider"
         >
           ✕
@@ -121,7 +121,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
             <button
               key={index}
               onClick={() => goToItem(index)}
-              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden border-2 transition-all transform hover:scale-110 ${
+              className={`relative w-16 h-16 flex-shrink-0 overflow-hidden border-2 transition-all transform hover:scale-110 ${
                 index === currentIndex ? "border-violet-800 scale-105" : "border-transparent"
               }`}
               role="tab"

@@ -20,7 +20,7 @@ export function TeamGrid({ members }: TeamGridProps) {
         <Link
           href={`/cooperators/${member?.slug?.current || ""}`}
           key={member._id}
-          className="relative w-full aspect-[3/4] md:aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden hover:scale-105 transition-all duration-300 ease-in-out rounded-sm"
+          className="relative w-full aspect-[3/4] md:aspect-[4/3] flex flex-col items-start justify-end p-3 overflow-hidden hover:scale-105 transition-all duration-300 ease-in-out"
           aria-label={member.name || ""}
         >
           {member.image && <ContentImage image={member.image} fill sizes={twSizes("42vw md:390px")} aspect={4 / 3} />}

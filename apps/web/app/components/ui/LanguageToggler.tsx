@@ -31,7 +31,7 @@ export function LanguageToggler({ variant }: { variant: "mobile" | "desktop" }) 
       aria-label={`Switch to ${locale === "pl" ? "English" : "Polish"}`}
       className="cursor-pointer"
     >
-      <div className="text-muted hover:text-white flex items-center justify-center gap-3 focus-brand rounded">
+      <div className="text-muted hover:text-white flex items-center justify-center gap-3 focus-brand">
         <FiGlobe style={{ width: "1em", height: "1em" }} aria-hidden="true" />
         <span>{locale.toUpperCase()}</span>
       </div>

@@ -18,7 +18,7 @@ export async function Footer({ data }: { data: FooterData }) {
           <Link
             key={link.url}
             href={link.url || "/"}
-            className="mr-1 inline-block after:content-['|'] after:pl-1 last-of-type:after:content-none focus-brand rounded"
+            className="mr-1 inline-block after:content-['|'] after:pl-1 last-of-type:after:content-none focus-brand"
           >
             <span className="hover:text-brand-300">{link.label}</span>
           </Link>
@@ -32,7 +32,7 @@ export async function Footer({ data }: { data: FooterData }) {
                   <Link
                     key={social.link?.url}
                     href={social.link?.url || "/"}
-                    className="mr-1 inline-block focus-brand rounded hover:text-brand-300"
+                    className="mr-1 inline-block focus-brand hover:text-brand-300"
                     aria-label={social.link?.label ? `Visit ${social.link.label}` : "Visit social media"}
                   >
                     {social.icon && <ContentIcon name={social.icon.asset?.name} size={20} />}
@@ -49,7 +49,7 @@ export async function Footer({ data }: { data: FooterData }) {
           <Link
             href="https://cyfrowe.org/?utm_source=itgirls&utm_medium=referral&utm_campaign=partners"
             rel="noopener noreferrer"
-            className="focus-brand rounded hover:text-brand-300"
+            className="focus-brand hover:text-brand-300"
           >
             Fundacja Kompetencji Cyfrowych
           </Link>
