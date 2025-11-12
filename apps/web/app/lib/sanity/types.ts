@@ -346,6 +346,7 @@ export type Donators = {
       fields?: Array<{
         title?: string;
         text?: string;
+        enableCopy?: boolean;
         _type: "field";
         _key: string;
       }>;
@@ -1195,6 +1196,7 @@ export type DonatorsPageQueryResult = {
       fields?: Array<{
         title?: string;
         text?: string;
+        enableCopy?: boolean;
         _type: "field";
         _key: string;
       }>;

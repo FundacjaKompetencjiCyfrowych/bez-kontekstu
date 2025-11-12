@@ -57,7 +57,8 @@ export default function ManifestSection({ section }: ManifestSectionProps) {
             <h2
               className={cn(
                 "uppercase font-defectica my-12 text-[2.5rem] leading-[3rem] md:text-[4rem] md:leading-[4.75rem]",
-                feature?.altTitle && "md:text-[3rem] md:leading-[5rem] whitespace-pre-line text-center xl:hidden md:pb-10 xl:pb-0"
+                feature?.altTitle &&
+                  "text-[2rem] md:text-[3rem] md:leading-[5rem] whitespace-pre-line text-center xl:hidden pb-15 md:pb-10 xl:pb-0"
               )}
             >
               {feature?.altTitle || title}

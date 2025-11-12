@@ -21,10 +21,11 @@ type CollectionShowcaseProps = {
   directory: string;
   title?: string[];
   srTitle: string;
+  multilineTitle?: boolean;
 };
 
 /* CollectionShowcase: displays a collection of items as a vertical stack on mobile/tablet and a horizontal slider on desktop */
-export function CollectionShowcase({ collection = [], lang, directory, title, srTitle }: CollectionShowcaseProps) {
+export function CollectionShowcase({ collection = [], lang, directory, title, srTitle, multilineTitle }: CollectionShowcaseProps) {
   return (
     <SectionContainer variant="heroBoxedOnDesktop">
       <Logo container="mobileOffset" />
@@ -34,7 +35,7 @@ export function CollectionShowcase({ collection = [], lang, directory, title, sr
       <section className="xl:overflow-hidden h-auto mx-auto flex flex-col items-center mt-[50px] xl:mt-0 w-full max-w-[1600px]">
         <div className="w-[85vw] md:w-[70vw] xl:w-full text-center text-md sm:text-3xl md:text-4xl lg:text-5xl">
           {/* Mobile and tablet layout - vertical stack */}
-          <div className="xl:hidden mx-auto flex flex-col gap-y-14 font-defectica">
+          <div className="xl:hidden mx-auto flex flex-col gap-y-10 font-defectica">
             {collection.map((item, index) => {
               return (
                 <ImageCard
@@ -45,6 +46,7 @@ export function CollectionShowcase({ collection = [], lang, directory, title, sr
                   tag={item.timestamp?.slice(0, 4)}
                   title={item.name ?? ""}
                   lang={lang}
+                  breakLines={multilineTitle}
                 />
               );
             })}

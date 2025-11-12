@@ -135,15 +135,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             );
           })}
       </div>
-      <MultimediaGallery images={images} />
-
-      <NavigationButtonGroup
-        previousSlug={previous?.slug?.current}
-        nextSlug={next?.slug?.current}
-        previousLabel={dictionary.previousMasc}
-        nextLabel={dictionary.nextMasc}
-        pathname="projects"
-      />
+      <SectionContainer variant="regular">
+        <h2 className="text-[2rem] md:text-[4rem] font-defectica uppercase">MULTIMEDIA</h2>
+        <MultimediaGallery images={images} />
+        <NavigationButtonGroup
+          previousSlug={previous?.slug?.current}
+          nextSlug={next?.slug?.current}
+          previousLabel={dictionary.previousMasc}
+          nextLabel={dictionary.nextMasc}
+          pathname="projects"
+        />
+      </SectionContainer>
     </PageContainer>
   );
 }

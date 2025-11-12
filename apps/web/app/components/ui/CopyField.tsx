@@ -13,6 +13,7 @@ type CopyFieldProps = {
   copiedText: string;
   ariaLiveCopiedMessage?: string;
   ariaLabel?: string;
+  disabled?: boolean;
 };
 
 export function CopyField({
@@ -23,6 +24,7 @@ export function CopyField({
   copiedText,
   ariaLiveCopiedMessage = copiedText,
   ariaLabel,
+  disabled,
 }: CopyFieldProps) {
   const [, copy] = useCopyToClipboard();
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -38,21 +40,23 @@ export function CopyField({
   return (
     <button
       type="button"
-      className={cn("glass border-white/10 rounded-3xl px-3 py-2 cursor-pointer w-full text-left relative", className)}
-      onClick={handleCopy}
+      className={cn("glass border-white/10 rounded-3xl px-3 py-2 w-full text-left relative", !disabled && "cursor-pointer", className)}
+      onClick={disabled ? undefined : handleCopy}
       aria-label={ariaLabel}
     >
       {/* Live region only when copied */}
-      <div aria-live="polite" aria-atomic="true" className="sr-only">
-        {copiedId === elementId ? ariaLiveCopiedMessage : undefined}
-      </div>
+      {!disabled && (
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          {copiedId === elementId ? ariaLiveCopiedMessage : undefined}
+        </div>
+      )}
 
       <div className="flex justify-between items-end mx-2 my-2">
         <div>
           {label && <p className="mb-4">{label}</p>}
           <p>{copiedId === elementId ? copiedText : value}</p>
         </div>
-        <FiCopy className="shrink-0 w-[1.2em] h-[1.2em] mb-1 mr-1" aria-hidden />
+        {!disabled && <FiCopy className="shrink-0 w-[1.2em] h-[1.2em] mb-1 mr-1" aria-hidden />}
       </div>
     </button>
   );

@@ -68,6 +68,13 @@ export default definePage({
                               title: 'Treść',
                               type: 'string',
                             }),
+                            defineField({
+                              name: 'enableCopy',
+                              title: 'Kopiowanie',
+                              initialValue: true,
+                              description: 'Włącz kopiowanie do schowka',
+                              type: 'boolean',
+                            }),
                           ],
                           preview: {
                             select: {

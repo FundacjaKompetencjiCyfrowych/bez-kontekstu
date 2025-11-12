@@ -2,10 +2,10 @@ import { cn } from "@/app/lib/utils";
 import { cva } from "class-variance-authority";
 import { ComponentProps, ReactNode } from "react";
 
-const pageContainer = cva("px-container flex flex-1 flex-col gap-12 lg:gap-[7.75rem]", {
+const pageContainer = cva("px-container flex flex-1 flex-col gap-24 lg:gap-[7.75rem]", {
   variants: {
     variant: {
-      default: "pb-[7.75rem]",
+      default: "pb-14 md:pb-[7.75rem]",
       noPadding: "",
     },
   },
