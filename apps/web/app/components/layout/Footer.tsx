@@ -20,7 +20,7 @@ export async function Footer({ data }: { data: FooterData }) {
             href={link.url || "/"}
             className="mr-1 inline-block after:content-['|'] after:pl-1 last-of-type:after:content-none focus-brand rounded"
           >
-            <span className="hover:underline">{link.label}</span>
+            <span className="hover:text-brand-300">{link.label}</span>
           </Link>
         ))}
         {/* Socials */}
@@ -32,7 +32,7 @@ export async function Footer({ data }: { data: FooterData }) {
                   <Link
                     key={social.link?.url}
                     href={social.link?.url || "/"}
-                    className="mr-1 inline-block focus-brand rounded"
+                    className="mr-1 inline-block focus-brand rounded hover:text-brand-300"
                     aria-label={social.link?.label ? `Visit ${social.link.label}` : "Visit social media"}
                   >
                     {social.icon && <ContentIcon name={social.icon.asset?.name} size={20} />}
@@ -44,12 +44,12 @@ export async function Footer({ data }: { data: FooterData }) {
         </div>
         <div className="text-muted">
           <span className="block lg:inline">
-            Page made with <FiHeart size={15} className="inline-block text-white" aria-hidden="true" /> by{" "}
+            Page made with <FiHeart size={15} className="inline-block" aria-hidden="true" /> by{" "}
           </span>
           <Link
             href="https://cyfrowe.org/?utm_source=itgirls&utm_medium=referral&utm_campaign=partners"
             rel="noopener noreferrer"
-            className="focus-brand rounded"
+            className="focus-brand rounded hover:text-brand-300"
           >
             Fundacja Kompetencji Cyfrowych
           </Link>

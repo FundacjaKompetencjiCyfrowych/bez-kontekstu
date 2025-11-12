@@ -1,5 +1,6 @@
 import {defineArrayMember, defineField} from 'sanity'
 import {definePage} from '../helpers'
+import {uniqueByLanguage} from '../../lib/intl'
 
 export default definePage({
   name: 'sounds',
@@ -15,7 +16,11 @@ export default definePage({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      hidden: true,
+      // hidden: true,
+      options: {
+        source: 'name',
+        isUnique: uniqueByLanguage,
+      },
     }),
     defineField({
       name: 'timestamp',
@@ -23,7 +28,6 @@ export default definePage({
       type: 'datetime',
       group: 'content',
       initialValue: () => new Date().toISOString(),
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'cover',

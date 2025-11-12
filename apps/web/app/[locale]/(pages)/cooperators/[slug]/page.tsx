@@ -68,7 +68,7 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
                           href={social.url}
                           target={social.newTab ? "_blank" : undefined}
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 justify-end hover:text-gray-300 transition-colors text-right"
+                          className="flex items-center gap-2 justify-end hover:text-brand-300 transition-colors text-right"
                         >
                           {social.label}
                           <FiArrowUpRight className="w-[1.5em] h-[1.5em]" />

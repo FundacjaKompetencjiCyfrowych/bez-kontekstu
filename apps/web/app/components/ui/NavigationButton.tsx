@@ -7,7 +7,7 @@ import { cloneElement, ComponentProps, ReactElement, ReactNode } from "react";
 import Link from "next/link";
 
 const buttonVariants = cva(
-  "inline-flex items-center w-fit justify-center gap-[0.6em] cursor-pointer text-[1rem] xl:text-[1.25rem] hover:text-gray-300 font-space-mono",
+  "inline-flex items-center w-fit justify-center gap-[0.6em] cursor-pointer text-[1rem] xl:text-[1.25rem] hover:text-brand-300 font-space-mono",
   {
     variants: {
       variant: {

@@ -6,6 +6,7 @@ import { useKeyboardNavigation } from "@/app/components/hooks/useKeyboardNavigat
 import { useBodyScrollLock } from "@/app/components/hooks/useBodyScrollLock";
 import { ContentImage, Image } from "@/app/components/cms/ContentImage";
 import { twSizes } from "@/app/lib/twSizes";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 interface LightboxProps {
   images: Image[];
@@ -52,11 +53,11 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
       aria-describedby={thumbnailsId}
     >
       {/* Header with close button */}
-      <div className="absolute right-4 p-4 z-10">
+      <div className="absolute right-6 p-4 z-10">
         <button
           id={closeButtonId}
           onClick={onClose}
-          className="text-white text-2xl font-bold hover:text-gray-300 transition-all duration-300 transform hover:scale-110 focus:outline-none focus-brand rounded"
+          className="text-white text-2xl font-bold hover:text-brand-300 transition-color focus-brand rounded"
           aria-label="Close image slider"
         >
           ✕
@@ -69,10 +70,10 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
         <button
           id={prevButtonId}
           onClick={goToPrevious}
-          className="absolute left-4 text-white text-4xl hover:text-gray-300 transition-all duration-300 transform hover:scale-150 z-10"
+          className="absolute left-6 text-white text-4xl hover:text-brand-300 transition-color z-10"
           aria-label="Previous image"
         >
-          ‹
+          <FiChevronLeft />
         </button>
 
         {/* Current image */}
@@ -101,10 +102,10 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
         <button
           id={nextButtonId}
           onClick={goToNext}
-          className="absolute right-4 text-white text-4xl hover:text-gray-300 transition-all duration-300 transform hover:scale-150 "
+          className="absolute right-0 text-white text-4xl hover:text-brand-300 transition-color"
           aria-label="Next image"
         >
-          ›
+          <FiChevronRight />
         </button>
       </div>
 
@@ -120,7 +121,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
             <button
               key={index}
               onClick={() => goToItem(index)}
-              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden border-2 transition-all duration-300 transform hover:scale-110 ${
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden border-2 transition-all transform hover:scale-110 ${
                 index === currentIndex ? "border-violet-800 scale-105" : "border-transparent"
               }`}
               role="tab"

@@ -96,7 +96,7 @@ export function NavigationMobile({ isMobileMenuEnabled, routePath }: MobileNavig
             <li key={item.href} className="mx-6">
               <Link
                 href={item.href}
-                className="text-gray-200 hover:text-violet-400 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica focus-brand"
+                className="text-gray-200 hover:text-brand-300 block px-3 py-3 sm:landscape:py-1 lg:landscape:py-3 text-xl rounded-md font-defectica focus-brand"
                 onClick={() => setIsMenuOpen(false)}
                 rel="noopener noreferrer"
                 role="menuitem"

@@ -14,33 +14,23 @@ type SliderProps = {
   onSlideChange?: (slide: number) => void;
 };
 
-/**
- * Fixed + pixel-perfect slider:
- * - Consistent spacing across slides
- * - No clipping or empty gaps
- * - Fully responsive
- */
 export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }: SliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const totalSlides = Math.ceil(children.length / itemsPerSlide);
   const [currentSlide, { goToNextStep, goToPrevStep }] = useStep(totalSlides);
   const { dictionary } = useIntl();
-
-  // Accordion hover state (desktop use in parent)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Precompute pixel widths for equal / hovered / others
   const sizes = useMemo(() => {
     const totalGapPx = (itemsPerSlide - 1) * gap;
     const available = Math.max(0, containerWidth - totalGapPx);
     const equalPx = itemsPerSlide > 0 ? available / itemsPerSlide : 0;
-    const hoveredPx = available * 0.55; // emphasis
+    const hoveredPx = available * 0.55;
     const othersPx = itemsPerSlide > 1 ? (available - hoveredPx) / (itemsPerSlide - 1) : 0;
     return { equalPx, hoveredPx, othersPx };
   }, [containerWidth, itemsPerSlide, gap]);
 
-  // Watch for resize to recalc widths
   useEffect(() => {
     const updateWidth = () => {
       if (sliderRef.current) setContainerWidth(sliderRef.current.clientWidth);
@@ -50,15 +40,21 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
-  // Scroll to correct slide
   useEffect(() => {
     if (!sliderRef.current || !containerWidth) return;
 
     const slideOffset = (currentSlide - 1) * containerWidth;
+    const el = sliderRef.current;
 
-    sliderRef.current.scrollTo({
-      left: slideOffset,
-      behavior: "smooth",
+    // Disable inline scroll-behavior to avoid Chrome conflicts
+    el.style.scrollBehavior = "auto";
+
+    // Use requestAnimationFrame to ensure layout is stable before scrolling
+    requestAnimationFrame(() => {
+      el.scrollTo({
+        left: slideOffset,
+        behavior: "smooth",
+      });
     });
 
     onSlideChange?.(currentSlide);
@@ -68,16 +64,16 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
   const isLastSlide = currentSlide === totalSlides;
 
   return (
-    <>
-      {/* Outer container */}
+    <div className="relative w-full">
+      {/* Slider container */}
       <div
         ref={sliderRef}
-        className="flex overflow-x-auto scrollbar-hide pb-4 justify-start snap-x snap-mandatory"
+        className="flex overflow-x-auto scrollbar-hide pb-4 justify-start snap-x snap-mandatory relative z-0"
         onMouseLeave={() => setHoveredIndex(null)}
         style={{
-          scrollBehavior: "smooth",
           scrollbarWidth: "none",
           msOverflowStyle: "none",
+          willChange: "scroll-position",
           gap: `${gap}px`,
         }}
       >
@@ -97,15 +93,15 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
         })}
       </div>
 
-      {/* Navigation */}
+      {/* Navigation below */}
       {totalSlides > 1 && (
-        <div className="flex justify-between items-center px-4 mt-6">
+        <div className="relative z-10 flex justify-between items-center px-4 mt-6">
           <button
             onClick={goToPrevStep}
             disabled={isFirstSlide}
             className={cn(
               "transition-all duration-200 flex-shrink-0 focus-brand rounded",
-              isFirstSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+              isFirstSlide ? "opacity-50 cursor-not-allowed" : "hover:opacity-100 hover:text-brand-300 cursor-pointer"
             )}
             aria-label={dictionary.previousSlide}
           >
@@ -123,7 +119,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
             disabled={isLastSlide}
             className={cn(
               "transition-all duration-200 flex-shrink-0 focus-brand rounded",
-              isLastSlide ? "opacity-30 cursor-not-allowed" : "opacity-70 hover:opacity-100 hover:scale-110 cursor-pointer"
+              isLastSlide ? "opacity-50 cursor-not-allowed" : "hover:opacity-100 hover:text-brand-300 cursor-pointer"
             )}
             aria-label={dictionary.nextSlide}
           >
@@ -131,6 +127,6 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
