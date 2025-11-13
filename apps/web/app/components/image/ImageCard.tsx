@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ContentImage, Image } from "@/app/components/cms/ContentImage";
 import { cn } from "@/app/lib/utils";
-import { getDictionary } from "../../lib/intl/dictionaries/dynamic";
-import { twSizes } from "../../lib/twSizes";
+import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
+import { twSizes } from "@/app/lib/twSizes";
+import { NavigationButton } from "@/app/components/ui/NavigationButton";
 
 type ImageCardProps = {
   title: string;
@@ -57,24 +58,37 @@ export async function ImageCard({
         <div
           className={cn(
             "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent pointer-events-none",
-            isMobile ? "h-1/2" : "h-24 xl:opacity-0 xl:group-hover:opacity-100 xl:transition-opacity xl:duration-300"
+            "h-1/2 xl:opacity-0 xl:group-hover:opacity-100 xl:transition-opacity xl:duration-300"
           )}
           aria-hidden="true"
         />
         <div
           className={cn(
-            "absolute font-defectica bottom-0 left-0 z-10 text-left",
+            "absolute font-defectica bottom-0 left-0 right-0 z-10",
             isMobile
-              ? "p-3 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl"
-              : "p-4 mb-4 ml-4 text-3xl xl:opacity-0 xl:group-hover:opacity-100 xl:translate-y-2 xl:group-hover:translate-y-0 xl:transition-all xl:duration-500"
+              ? "p-3 mb-4 ml-3 text-2xl md:text-3xl xl:text-4xl text-left"
+              : "p-4 mb-4 xl:opacity-0 xl:group-hover:opacity-100 xl:translate-y-2 xl:group-hover:translate-y-0 xl:transition-all xl:duration-500 xl:flex xl:items-end xl:justify-between"
           )}
         >
-          {tag && <p className={cn("font-mono mb-4", isMobile ? "text-base" : "text-lg")}>{tag}</p>}
-          <h2
-            className={cn("font-defectica uppercase", isMobile ? "text-2xl md:text-3xl" : "text-2xl", breakLines && "whitespace-pre-line")}
-          >
-            {title.replace(/\s/g, "\n")}
-          </h2>
+          <div className="text-left">
+            {tag && <p className={cn("font-mono mb-4", isMobile ? "text-base" : "text-lg")}>{tag}</p>}
+            <h2
+              className={cn(
+                "font-defectica uppercase",
+                isMobile ? "text-2xl md:text-3xl" : "text-2xl",
+                breakLines && "whitespace-pre-line"
+              )}
+            >
+              {title.replace(/\s/g, "\n")}
+            </h2>
+          </div>
+          {!isMobile && (
+            <div className="hidden xl:block ml-4">
+              <NavigationButton variant="next">
+                <>{dictionary.more}</>
+              </NavigationButton>
+            </div>
+          )}
         </div>
       </div>
     </Link>

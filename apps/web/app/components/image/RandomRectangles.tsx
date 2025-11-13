@@ -111,8 +111,8 @@ const generateRectangles = (images: { image: Image; slug: string }[]) => {
   const maxRectangles = Math.min(4, images.length);
 
   for (let i = 0; i < maxRectangles; i++) {
-    const rectWidth = 40;
-    const rectHeight = 20; // 2:1 aspect ratio
+    const rectWidth = 50;
+    const rectHeight = 25; // 2:1 aspect ratio
 
     // Try progressively smaller sizes
     const sizeAttempts = [
@@ -228,13 +228,13 @@ export function RandomRectangles({ images, className }: { images: { image: Image
   }, [containerWidth, regenerate]);
 
   return (
-    <div className={cn("w-full h-full grow relative overflow-hidden", className)}>
+    <div className={cn("w-full h-full grow relative", className)}>
       {rectangles.map((rect) => {
         return (
           <Link
             key={rect.id}
             href={`/projects/${rect.slug}`}
-            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden focus-brand"
+            className="absolute transition-all duration-300 hover:scale-120 hover:z-50 focus-brand"
             style={{
               left: `${rect.x}%`,
               top: `${rect.y}%`,
