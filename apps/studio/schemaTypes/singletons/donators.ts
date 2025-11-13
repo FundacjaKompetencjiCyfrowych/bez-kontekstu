@@ -6,6 +6,12 @@ export default definePage({
   title: 'Darczyńcy',
   fields: [
     defineField({
+      name: 'hero',
+      title: 'Tytuł strony',
+      type: 'blockContent',
+      group: 'content',
+    }),
+    defineField({
       name: 'sections',
       title: 'Sekcje',
       type: 'array',

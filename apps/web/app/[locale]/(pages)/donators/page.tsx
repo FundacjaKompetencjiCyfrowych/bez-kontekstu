@@ -9,6 +9,7 @@ import { PageContainer } from "@/app/components/layout/PageContainer";
 import { SectionContainer } from "@/app/components/layout/SectionContainer";
 import { SplitTitle } from "@/app/components/ui/SplitTitle";
 import { DonatorSection } from "@/app/components/layout/DonatorSection";
+import { ContentText } from "@/app/components/cms/ContentText";
 
 // Cache and metadata functions
 const getDonatorsPage = cache(async (locale: string) => {
@@ -47,11 +48,9 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
         />
         <div className="flex w-full">
           <div className="hidden xl:block flex-1"></div>
-          <p className="relative flex-1 xl:pt-44 xl:font-bold text-[1rem] leading-[2.5rem] xl:text-[2.5rem] xl:leading-[3.125rem]">
-            {dictionary.donators.yourSupport}
-            <br />=<br />
-            {dictionary.donators.newArtSpaces}
-          </p>
+          <div className="relative flex-1 xl:pt-44 xl:font-bold text-[1rem] leading-[2.5rem] xl:text-[2.5rem] xl:leading-[3.125rem]">
+            <ContentText variant="hero" value={data?.hero || []} />
+          </div>
         </div>
       </SectionContainer>
 
