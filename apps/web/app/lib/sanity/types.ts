@@ -1171,7 +1171,7 @@ export type ManifestPageQueryResult = {
   }> | null;
 } | null;
 // Variable: donatorsPageQuery
-// Query: *[_type == "donators" && language == $lang][0]{  meta,  sections[]{    ...,    body[]{      ...,      fields[]{        ...,        enableCopy      }    }  }}
+// Query: *[_type == "donators" && language == $lang][0]{  meta,  sections[]}
 export type DonatorsPageQueryResult = {
   meta: Meta | null;
   sections: Array<{
@@ -1188,21 +1188,21 @@ export type DonatorsPageQueryResult = {
       alt?: string;
       _type: "richImage";
     };
-    body: Array<{
+    body?: Array<{
       heading?: {
         title?: string;
         subtitle?: string;
       };
-      fields: Array<{
+      fields?: Array<{
         title?: string;
         text?: string;
-        enableCopy: boolean | null;
+        enableCopy?: boolean;
         _type: "field";
         _key: string;
-      }> | null;
+      }>;
       _type: "subsection";
       _key: string;
-    }> | null;
+    }>;
     _type: "section";
     _key: string;
   }> | null;
@@ -1265,7 +1265,7 @@ declare module "@sanity/client" {
     '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "project" && language == $lang]{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      },\n      featured[]->{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      }\n    ),\n  },\n  cooperators{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "cooperator" && language == $lang]{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      },\n      featured[]->{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      }\n    ),\n  },\n  support,\n}': HomePageQueryResult;
     '*[_type == "sounds" && language == $lang][0]{\n  meta,\n  trackUrls,\n  name,\n  cover,\n  timestamp,\n  "next": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n}': SoundsPageQueryResult;
     '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
-    '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections[]{\n    ...,\n    body[]{\n      ...,\n      fields[]{\n        ...,\n        enableCopy\n      }\n    }\n  }\n}': DonatorsPageQueryResult;
+    '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections[]\n}': DonatorsPageQueryResult;
     '*[_type == "privacy" && language == $lang][0]{\n  meta,\n  content\n}': PrivacyPageQueryResult;
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
