@@ -62,19 +62,25 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
           const isCurrent = slideIndex + 1 === currentSlide;
 
           // Calculate item widths
-          const totalGapPx = (slideItems.length - 1) * gap;
+          const totalGapPx = (itemsPerSlide - 1) * gap; // always use itemsPerSlide
           const available = containerWidth - totalGapPx;
-          const hoveredPx = hoveredIndex !== null && isCurrent ? available * 0.55 : available / slideItems.length;
+          const hoveredPx = hoveredIndex !== null && isCurrent ? available * 0.55 : available / itemsPerSlide;
           const othersPx =
             hoveredIndex !== null && isCurrent && slideItems.length > 1
-              ? (available - hoveredPx) / (slideItems.length - 1)
-              : available / slideItems.length;
+              ? (available - hoveredPx) / (itemsPerSlide - 1)
+              : available / itemsPerSlide;
 
           return (
-            <div key={slideIndex} className="flex flex-shrink-0 snap-start justify-start w-full" style={{ gap: `${gap}px` }}>
+            <div
+              key={slideIndex}
+              className={cn(
+                "flex flex-shrink-0 snap-start justify-center" // center items
+              )}
+              style={{ gap: `${gap}px`, width: "100%" }}
+            >
               {slideItems.map((child, index) => {
                 const basisPx =
-                  hoveredIndex !== null && isCurrent ? (hoveredIndex === index ? hoveredPx : othersPx) : available / slideItems.length;
+                  hoveredIndex !== null && isCurrent ? (hoveredIndex === index ? hoveredPx : othersPx) : available / itemsPerSlide;
 
                 return (
                   <div
