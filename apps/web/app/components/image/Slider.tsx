@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo, ReactNode } from "react";
+import { useRef, useEffect, useState, ReactNode } from "react";
 import { useStep } from "usehooks-ts";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { cn } from "@/app/lib/utils";
@@ -22,15 +22,7 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
   const { dictionary } = useIntl();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const sizes = useMemo(() => {
-    const totalGapPx = (itemsPerSlide - 1) * gap;
-    const available = Math.max(0, containerWidth - totalGapPx);
-    const equalPx = itemsPerSlide > 0 ? available / itemsPerSlide : 0;
-    const hoveredPx = available * 0.55;
-    const othersPx = itemsPerSlide > 1 ? (available - hoveredPx) / (itemsPerSlide - 1) : 0;
-    return { equalPx, hoveredPx, othersPx };
-  }, [containerWidth, itemsPerSlide, gap]);
-
+  // Update container width on resize
   useEffect(() => {
     const updateWidth = () => {
       if (sliderRef.current) setContainerWidth(sliderRef.current.clientWidth);
@@ -40,60 +32,67 @@ export function Slider({ itemsPerSlide = 4, gap = 24, children, onSlideChange }:
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
+  // Scroll to current slide
   useEffect(() => {
-    if (!sliderRef.current || !containerWidth) return;
-
-    const slideOffset = (currentSlide - 1) * containerWidth;
+    if (!sliderRef.current) return;
     const el = sliderRef.current;
-
-    // Disable inline scroll-behavior to avoid Chrome conflicts
-    el.style.scrollBehavior = "auto";
-
-    // Use requestAnimationFrame to ensure layout is stable before scrolling
-    requestAnimationFrame(() => {
-      el.scrollTo({
-        left: slideOffset,
-        behavior: "smooth",
-      });
-    });
-
+    const slideOffset = (currentSlide - 1) * containerWidth;
+    el.scrollTo({ left: slideOffset, behavior: "smooth" });
     onSlideChange?.(currentSlide);
   }, [currentSlide, containerWidth, onSlideChange]);
+
+  // Split children into pages
+  const slides = [];
+  for (let i = 0; i < children.length; i += itemsPerSlide) {
+    slides.push(children.slice(i, i + itemsPerSlide));
+  }
 
   const isFirstSlide = currentSlide === 1;
   const isLastSlide = currentSlide === totalSlides;
 
   return (
     <div className="relative w-full">
-      {/* Slider container */}
       <div
         ref={sliderRef}
-        className="flex overflow-x-auto scrollbar-hide pb-4 justify-start snap-x snap-mandatory relative z-0"
+        className="flex overflow-x-hidden snap-x snap-mandatory relative z-0"
+        style={{ gap: `${gap}px` }}
         onMouseLeave={() => setHoveredIndex(null)}
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          willChange: "scroll-position",
-          gap: `${gap}px`,
-        }}
       >
-        {children.map((child, index) => {
-          const basisPx = hoveredIndex === null ? sizes.equalPx : hoveredIndex === index ? sizes.hoveredPx : sizes.othersPx;
+        {slides.map((slideItems, slideIndex) => {
+          const isCurrent = slideIndex + 1 === currentSlide;
+
+          // Calculate item widths
+          const totalGapPx = (slideItems.length - 1) * gap;
+          const available = containerWidth - totalGapPx;
+          const hoveredPx = hoveredIndex !== null && isCurrent ? available * 0.55 : available / slideItems.length;
+          const othersPx =
+            hoveredIndex !== null && isCurrent && slideItems.length > 1
+              ? (available - hoveredPx) / (slideItems.length - 1)
+              : available / slideItems.length;
 
           return (
-            <div
-              key={index}
-              className="snap-start transition-[flex-basis] duration-500 ease-in-out"
-              style={{ flex: "0 0 auto", flexBasis: `${basisPx}px` }}
-              onMouseEnter={() => setHoveredIndex(index)}
-            >
-              {child}
+            <div key={slideIndex} className="flex flex-shrink-0 snap-start justify-start w-full" style={{ gap: `${gap}px` }}>
+              {slideItems.map((child, index) => {
+                const basisPx =
+                  hoveredIndex !== null && isCurrent ? (hoveredIndex === index ? hoveredPx : othersPx) : available / slideItems.length;
+
+                return (
+                  <div
+                    key={index}
+                    className="transition-[flex-basis] duration-500 ease-in-out"
+                    style={{ flex: `0 0 ${basisPx}px` }}
+                    onMouseEnter={() => isCurrent && setHoveredIndex(index)}
+                  >
+                    {child}
+                  </div>
+                );
+              })}
             </div>
           );
         })}
       </div>
 
-      {/* Navigation below */}
+      {/* Navigation */}
       {totalSlides > 1 && (
         <div className="relative z-10 flex justify-between items-center px-4 mt-6">
           <button
