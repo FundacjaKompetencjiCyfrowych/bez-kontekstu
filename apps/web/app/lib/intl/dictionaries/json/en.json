@@ -46,9 +46,5 @@
     "support": ["SU P", "P P ORT"],
     "contact": ["CON T", "A CT"],
     "privacy": ["PRIV AC Y", "PO LICY"]
-  },
-  "donators": {
-    "yourSupport": "Your support",
-    "newArtSpaces": "new art spaces"
   }
 }

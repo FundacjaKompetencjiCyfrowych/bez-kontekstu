@@ -1765,6 +1765,14 @@
         },
         "optional": true
       },
+      "hero": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "blockContent"
+        },
+        "optional": true
+      },
       "sections": {
         "type": "objectAttribute",
         "value": {

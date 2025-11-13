@@ -301,7 +301,8 @@ export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language 
 
 export const donatorsPageQuery = defineQuery(`*[_type == "donators" && language == $lang][0]{
   meta,
-  sections[]
+  sections[],
+  hero
 }`);
 
 export const privacyPageQuery = defineQuery(`*[_type == "privacy" && language == $lang][0]{
