@@ -41,7 +41,7 @@ export function DonatorSection({ section, dictionary, imagePosition }: DonatorSe
                     ariaLabel={dictionary.copyToClipboard}
                     ariaLiveCopiedMessage={dictionary.copied}
                     copiedText={dictionary.copied + " ✓"}
-                    disabled={field.enableCopy}
+                    disabled={!field.enableCopy}
                   />
                 ))}
             </div>
