@@ -49,8 +49,8 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           {data?.fields &&
             data.fields.map((field) => (
               <div key={field._key} className={cn("flex items-center", field.link?.url && "hover:text-brand-300")}>
-                <dt className="mr-2 flex items-center md:mr-4">
-                  <ContentIcon name={field.icon?.asset?.name || ""} className="w-[1em] h-[1em]" />
+                <dt className="flex items-center mr-4">
+                  <ContentIcon name={field.icon?.asset?.name || ""} className="w-[1.4em] h-[1.4em] xl:w-[1.1em] xl:h-[1.1em]" />
                   <span className="sr-only">{field.link?.label}:</span>
                 </dt>
                 <dd className="break-words [@media(max-width:350px)]:break-all min-w-0 whitespace-pre-line">

@@ -315,3 +315,9 @@ export const contactPageQuery = defineQuery(`*[_type == "contact" && language ==
 }`);
 
 export const settingsQuery = defineQuery(`*[_type == "settings" && language == $lang][0]`);
+
+export const allSlugsQuery = defineQuery(`*[_type in ["project", "sounds", "cooperator"]]{
+  "slug": slug.current,
+  language,
+  _type
+}`);

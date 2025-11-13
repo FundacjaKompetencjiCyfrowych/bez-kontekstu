@@ -36,6 +36,14 @@ const components: PortableTextComponents = {
   },
 };
 
-export function ContentText({ value }: { value: BlockContentWithHeadings }) {
-  return <PortableText value={value} components={components} />;
+const heroComponents: PortableTextComponents = {
+  ...components,
+  block: {
+    normal: ({ children }) => <p className="mb-4 xl:mb-7">{children}</p>,
+    blockquote: ({ children }) => <blockquote className="mb-4 xl:mb-7">{children}</blockquote>,
+  },
+};
+
+export function ContentText({ value, variant }: { value: BlockContentWithHeadings; variant?: "hero" | "default" }) {
+  return <PortableText value={value} components={variant === "hero" ? heroComponents : components} />;
 }

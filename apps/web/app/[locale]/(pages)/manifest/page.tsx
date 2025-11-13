@@ -12,6 +12,8 @@ import { PageContainer } from "@/app/components/layout/PageContainer";
 import { SplitTitle } from "@/app/components/ui/SplitTitle";
 import { FaQuoteLeft } from "react-icons/fa";
 import { Logo } from "@/app/components/image/Logo";
+import { ContentText } from "@/app/components/cms/ContentText";
+import { BlockContent } from "@/app/lib/sanity/types";
 
 const getManifestPage = cache(async (locale: string) => {
   return await sanityFetch({ query: manifestPageQuery, params: { lang: locale } });
@@ -49,10 +51,16 @@ export default async function ManifestPage({ params }: { params: Promise<{ local
         {data?.hero && (
           <>
             {/* Quote */}
-            <p className="relative max-w-[32rem] xl:mr-auto xl:ml-[5rem] pl-[1.5em] text-emphasis font-bold xl:text-right xl:font-normal">
+            {/* <p className="relative max-w-[32rem] xl:mr-auto xl:ml-[5rem] pl-[1.5em] text-emphasis font-bold xl:text-right xl:font-normal">
               <FaQuoteLeft className="w-[1rem] h-[1rem] absolute left-0 top-[0.3rem]" />
               {data.hero.quote}
-            </p>
+            </p> */}
+
+            {/* Quote */}
+            <div className="relative max-w-[32rem] xl:mr-auto xl:ml-[5rem] pl-[1.5em] text-emphasis font-bold xl:text-right xl:font-normal">
+              <FaQuoteLeft className="w-[1rem] h-[1rem] absolute left-0 top-[0.3rem]" />
+              <ContentText value={(data.hero.quote ?? {}) as BlockContent} variant="hero" />
+            </div>
 
             {/* Image */}
             <div className="hidden xl:block bottom-0 left-1/2 absolute w-[400px] min-h-[500px]">

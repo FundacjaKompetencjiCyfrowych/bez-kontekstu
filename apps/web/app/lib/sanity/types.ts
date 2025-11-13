@@ -398,7 +398,7 @@ export type Manifest = {
   language?: string;
   meta?: Meta;
   hero?: {
-    quote?: string;
+    quote?: BlockContent;
     image?: {
       asset?: {
         _ref: string;
@@ -1121,7 +1121,7 @@ export type SoundsPageQueryResult = {
 export type ManifestPageQueryResult = {
   meta: Meta | null;
   hero: {
-    quote?: string;
+    quote?: BlockContent;
     image?: {
       asset?: {
         _ref: string;
@@ -1234,6 +1234,25 @@ export type SettingsQueryResult = {
     socials?: LinkIconList;
   };
 } | null;
+// Variable: allSlugsQuery
+// Query: *[_type in ["project", "sounds", "cooperator"]]{  "slug": slug.current,  language,  _type}
+export type AllSlugsQueryResult = Array<
+  | {
+      slug: string | null;
+      language: string | null;
+      _type: "cooperator";
+    }
+  | {
+      slug: string | null;
+      language: string | null;
+      _type: "project";
+    }
+  | {
+      slug: string | null;
+      language: string | null;
+      _type: "sounds";
+    }
+>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1250,5 +1269,6 @@ declare module "@sanity/client" {
     '*[_type == "privacy" && language == $lang][0]{\n  meta,\n  content\n}': PrivacyPageQueryResult;
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
+    '*[_type in ["project", "sounds", "cooperator"]]{\n  "slug": slug.current,\n  language,\n  _type\n}': AllSlugsQueryResult;
   }
 }
