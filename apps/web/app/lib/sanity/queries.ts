@@ -301,7 +301,16 @@ export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language 
 
 export const donatorsPageQuery = defineQuery(`*[_type == "donators" && language == $lang][0]{
   meta,
-  sections
+  sections[]{
+    ...,
+    body[]{
+      ...,
+      fields[]{
+        ...,
+        enableCopy
+      }
+    }
+  }
 }`);
 
 export const privacyPageQuery = defineQuery(`*[_type == "privacy" && language == $lang][0]{
