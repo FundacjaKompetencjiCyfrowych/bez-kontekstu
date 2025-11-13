@@ -346,6 +346,7 @@ export type Donators = {
       fields?: Array<{
         title?: string;
         text?: string;
+        enableCopy?: boolean;
         _type: "field";
         _key: string;
       }>;
@@ -397,7 +398,7 @@ export type Manifest = {
   language?: string;
   meta?: Meta;
   hero?: {
-    quote?: string;
+    quote?: BlockContent;
     image?: {
       asset?: {
         _ref: string;
@@ -1120,7 +1121,7 @@ export type SoundsPageQueryResult = {
 export type ManifestPageQueryResult = {
   meta: Meta | null;
   hero: {
-    quote?: string;
+    quote?: BlockContent;
     image?: {
       asset?: {
         _ref: string;
@@ -1170,7 +1171,7 @@ export type ManifestPageQueryResult = {
   }> | null;
 } | null;
 // Variable: donatorsPageQuery
-// Query: *[_type == "donators" && language == $lang][0]{  meta,  sections}
+// Query: *[_type == "donators" && language == $lang][0]{  meta,  sections[]}
 export type DonatorsPageQueryResult = {
   meta: Meta | null;
   sections: Array<{
@@ -1195,6 +1196,7 @@ export type DonatorsPageQueryResult = {
       fields?: Array<{
         title?: string;
         text?: string;
+        enableCopy?: boolean;
         _type: "field";
         _key: string;
       }>;
@@ -1232,6 +1234,25 @@ export type SettingsQueryResult = {
     socials?: LinkIconList;
   };
 } | null;
+// Variable: allSlugsQuery
+// Query: *[_type in ["project", "sounds", "cooperator"]]{  "slug": slug.current,  language,  _type}
+export type AllSlugsQueryResult = Array<
+  | {
+      slug: string | null;
+      language: string | null;
+      _type: "cooperator";
+    }
+  | {
+      slug: string | null;
+      language: string | null;
+      _type: "project";
+    }
+  | {
+      slug: string | null;
+      language: string | null;
+      _type: "sounds";
+    }
+>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1244,9 +1265,10 @@ declare module "@sanity/client" {
     '*[_type == "home" && language == $lang][0]{\n  meta,\n  manifest,\n  projects{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "project" && language == $lang]{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      },\n      featured[]->{\n        _id,\n        slug,\n        cover{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        },\n      }\n    ),\n  },\n  cooperators{\n    featureRandom,\n    randomCount,\n    ...,\n    "featured": select(\n      featureRandom == true => *[_type == "cooperator" && language == $lang]{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      },\n      featured[]->{\n        _id,\n        slug,\n        name,\n        image{\n          asset->{\n            _id,\n            url,\n            metadata{\n              lqip,\n              dimensions,\n            }\n          },\n          alt,\n          hotspot,\n          crop\n        }\n      }\n    ),\n  },\n  support,\n}': HomePageQueryResult;
     '*[_type == "sounds" && language == $lang][0]{\n  meta,\n  trackUrls,\n  name,\n  cover,\n  timestamp,\n  "next": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp < ^.timestamp ||\n      (timestamp == ^.timestamp && _id > ^._id)\n    )\n  ] | order(timestamp desc, _id asc)[0]{\n    name,\n    slug\n  },\n\n  "previous": *[\n    _type == "project" &&\n    language == $lang &&\n    (\n      timestamp > ^.timestamp ||\n      (timestamp == ^.timestamp && _id < ^._id)\n    )\n  ] | order(timestamp asc, _id desc)[0]{\n    name,\n    slug\n  },\n}': SoundsPageQueryResult;
     '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
-    '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections\n}': DonatorsPageQueryResult;
+    '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections[]\n}': DonatorsPageQueryResult;
     '*[_type == "privacy" && language == $lang][0]{\n  meta,\n  content\n}': PrivacyPageQueryResult;
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
+    '*[_type in ["project", "sounds", "cooperator"]]{\n  "slug": slug.current,\n  language,\n  _type\n}': AllSlugsQueryResult;
   }
 }

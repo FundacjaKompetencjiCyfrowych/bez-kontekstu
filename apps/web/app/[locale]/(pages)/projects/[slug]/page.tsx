@@ -58,7 +58,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           </div>
         )}
         {featured?._type === "video" && (
-          <div className="relative bg-gray-900 rounded-lg overflow-hidden aspect-video w-full">
+          <div className="relative bg-gray-900 overflow-hidden aspect-video w-full">
             {isYouTube(featured?.url ?? "") && (
               <iframe
                 src={getYouTubeEmbedUrl(featured?.url ?? "")}
@@ -135,15 +135,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             );
           })}
       </div>
-      <MultimediaGallery images={images} />
-
-      <NavigationButtonGroup
-        previousSlug={previous?.slug?.current}
-        nextSlug={next?.slug?.current}
-        previousLabel={dictionary.previousMasc}
-        nextLabel={dictionary.nextMasc}
-        pathname="projects"
-      />
+      <SectionContainer variant="regular">
+        <h2 className="text-[2rem] md:text-[4rem] font-defectica uppercase">MULTIMEDIA</h2>
+        <MultimediaGallery images={images} />
+        <NavigationButtonGroup
+          previousSlug={previous?.slug?.current}
+          nextSlug={next?.slug?.current}
+          previousLabel={dictionary.previousMasc}
+          nextLabel={dictionary.nextMasc}
+          pathname="projects"
+        />
+      </SectionContainer>
     </PageContainer>
   );
 }

@@ -31,6 +31,7 @@ export default async function CooperatorsPage({ params }: { params: Promise<{ lo
         directory="cooperators"
         title={dictionary.split2.collaborators}
         srTitle={dictionary.collaborators}
+        multilineTitle
       />
     </PageContainer>
   );

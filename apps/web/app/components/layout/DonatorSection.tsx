@@ -1,28 +1,14 @@
 import CopyField from "@/app/components/ui/CopyField";
-import { ContentImage, Image } from "@/app/components/cms/ContentImage";
+import { ContentImage } from "@/app/components/cms/ContentImage";
 import { twSizes } from "@/app/lib/twSizes";
+import { Donators } from "@/app/lib/sanity/types";
+import { Dictionary } from "@/app/lib/intl/dictionaries/type";
+
+type DonatorSectionType = NonNullable<Donators["sections"]>[number];
 
 interface DonatorSectionProps {
-  section: {
-    _key: string;
-    image?: Image | undefined;
-    body?: Array<{
-      _key: string;
-      heading?: {
-        title?: string;
-        subtitle?: string;
-      };
-      fields?: Array<{
-        _key: string;
-        title?: string;
-        text?: string;
-      }>;
-    }>;
-  };
-  dictionary: {
-    copyToClipboard: string;
-    copied: string;
-  };
+  section: DonatorSectionType;
+  dictionary: Dictionary;
   imagePosition: "left" | "right";
 }
 
@@ -55,6 +41,7 @@ export function DonatorSection({ section, dictionary, imagePosition }: DonatorSe
                     ariaLabel={dictionary.copyToClipboard}
                     ariaLiveCopiedMessage={dictionary.copied}
                     copiedText={dictionary.copied + " ✓"}
+                    disabled={!field.enableCopy}
                   />
                 ))}
             </div>

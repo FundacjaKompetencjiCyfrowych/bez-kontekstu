@@ -10,6 +10,7 @@ import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { PageContainer } from "@/app/components/layout/PageContainer";
 import { SectionContainer } from "@/app/components/layout/SectionContainer";
 import { SplitTitle } from "@/app/components/ui/SplitTitle";
+import { cn } from "@/app/lib/utils";
 
 const getContactPage = cache(async (locale: string) => {
   return await sanityFetch({ query: contactPageQuery, params: { lang: locale } });
@@ -44,15 +45,15 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           variant="hero"
         />
         {/* Contact Information */}
-        <dl className="tall:space-y-10 space-y-6 font-space-mono text-[1rem] leading-[1.5rem] xl:text-[1.25rem] xl:leading-[2rem]">
+        <dl className="tall:space-y-8 space-y-6 font-space-mono text-[1rem] leading-[1.5rem] xl:text-[1.25rem] xl:leading-[2rem]">
           {data?.fields &&
             data.fields.map((field) => (
-              <div key={field._key} className="flex items-center">
-                <dt className="mr-2 flex items-center md:mr-4">
-                  <ContentIcon name={field.icon?.asset?.name || ""} className="w-[1.5em] h-[1.5em]" />
+              <div key={field._key} className={cn("flex items-center", field.link?.url && "hover:text-brand-300")}>
+                <dt className="flex items-center mr-4">
+                  <ContentIcon name={field.icon?.asset?.name || ""} className="w-[1.4em] h-[1.4em] xl:w-[1.1em] xl:h-[1.1em]" />
                   <span className="sr-only">{field.link?.label}:</span>
                 </dt>
-                <dd className="break-words [@media(max-width:350px)]:break-all min-w-0">
+                <dd className="break-words [@media(max-width:350px)]:break-all min-w-0 whitespace-pre-line">
                   {field.link?.url ? (
                     <Link href={field.link.url} target="_blank" rel="noopener noreferrer">
                       {field.link.label}

@@ -9,7 +9,7 @@ export function SoundToggler() {
     <button
       onClick={() => setIsOn(!isOn)}
       aria-label={`Toggle sound`}
-      className="cursor-pointer text-white hover:text-brand-200 xl:text-muted xl:hover:text-white focus-brand rounded"
+      className="cursor-pointer text-white hover:text-brand-300 xl:text-muted xl:hover:text-white focus-brand"
     >
       {isOn ? <FiVolume2 style={{ width: "1.3em", height: "1.3em" }} /> : <FiVolumeX style={{ width: "1.3em", height: "1.3em" }} />}
     </button>

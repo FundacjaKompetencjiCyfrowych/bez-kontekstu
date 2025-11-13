@@ -15,8 +15,7 @@ export default definePage({
         defineField({
           name: 'quote',
           title: 'Cytat',
-          type: 'text',
-          rows: 2,
+          type: 'blockContent',
         }),
         defineField({
           name: 'image',

@@ -17,8 +17,7 @@ export function MultimediaGallery({ images }: { images: Image[] }) {
 
   return (
     <>
-      <h2 className="font-defectica uppercase mb-6 md:text-6xl">MULTIMEDIA</h2>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 md:gap-10 xl:gap-24">
         {images.map((image, index) => (
           <button
             key={index}

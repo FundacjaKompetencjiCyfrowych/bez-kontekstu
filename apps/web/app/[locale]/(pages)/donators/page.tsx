@@ -45,11 +45,14 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
           srId="donators-title"
           variant="hero"
         />
-        <p className="relative self-start xl:self-auto xl:ml-auto xl:mr-[10%] xl:pl-[1.5em] xl:font-bold text-[1rem] leading-[2.5rem] xl:text-[2.5rem] xl:leading-[3.125rem]">
-          Twoje wsparcie
-          <br />=<br />
-          nowe przestrzenie sztuki
-        </p>
+        <div className="flex w-full">
+          <div className="hidden xl:block flex-1"></div>
+          <p className="relative flex-1 xl:pt-44 xl:font-bold text-[1rem] leading-[2.5rem] xl:text-[2.5rem] xl:leading-[3.125rem]">
+            Twoje wsparcie
+            <br />=<br />
+            nowe przestrzenie sztuki
+          </p>
+        </div>
       </SectionContainer>
 
       {/* Info - Desktop 2-column layout */}

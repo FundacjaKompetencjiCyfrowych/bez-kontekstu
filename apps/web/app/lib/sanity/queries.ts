@@ -301,7 +301,7 @@ export const manifestPageQuery = defineQuery(`*[_type == "manifest" && language 
 
 export const donatorsPageQuery = defineQuery(`*[_type == "donators" && language == $lang][0]{
   meta,
-  sections
+  sections[]
 }`);
 
 export const privacyPageQuery = defineQuery(`*[_type == "privacy" && language == $lang][0]{
@@ -315,3 +315,9 @@ export const contactPageQuery = defineQuery(`*[_type == "contact" && language ==
 }`);
 
 export const settingsQuery = defineQuery(`*[_type == "settings" && language == $lang][0]`);
+
+export const allSlugsQuery = defineQuery(`*[_type in ["project", "sounds", "cooperator"]]{
+  "slug": slug.current,
+  language,
+  _type
+}`);

@@ -234,7 +234,7 @@ export function RandomRectangles({ images, className }: { images: { image: Image
           <Link
             key={rect.id}
             href={`/projects/${rect.slug}`}
-            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden focus-brand rounded"
+            className="absolute transition-all duration-300 hover:scale-105 overflow-hidden focus-brand"
             style={{
               left: `${rect.x}%`,
               top: `${rect.y}%`,
