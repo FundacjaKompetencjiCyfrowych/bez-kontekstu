@@ -11,6 +11,10 @@ import { Logo } from "@/app/components/image/Logo";
 import { NavigationButton, NavigationButtonGroup } from "@/app/components/ui/NavigationButton";
 import Link from "next/link";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 const getSoundsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: soundsPageQuery, params: { lang: locale } });
 });

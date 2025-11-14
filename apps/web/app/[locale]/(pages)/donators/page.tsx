@@ -11,6 +11,10 @@ import { SplitTitle } from "@/app/components/ui/SplitTitle";
 import { DonatorSection } from "@/app/components/layout/DonatorSection";
 import { ContentText } from "@/app/components/cms/ContentText";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 // Cache and metadata functions
 const getDonatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: donatorsPageQuery, params: { lang: locale } });

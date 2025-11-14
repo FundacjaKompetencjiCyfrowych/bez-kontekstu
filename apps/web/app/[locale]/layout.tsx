@@ -12,6 +12,8 @@ import { settingsQuery } from "../lib/sanity/queries";
 import { mapMetadata } from "../lib/sanity/mappers";
 import { LenisScrollProvider } from "../lib/lenis";
 
+export const revalidate = 3600; // invalidate every hour
+
 const defectica = localFont({
   src: [
     {

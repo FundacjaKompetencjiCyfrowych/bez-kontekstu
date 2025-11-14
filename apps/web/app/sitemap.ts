@@ -1,9 +1,12 @@
 import { MetadataRoute } from "next";
 import { supportedLocales } from "@/app/lib/intl/locale";
-import { client } from "@/app/lib/sanity/client";
 import { allSlugsQuery } from "@/app/lib/sanity/queries";
+import { CONFIG } from "config";
+import { sanityFetch } from "./lib/sanity/live";
 
-const baseUrl = "https://fkc.com"; // TODO replace
+export const revalidate = 21600; // 6 hours
+
+const baseUrl = CONFIG.baseUrl;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = supportedLocales.flatMap((locale: string) => [
@@ -51,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]);
 
-  const slugs = await client.fetch(allSlugsQuery);
+  const { data: slugs } = await sanityFetch({ query: allSlugsQuery });
 
   const dynamicRoutes = slugs
     .filter(
