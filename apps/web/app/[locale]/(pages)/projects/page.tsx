@@ -15,11 +15,11 @@ const getProjectsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: projectsPageQuery, params: { lang: locale } });
 });
 
-// export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-//   const { locale } = await params;
-//   const { data } = await getProjectsPage(locale);
-//   return mapMetadata(data?.meta);
-// }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const { data } = await getProjectsPage(locale);
+  return mapMetadata(data?.meta);
+}
 
 type ProjectsPageProps = {
   params: Promise<{ locale: string }>;
