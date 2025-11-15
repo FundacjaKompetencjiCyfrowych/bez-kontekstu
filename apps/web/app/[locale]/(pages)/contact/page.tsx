@@ -12,6 +12,10 @@ import { SectionContainer } from "@/app/components/layout/SectionContainer";
 import { SplitTitle } from "@/app/components/ui/SplitTitle";
 import { cn } from "@/app/lib/utils";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 const getContactPage = cache(async (locale: string) => {
   return await sanityFetch({ query: contactPageQuery, params: { lang: locale } });
 });

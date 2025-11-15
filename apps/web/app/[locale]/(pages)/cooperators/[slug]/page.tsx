@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { sanityFetch } from "@/app/lib/sanity/live";
-import { cooperatorPageQuery } from "@/app/lib/sanity/queries";
+import { cooperatorPageQuery, cooperatorSlugsQuery } from "@/app/lib/sanity/queries";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { Metadata } from "next";
 import { ContentImage } from "@/app/components/cms/ContentImage";
@@ -13,6 +13,15 @@ import { NavigationButton, NavigationButtonGroup } from "@/app/components/ui/Nav
 import { PageContainer } from "@/app/components/layout/PageContainer";
 import { SectionContainer } from "@/app/components/layout/SectionContainer";
 import { FiArrowUpRight } from "react-icons/fi";
+import { client } from "@/app/lib/sanity/client";
+
+export async function generateStaticParams() {
+  const data = await client.fetch(cooperatorSlugsQuery);
+  return data.map((collab) => ({
+    slug: collab.slug,
+    locale: collab.language,
+  }));
+}
 
 const getCooperatorPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: cooperatorPageQuery, params: { lang: locale, slug } });

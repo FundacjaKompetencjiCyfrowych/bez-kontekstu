@@ -14,6 +14,10 @@ import Link from "next/link";
 import { PageContainer } from "../components/layout/PageContainer";
 import { Logo } from "../components/image/Logo";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 function getFeaturedItems<T>(
   section:
     | {

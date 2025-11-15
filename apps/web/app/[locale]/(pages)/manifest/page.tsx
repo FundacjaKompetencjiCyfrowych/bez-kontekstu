@@ -15,6 +15,10 @@ import { Logo } from "@/app/components/image/Logo";
 import { ContentText } from "@/app/components/cms/ContentText";
 import { BlockContent } from "@/app/lib/sanity/types";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 const getManifestPage = cache(async (locale: string) => {
   return await sanityFetch({ query: manifestPageQuery, params: { lang: locale } });
 });

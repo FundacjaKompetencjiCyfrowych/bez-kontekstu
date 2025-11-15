@@ -7,15 +7,19 @@ import { CollectionItem, CollectionShowcase } from "@/app/components/image/Colle
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { PageContainer } from "@/app/components/layout/PageContainer";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 const getProjectsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: projectsPageQuery, params: { lang: locale } });
 });
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params;
-  const { data } = await getProjectsPage(locale);
-  return mapMetadata(data?.meta);
-}
+// export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+//   const { locale } = await params;
+//   const { data } = await getProjectsPage(locale);
+//   return mapMetadata(data?.meta);
+// }
 
 type ProjectsPageProps = {
   params: Promise<{ locale: string }>;

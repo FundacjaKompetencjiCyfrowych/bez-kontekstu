@@ -1255,6 +1255,18 @@ export type AllSlugsQueryResult = Array<
       _type: "sounds";
     }
 >;
+// Variable: projectSlugsQuery
+// Query: *[_type == "project"]{  "slug": slug.current,  language,}
+export type ProjectSlugsQueryResult = Array<{
+  slug: string | null;
+  language: string | null;
+}>;
+// Variable: cooperatorSlugsQuery
+// Query: *[_type == "cooperator"]{  "slug": slug.current,  language,}
+export type CooperatorSlugsQueryResult = Array<{
+  slug: string | null;
+  language: string | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1272,5 +1284,7 @@ declare module "@sanity/client" {
     '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
     '*[_type in ["project", "sounds", "cooperator"]]{\n  "slug": slug.current,\n  language,\n  _type\n}': AllSlugsQueryResult;
+    '*[_type == "project"]{\n  "slug": slug.current,\n  language,\n}': ProjectSlugsQueryResult;
+    '*[_type == "cooperator"]{\n  "slug": slug.current,\n  language,\n}': CooperatorSlugsQueryResult;
   }
 }

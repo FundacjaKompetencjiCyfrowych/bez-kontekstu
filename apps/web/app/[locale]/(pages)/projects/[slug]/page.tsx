@@ -1,16 +1,13 @@
 import { cache } from "react";
 import { sanityFetch } from "@/app/lib/sanity/live";
-import { projectPageQuery } from "@/app/lib/sanity/queries";
+import { projectPageQuery, projectSlugsQuery } from "@/app/lib/sanity/queries";
 import { Metadata } from "next";
 import { mapMetadata } from "@/app/lib/sanity/mappers";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
-
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
 import { isYouTube, getYouTubeEmbedUrl } from "./utils";
 import { cn } from "@/app/lib/utils";
-import { Fragment } from "react";
 import { MultimediaGallery } from "@/app/components/image/MultimediaGallery";
 import { Logo } from "@/app/components/image/Logo";
 import { PageContainer } from "@/app/components/layout/PageContainer";
@@ -18,6 +15,15 @@ import { NavigationButton, NavigationButtonGroup } from "@/app/components/ui/Nav
 import { SectionContainer } from "@/app/components/layout/SectionContainer";
 import { ContentImage } from "@/app/components/cms/ContentImage";
 import { twSizes } from "@/app/lib/twSizes";
+import { client } from "@/app/lib/sanity/client";
+
+export async function generateStaticParams() {
+  const data = await client.fetch(projectSlugsQuery);
+  return data.map((project) => ({
+    slug: project.slug,
+    locale: project.language,
+  }));
+}
 
 const getProjectPage = cache(async (locale: string, slug: string) => {
   return await sanityFetch({ query: projectPageQuery, params: { lang: locale, slug } });

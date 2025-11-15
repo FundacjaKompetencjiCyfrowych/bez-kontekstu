@@ -7,6 +7,10 @@ import { Metadata } from "next";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 import { PageContainer } from "@/app/components/layout/PageContainer";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 const getCooperatorsPage = cache(async (locale: string) => {
   return await sanityFetch({ query: cooperatorsPageQuery, params: { lang: locale } });
 });

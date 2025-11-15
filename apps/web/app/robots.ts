@@ -1,3 +1,4 @@
+import { CONFIG } from "config";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
@@ -6,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://fkc.com/sitemap.xml", // TODO replace
+    sitemap: `${CONFIG.baseUrl}/sitemap.xml`,
   };
 }

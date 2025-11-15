@@ -322,3 +322,13 @@ export const allSlugsQuery = defineQuery(`*[_type in ["project", "sounds", "coop
   language,
   _type
 }`);
+
+export const projectSlugsQuery = defineQuery(`*[_type == "project"]{
+  "slug": slug.current,
+  language,
+}`);
+
+export const cooperatorSlugsQuery = defineQuery(`*[_type == "cooperator"]{
+  "slug": slug.current,
+  language,
+}`);

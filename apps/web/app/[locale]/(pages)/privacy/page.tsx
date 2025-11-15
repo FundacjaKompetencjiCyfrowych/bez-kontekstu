@@ -9,6 +9,10 @@ import { cache } from "react";
 import { SectionContainer } from "@/app/components/layout/SectionContainer";
 import { getDictionary } from "@/app/lib/intl/dictionaries/dynamic";
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }];
+}
+
 const getPrivacyPage = cache(async (locale: string) => {
   return await sanityFetch({ query: privacyPageQuery, params: { lang: locale } });
 });

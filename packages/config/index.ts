@@ -2,6 +2,10 @@
   Contains config shared across apps in the monorepo.
 */
 
+export const CONFIG = {
+  baseUrl: "https://bezkontekstu.org",
+};
+
 export const SANITY_CONFIG = {
   projectId: "ppkzed19",
   dataset: "production",
