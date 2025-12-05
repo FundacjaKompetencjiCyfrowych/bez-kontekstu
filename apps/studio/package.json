@@ -18,33 +18,33 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity/document-internationalization": "^4.0.0",
-    "@sanity/ui": "^3.1.10",
-    "@sanity/vision": "^4.8.1",
+    "@sanity/document-internationalization": "^4.1.0",
+    "@sanity/ui": "^3.1.11",
+    "@sanity/vision": "^4.20.3",
     "config": "workspace:^",
     "install": "^0.13.0",
     "lucide-react": "^0.545.0",
-    "npm": "^11.6.2",
-    "react": "^19.1",
-    "react-dom": "^19.1",
-    "sanity": "^4.8.1",
+    "npm": "^11.6.4",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "sanity": "^4.20.3",
     "sanity-plugin-icon-picker": "^4.0.0",
-    "styled-components": "^6.1.18",
-    "tsx": "^4.20.6"
+    "styled-components": "^6.1.19",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
     "@types/emoji-strip": "^1.0.2",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/react": "^19.1",
+    "@types/react": "^19.2.7",
     "chokidar": "^4.0.3",
     "concurrently": "^9.2.1",
     "emoji-strip": "^1.0.1",
-    "eslint": "^9.28",
+    "eslint": "^9.39.1",
     "lodash.debounce": "^4.0.8",
-    "prettier": "^3.5",
+    "prettier": "^3.7.4",
     "studio": "^0.13.5",
-    "typescript": "^5.8"
+    "typescript": "^5.9.3"
   },
   "prettier": {
     "semi": false,

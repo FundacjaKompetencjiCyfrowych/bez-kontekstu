@@ -52,7 +52,7 @@ export default async function DonorsPage({ params }: { params: Promise<{ locale:
         />
         <div className="flex w-full">
           <div className="hidden xl:block flex-1"></div>
-          <div className="relative flex-1 xl:pt-44 xl:font-bold text-[1rem] leading-[2.5rem] xl:text-[2.5rem] xl:leading-[3.125rem]">
+          <div className="relative flex-1 xl:pt-44 xl:font-bold text-[1rem] leading-10 xl:text-[2.5rem] xl:leading-12.5">
             <ContentText variant="hero" value={data?.hero || []} />
           </div>
         </div>

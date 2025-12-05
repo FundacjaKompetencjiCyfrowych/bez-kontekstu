@@ -30,14 +30,14 @@ export function NavigationMobile({ isMobileMenuEnabled, routePath }: MobileNavig
 
   // Update menu offset initially and on resize
   useEffect(() => {
-    updateMenuOffset();
+    setTimeout(() => updateMenuOffset(), 0);
     window.addEventListener("resize", updateMenuOffset);
     return () => window.removeEventListener("resize", updateMenuOffset);
   }, []);
 
   // Update menu offset on route change
   useEffect(() => {
-    updateMenuOffset();
+    setTimeout(() => updateMenuOffset(), 0);
   }, [routePath]);
 
   const getMobilePageTitle = (path: string) => {
@@ -75,8 +75,8 @@ export function NavigationMobile({ isMobileMenuEnabled, routePath }: MobileNavig
 
       {/* Menu */}
       <div
-        className={cn("absolute bottom-0 left-0 right-0 border-b-1 border-gray-700 transition-transform duration-300 z-30", {
-          "translate-y-[var(--menu-move)]": isMenuOpen,
+        className={cn("absolute bottom-0 left-0 right-0 border-b border-gray-700 transition-transform duration-300 z-30", {
+          "translate-y-(--menu-move)": isMenuOpen,
         })}
         style={{ "--menu-move": `${menuOffset}px` } as React.CSSProperties}
       >

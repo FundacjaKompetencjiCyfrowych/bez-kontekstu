@@ -312,7 +312,28 @@ export const privacyPageQuery = defineQuery(`*[_type == "privacy" && language ==
 
 export const contactPageQuery = defineQuery(`*[_type == "contact" && language == $lang][0]{
   meta,
-  fields
+  fields[]{
+    ...,
+    _key,
+    _type,
+    icon {
+      _type,
+      alt,
+      asset {
+        _type,
+        name,
+        provider,
+        url,
+        metadata,
+      }
+    },
+    link {
+      _type,
+      label,
+      url,
+      newTab,
+    }
+  }
 }`);
 
 export const settingsQuery = defineQuery(`*[_type == "settings" && language == $lang][0]`);

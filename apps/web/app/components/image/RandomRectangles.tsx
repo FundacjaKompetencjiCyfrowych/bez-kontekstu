@@ -223,7 +223,7 @@ export function RandomRectangles({ images, className }: { images: { image: Image
 
   useEffect(() => {
     if (containerWidth > 0) {
-      regenerate();
+      setTimeout(() => regenerate(), 0);
     }
   }, [containerWidth, regenerate]);
 

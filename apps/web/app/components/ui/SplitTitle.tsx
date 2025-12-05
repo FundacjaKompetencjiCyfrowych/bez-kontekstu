@@ -2,7 +2,7 @@ import { cn } from "@/app/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 import { createElement } from "react";
 
-const SplitTitleVariants = cva("flex flex-col font-defectica gap-[0.1em] tracking-[0.1em]", {
+const SplitTitleVariants = cva("flex flex-col font-defectica gap-[0.1em] tracking-widest", {
   variants: {
     mobile: {
       left: "self-start text-left",
