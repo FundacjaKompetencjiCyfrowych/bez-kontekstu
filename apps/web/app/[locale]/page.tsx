@@ -120,7 +120,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         />
 
         <RandomRectangles
-          className="h-[25rem] -mb-[1rem] sm:mb-[3rem] md:mb-[7rem] lg:mb-[10rem] xl:mb-[5rem] -mt-[2rem] sm:mt-0"
+          className="h-100 -mb-4 sm:mb-12 md:mb-28 lg:mb-40 xl:mb-20 -mt-8 sm:mt-0"
           images={
             projects
               ?.filter((project) => project?.cover && project.slug?.current)

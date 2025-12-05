@@ -3,7 +3,7 @@ import { localeMiddleware } from "./app/lib/intl/middleware";
 
 const middlewares = [localeMiddleware];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip _next, api, and public files (like favicon.ico, robots.txt, images, etc.)

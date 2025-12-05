@@ -110,7 +110,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
       </div>
 
       {/* Thumbnails */}
-      <div className="p-4 pb-6 flex-shrink-0">
+      <div className="p-4 pb-6 shrink-0">
         <div
           id={thumbnailsId}
           className="flex justify-center gap-2 overflow-x-auto overflow-y-hidden py-2 max-w-full"
@@ -121,7 +121,7 @@ function LightboxComponent({ images, isOpen, onClose, initialIndex = 0 }: Lightb
             <button
               key={index}
               onClick={() => goToItem(index)}
-              className={`relative w-16 h-16 flex-shrink-0 overflow-hidden border-2 transition-all transform hover:scale-110 ${
+              className={`relative w-16 h-16 shrink-0 overflow-hidden border-2 transition-all transform hover:scale-110 ${
                 index === currentIndex ? "border-violet-800 scale-105" : "border-transparent"
               }`}
               role="tab"

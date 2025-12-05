@@ -5,7 +5,7 @@ export default defineType({
   type: 'array',
   of: [
     defineArrayMember({
-      name: 'link',
+      name: 'linkIcon',
       title: 'Link',
       type: 'linkIcon',
     }),

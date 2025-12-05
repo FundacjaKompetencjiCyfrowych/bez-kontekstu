@@ -145,7 +145,7 @@ const getPlaceholderProps = (props: ContentImageProps, aspect: number) => {
  * @see https://nextjs.org/docs/app/api-reference/components/image#loader
  */
 export function ContentImage(props: ContentImageProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   const { image, aspect, shimmer, shimmerColors, lqip, width, height, fill, intrinsic, ...defaultProps } = props;
   if (!image?.asset) {
     console.warn("Missing Sanity image object in ContentImage component");

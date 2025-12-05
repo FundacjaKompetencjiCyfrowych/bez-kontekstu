@@ -62,7 +62,7 @@ export function TrackItem({ title, isPlaying = false, duration, progress = 0, tr
     <div
       className={cn(
         `flex items-center space-x-4 py-3 px-2 hover:bg-black/10 transition-all duration-300 rounded-lg group`,
-        `text-white font-space-mono text-[1rem] leading-[1.5rem] md:text-[1.25rem] md:leading-[2rem]`
+        `text-white font-space-mono text-[1rem] leading-6 md:text-[1.25rem] md:leading-8`
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -78,7 +78,7 @@ export function TrackItem({ title, isPlaying = false, duration, progress = 0, tr
         aria-label={isPlaying ? `Pause ${title}` : `Play ${title}`}
         aria-pressed={isPlaying}
       >
-        {isPlaying ? <FiPause className={cn(iconStyles)} /> : <FiPlay className={cn(iconStyles, "pl-[4px] pt-[2px]")} />}
+        {isPlaying ? <FiPause className={cn(iconStyles)} /> : <FiPlay className={cn(iconStyles, "pl-1 pt-0.5")} />}
       </button>
 
       {/* Title + Progress container */}
