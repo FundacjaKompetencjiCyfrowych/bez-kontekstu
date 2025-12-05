@@ -61,8 +61,8 @@ export default async function ManifestPage({ params }: { params: Promise<{ local
             </p> */}
 
             {/* Quote */}
-            <div className="relative max-w-[32rem] xl:mr-auto xl:ml-[5rem] pl-[1.5em] text-emphasis font-bold xl:text-right xl:font-normal">
-              <FaQuoteLeft className="w-[1rem] h-[1rem] absolute left-0 top-[0.3rem]" />
+            <div className="relative max-w-lg xl:mr-auto xl:ml-20 pl-[1.5em] text-emphasis font-bold xl:text-right xl:font-normal">
+              <FaQuoteLeft className="w-4 h-4 absolute left-0 top-[0.3rem]" />
               <ContentText value={(data.hero.quote ?? {}) as BlockContent} variant="hero" />
             </div>
 

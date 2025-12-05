@@ -101,14 +101,14 @@ export default async function CooperatorBioPage({ params }: CooperatorPageProps)
           </div>
           <div className="flex flex-col justify-center gap-14">
             <div className="relative">
-              <h1 className="uppercase xl:hidden font-defectica text-[1.5rem] leading-[2rem] md:text-[2rem] md:leading-[2.5rem] z-10 absolute bottom-6 left-6 whitespace-pre-line">
+              <h1 className="uppercase xl:hidden font-defectica text-[1.5rem] leading-8 md:text-[2rem] md:leading-10 z-10 absolute bottom-6 left-6 whitespace-pre-line">
                 {name?.replace(/\s/g, "\n")}
               </h1>
-              <div className="relative aspect-[4/3] lg:aspect-[3/2] xl:aspect-[3/4] overflow-hidden">
+              <div className="relative aspect-4/3 lg:aspect-3/2 xl:aspect-3/4 overflow-hidden">
                 {image ? (
                   <>
                     <ContentImage lqip image={image} fill sizes={twSizes("90vw lg:45vw max:580px")} />
-                    <div className="xl:hidden absolute inset-0 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+                    <div className="xl:hidden absolute inset-0 bg-linear-to-t from-black to-transparent pointer-events-none" />
                   </>
                 ) : (
                   <div className="text-gray-400 text-xl font-mono text-center absolute inset-0 border grid place-items-center">

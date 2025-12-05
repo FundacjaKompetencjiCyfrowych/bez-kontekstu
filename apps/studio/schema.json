@@ -47,7 +47,7 @@
         },
         "rest": {
           "type": "inline",
-          "name": "link"
+          "name": "linkIcon"
         }
       }
     }
@@ -104,7 +104,7 @@
             },
             "rest": {
               "type": "inline",
-              "name": "img"
+              "name": "richImage"
             }
           },
           {

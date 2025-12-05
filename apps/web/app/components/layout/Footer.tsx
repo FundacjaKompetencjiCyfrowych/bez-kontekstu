@@ -30,14 +30,14 @@ export async function Footer({ data }: { data: FooterData }) {
               (social) =>
                 social.link?.url && (
                   <Link
-                    key={social.link?.url}
-                    href={social.link?.url || "/"}
+                    key={social._key}
+                    href={social.link.url || "/"}
                     className="mr-1 xl:mr-3 inline-block focus-brand hover:text-brand-300"
-                    aria-label={social.link?.label ? `Visit ${social.link.label}` : "Visit social media"}
+                    aria-label={social.link.label ? `Visit ${social.link.label}` : "Visit social media"}
                   >
                     {social.icon && <ContentIcon name={social.icon.asset?.name} size={20} />}
-                    <span className="sr-only">{social.link?.label}</span>
-                    <span aria-hidden="true">{social.link?.label}</span>
+                    <span className="sr-only">{social.link.label}</span>
+                    <span aria-hidden="true">{social.link.label}</span>
                   </Link>
                 )
             )}

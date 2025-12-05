@@ -44,9 +44,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const dictionary = await getDictionary(locale);
   const { name, description, multimedia, contributors, next, previous, timestamp } = data;
   const featured = Array.isArray(data.featured) ? data.featured[0] : null;
-
-  // ! TODO replace with added video support
-  const images = multimedia?.filter((item) => item._type === "img") || [];
+  const images = multimedia?.filter((item) => !("_type" in item && item._type === "video")) || [];
+  const featuredImage = featured && "_type" in featured && !(featured._type === "video") ? featured : null;
+  const featuredVideo = featured && "_type" in featured && featured._type === "video" ? featured : null;
 
   return (
     <PageContainer className="space-y-15">
@@ -58,16 +58,16 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         <h1 className="font-defectica uppercase text-[2.5rem] md:text-[4rem] lg:text-[5.5rem] xl-tall:text-[8rem] leading-none">{name}</h1>
         <p className="text-[1rem] xl:text-[2rem]">{timestamp?.slice(0, 4)}</p>
         <p className="text-sm md:text-xl leading-relaxed ">{description}</p>
-        {featured?._type === "img" && (
+        {featuredImage && (
           <div className="w-full aspect-video">
-            <ContentImage image={featured} fill aspect={16 / 9} sizes={twSizes("90vw max:690px")} />
+            <ContentImage image={featuredImage} fill aspect={16 / 9} sizes={twSizes("90vw max:690px")} />
           </div>
         )}
-        {featured?._type === "video" && (
+        {featuredVideo && (
           <div className="relative bg-gray-900 overflow-hidden aspect-video w-full">
-            {isYouTube(featured?.url ?? "") && (
+            {isYouTube(featuredVideo?.url ?? "") && (
               <iframe
-                src={getYouTubeEmbedUrl(featured?.url ?? "")}
+                src={getYouTubeEmbedUrl(featuredVideo?.url ?? "")}
                 title={`${name} - Video`}
                 className="absolute inset-0 w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -108,7 +108,7 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
   // Load SoundCloud Widget API
   useEffect(() => {
     if (window.SC?.Widget) {
-      setIsApiReady(true);
+      setTimeout(() => setIsApiReady(true), 0);
       return;
     }
 
@@ -175,17 +175,20 @@ export function SoundsClient({ tracks, dictionary, className }: SoundsClientProp
 
   const tryPlayTrack = useCallback(
     (attempt: number = 0) => {
-      if (attempt > MAX_RETRY_ATTEMPTS) return console.error("Failed to play track");
+      const play = (n: number) => {
+        if (n > MAX_RETRY_ATTEMPTS) return console.error("Failed to play track");
+        if (!widgetRef.current) return;
 
-      if (!widgetRef.current) return;
+        try {
+          widgetRef.current.play();
+          setIsPlaying(true);
+          setTimeout(() => startProgressTracking(), TIMEOUTS.PROGRESS_START_DELAY);
+        } catch {
+          setTimeout(() => play(n + 1), TIMEOUTS.RETRY_DELAY * (n + 1));
+        }
+      };
 
-      try {
-        widgetRef.current.play();
-        setIsPlaying(true);
-        setTimeout(() => startProgressTracking(), TIMEOUTS.PROGRESS_START_DELAY);
-      } catch {
-        setTimeout(() => tryPlayTrack(attempt + 1), TIMEOUTS.RETRY_DELAY * (attempt + 1));
-      }
+      play(attempt);
     },
     [startProgressTracking]
   );

@@ -7,7 +7,6 @@ export default defineType({
   type: 'array',
   of: [
     defineArrayMember({
-      name: 'img',
       title: 'Obraz',
       type: 'richImage',
     }),

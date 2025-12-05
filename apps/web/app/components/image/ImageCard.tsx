@@ -39,7 +39,7 @@ export async function ImageCard({
       rel="noopener noreferrer"
       aria-label={`View ${title}${tag ? ` (${tag})` : ""}`}
     >
-      <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "aspect-[50/42] mb-5" : "h-[500px]")}>
+      <div className={cn("relative w-full cursor-pointer overflow-hidden", isMobile ? "aspect-50/42 mb-5" : "h-[500px]")}>
         {image ? (
           <ContentImage
             lqip
@@ -57,7 +57,7 @@ export async function ImageCard({
         )}
         <div
           className={cn(
-            "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent pointer-events-none",
+            "absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/90 to-transparent pointer-events-none",
             "h-1/2 xl:opacity-0 xl:group-hover:opacity-100 xl:transition-opacity xl:duration-300"
           )}
           aria-hidden="true"

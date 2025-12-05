@@ -11,6 +11,7 @@ import { PageContainer } from "@/app/components/layout/PageContainer";
 import { SectionContainer } from "@/app/components/layout/SectionContainer";
 import { SplitTitle } from "@/app/components/ui/SplitTitle";
 import { cn } from "@/app/lib/utils";
+import { LinkIcon } from "@/app/lib/sanity/types";
 
 export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }];
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const { data } = await getContactPage(locale);
+  const fields = data?.fields || ([] as (LinkIcon & { _key: string })[]);
   const dictionary = await getDictionary(locale);
   return (
     <PageContainer>
@@ -49,15 +51,16 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           variant="hero"
         />
         {/* Contact Information */}
-        <dl className="tall:space-y-8 space-y-6 font-space-mono text-[1rem] leading-[1.5rem] xl:text-[1.25rem] xl:leading-[2rem]">
-          {data?.fields &&
-            data.fields.map((field) => (
+        <dl className="tall:space-y-8 space-y-6 font-space-mono text-[1rem] leading-6 xl:text-[1.25rem] xl:leading-8">
+          {fields &&
+            fields.length > 0 &&
+            fields.map((field) => (
               <div key={field._key} className={cn("flex items-center", field.link?.url && "hover:text-brand-300")}>
                 <dt className="flex items-center mr-4">
                   <ContentIcon name={field.icon?.asset?.name || ""} className="w-[1.4em] h-[1.4em] xl:w-[1.1em] xl:h-[1.1em]" />
                   <span className="sr-only">{field.link?.label}:</span>
                 </dt>
-                <dd className="break-words [@media(max-width:350px)]:break-all min-w-0 whitespace-pre-line">
+                <dd className="wrap-break-word [@media(max-width:350px)]:break-all min-w-0 whitespace-pre-line">
                   {field.link?.url ? (
                     <Link href={field.link.url} target="_blank" rel="noopener noreferrer">
                       {field.link.label}

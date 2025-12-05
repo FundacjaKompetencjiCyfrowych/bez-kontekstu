@@ -22,7 +22,7 @@ export type Icon = {
 export type LinkIconList = Array<
   {
     _key: string;
-  } & Link
+  } & LinkIcon
 >;
 
 export type LinkIcon = {
@@ -32,7 +32,9 @@ export type LinkIcon = {
 };
 
 export type ImgOrVideo = Array<
-  | unknown // Unable to locate the referenced type "img" in schema
+  | ({
+      _key: string;
+    } & RichImage)
   | {
       url?: UrlOrPath;
       _type: "video";
@@ -772,7 +774,19 @@ export type ProjectPageQueryResult =
             _type: "video";
             _key: string;
           }
-        | unknown
+        | {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: SanityImageDimensions | null;
+              } | null;
+            } | null;
+            alt: string | null;
+            hotspot: SanityImageHotspot | null;
+            crop: SanityImageCrop | null;
+          }
       > | null;
       description: string | null;
     }
@@ -1066,10 +1080,30 @@ export type PrivacyPageQueryResult = {
   content: BlockContentWithHeadings | null;
 } | null;
 // Variable: contactPageQuery
-// Query: *[_type == "contact" && language == $lang][0]{  meta,  fields}
+// Query: *[_type == "contact" && language == $lang][0]{  meta,  fields[]{    ...,    _key,    _type,    icon {      _type,      alt,      asset {        _type,        name,        provider,        url,        metadata,      }    },    link {      _type,      label,      url,      newTab,    }  }}
 export type ContactPageQueryResult = {
   meta: Meta | null;
-  fields: LinkIconList | null;
+  fields: Array<{
+    _key: string;
+    _type: "linkIcon";
+    icon: {
+      _type: "icon";
+      alt: string | null;
+      asset: {
+        _type: "iconPicker";
+        name: string | null;
+        provider: string | null;
+        url: null;
+        metadata: null;
+      } | null;
+    } | null;
+    link: {
+      _type: "link";
+      label: string | null;
+      url: UrlOrPath | null;
+      newTab: boolean | null;
+    } | null;
+  }> | null;
 } | null;
 // Variable: settingsQuery
 // Query: *[_type == "settings" && language == $lang][0]
@@ -1131,7 +1165,7 @@ declare module "@sanity/client" {
     '*[_type == "manifest" && language == $lang][0]{\n  meta,\n  hero,\n  sections\n}': ManifestPageQueryResult;
     '*[_type == "donators" && language == $lang][0]{\n  meta,\n  sections[],\n  hero\n}': DonatorsPageQueryResult;
     '*[_type == "privacy" && language == $lang][0]{\n  meta,\n  content\n}': PrivacyPageQueryResult;
-    '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields\n}': ContactPageQueryResult;
+    '*[_type == "contact" && language == $lang][0]{\n  meta,\n  fields[]{\n    ...,\n    _key,\n    _type,\n    icon {\n      _type,\n      alt,\n      asset {\n        _type,\n        name,\n        provider,\n        url,\n        metadata,\n      }\n    },\n    link {\n      _type,\n      label,\n      url,\n      newTab,\n    }\n  }\n}': ContactPageQueryResult;
     '*[_type == "settings" && language == $lang][0]': SettingsQueryResult;
     '*[_type in ["project", "sounds", "cooperator"]]{\n  "slug": slug.current,\n  language,\n  _type\n}': AllSlugsQueryResult;
     '*[_type == "project"]{\n  "slug": slug.current,\n  language,\n}': ProjectSlugsQueryResult;
